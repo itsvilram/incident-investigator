@@ -1,0 +1,12 @@
+{
+  "id": "INC-06",
+  "title": "Portfolio screen failing, logs clean",
+  "reported_at": "2026-10-09T14:05:00Z",
+  "reporter": "on-call SRE (Kabir)",
+  "description": "Since ~13:45 the portfolio screen fails to load for many users. I checked portfolio-service logs: nothing unusual, no errors logged.",
+  "symptom_services": [
+    "portfolio-service",
+    "mobile-bff"
+  ],
+  "customer_impact": "About 30% of portfolio screen loads fail."
+}

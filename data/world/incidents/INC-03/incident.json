@@ -1,0 +1,12 @@
+{
+  "id": "INC-03",
+  "title": "Checkout timeouts on UPI pay",
+  "reported_at": "2026-10-04T14:10:00Z",
+  "reporter": "on-call SRE (Kabir)",
+  "description": "p99 latency of payments-api jumped to ~9s since ~13:45; users see timeouts on UPI pay. The payments-api team says nothing changed on their side.",
+  "symptom_services": [
+    "payments-api",
+    "mobile-bff"
+  ],
+  "customer_impact": "About 10% of UPI payments time out."
+}

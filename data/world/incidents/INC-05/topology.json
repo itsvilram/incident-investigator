@@ -1,0 +1,371 @@
+{
+ "services": [
+  {
+   "name": "mobile-bff",
+   "kind": "api",
+   "owner": "app-platform",
+   "external": false
+  },
+  {
+   "name": "auth-service",
+   "kind": "api",
+   "owner": "identity",
+   "external": false
+  },
+  {
+   "name": "payments-api",
+   "kind": "api",
+   "owner": "payments",
+   "external": false
+  },
+  {
+   "name": "upi-gateway",
+   "kind": "api",
+   "owner": "payments",
+   "external": false
+  },
+  {
+   "name": "ledger-service",
+   "kind": "api",
+   "owner": "ledger",
+   "external": false
+  },
+  {
+   "name": "fraud-service",
+   "kind": "api",
+   "owner": "risk",
+   "external": false
+  },
+  {
+   "name": "portfolio-service",
+   "kind": "api",
+   "owner": "investing",
+   "external": false
+  },
+  {
+   "name": "orders-service",
+   "kind": "api",
+   "owner": "investing",
+   "external": false
+  },
+  {
+   "name": "market-data-service",
+   "kind": "api",
+   "owner": "investing",
+   "external": false
+  },
+  {
+   "name": "kyc-service",
+   "kind": "api",
+   "owner": "identity",
+   "external": false
+  },
+  {
+   "name": "aa-connector",
+   "kind": "api",
+   "owner": "growth",
+   "external": false
+  },
+  {
+   "name": "notification-service",
+   "kind": "api",
+   "owner": "engagement",
+   "external": false
+  },
+  {
+   "name": "user-db",
+   "kind": "db",
+   "owner": "platform-data",
+   "external": false
+  },
+  {
+   "name": "ledger-db",
+   "kind": "db",
+   "owner": "platform-data",
+   "external": false
+  },
+  {
+   "name": "portfolio-db",
+   "kind": "db",
+   "owner": "platform-data",
+   "external": false
+  },
+  {
+   "name": "redis-cache",
+   "kind": "cache",
+   "owner": "platform-data",
+   "external": false
+  },
+  {
+   "name": "redis-session",
+   "kind": "cache",
+   "owner": "platform-data",
+   "external": false
+  },
+  {
+   "name": "event-bus",
+   "kind": "queue",
+   "owner": "platform-data",
+   "external": false
+  },
+  {
+   "name": "coredns",
+   "kind": "platform",
+   "owner": "platform",
+   "external": false
+  },
+  {
+   "name": "kubernetes",
+   "kind": "events",
+   "owner": "platform",
+   "external": false
+  },
+  {
+   "name": "otp-provider",
+   "kind": "external",
+   "owner": "vendor: SMS OTP",
+   "external": true
+  },
+  {
+   "name": "npci-switch",
+   "kind": "external",
+   "owner": "NPCI",
+   "external": true
+  },
+  {
+   "name": "partner-bank-api",
+   "kind": "external",
+   "owner": "partner bank",
+   "external": true
+  },
+  {
+   "name": "broker-api",
+   "kind": "external",
+   "owner": "broker",
+   "external": true
+  },
+  {
+   "name": "market-feed",
+   "kind": "external",
+   "owner": "exchange feed",
+   "external": true
+  },
+  {
+   "name": "kyc-vendor",
+   "kind": "external",
+   "owner": "vendor: KYC",
+   "external": true
+  },
+  {
+   "name": "aa-fiu-gateway",
+   "kind": "external",
+   "owner": "AA network",
+   "external": true
+  },
+  {
+   "name": "sms-vendor",
+   "kind": "external",
+   "owner": "vendor: SMS",
+   "external": true
+  },
+  {
+   "name": "push-provider",
+   "kind": "external",
+   "owner": "vendor: push",
+   "external": true
+  }
+ ],
+ "edges": [
+  {
+   "id": "dep:mobile-bff->auth-service",
+   "from": "mobile-bff",
+   "to": "auth-service",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:mobile-bff->payments-api",
+   "from": "mobile-bff",
+   "to": "payments-api",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:mobile-bff->portfolio-service",
+   "from": "mobile-bff",
+   "to": "portfolio-service",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:mobile-bff->orders-service",
+   "from": "mobile-bff",
+   "to": "orders-service",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:mobile-bff->kyc-service",
+   "from": "mobile-bff",
+   "to": "kyc-service",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:mobile-bff->aa-connector",
+   "from": "mobile-bff",
+   "to": "aa-connector",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:auth-service->user-db",
+   "from": "auth-service",
+   "to": "user-db",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:auth-service->redis-session",
+   "from": "auth-service",
+   "to": "redis-session",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:auth-service->otp-provider",
+   "from": "auth-service",
+   "to": "otp-provider",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:payments-api->ledger-service",
+   "from": "payments-api",
+   "to": "ledger-service",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:payments-api->upi-gateway",
+   "from": "payments-api",
+   "to": "upi-gateway",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:payments-api->fraud-service",
+   "from": "payments-api",
+   "to": "fraud-service",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:payments-api->redis-cache",
+   "from": "payments-api",
+   "to": "redis-cache",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:payments-api->event-bus",
+   "from": "payments-api",
+   "to": "event-bus",
+   "kind": "async"
+  },
+  {
+   "id": "dep:upi-gateway->npci-switch",
+   "from": "upi-gateway",
+   "to": "npci-switch",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:upi-gateway->partner-bank-api",
+   "from": "upi-gateway",
+   "to": "partner-bank-api",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:ledger-service->ledger-db",
+   "from": "ledger-service",
+   "to": "ledger-db",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:fraud-service->redis-cache",
+   "from": "fraud-service",
+   "to": "redis-cache",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:portfolio-service->portfolio-db",
+   "from": "portfolio-service",
+   "to": "portfolio-db",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:portfolio-service->market-data-service",
+   "from": "portfolio-service",
+   "to": "market-data-service",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:orders-service->broker-api",
+   "from": "orders-service",
+   "to": "broker-api",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:orders-service->portfolio-db",
+   "from": "orders-service",
+   "to": "portfolio-db",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:market-data-service->market-feed",
+   "from": "market-data-service",
+   "to": "market-feed",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:market-data-service->redis-cache",
+   "from": "market-data-service",
+   "to": "redis-cache",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:kyc-service->kyc-vendor",
+   "from": "kyc-service",
+   "to": "kyc-vendor",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:kyc-service->user-db",
+   "from": "kyc-service",
+   "to": "user-db",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:aa-connector->aa-fiu-gateway",
+   "from": "aa-connector",
+   "to": "aa-fiu-gateway",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:aa-connector->user-db",
+   "from": "aa-connector",
+   "to": "user-db",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:notification-service->event-bus",
+   "from": "notification-service",
+   "to": "event-bus",
+   "kind": "async"
+  },
+  {
+   "id": "dep:notification-service->sms-vendor",
+   "from": "notification-service",
+   "to": "sms-vendor",
+   "kind": "sync"
+  },
+  {
+   "id": "dep:notification-service->push-provider",
+   "from": "notification-service",
+   "to": "push-provider",
+   "kind": "sync"
+  }
+ ],
+ "notes": [
+  "coredns is the cluster DNS: every service resolves hostnames through it (not shown as edges).",
+  "kubernetes is the cluster control plane; its events (OOM kills, restarts, scaling) are logged under service 'kubernetes'.",
+  "External services (kind=external) have no logs of ours; their metrics come from synthetic probes plus our clients' call stats."
+ ]
+}

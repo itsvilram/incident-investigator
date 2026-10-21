@@ -1,0 +1,195 @@
+[
+ {
+  "id": "chg-1481",
+  "ts": "2026-10-04T12:53:00Z",
+  "service": "mobile-bff",
+  "kind": "config",
+  "summary": "mobile-bff raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-1621",
+  "ts": "2026-10-04T18:25:00Z",
+  "service": "aa-connector",
+  "kind": "infra",
+  "summary": "aa-connector node pool patch: kernel security update",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-2504",
+  "ts": "2026-10-05T21:39:00Z",
+  "service": "market-data-service",
+  "kind": "config",
+  "summary": "market-data-service raise request timeout 5s -> 6s",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-2991",
+  "ts": "2026-10-06T02:11:00Z",
+  "service": "mobile-bff",
+  "kind": "deploy",
+  "summary": "mobile-bff v4.7.5: logging improvements",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-3770",
+  "ts": "2026-10-06T10:51:00Z",
+  "service": "fraud-service",
+  "kind": "config",
+  "summary": "fraud-service raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-3781",
+  "ts": "2026-10-06T16:47:00Z",
+  "service": "ledger-service",
+  "kind": "config",
+  "summary": "ledger-service rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-4152",
+  "ts": "2026-10-06T21:29:00Z",
+  "service": "notification-service",
+  "kind": "deploy",
+  "summary": "notification-service v7.9.7: dependency bumps",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-4591",
+  "ts": "2026-10-08T06:50:00Z",
+  "service": "auth-service",
+  "kind": "config",
+  "summary": "auth-service raise request timeout 5s -> 6s",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-5351",
+  "ts": "2026-10-08T11:45:00Z",
+  "service": "kyc-service",
+  "kind": "deploy",
+  "summary": "kyc-service v9.12.9: logging improvements",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-5608",
+  "ts": "2026-10-09T08:59:00Z",
+  "service": "orders-service",
+  "kind": "deploy",
+  "summary": "orders-service v3.1.9: logging improvements",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-5822",
+  "ts": "2026-10-09T10:58:00Z",
+  "service": "portfolio-service",
+  "kind": "config",
+  "summary": "portfolio-service rotate API credentials (scheduled)",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-6016",
+  "ts": "2026-10-09T13:01:00Z",
+  "service": "portfolio-db",
+  "kind": "deploy",
+  "summary": "portfolio-db v8.17.4: minor bug fixes",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-6164",
+  "ts": "2026-10-09T20:55:00Z",
+  "service": "ledger-db",
+  "kind": "deploy",
+  "summary": "ledger-db v1.20.4: minor bug fixes",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6419",
+  "ts": "2026-10-09T23:01:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v3.10.3: dependency bumps",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-6732",
+  "ts": "2026-10-10T06:17:00Z",
+  "service": "redis-cache",
+  "kind": "deploy",
+  "summary": "redis-cache v4.16.7: minor bug fixes",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-7042",
+  "ts": "2026-10-10T13:01:00Z",
+  "service": "aa-connector",
+  "kind": "deploy",
+  "summary": "aa-connector v4.7.8: dependency bumps",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-8883",
+  "ts": "2026-10-11T05:03:00Z",
+  "service": "redis-session",
+  "kind": "config",
+  "summary": "redis-session rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9140",
+  "ts": "2026-10-11T09:37:00Z",
+  "service": "notification-service",
+  "kind": "infra",
+  "summary": "notification-service node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9163",
+  "ts": "2026-10-11T12:12:00Z",
+  "service": "redis-session",
+  "kind": "deploy",
+  "summary": "redis-session v2.10.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9768",
+  "ts": "2026-10-11T12:13:00Z",
+  "service": "user-db",
+  "kind": "deploy",
+  "summary": "user-db v3.20.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9802",
+  "ts": "2026-10-11T13:18:00Z",
+  "service": "ledger-service",
+  "kind": "feature_flag",
+  "summary": "ledger.reconciliation_v2 rollout 10% -> 100%",
+  "author": "ravi (ledger team)",
+  "details": {
+   "flag": "ledger.reconciliation_v2",
+   "old": "10%",
+   "new": "100%"
+  }
+ }
+]

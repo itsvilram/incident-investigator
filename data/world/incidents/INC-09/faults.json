@@ -1,0 +1,14 @@
+[
+ {
+  "tool": "query_metrics",
+  "mode": "error",
+  "times": 99,
+  "service": "notification-service"
+ },
+ {
+  "tool": "query_logs",
+  "mode": "partial",
+  "times": 99,
+  "service": "notification-service"
+ }
+]

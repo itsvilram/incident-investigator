@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.env
+# LLM response cache and raw run output (eval summaries are copied to results/)
+.cache/
+runs/

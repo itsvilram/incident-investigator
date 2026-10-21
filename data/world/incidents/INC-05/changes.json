@@ -1,0 +1,182 @@
+[
+ {
+  "id": "chg-1600",
+  "ts": "2026-10-01T14:08:00Z",
+  "service": "redis-cache",
+  "kind": "config",
+  "summary": "redis-cache raise request timeout 5s -> 6s",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-1826",
+  "ts": "2026-10-01T16:41:00Z",
+  "service": "mobile-bff",
+  "kind": "deploy",
+  "summary": "mobile-bff v5.2.8: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-2025",
+  "ts": "2026-10-02T02:37:00Z",
+  "service": "fraud-service",
+  "kind": "deploy",
+  "summary": "fraud-service v5.13.6: logging improvements",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-3173",
+  "ts": "2026-10-02T13:51:00Z",
+  "service": "orders-service",
+  "kind": "infra",
+  "summary": "orders-service node pool patch: kernel security update",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-3824",
+  "ts": "2026-10-02T20:24:00Z",
+  "service": "payments-api",
+  "kind": "deploy",
+  "summary": "payments-api v5.15.2: dependency bumps",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-4545",
+  "ts": "2026-10-02T20:24:00Z",
+  "service": "portfolio-db",
+  "kind": "config",
+  "summary": "portfolio-db rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-4942",
+  "ts": "2026-10-03T00:40:00Z",
+  "service": "fraud-service",
+  "kind": "deploy",
+  "summary": "fraud-service v9.9.6: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5433",
+  "ts": "2026-10-03T23:20:00Z",
+  "service": "portfolio-db",
+  "kind": "infra",
+  "summary": "portfolio-db node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5946",
+  "ts": "2026-10-04T07:04:00Z",
+  "service": "payments-api",
+  "kind": "config",
+  "summary": "payments-api rotate API credentials (scheduled)",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-6038",
+  "ts": "2026-10-04T09:21:00Z",
+  "service": "redis-session",
+  "kind": "deploy",
+  "summary": "redis-session v5.2.7: minor bug fixes",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6346",
+  "ts": "2026-10-05T05:22:00Z",
+  "service": "user-db",
+  "kind": "infra",
+  "summary": "user-db node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6977",
+  "ts": "2026-10-05T13:32:00Z",
+  "service": "fraud-service",
+  "kind": "deploy",
+  "summary": "fraud-service v7.18.3: logging improvements",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-7675",
+  "ts": "2026-10-05T20:06:00Z",
+  "service": "ledger-service",
+  "kind": "config",
+  "summary": "ledger-service raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-8044",
+  "ts": "2026-10-06T05:28:00Z",
+  "service": "kyc-service",
+  "kind": "deploy",
+  "summary": "kyc-service v9.12.7: minor bug fixes",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-8159",
+  "ts": "2026-10-06T23:00:00Z",
+  "service": "ledger-service",
+  "kind": "config",
+  "summary": "ledger-service rotate API credentials (scheduled)",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-8692",
+  "ts": "2026-10-07T01:22:00Z",
+  "service": "aa-connector",
+  "kind": "deploy",
+  "summary": "aa-connector v8.18.8: minor bug fixes",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-9048",
+  "ts": "2026-10-07T14:18:00Z",
+  "service": "event-bus",
+  "kind": "config",
+  "summary": "event-bus raise request timeout 5s -> 6s",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-9513",
+  "ts": "2026-10-08T09:21:00Z",
+  "service": "ledger-db",
+  "kind": "config",
+  "summary": "ledger-db rotate API credentials (scheduled)",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-9541",
+  "ts": "2026-10-08T12:05:00Z",
+  "service": "fraud-service",
+  "kind": "deploy",
+  "summary": "fraud-service v3.6.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9816",
+  "ts": "2026-10-08T12:07:00Z",
+  "service": "orders-service",
+  "kind": "deploy",
+  "summary": "orders-service v5.30.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ }
+]

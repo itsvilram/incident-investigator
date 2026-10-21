@@ -1,0 +1,182 @@
+[
+ {
+  "id": "chg-1151",
+  "ts": "2026-10-07T06:23:00Z",
+  "service": "auth-service",
+  "kind": "config",
+  "summary": "auth-service raise request timeout 5s -> 6s",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-4353",
+  "ts": "2026-10-07T10:18:00Z",
+  "service": "upi-gateway",
+  "kind": "deploy",
+  "summary": "upi-gateway v9.8.3: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-4374",
+  "ts": "2026-10-07T16:37:00Z",
+  "service": "ledger-service",
+  "kind": "deploy",
+  "summary": "ledger-service v6.11.9: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-4840",
+  "ts": "2026-10-07T17:40:00Z",
+  "service": "market-data-service",
+  "kind": "feature_flag",
+  "summary": "market-data-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-4969",
+  "ts": "2026-10-08T07:03:00Z",
+  "service": "ledger-service",
+  "kind": "config",
+  "summary": "ledger-service raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-5039",
+  "ts": "2026-10-08T07:46:00Z",
+  "service": "upi-gateway",
+  "kind": "deploy",
+  "summary": "upi-gateway v7.14.4: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5129",
+  "ts": "2026-10-08T08:07:00Z",
+  "service": "payments-api",
+  "kind": "feature_flag",
+  "summary": "payments-api enable new_onboarding_copy for 20% of users",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-5693",
+  "ts": "2026-10-09T02:15:00Z",
+  "service": "fraud-service",
+  "kind": "feature_flag",
+  "summary": "fraud-service enable new_onboarding_copy for 20% of users",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-5973",
+  "ts": "2026-10-09T12:25:00Z",
+  "service": "ledger-db",
+  "kind": "config",
+  "summary": "ledger-db raise request timeout 5s -> 6s",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-6021",
+  "ts": "2026-10-10T02:09:00Z",
+  "service": "event-bus",
+  "kind": "feature_flag",
+  "summary": "event-bus enable new_onboarding_copy for 20% of users",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-6124",
+  "ts": "2026-10-10T05:22:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v9.18.1: minor bug fixes",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6138",
+  "ts": "2026-10-10T10:13:00Z",
+  "service": "portfolio-db",
+  "kind": "config",
+  "summary": "portfolio-db raise request timeout 5s -> 6s",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-6385",
+  "ts": "2026-10-11T00:26:00Z",
+  "service": "event-bus",
+  "kind": "config",
+  "summary": "event-bus raise request timeout 5s -> 6s",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-7126",
+  "ts": "2026-10-11T12:00:00Z",
+  "service": "orders-service",
+  "kind": "config",
+  "summary": "orders-service rotate API credentials (scheduled)",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-7437",
+  "ts": "2026-10-11T14:26:00Z",
+  "service": "auth-service",
+  "kind": "config",
+  "summary": "auth-service raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-8128",
+  "ts": "2026-10-11T20:19:00Z",
+  "service": "fraud-service",
+  "kind": "config",
+  "summary": "fraud-service raise request timeout 5s -> 6s",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-8599",
+  "ts": "2026-10-12T05:21:00Z",
+  "service": "event-bus",
+  "kind": "config",
+  "summary": "event-bus raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-9140",
+  "ts": "2026-10-12T07:38:00Z",
+  "service": "notification-service",
+  "kind": "config",
+  "summary": "notification-service rotate API credentials (scheduled)",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-9719",
+  "ts": "2026-10-12T12:32:00Z",
+  "service": "portfolio-service",
+  "kind": "deploy",
+  "summary": "portfolio-service v2.8.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9757",
+  "ts": "2026-10-12T12:45:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v4.2.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ }
+]

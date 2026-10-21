@@ -1,0 +1,51 @@
+{
+ "id": "INC-06",
+ "verdict": "identified",
+ "root_cause_service": "portfolio-service",
+ "category": "resource_exhaustion",
+ "accepted": [
+  [
+   "portfolio-service",
+   "resource_exhaustion"
+  ],
+  [
+   "portfolio-service",
+   "bad_deploy"
+  ]
+ ],
+ "key_evidence": [
+  [
+   "metric:portfolio-service:mem_pct"
+  ],
+  [
+   "log-00664",
+   "log-00677",
+   "log-00736",
+   "log-00747",
+   "log-00764",
+   "log-00778",
+   "log-00797",
+   "log-00818",
+   "log-00819",
+   "log-00835",
+   "log-00873",
+   "log-00884",
+   "log-00907",
+   "log-00934",
+   "log-00968",
+   "log-00990",
+   "log-01015",
+   "log-01024",
+   "log-01068",
+   "log-01082"
+  ],
+  [
+   "chg-7001"
+  ]
+ ],
+ "traps": [
+  "'logs are clean' because log shipping died, not because the service is healthy",
+  "the trigger was deployed the day before, outside the default time window"
+ ],
+ "explanation": "v3.8.0 (deployed yesterday) leaks memory; pods hit the 2Gi limit and are OOM-killed from 13:42. The log shipper died too, so service logs went silent."
+}

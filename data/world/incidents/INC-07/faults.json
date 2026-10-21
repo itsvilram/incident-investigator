@@ -1,0 +1,14 @@
+[
+ {
+  "tool": "query_metrics",
+  "mode": "timeout",
+  "times": 3,
+  "service": "orders-service"
+ },
+ {
+  "tool": "query_logs",
+  "mode": "partial",
+  "times": 2,
+  "service": "orders-service"
+ }
+]

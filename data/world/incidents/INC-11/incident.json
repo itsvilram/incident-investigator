@@ -1,0 +1,11 @@
+{
+  "id": "INC-11",
+  "title": "Intermittent notification failures",
+  "reported_at": "2026-10-14T13:50:00Z",
+  "reporter": "on-call SRE (Kabir)",
+  "description": "Since ~13:25 about 25% of push/SMS sends from notification-service fail intermittently. Both vendors' status pages are green.",
+  "symptom_services": [
+    "notification-service"
+  ],
+  "customer_impact": "A quarter of notifications are not delivered."
+}

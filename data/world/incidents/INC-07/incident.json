@@ -1,0 +1,12 @@
+{
+  "id": "INC-07",
+  "title": "Order placement errors",
+  "reported_at": "2026-10-10T13:55:00Z",
+  "reporter": "investing on-call (Rohan)",
+  "description": "Since ~13:32 many SIP and order placements fail with 'Please try again'. orders-service alerts are firing.",
+  "symptom_services": [
+    "orders-service",
+    "mobile-bff"
+  ],
+  "customer_impact": "About 14% of order placements fail."
+}

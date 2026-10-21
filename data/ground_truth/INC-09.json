@@ -1,0 +1,14 @@
+{
+ "id": "INC-09",
+ "verdict": "inconclusive",
+ "root_cause_service": null,
+ "category": null,
+ "accepted": [],
+ "key_evidence": [],
+ "traps": [
+  "the key service's metrics are unavailable and its logs incomplete",
+  "two weak, conflicting leads (sms-vendor slowness vs consumer lag)",
+  "push is delayed too, which sms-vendor cannot explain"
+ ],
+ "explanation": "There is not enough evidence: notification-service metrics never load, logs are partial, and the leads conflict. The right answer is inconclusive, with a list of the data needed."
+}

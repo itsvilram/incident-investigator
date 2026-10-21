@@ -1,0 +1,12 @@
+{
+  "id": "INC-05",
+  "title": "Account linking via AA failing",
+  "reported_at": "2026-10-08T13:50:00Z",
+  "reporter": "growth on-call (Neha)",
+  "description": "Users can't link bank accounts through Account Aggregator since ~13:30. Looks like the AA consent timeout issue from last month again.",
+  "symptom_services": [
+    "aa-connector",
+    "mobile-bff"
+  ],
+  "customer_impact": "No new bank accounts can be linked."
+}

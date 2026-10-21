@@ -1,0 +1,1103 @@
+{"id": "log-00001", "ts": "2026-10-09T12:00:14Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/receipts 200 in 403ms"}
+{"id": "log-00002", "ts": "2026-10-09T12:00:20Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/sip 200 in 148ms"}
+{"id": "log-00003", "ts": "2026-10-09T12:00:23Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/orders 200 in 79ms"}
+{"id": "log-00004", "ts": "2026-10-09T12:00:28Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment orders-service replicas unchanged"}
+{"id": "log-00005", "ts": "2026-10-09T12:00:37Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00006", "ts": "2026-10-09T12:00:46Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/orders 201 in 184ms"}
+{"id": "log-00007", "ts": "2026-10-09T12:00:52Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/holdings 200 in 294ms"}
+{"id": "log-00008", "ts": "2026-10-09T12:00:56Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00009", "ts": "2026-10-09T12:00:58Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00010", "ts": "2026-10-09T12:01:08Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/orders 201 in 354ms"}
+{"id": "log-00011", "ts": "2026-10-09T12:01:11Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/sip 200 in 368ms"}
+{"id": "log-00012", "ts": "2026-10-09T12:01:13Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 155ms"}
+{"id": "log-00013", "ts": "2026-10-09T12:01:24Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00014", "ts": "2026-10-09T12:01:24Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00015", "ts": "2026-10-09T12:01:44Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00016", "ts": "2026-10-09T12:01:45Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/profile 201 in 220ms"}
+{"id": "log-00017", "ts": "2026-10-09T12:01:48Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00018", "ts": "2026-10-09T12:01:52Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00019", "ts": "2026-10-09T12:01:53Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00020", "ts": "2026-10-09T12:01:56Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00021", "ts": "2026-10-09T12:02:41Z", "service": "market-data-service", "level": "WARN", "message": "slow request GET /v1/holdings took 1337ms"}
+{"id": "log-00022", "ts": "2026-10-09T12:03:05Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/orders 201 in 326ms"}
+{"id": "log-00023", "ts": "2026-10-09T12:03:25Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00024", "ts": "2026-10-09T12:03:40Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/sip 200 in 154ms"}
+{"id": "log-00025", "ts": "2026-10-09T12:03:47Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 361 buffers"}
+{"id": "log-00026", "ts": "2026-10-09T12:03:50Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 442ms"}
+{"id": "log-00027", "ts": "2026-10-09T12:03:55Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00028", "ts": "2026-10-09T12:04:06Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/sip 200 in 302ms"}
+{"id": "log-00029", "ts": "2026-10-09T12:04:17Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment orders-service replicas unchanged"}
+{"id": "log-00030", "ts": "2026-10-09T12:04:48Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/accounts 200 in 239ms"}
+{"id": "log-00031", "ts": "2026-10-09T12:04:54Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00032", "ts": "2026-10-09T12:05:06Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00033", "ts": "2026-10-09T12:05:25Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00034", "ts": "2026-10-09T12:05:25Z", "service": "upi-gateway", "level": "WARN", "message": "retrying call to npci-switch (attempt 1 of 3)"}
+{"id": "log-00035", "ts": "2026-10-09T12:05:38Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00036", "ts": "2026-10-09T12:05:50Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/orders 200 in 349ms"}
+{"id": "log-00037", "ts": "2026-10-09T12:05:50Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/accounts 200 in 188ms"}
+{"id": "log-00038", "ts": "2026-10-09T12:06:01Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/profile 201 in 410ms"}
+{"id": "log-00039", "ts": "2026-10-09T12:06:03Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00040", "ts": "2026-10-09T12:06:12Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00041", "ts": "2026-10-09T12:06:15Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/receipts 201 in 240ms"}
+{"id": "log-00042", "ts": "2026-10-09T12:06:26Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00043", "ts": "2026-10-09T12:06:31Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/accounts 200 in 215ms"}
+{"id": "log-00044", "ts": "2026-10-09T12:06:38Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/orders 200 in 226ms"}
+{"id": "log-00045", "ts": "2026-10-09T12:06:47Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00046", "ts": "2026-10-09T12:06:50Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00047", "ts": "2026-10-09T12:07:03Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00048", "ts": "2026-10-09T12:07:26Z", "service": "kubernetes", "level": "INFO", "message": "Pod market-data-service-5af0f readiness probe ok"}
+{"id": "log-00049", "ts": "2026-10-09T12:07:31Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00050", "ts": "2026-10-09T12:07:43Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/sip 200 in 292ms"}
+{"id": "log-00051", "ts": "2026-10-09T12:07:45Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/profile 200 in 264ms"}
+{"id": "log-00052", "ts": "2026-10-09T12:07:59Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00053", "ts": "2026-10-09T12:08:16Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00054", "ts": "2026-10-09T12:08:46Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00055", "ts": "2026-10-09T12:08:46Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 370ms"}
+{"id": "log-00056", "ts": "2026-10-09T12:09:10Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00057", "ts": "2026-10-09T12:09:14Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/receipts 200 in 284ms"}
+{"id": "log-00058", "ts": "2026-10-09T12:09:28Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00059", "ts": "2026-10-09T12:09:34Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00060", "ts": "2026-10-09T12:09:36Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 477 buffers"}
+{"id": "log-00061", "ts": "2026-10-09T12:09:42Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/orders 200 in 432ms"}
+{"id": "log-00062", "ts": "2026-10-09T12:09:47Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/profile 200 in 417ms"}
+{"id": "log-00063", "ts": "2026-10-09T12:09:47Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/orders 200 in 333ms"}
+{"id": "log-00064", "ts": "2026-10-09T12:09:54Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00065", "ts": "2026-10-09T12:09:56Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/profile 200 in 310ms"}
+{"id": "log-00066", "ts": "2026-10-09T12:09:57Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/profile 201 in 392ms"}
+{"id": "log-00067", "ts": "2026-10-09T12:10:01Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/receipts 200 in 164ms"}
+{"id": "log-00068", "ts": "2026-10-09T12:10:04Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/sip 200 in 328ms"}
+{"id": "log-00069", "ts": "2026-10-09T12:10:16Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/receipts 200 in 139ms"}
+{"id": "log-00070", "ts": "2026-10-09T12:11:03Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/accounts 201 in 270ms"}
+{"id": "log-00071", "ts": "2026-10-09T12:11:06Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00072", "ts": "2026-10-09T12:11:26Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment payments-api replicas unchanged"}
+{"id": "log-00073", "ts": "2026-10-09T12:11:28Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/holdings 201 in 287ms"}
+{"id": "log-00074", "ts": "2026-10-09T12:11:42Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/holdings 200 in 36ms"}
+{"id": "log-00075", "ts": "2026-10-09T12:11:43Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00076", "ts": "2026-10-09T12:11:47Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/sip 200 in 286ms"}
+{"id": "log-00077", "ts": "2026-10-09T12:12:05Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/profile 200 in 250ms"}
+{"id": "log-00078", "ts": "2026-10-09T12:12:10Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/holdings 200 in 249ms"}
+{"id": "log-00079", "ts": "2026-10-09T12:12:16Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/receipts 200 in 304ms"}
+{"id": "log-00080", "ts": "2026-10-09T12:12:17Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 70ms"}
+{"id": "log-00081", "ts": "2026-10-09T12:12:32Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/holdings 201 in 44ms"}
+{"id": "log-00082", "ts": "2026-10-09T12:12:38Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00083", "ts": "2026-10-09T12:12:45Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/sip 200 in 208ms"}
+{"id": "log-00084", "ts": "2026-10-09T12:12:56Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00085", "ts": "2026-10-09T12:13:02Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 341ms"}
+{"id": "log-00086", "ts": "2026-10-09T12:13:03Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/profile 200 in 335ms"}
+{"id": "log-00087", "ts": "2026-10-09T12:13:32Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00088", "ts": "2026-10-09T12:13:37Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 858 buffers"}
+{"id": "log-00089", "ts": "2026-10-09T12:13:47Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/receipts 201 in 198ms"}
+{"id": "log-00090", "ts": "2026-10-09T12:13:49Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/receipts 200 in 169ms"}
+{"id": "log-00091", "ts": "2026-10-09T12:14:00Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 555 buffers"}
+{"id": "log-00092", "ts": "2026-10-09T12:14:01Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00093", "ts": "2026-10-09T12:14:11Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/holdings 200 in 248ms"}
+{"id": "log-00094", "ts": "2026-10-09T12:14:16Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00095", "ts": "2026-10-09T12:14:27Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00096", "ts": "2026-10-09T12:14:35Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/receipts 201 in 267ms"}
+{"id": "log-00097", "ts": "2026-10-09T12:15:12Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/sip 201 in 328ms"}
+{"id": "log-00098", "ts": "2026-10-09T12:15:15Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 117ms"}
+{"id": "log-00099", "ts": "2026-10-09T12:15:28Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00100", "ts": "2026-10-09T12:15:32Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/holdings 201 in 304ms"}
+{"id": "log-00101", "ts": "2026-10-09T12:15:33Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00102", "ts": "2026-10-09T12:15:34Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment fraud-service replicas unchanged"}
+{"id": "log-00103", "ts": "2026-10-09T12:15:42Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/orders 200 in 378ms"}
+{"id": "log-00104", "ts": "2026-10-09T12:15:52Z", "service": "portfolio-service", "level": "WARN", "message": "retrying call to market-data-service (attempt 1 of 3)"}
+{"id": "log-00105", "ts": "2026-10-09T12:15:56Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/profile 201 in 370ms"}
+{"id": "log-00106", "ts": "2026-10-09T12:15:56Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/holdings 200 in 107ms"}
+{"id": "log-00107", "ts": "2026-10-09T12:15:57Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00108", "ts": "2026-10-09T12:16:28Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00109", "ts": "2026-10-09T12:16:32Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00110", "ts": "2026-10-09T12:16:36Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/sip 200 in 52ms"}
+{"id": "log-00111", "ts": "2026-10-09T12:16:51Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/receipts 201 in 159ms"}
+{"id": "log-00112", "ts": "2026-10-09T12:17:23Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00113", "ts": "2026-10-09T12:17:23Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/holdings 200 in 53ms"}
+{"id": "log-00114", "ts": "2026-10-09T12:17:26Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00115", "ts": "2026-10-09T12:17:42Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00116", "ts": "2026-10-09T12:18:01Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00117", "ts": "2026-10-09T12:18:06Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/holdings 201 in 19ms"}
+{"id": "log-00118", "ts": "2026-10-09T12:18:11Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/holdings 201 in 153ms"}
+{"id": "log-00119", "ts": "2026-10-09T12:18:14Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00120", "ts": "2026-10-09T12:18:29Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 372ms"}
+{"id": "log-00121", "ts": "2026-10-09T12:18:30Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment notification-service replicas unchanged"}
+{"id": "log-00122", "ts": "2026-10-09T12:18:39Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 130ms"}
+{"id": "log-00123", "ts": "2026-10-09T12:18:39Z", "service": "payments-api", "level": "WARN", "message": "retrying call to event-bus (attempt 1 of 3)"}
+{"id": "log-00124", "ts": "2026-10-09T12:18:45Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/profile 201 in 190ms"}
+{"id": "log-00125", "ts": "2026-10-09T12:19:11Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00126", "ts": "2026-10-09T12:19:15Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00127", "ts": "2026-10-09T12:19:35Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/receipts 200 in 147ms"}
+{"id": "log-00128", "ts": "2026-10-09T12:19:43Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/profile 200 in 179ms"}
+{"id": "log-00129", "ts": "2026-10-09T12:19:47Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00130", "ts": "2026-10-09T12:20:03Z", "service": "kubernetes", "level": "INFO", "message": "Pod aa-connector-890e8 readiness probe ok"}
+{"id": "log-00131", "ts": "2026-10-09T12:20:19Z", "service": "ledger-service", "level": "WARN", "message": "slow request GET /v1/accounts took 1702ms"}
+{"id": "log-00132", "ts": "2026-10-09T12:20:19Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/holdings 201 in 341ms"}
+{"id": "log-00133", "ts": "2026-10-09T12:20:28Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/accounts 200 in 129ms"}
+{"id": "log-00134", "ts": "2026-10-09T12:20:48Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00135", "ts": "2026-10-09T12:20:55Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00136", "ts": "2026-10-09T12:20:58Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/holdings 200 in 356ms"}
+{"id": "log-00137", "ts": "2026-10-09T12:20:58Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00138", "ts": "2026-10-09T12:21:01Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 206ms"}
+{"id": "log-00139", "ts": "2026-10-09T12:21:07Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00140", "ts": "2026-10-09T12:21:53Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/receipts 200 in 37ms"}
+{"id": "log-00141", "ts": "2026-10-09T12:22:14Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/receipts 200 in 143ms"}
+{"id": "log-00142", "ts": "2026-10-09T12:22:25Z", "service": "orders-service", "level": "WARN", "message": "retrying call to portfolio-db (attempt 1 of 3)"}
+{"id": "log-00143", "ts": "2026-10-09T12:22:34Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00144", "ts": "2026-10-09T12:22:42Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00145", "ts": "2026-10-09T12:22:57Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/sip 200 in 442ms"}
+{"id": "log-00146", "ts": "2026-10-09T12:22:58Z", "service": "kubernetes", "level": "INFO", "message": "Pod orders-service-7ea04 readiness probe ok"}
+{"id": "log-00147", "ts": "2026-10-09T12:23:01Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/orders 200 in 77ms"}
+{"id": "log-00148", "ts": "2026-10-09T12:23:06Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00149", "ts": "2026-10-09T12:23:09Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00150", "ts": "2026-10-09T12:23:09Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/accounts 200 in 68ms"}
+{"id": "log-00151", "ts": "2026-10-09T12:23:17Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/accounts 200 in 411ms"}
+{"id": "log-00152", "ts": "2026-10-09T12:23:24Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/accounts 200 in 256ms"}
+{"id": "log-00153", "ts": "2026-10-09T12:23:29Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/accounts 200 in 394ms"}
+{"id": "log-00154", "ts": "2026-10-09T12:24:16Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/orders 201 in 367ms"}
+{"id": "log-00155", "ts": "2026-10-09T12:24:19Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 205ms"}
+{"id": "log-00156", "ts": "2026-10-09T12:24:36Z", "service": "auth-service", "level": "WARN", "message": "slow request GET /v1/receipts took 1451ms"}
+{"id": "log-00157", "ts": "2026-10-09T12:24:39Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/receipts 200 in 443ms"}
+{"id": "log-00158", "ts": "2026-10-09T12:24:42Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00159", "ts": "2026-10-09T12:24:46Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/orders 200 in 44ms"}
+{"id": "log-00160", "ts": "2026-10-09T12:24:59Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 180ms"}
+{"id": "log-00161", "ts": "2026-10-09T12:25:06Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00162", "ts": "2026-10-09T12:25:08Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00163", "ts": "2026-10-09T12:25:23Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00164", "ts": "2026-10-09T12:25:23Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment orders-service replicas unchanged"}
+{"id": "log-00165", "ts": "2026-10-09T12:25:41Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 157ms"}
+{"id": "log-00166", "ts": "2026-10-09T12:25:50Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/sip 200 in 361ms"}
+{"id": "log-00167", "ts": "2026-10-09T12:25:52Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00168", "ts": "2026-10-09T12:26:24Z", "service": "mobile-bff", "level": "WARN", "message": "retrying call to portfolio-service (attempt 1 of 3)"}
+{"id": "log-00169", "ts": "2026-10-09T12:26:29Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 344 buffers"}
+{"id": "log-00170", "ts": "2026-10-09T12:26:48Z", "service": "payments-api", "level": "WARN", "message": "retrying call to upi-gateway (attempt 1 of 3)"}
+{"id": "log-00171", "ts": "2026-10-09T12:26:49Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/holdings 200 in 77ms"}
+{"id": "log-00172", "ts": "2026-10-09T12:26:50Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00173", "ts": "2026-10-09T12:26:53Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00174", "ts": "2026-10-09T12:26:54Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/accounts 200 in 99ms"}
+{"id": "log-00175", "ts": "2026-10-09T12:27:34Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/sip 201 in 154ms"}
+{"id": "log-00176", "ts": "2026-10-09T12:27:41Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00177", "ts": "2026-10-09T12:27:55Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/holdings 201 in 411ms"}
+{"id": "log-00178", "ts": "2026-10-09T12:28:03Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/accounts 201 in 402ms"}
+{"id": "log-00179", "ts": "2026-10-09T12:28:10Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/holdings 200 in 181ms"}
+{"id": "log-00180", "ts": "2026-10-09T12:28:17Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00181", "ts": "2026-10-09T12:28:31Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/holdings 201 in 38ms"}
+{"id": "log-00182", "ts": "2026-10-09T12:28:42Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/orders 200 in 431ms"}
+{"id": "log-00183", "ts": "2026-10-09T12:28:47Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00184", "ts": "2026-10-09T12:29:15Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00185", "ts": "2026-10-09T12:29:17Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/orders 200 in 147ms"}
+{"id": "log-00186", "ts": "2026-10-09T12:29:22Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 201 buffers"}
+{"id": "log-00187", "ts": "2026-10-09T12:29:28Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00188", "ts": "2026-10-09T12:29:41Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 308ms"}
+{"id": "log-00189", "ts": "2026-10-09T12:29:42Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/sip 200 in 276ms"}
+{"id": "log-00190", "ts": "2026-10-09T12:29:57Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/profile 200 in 48ms"}
+{"id": "log-00191", "ts": "2026-10-09T12:30:05Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment market-data-service replicas unchanged"}
+{"id": "log-00192", "ts": "2026-10-09T12:30:11Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 18 buffers"}
+{"id": "log-00193", "ts": "2026-10-09T12:30:12Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/holdings 200 in 293ms"}
+{"id": "log-00194", "ts": "2026-10-09T12:30:17Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00195", "ts": "2026-10-09T12:30:26Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/orders 201 in 413ms"}
+{"id": "log-00196", "ts": "2026-10-09T12:30:50Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00197", "ts": "2026-10-09T12:30:50Z", "service": "orders-service", "level": "WARN", "message": "slow request GET /v1/holdings took 2319ms"}
+{"id": "log-00198", "ts": "2026-10-09T12:31:16Z", "service": "upi-gateway", "level": "WARN", "message": "retrying call to partner-bank-api (attempt 1 of 3)"}
+{"id": "log-00199", "ts": "2026-10-09T12:31:20Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/sip 201 in 25ms"}
+{"id": "log-00200", "ts": "2026-10-09T12:31:36Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 115ms"}
+{"id": "log-00201", "ts": "2026-10-09T12:31:37Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00202", "ts": "2026-10-09T12:32:07Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/profile 201 in 418ms"}
+{"id": "log-00203", "ts": "2026-10-09T12:32:09Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00204", "ts": "2026-10-09T12:32:18Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 25 buffers"}
+{"id": "log-00205", "ts": "2026-10-09T12:32:21Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00206", "ts": "2026-10-09T12:32:29Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00207", "ts": "2026-10-09T12:32:42Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00208", "ts": "2026-10-09T12:32:47Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00209", "ts": "2026-10-09T12:33:01Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/holdings 201 in 413ms"}
+{"id": "log-00210", "ts": "2026-10-09T12:33:03Z", "service": "market-data-service", "level": "WARN", "message": "retrying call to redis-cache (attempt 1 of 3)"}
+{"id": "log-00211", "ts": "2026-10-09T12:33:11Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/holdings 200 in 424ms"}
+{"id": "log-00212", "ts": "2026-10-09T12:33:14Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/accounts 200 in 441ms"}
+{"id": "log-00213", "ts": "2026-10-09T12:33:16Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/profile 200 in 183ms"}
+{"id": "log-00214", "ts": "2026-10-09T12:33:41Z", "service": "kubernetes", "level": "INFO", "message": "Pod ledger-service-92381 readiness probe ok"}
+{"id": "log-00215", "ts": "2026-10-09T12:34:14Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00216", "ts": "2026-10-09T12:34:17Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/sip 200 in 272ms"}
+{"id": "log-00217", "ts": "2026-10-09T12:34:26Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00218", "ts": "2026-10-09T12:34:29Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 96ms"}
+{"id": "log-00219", "ts": "2026-10-09T12:34:32Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00220", "ts": "2026-10-09T12:34:32Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/profile 200 in 290ms"}
+{"id": "log-00221", "ts": "2026-10-09T12:34:36Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/orders 200 in 441ms"}
+{"id": "log-00222", "ts": "2026-10-09T12:34:49Z", "service": "auth-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00223", "ts": "2026-10-09T12:34:50Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/profile 200 in 444ms"}
+{"id": "log-00224", "ts": "2026-10-09T12:35:36Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00225", "ts": "2026-10-09T12:35:48Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00226", "ts": "2026-10-09T12:35:49Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00227", "ts": "2026-10-09T12:36:08Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00228", "ts": "2026-10-09T12:36:12Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00229", "ts": "2026-10-09T12:36:14Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/accounts 200 in 327ms"}
+{"id": "log-00230", "ts": "2026-10-09T12:36:31Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00231", "ts": "2026-10-09T12:36:44Z", "service": "kubernetes", "level": "INFO", "message": "Pod portfolio-service-32908 readiness probe ok"}
+{"id": "log-00232", "ts": "2026-10-09T12:37:02Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00233", "ts": "2026-10-09T12:37:02Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00234", "ts": "2026-10-09T12:37:04Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/profile 201 in 442ms"}
+{"id": "log-00235", "ts": "2026-10-09T12:37:07Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00236", "ts": "2026-10-09T12:37:26Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/payments/intent 200 in 439ms"}
+{"id": "log-00237", "ts": "2026-10-09T12:37:31Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/holdings 201 in 212ms"}
+{"id": "log-00238", "ts": "2026-10-09T12:37:32Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 201ms"}
+{"id": "log-00239", "ts": "2026-10-09T12:37:45Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 91ms"}
+{"id": "log-00240", "ts": "2026-10-09T12:37:46Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00241", "ts": "2026-10-09T12:38:00Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/accounts 200 in 121ms"}
+{"id": "log-00242", "ts": "2026-10-09T12:38:51Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 309 buffers"}
+{"id": "log-00243", "ts": "2026-10-09T12:38:59Z", "service": "payments-api", "level": "WARN", "message": "retrying call to ledger-service (attempt 1 of 3)"}
+{"id": "log-00244", "ts": "2026-10-09T12:39:15Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 130ms"}
+{"id": "log-00245", "ts": "2026-10-09T12:39:22Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 80ms"}
+{"id": "log-00246", "ts": "2026-10-09T12:39:24Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/receipts 200 in 362ms"}
+{"id": "log-00247", "ts": "2026-10-09T12:39:48Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment fraud-service replicas unchanged"}
+{"id": "log-00248", "ts": "2026-10-09T12:39:53Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00249", "ts": "2026-10-09T12:40:03Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00250", "ts": "2026-10-09T12:40:08Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/orders 200 in 24ms"}
+{"id": "log-00251", "ts": "2026-10-09T12:40:30Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00252", "ts": "2026-10-09T12:40:37Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00253", "ts": "2026-10-09T12:40:41Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00254", "ts": "2026-10-09T12:40:48Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/sip 201 in 304ms"}
+{"id": "log-00255", "ts": "2026-10-09T12:40:52Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00256", "ts": "2026-10-09T12:40:54Z", "service": "aa-connector", "level": "WARN", "message": "retrying call to aa-fiu-gateway (attempt 1 of 3)"}
+{"id": "log-00257", "ts": "2026-10-09T12:41:02Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 141 buffers"}
+{"id": "log-00258", "ts": "2026-10-09T12:41:06Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/accounts 200 in 381ms"}
+{"id": "log-00259", "ts": "2026-10-09T12:41:12Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00260", "ts": "2026-10-09T12:41:14Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/sip 200 in 263ms"}
+{"id": "log-00261", "ts": "2026-10-09T12:41:20Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00262", "ts": "2026-10-09T12:41:42Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/accounts 200 in 72ms"}
+{"id": "log-00263", "ts": "2026-10-09T12:41:43Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 370ms"}
+{"id": "log-00264", "ts": "2026-10-09T12:42:06Z", "service": "auth-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00265", "ts": "2026-10-09T12:42:42Z", "service": "orders-service", "level": "WARN", "message": "retrying call to broker-api (attempt 1 of 3)"}
+{"id": "log-00266", "ts": "2026-10-09T12:42:46Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00267", "ts": "2026-10-09T12:43:07Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/receipts 200 in 305ms"}
+{"id": "log-00268", "ts": "2026-10-09T12:43:16Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00269", "ts": "2026-10-09T12:43:29Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/orders 200 in 107ms"}
+{"id": "log-00270", "ts": "2026-10-09T12:43:30Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00271", "ts": "2026-10-09T12:43:41Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00272", "ts": "2026-10-09T12:43:44Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00273", "ts": "2026-10-09T12:43:49Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/sip 200 in 295ms"}
+{"id": "log-00274", "ts": "2026-10-09T12:43:53Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment market-data-service replicas unchanged"}
+{"id": "log-00275", "ts": "2026-10-09T12:43:53Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/payments/intent 200 in 35ms"}
+{"id": "log-00276", "ts": "2026-10-09T12:43:59Z", "service": "notification-service", "level": "WARN", "message": "slow request GET /v1/accounts took 2176ms"}
+{"id": "log-00277", "ts": "2026-10-09T12:44:02Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00278", "ts": "2026-10-09T12:44:30Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 360 buffers"}
+{"id": "log-00279", "ts": "2026-10-09T12:44:39Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 240ms"}
+{"id": "log-00280", "ts": "2026-10-09T12:44:39Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/receipts 200 in 327ms"}
+{"id": "log-00281", "ts": "2026-10-09T12:45:16Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 476 buffers"}
+{"id": "log-00282", "ts": "2026-10-09T12:45:22Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/payments/intent 200 in 436ms"}
+{"id": "log-00283", "ts": "2026-10-09T12:45:30Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00284", "ts": "2026-10-09T12:45:31Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/accounts 201 in 401ms"}
+{"id": "log-00285", "ts": "2026-10-09T12:45:39Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/profile 200 in 70ms"}
+{"id": "log-00286", "ts": "2026-10-09T12:45:57Z", "service": "portfolio-service", "level": "WARN", "message": "slow request GET /v1/receipts took 2429ms"}
+{"id": "log-00287", "ts": "2026-10-09T12:45:59Z", "service": "fraud-service", "level": "WARN", "message": "slow request GET /v1/orders took 1319ms"}
+{"id": "log-00288", "ts": "2026-10-09T12:46:15Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/accounts 200 in 367ms"}
+{"id": "log-00289", "ts": "2026-10-09T12:46:31Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/accounts 200 in 362ms"}
+{"id": "log-00290", "ts": "2026-10-09T12:46:33Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00291", "ts": "2026-10-09T12:46:34Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00292", "ts": "2026-10-09T12:46:35Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00293", "ts": "2026-10-09T12:46:42Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00294", "ts": "2026-10-09T12:46:45Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/accounts 200 in 192ms"}
+{"id": "log-00295", "ts": "2026-10-09T12:47:00Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 415 buffers"}
+{"id": "log-00296", "ts": "2026-10-09T12:47:02Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/receipts 200 in 424ms"}
+{"id": "log-00297", "ts": "2026-10-09T12:47:09Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/sip 201 in 130ms"}
+{"id": "log-00298", "ts": "2026-10-09T12:47:38Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00299", "ts": "2026-10-09T12:47:48Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00300", "ts": "2026-10-09T12:48:04Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/receipts 200 in 74ms"}
+{"id": "log-00301", "ts": "2026-10-09T12:48:34Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment mobile-bff replicas unchanged"}
+{"id": "log-00302", "ts": "2026-10-09T12:49:10Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00303", "ts": "2026-10-09T12:49:10Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/orders 200 in 65ms"}
+{"id": "log-00304", "ts": "2026-10-09T12:49:10Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00305", "ts": "2026-10-09T12:49:17Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00306", "ts": "2026-10-09T12:49:22Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00307", "ts": "2026-10-09T12:49:25Z", "service": "aa-connector", "level": "WARN", "message": "slow request GET /v1/sip took 2343ms"}
+{"id": "log-00308", "ts": "2026-10-09T12:49:28Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/sip 201 in 293ms"}
+{"id": "log-00309", "ts": "2026-10-09T12:49:28Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/holdings 200 in 293ms"}
+{"id": "log-00310", "ts": "2026-10-09T12:49:34Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00311", "ts": "2026-10-09T12:49:50Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00312", "ts": "2026-10-09T12:50:02Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00313", "ts": "2026-10-09T12:50:10Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/sip 200 in 182ms"}
+{"id": "log-00314", "ts": "2026-10-09T12:50:18Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/receipts 201 in 84ms"}
+{"id": "log-00315", "ts": "2026-10-09T12:50:24Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00316", "ts": "2026-10-09T12:50:41Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00317", "ts": "2026-10-09T12:50:49Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00318", "ts": "2026-10-09T12:50:51Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/receipts 200 in 271ms"}
+{"id": "log-00319", "ts": "2026-10-09T12:50:59Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/orders 200 in 267ms"}
+{"id": "log-00320", "ts": "2026-10-09T12:51:08Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/receipts 200 in 264ms"}
+{"id": "log-00321", "ts": "2026-10-09T12:51:12Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00322", "ts": "2026-10-09T12:51:16Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00323", "ts": "2026-10-09T12:51:25Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00324", "ts": "2026-10-09T12:51:48Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/receipts 200 in 75ms"}
+{"id": "log-00325", "ts": "2026-10-09T12:51:54Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/sip 200 in 68ms"}
+{"id": "log-00326", "ts": "2026-10-09T12:52:00Z", "service": "kubernetes", "level": "INFO", "message": "Pod payments-api-d9ab2 readiness probe ok"}
+{"id": "log-00327", "ts": "2026-10-09T12:52:38Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00328", "ts": "2026-10-09T12:52:40Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/profile 200 in 289ms"}
+{"id": "log-00329", "ts": "2026-10-09T12:52:42Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/receipts 200 in 139ms"}
+{"id": "log-00330", "ts": "2026-10-09T12:52:52Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00331", "ts": "2026-10-09T12:52:58Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/accounts 200 in 172ms"}
+{"id": "log-00332", "ts": "2026-10-09T12:53:03Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 101ms"}
+{"id": "log-00333", "ts": "2026-10-09T12:53:38Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00334", "ts": "2026-10-09T12:53:42Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/accounts 200 in 412ms"}
+{"id": "log-00335", "ts": "2026-10-09T12:53:45Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00336", "ts": "2026-10-09T12:54:04Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00337", "ts": "2026-10-09T12:54:18Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/sip 201 in 225ms"}
+{"id": "log-00338", "ts": "2026-10-09T12:54:21Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00339", "ts": "2026-10-09T12:54:36Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00340", "ts": "2026-10-09T12:54:44Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00341", "ts": "2026-10-09T12:54:53Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/accounts 200 in 224ms"}
+{"id": "log-00342", "ts": "2026-10-09T12:54:59Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/accounts 201 in 146ms"}
+{"id": "log-00343", "ts": "2026-10-09T12:55:00Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/orders 201 in 91ms"}
+{"id": "log-00344", "ts": "2026-10-09T12:55:02Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00345", "ts": "2026-10-09T12:55:13Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00346", "ts": "2026-10-09T12:55:21Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00347", "ts": "2026-10-09T12:55:22Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00348", "ts": "2026-10-09T12:55:34Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00349", "ts": "2026-10-09T12:56:05Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/profile 201 in 122ms"}
+{"id": "log-00350", "ts": "2026-10-09T12:56:14Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/accounts 200 in 356ms"}
+{"id": "log-00351", "ts": "2026-10-09T12:56:16Z", "service": "kubernetes", "level": "INFO", "message": "Pod payments-api-2f49a readiness probe ok"}
+{"id": "log-00352", "ts": "2026-10-09T12:56:17Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00353", "ts": "2026-10-09T12:56:24Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00354", "ts": "2026-10-09T12:56:29Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/holdings 200 in 412ms"}
+{"id": "log-00355", "ts": "2026-10-09T12:57:06Z", "service": "market-data-service", "level": "WARN", "message": "retrying call to redis-cache (attempt 1 of 3)"}
+{"id": "log-00356", "ts": "2026-10-09T12:57:29Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00357", "ts": "2026-10-09T12:57:30Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 546 buffers"}
+{"id": "log-00358", "ts": "2026-10-09T12:57:34Z", "service": "kyc-service", "level": "WARN", "message": "slow request GET /v1/holdings took 1772ms"}
+{"id": "log-00359", "ts": "2026-10-09T12:57:34Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00360", "ts": "2026-10-09T12:57:46Z", "service": "kubernetes", "level": "INFO", "message": "Pod notification-service-57829 readiness probe ok"}
+{"id": "log-00361", "ts": "2026-10-09T12:57:48Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/profile 201 in 245ms"}
+{"id": "log-00362", "ts": "2026-10-09T12:58:14Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/receipts 200 in 220ms"}
+{"id": "log-00363", "ts": "2026-10-09T12:58:15Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/orders 200 in 71ms"}
+{"id": "log-00364", "ts": "2026-10-09T12:58:40Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00365", "ts": "2026-10-09T12:59:04Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/orders 200 in 154ms"}
+{"id": "log-00366", "ts": "2026-10-09T12:59:11Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00367", "ts": "2026-10-09T12:59:12Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00368", "ts": "2026-10-09T12:59:13Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00369", "ts": "2026-10-09T12:59:17Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00370", "ts": "2026-10-09T12:59:17Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00371", "ts": "2026-10-09T12:59:26Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 70 buffers"}
+{"id": "log-00372", "ts": "2026-10-09T12:59:29Z", "service": "auth-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00373", "ts": "2026-10-09T12:59:42Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00374", "ts": "2026-10-09T12:59:45Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/sip 201 in 264ms"}
+{"id": "log-00375", "ts": "2026-10-09T12:59:49Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/accounts 201 in 321ms"}
+{"id": "log-00376", "ts": "2026-10-09T12:59:57Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/profile 200 in 396ms"}
+{"id": "log-00377", "ts": "2026-10-09T13:00:24Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00378", "ts": "2026-10-09T13:00:33Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00379", "ts": "2026-10-09T13:00:45Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/accounts 200 in 282ms"}
+{"id": "log-00380", "ts": "2026-10-09T13:01:07Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00381", "ts": "2026-10-09T13:01:09Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 718 buffers"}
+{"id": "log-00382", "ts": "2026-10-09T13:01:10Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/holdings 200 in 247ms"}
+{"id": "log-00383", "ts": "2026-10-09T13:01:56Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/sip 201 in 258ms"}
+{"id": "log-00384", "ts": "2026-10-09T13:02:05Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/accounts 200 in 67ms"}
+{"id": "log-00385", "ts": "2026-10-09T13:02:06Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/orders 201 in 384ms"}
+{"id": "log-00386", "ts": "2026-10-09T13:02:08Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00387", "ts": "2026-10-09T13:02:10Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00388", "ts": "2026-10-09T13:02:15Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00389", "ts": "2026-10-09T13:02:17Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/receipts 200 in 324ms"}
+{"id": "log-00390", "ts": "2026-10-09T13:02:31Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00391", "ts": "2026-10-09T13:02:35Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment portfolio-service replicas unchanged"}
+{"id": "log-00392", "ts": "2026-10-09T13:02:52Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/accounts 200 in 38ms"}
+{"id": "log-00393", "ts": "2026-10-09T13:02:59Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00394", "ts": "2026-10-09T13:03:02Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/accounts 200 in 90ms"}
+{"id": "log-00395", "ts": "2026-10-09T13:03:09Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00396", "ts": "2026-10-09T13:03:32Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/accounts 201 in 325ms"}
+{"id": "log-00397", "ts": "2026-10-09T13:03:37Z", "service": "notification-service", "level": "WARN", "message": "retrying call to push-provider (attempt 1 of 3)"}
+{"id": "log-00398", "ts": "2026-10-09T13:04:10Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00399", "ts": "2026-10-09T13:04:12Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/holdings 201 in 170ms"}
+{"id": "log-00400", "ts": "2026-10-09T13:04:13Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/profile 201 in 75ms"}
+{"id": "log-00401", "ts": "2026-10-09T13:04:18Z", "service": "kubernetes", "level": "INFO", "message": "Pod notification-service-f56ab readiness probe ok"}
+{"id": "log-00402", "ts": "2026-10-09T13:04:45Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/receipts 200 in 221ms"}
+{"id": "log-00403", "ts": "2026-10-09T13:05:01Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00404", "ts": "2026-10-09T13:05:20Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/sip 200 in 32ms"}
+{"id": "log-00405", "ts": "2026-10-09T13:05:35Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00406", "ts": "2026-10-09T13:05:35Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00407", "ts": "2026-10-09T13:05:38Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00408", "ts": "2026-10-09T13:05:46Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/receipts 200 in 236ms"}
+{"id": "log-00409", "ts": "2026-10-09T13:05:55Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00410", "ts": "2026-10-09T13:06:00Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/accounts 201 in 66ms"}
+{"id": "log-00411", "ts": "2026-10-09T13:06:01Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 59 buffers"}
+{"id": "log-00412", "ts": "2026-10-09T13:06:04Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/orders 200 in 419ms"}
+{"id": "log-00413", "ts": "2026-10-09T13:06:24Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/payments/intent 200 in 253ms"}
+{"id": "log-00414", "ts": "2026-10-09T13:06:25Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00415", "ts": "2026-10-09T13:06:34Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/payments/intent 200 in 176ms"}
+{"id": "log-00416", "ts": "2026-10-09T13:06:37Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/payments/intent 200 in 141ms"}
+{"id": "log-00417", "ts": "2026-10-09T13:06:47Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00418", "ts": "2026-10-09T13:07:13Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/holdings 200 in 126ms"}
+{"id": "log-00419", "ts": "2026-10-09T13:07:14Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/receipts 201 in 371ms"}
+{"id": "log-00420", "ts": "2026-10-09T13:07:27Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 690 buffers"}
+{"id": "log-00421", "ts": "2026-10-09T13:07:33Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00422", "ts": "2026-10-09T13:07:58Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/holdings 201 in 338ms"}
+{"id": "log-00423", "ts": "2026-10-09T13:08:05Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00424", "ts": "2026-10-09T13:08:09Z", "service": "kubernetes", "level": "INFO", "message": "Pod market-data-service-fa3b7 readiness probe ok"}
+{"id": "log-00425", "ts": "2026-10-09T13:08:16Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00426", "ts": "2026-10-09T13:08:41Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 22ms"}
+{"id": "log-00427", "ts": "2026-10-09T13:08:50Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 29ms"}
+{"id": "log-00428", "ts": "2026-10-09T13:08:53Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/orders 200 in 199ms"}
+{"id": "log-00429", "ts": "2026-10-09T13:08:53Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/accounts 201 in 56ms"}
+{"id": "log-00430", "ts": "2026-10-09T13:09:02Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00431", "ts": "2026-10-09T13:09:03Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00432", "ts": "2026-10-09T13:09:07Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/accounts 200 in 116ms"}
+{"id": "log-00433", "ts": "2026-10-09T13:09:11Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 365 buffers"}
+{"id": "log-00434", "ts": "2026-10-09T13:09:43Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/sip 200 in 155ms"}
+{"id": "log-00435", "ts": "2026-10-09T13:09:55Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00436", "ts": "2026-10-09T13:10:01Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00437", "ts": "2026-10-09T13:10:12Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/orders 200 in 20ms"}
+{"id": "log-00438", "ts": "2026-10-09T13:10:27Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/profile 200 in 369ms"}
+{"id": "log-00439", "ts": "2026-10-09T13:10:32Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/accounts 201 in 405ms"}
+{"id": "log-00440", "ts": "2026-10-09T13:10:42Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00441", "ts": "2026-10-09T13:11:00Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00442", "ts": "2026-10-09T13:11:10Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/orders 200 in 278ms"}
+{"id": "log-00443", "ts": "2026-10-09T13:11:13Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00444", "ts": "2026-10-09T13:11:16Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/holdings 201 in 52ms"}
+{"id": "log-00445", "ts": "2026-10-09T13:11:25Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/profile 200 in 25ms"}
+{"id": "log-00446", "ts": "2026-10-09T13:11:45Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 271 buffers"}
+{"id": "log-00447", "ts": "2026-10-09T13:12:10Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/receipts 200 in 120ms"}
+{"id": "log-00448", "ts": "2026-10-09T13:12:12Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/orders 200 in 378ms"}
+{"id": "log-00449", "ts": "2026-10-09T13:12:15Z", "service": "kubernetes", "level": "INFO", "message": "Pod payments-api-42444 readiness probe ok"}
+{"id": "log-00450", "ts": "2026-10-09T13:12:36Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/accounts 201 in 283ms"}
+{"id": "log-00451", "ts": "2026-10-09T13:12:43Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00452", "ts": "2026-10-09T13:12:46Z", "service": "notification-service", "level": "WARN", "message": "slow request GET /v1/sip took 1118ms"}
+{"id": "log-00453", "ts": "2026-10-09T13:12:57Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 213 buffers"}
+{"id": "log-00454", "ts": "2026-10-09T13:13:08Z", "service": "upi-gateway", "level": "WARN", "message": "retrying call to partner-bank-api (attempt 1 of 3)"}
+{"id": "log-00455", "ts": "2026-10-09T13:13:09Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00456", "ts": "2026-10-09T13:13:11Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00457", "ts": "2026-10-09T13:13:28Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 359 buffers"}
+{"id": "log-00458", "ts": "2026-10-09T13:13:30Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00459", "ts": "2026-10-09T13:13:52Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00460", "ts": "2026-10-09T13:14:05Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00461", "ts": "2026-10-09T13:14:15Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/orders 201 in 86ms"}
+{"id": "log-00462", "ts": "2026-10-09T13:14:16Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/sip 201 in 173ms"}
+{"id": "log-00463", "ts": "2026-10-09T13:14:31Z", "service": "kubernetes", "level": "INFO", "message": "Pod kyc-service-29027 readiness probe ok"}
+{"id": "log-00464", "ts": "2026-10-09T13:14:34Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/sip 200 in 245ms"}
+{"id": "log-00465", "ts": "2026-10-09T13:14:47Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00466", "ts": "2026-10-09T13:14:48Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/sip 201 in 367ms"}
+{"id": "log-00467", "ts": "2026-10-09T13:14:49Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/sip 200 in 305ms"}
+{"id": "log-00468", "ts": "2026-10-09T13:14:53Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00469", "ts": "2026-10-09T13:14:57Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 414ms"}
+{"id": "log-00470", "ts": "2026-10-09T13:15:04Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00471", "ts": "2026-10-09T13:15:22Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/holdings 200 in 271ms"}
+{"id": "log-00472", "ts": "2026-10-09T13:15:26Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00473", "ts": "2026-10-09T13:15:54Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00474", "ts": "2026-10-09T13:15:57Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/holdings 200 in 261ms"}
+{"id": "log-00475", "ts": "2026-10-09T13:16:10Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00476", "ts": "2026-10-09T13:16:35Z", "service": "auth-service", "level": "WARN", "message": "slow request GET /v1/holdings took 1565ms"}
+{"id": "log-00477", "ts": "2026-10-09T13:16:35Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00478", "ts": "2026-10-09T13:16:39Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 287 buffers"}
+{"id": "log-00479", "ts": "2026-10-09T13:17:07Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00480", "ts": "2026-10-09T13:17:09Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00481", "ts": "2026-10-09T13:17:13Z", "service": "kubernetes", "level": "INFO", "message": "Pod aa-connector-96a4b readiness probe ok"}
+{"id": "log-00482", "ts": "2026-10-09T13:17:19Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/profile 200 in 57ms"}
+{"id": "log-00483", "ts": "2026-10-09T13:17:36Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/profile 200 in 349ms"}
+{"id": "log-00484", "ts": "2026-10-09T13:17:37Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/holdings 200 in 325ms"}
+{"id": "log-00485", "ts": "2026-10-09T13:17:47Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00486", "ts": "2026-10-09T13:17:51Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/profile 200 in 142ms"}
+{"id": "log-00487", "ts": "2026-10-09T13:17:52Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00488", "ts": "2026-10-09T13:17:57Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/receipts 201 in 175ms"}
+{"id": "log-00489", "ts": "2026-10-09T13:18:02Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00490", "ts": "2026-10-09T13:18:07Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/orders 200 in 211ms"}
+{"id": "log-00491", "ts": "2026-10-09T13:18:34Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00492", "ts": "2026-10-09T13:18:36Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 506 buffers"}
+{"id": "log-00493", "ts": "2026-10-09T13:18:38Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 224ms"}
+{"id": "log-00494", "ts": "2026-10-09T13:18:56Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/orders 201 in 22ms"}
+{"id": "log-00495", "ts": "2026-10-09T13:19:09Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00496", "ts": "2026-10-09T13:19:10Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/accounts 200 in 116ms"}
+{"id": "log-00497", "ts": "2026-10-09T13:19:49Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00498", "ts": "2026-10-09T13:19:53Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00499", "ts": "2026-10-09T13:19:58Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00500", "ts": "2026-10-09T13:20:09Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00501", "ts": "2026-10-09T13:20:15Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 216ms"}
+{"id": "log-00502", "ts": "2026-10-09T13:20:16Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/profile 200 in 131ms"}
+{"id": "log-00503", "ts": "2026-10-09T13:20:19Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 129ms"}
+{"id": "log-00504", "ts": "2026-10-09T13:20:44Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00505", "ts": "2026-10-09T13:20:55Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00506", "ts": "2026-10-09T13:20:57Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/sip 200 in 298ms"}
+{"id": "log-00507", "ts": "2026-10-09T13:20:59Z", "service": "fraud-service", "level": "WARN", "message": "slow request GET /v1/sip took 1233ms"}
+{"id": "log-00508", "ts": "2026-10-09T13:21:05Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00509", "ts": "2026-10-09T13:21:06Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00510", "ts": "2026-10-09T13:21:23Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/profile 200 in 438ms"}
+{"id": "log-00511", "ts": "2026-10-09T13:21:29Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 117 buffers"}
+{"id": "log-00512", "ts": "2026-10-09T13:21:35Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/accounts 200 in 104ms"}
+{"id": "log-00513", "ts": "2026-10-09T13:21:51Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment mobile-bff replicas unchanged"}
+{"id": "log-00514", "ts": "2026-10-09T13:22:08Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/sip 200 in 208ms"}
+{"id": "log-00515", "ts": "2026-10-09T13:22:26Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/orders 201 in 194ms"}
+{"id": "log-00516", "ts": "2026-10-09T13:22:42Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/profile 200 in 390ms"}
+{"id": "log-00517", "ts": "2026-10-09T13:22:59Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00518", "ts": "2026-10-09T13:23:11Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/profile 201 in 293ms"}
+{"id": "log-00519", "ts": "2026-10-09T13:23:11Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/sip 200 in 330ms"}
+{"id": "log-00520", "ts": "2026-10-09T13:23:36Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/receipts 200 in 378ms"}
+{"id": "log-00521", "ts": "2026-10-09T13:23:38Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00522", "ts": "2026-10-09T13:23:43Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00523", "ts": "2026-10-09T13:23:43Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00524", "ts": "2026-10-09T13:23:53Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00525", "ts": "2026-10-09T13:23:58Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00526", "ts": "2026-10-09T13:24:01Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/profile 200 in 206ms"}
+{"id": "log-00527", "ts": "2026-10-09T13:24:07Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00528", "ts": "2026-10-09T13:24:10Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/profile 200 in 56ms"}
+{"id": "log-00529", "ts": "2026-10-09T13:24:11Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/accounts 200 in 376ms"}
+{"id": "log-00530", "ts": "2026-10-09T13:24:13Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/profile 200 in 402ms"}
+{"id": "log-00531", "ts": "2026-10-09T13:24:36Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00532", "ts": "2026-10-09T13:24:42Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment upi-gateway replicas unchanged"}
+{"id": "log-00533", "ts": "2026-10-09T13:24:58Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00534", "ts": "2026-10-09T13:25:14Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 214 buffers"}
+{"id": "log-00535", "ts": "2026-10-09T13:25:16Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00536", "ts": "2026-10-09T13:26:02Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/orders 200 in 205ms"}
+{"id": "log-00537", "ts": "2026-10-09T13:26:05Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 300ms"}
+{"id": "log-00538", "ts": "2026-10-09T13:26:11Z", "service": "payments-api", "level": "WARN", "message": "retrying call to ledger-service (attempt 1 of 3)"}
+{"id": "log-00539", "ts": "2026-10-09T13:26:20Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/payments/intent 200 in 90ms"}
+{"id": "log-00540", "ts": "2026-10-09T13:26:22Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00541", "ts": "2026-10-09T13:26:29Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment market-data-service replicas unchanged"}
+{"id": "log-00542", "ts": "2026-10-09T13:27:27Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00543", "ts": "2026-10-09T13:27:29Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00544", "ts": "2026-10-09T13:27:30Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/receipts 200 in 79ms"}
+{"id": "log-00545", "ts": "2026-10-09T13:27:30Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 541 buffers"}
+{"id": "log-00546", "ts": "2026-10-09T13:27:34Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00547", "ts": "2026-10-09T13:27:49Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/profile 200 in 64ms"}
+{"id": "log-00548", "ts": "2026-10-09T13:27:51Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 159ms"}
+{"id": "log-00549", "ts": "2026-10-09T13:27:53Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00550", "ts": "2026-10-09T13:27:54Z", "service": "ledger-service", "level": "WARN", "message": "slow request GET /v1/profile took 1997ms"}
+{"id": "log-00551", "ts": "2026-10-09T13:27:56Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/accounts 200 in 99ms"}
+{"id": "log-00552", "ts": "2026-10-09T13:27:59Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/receipts 200 in 263ms"}
+{"id": "log-00553", "ts": "2026-10-09T13:28:06Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00554", "ts": "2026-10-09T13:28:12Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00555", "ts": "2026-10-09T13:28:12Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/receipts 201 in 238ms"}
+{"id": "log-00556", "ts": "2026-10-09T13:28:26Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00557", "ts": "2026-10-09T13:28:59Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00558", "ts": "2026-10-09T13:29:12Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/orders 200 in 311ms"}
+{"id": "log-00559", "ts": "2026-10-09T13:29:25Z", "service": "market-data-service", "level": "WARN", "message": "retrying call to market-feed (attempt 1 of 3)"}
+{"id": "log-00560", "ts": "2026-10-09T13:29:39Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00561", "ts": "2026-10-09T13:29:41Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00562", "ts": "2026-10-09T13:29:43Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/sip 200 in 331ms"}
+{"id": "log-00563", "ts": "2026-10-09T13:29:55Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/sip 201 in 427ms"}
+{"id": "log-00564", "ts": "2026-10-09T13:30:08Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/sip 201 in 400ms"}
+{"id": "log-00565", "ts": "2026-10-09T13:30:17Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment ledger-service replicas unchanged"}
+{"id": "log-00566", "ts": "2026-10-09T13:30:18Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00567", "ts": "2026-10-09T13:30:40Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 213 buffers"}
+{"id": "log-00568", "ts": "2026-10-09T13:30:53Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00569", "ts": "2026-10-09T13:31:02Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00570", "ts": "2026-10-09T13:31:04Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/accounts 200 in 431ms"}
+{"id": "log-00571", "ts": "2026-10-09T13:31:30Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/orders 200 in 350ms"}
+{"id": "log-00572", "ts": "2026-10-09T13:31:31Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/receipts 200 in 48ms"}
+{"id": "log-00573", "ts": "2026-10-09T13:31:32Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/accounts 200 in 37ms"}
+{"id": "log-00574", "ts": "2026-10-09T13:31:44Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00575", "ts": "2026-10-09T13:31:53Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00576", "ts": "2026-10-09T13:32:15Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00577", "ts": "2026-10-09T13:32:15Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/receipts 200 in 398ms"}
+{"id": "log-00578", "ts": "2026-10-09T13:32:18Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/holdings 200 in 449ms"}
+{"id": "log-00579", "ts": "2026-10-09T13:32:26Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00580", "ts": "2026-10-09T13:32:31Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00581", "ts": "2026-10-09T13:32:37Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/sip 200 in 362ms"}
+{"id": "log-00582", "ts": "2026-10-09T13:32:49Z", "service": "kubernetes", "level": "INFO", "message": "Pod kyc-service-0b834 readiness probe ok"}
+{"id": "log-00583", "ts": "2026-10-09T13:32:56Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00584", "ts": "2026-10-09T13:32:58Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00585", "ts": "2026-10-09T13:33:13Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00586", "ts": "2026-10-09T13:33:25Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/payments/intent 200 in 99ms"}
+{"id": "log-00587", "ts": "2026-10-09T13:33:26Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00588", "ts": "2026-10-09T13:34:14Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 104ms"}
+{"id": "log-00589", "ts": "2026-10-09T13:34:18Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00590", "ts": "2026-10-09T13:34:19Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/receipts 200 in 340ms"}
+{"id": "log-00591", "ts": "2026-10-09T13:34:38Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00592", "ts": "2026-10-09T13:34:39Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/profile 201 in 103ms"}
+{"id": "log-00593", "ts": "2026-10-09T13:34:51Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00594", "ts": "2026-10-09T13:34:54Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00595", "ts": "2026-10-09T13:34:56Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/accounts 201 in 39ms"}
+{"id": "log-00596", "ts": "2026-10-09T13:35:01Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00597", "ts": "2026-10-09T13:35:19Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/receipts 200 in 111ms"}
+{"id": "log-00598", "ts": "2026-10-09T13:35:19Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/holdings 200 in 380ms"}
+{"id": "log-00599", "ts": "2026-10-09T13:35:23Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 508 buffers"}
+{"id": "log-00600", "ts": "2026-10-09T13:35:26Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00601", "ts": "2026-10-09T13:35:38Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 55ms"}
+{"id": "log-00602", "ts": "2026-10-09T13:35:47Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00603", "ts": "2026-10-09T13:35:52Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/receipts 200 in 26ms"}
+{"id": "log-00604", "ts": "2026-10-09T13:35:56Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00605", "ts": "2026-10-09T13:36:08Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00606", "ts": "2026-10-09T13:36:56Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/holdings 200 in 409ms"}
+{"id": "log-00607", "ts": "2026-10-09T13:37:35Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 372ms"}
+{"id": "log-00608", "ts": "2026-10-09T13:37:38Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00609", "ts": "2026-10-09T13:37:40Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment auth-service replicas unchanged"}
+{"id": "log-00610", "ts": "2026-10-09T13:38:10Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/orders 201 in 155ms"}
+{"id": "log-00611", "ts": "2026-10-09T13:38:22Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00612", "ts": "2026-10-09T13:38:37Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00613", "ts": "2026-10-09T13:38:39Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/receipts 200 in 172ms"}
+{"id": "log-00614", "ts": "2026-10-09T13:38:40Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00615", "ts": "2026-10-09T13:38:48Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00616", "ts": "2026-10-09T13:38:54Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00617", "ts": "2026-10-09T13:39:02Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00618", "ts": "2026-10-09T13:39:09Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00619", "ts": "2026-10-09T13:39:11Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/accounts 200 in 55ms"}
+{"id": "log-00620", "ts": "2026-10-09T13:39:13Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/receipts 200 in 264ms"}
+{"id": "log-00621", "ts": "2026-10-09T13:39:15Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/profile 200 in 138ms"}
+{"id": "log-00622", "ts": "2026-10-09T13:39:17Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00623", "ts": "2026-10-09T13:39:17Z", "service": "mobile-bff", "level": "WARN", "message": "slow request GET /v1/profile took 1464ms"}
+{"id": "log-00624", "ts": "2026-10-09T13:39:48Z", "service": "notification-service", "level": "WARN", "message": "retrying call to sms-vendor (attempt 1 of 3)"}
+{"id": "log-00625", "ts": "2026-10-09T13:40:01Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 791 buffers"}
+{"id": "log-00626", "ts": "2026-10-09T13:40:16Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-x2kq9 container fluent-bit OOMKilled; log shipping for portfolio-service stopped"}
+{"id": "log-00627", "ts": "2026-10-09T13:40:22Z", "service": "upi-gateway", "level": "WARN", "message": "slow request GET /v1/payments/intent took 1106ms"}
+{"id": "log-00628", "ts": "2026-10-09T13:40:36Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00629", "ts": "2026-10-09T13:40:41Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 34ms"}
+{"id": "log-00630", "ts": "2026-10-09T13:40:47Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/holdings 200 in 321ms"}
+{"id": "log-00631", "ts": "2026-10-09T13:41:04Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/sip 200 in 330ms"}
+{"id": "log-00632", "ts": "2026-10-09T13:41:11Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/holdings 201 in 429ms"}
+{"id": "log-00633", "ts": "2026-10-09T13:41:13Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00634", "ts": "2026-10-09T13:41:21Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/accounts 200 in 246ms"}
+{"id": "log-00635", "ts": "2026-10-09T13:41:37Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00636", "ts": "2026-10-09T13:41:42Z", "service": "kubernetes", "level": "INFO", "message": "Pod portfolio-service-d004e readiness probe ok"}
+{"id": "log-00637", "ts": "2026-10-09T13:41:54Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/receipts 201 in 108ms"}
+{"id": "log-00638", "ts": "2026-10-09T13:42:05Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00639", "ts": "2026-10-09T13:42:10Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00640", "ts": "2026-10-09T13:42:17Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00641", "ts": "2026-10-09T13:42:55Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/sip 200 in 355ms"}
+{"id": "log-00642", "ts": "2026-10-09T13:42:55Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/receipts 201 in 374ms"}
+{"id": "log-00643", "ts": "2026-10-09T13:42:56Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00644", "ts": "2026-10-09T13:42:57Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00645", "ts": "2026-10-09T13:43:00Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00646", "ts": "2026-10-09T13:43:12Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/receipts 201 in 408ms"}
+{"id": "log-00647", "ts": "2026-10-09T13:43:14Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00648", "ts": "2026-10-09T13:43:21Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00649", "ts": "2026-10-09T13:43:25Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00650", "ts": "2026-10-09T13:43:27Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/receipts 201 in 354ms"}
+{"id": "log-00651", "ts": "2026-10-09T13:43:42Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00652", "ts": "2026-10-09T13:43:44Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00653", "ts": "2026-10-09T13:43:47Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00654", "ts": "2026-10-09T13:43:51Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00655", "ts": "2026-10-09T13:43:59Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00656", "ts": "2026-10-09T13:44:01Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00657", "ts": "2026-10-09T13:44:14Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00658", "ts": "2026-10-09T13:44:14Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/profile 200 in 348ms"}
+{"id": "log-00659", "ts": "2026-10-09T13:44:17Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00660", "ts": "2026-10-09T13:44:17Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00661", "ts": "2026-10-09T13:44:25Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00662", "ts": "2026-10-09T13:44:27Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00663", "ts": "2026-10-09T13:44:29Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00664", "ts": "2026-10-09T13:44:35Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-82ea6 OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00665", "ts": "2026-10-09T13:44:36Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00666", "ts": "2026-10-09T13:44:46Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00667", "ts": "2026-10-09T13:44:47Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/holdings 201 in 329ms"}
+{"id": "log-00668", "ts": "2026-10-09T13:44:48Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/profile 201 in 344ms"}
+{"id": "log-00669", "ts": "2026-10-09T13:44:54Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00670", "ts": "2026-10-09T13:44:55Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00671", "ts": "2026-10-09T13:44:58Z", "service": "auth-service", "level": "WARN", "message": "retrying call to otp-provider (attempt 1 of 3)"}
+{"id": "log-00672", "ts": "2026-10-09T13:45:00Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00673", "ts": "2026-10-09T13:45:03Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00674", "ts": "2026-10-09T13:45:08Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/accounts 200 in 365ms"}
+{"id": "log-00675", "ts": "2026-10-09T13:45:12Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00676", "ts": "2026-10-09T13:45:25Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00677", "ts": "2026-10-09T13:45:28Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-d4728 OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00678", "ts": "2026-10-09T13:45:33Z", "service": "kubernetes", "level": "INFO", "message": "Pod orders-service-2e3f7 readiness probe ok"}
+{"id": "log-00679", "ts": "2026-10-09T13:45:33Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00680", "ts": "2026-10-09T13:45:36Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00681", "ts": "2026-10-09T13:45:41Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00682", "ts": "2026-10-09T13:45:42Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00683", "ts": "2026-10-09T13:45:48Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00684", "ts": "2026-10-09T13:45:50Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00685", "ts": "2026-10-09T13:45:58Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00686", "ts": "2026-10-09T13:45:58Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/profile 200 in 258ms"}
+{"id": "log-00687", "ts": "2026-10-09T13:46:07Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00688", "ts": "2026-10-09T13:46:10Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00689", "ts": "2026-10-09T13:46:12Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00690", "ts": "2026-10-09T13:46:13Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/accounts 200 in 69ms"}
+{"id": "log-00691", "ts": "2026-10-09T13:46:17Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00692", "ts": "2026-10-09T13:46:29Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00693", "ts": "2026-10-09T13:46:33Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00694", "ts": "2026-10-09T13:46:33Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00695", "ts": "2026-10-09T13:46:34Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/sip 200 in 415ms"}
+{"id": "log-00696", "ts": "2026-10-09T13:46:38Z", "service": "orders-service", "level": "WARN", "message": "slow request GET /v1/orders took 1795ms"}
+{"id": "log-00697", "ts": "2026-10-09T13:46:47Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00698", "ts": "2026-10-09T13:46:49Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00699", "ts": "2026-10-09T13:47:03Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/accounts 200 in 227ms"}
+{"id": "log-00700", "ts": "2026-10-09T13:47:04Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00701", "ts": "2026-10-09T13:47:04Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00702", "ts": "2026-10-09T13:47:07Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00703", "ts": "2026-10-09T13:47:18Z", "service": "market-data-service", "level": "WARN", "message": "slow request GET /v1/sip took 2390ms"}
+{"id": "log-00704", "ts": "2026-10-09T13:47:21Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00705", "ts": "2026-10-09T13:47:37Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 440 buffers"}
+{"id": "log-00706", "ts": "2026-10-09T13:47:45Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/payments/intent 200 in 354ms"}
+{"id": "log-00707", "ts": "2026-10-09T13:47:50Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00708", "ts": "2026-10-09T13:47:52Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00709", "ts": "2026-10-09T13:47:55Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00710", "ts": "2026-10-09T13:47:59Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment portfolio-service replicas unchanged"}
+{"id": "log-00711", "ts": "2026-10-09T13:48:02Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00712", "ts": "2026-10-09T13:48:03Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00713", "ts": "2026-10-09T13:48:04Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/receipts 200 in 375ms"}
+{"id": "log-00714", "ts": "2026-10-09T13:48:06Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00715", "ts": "2026-10-09T13:48:20Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00716", "ts": "2026-10-09T13:48:24Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00717", "ts": "2026-10-09T13:48:25Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/profile 200 in 377ms"}
+{"id": "log-00718", "ts": "2026-10-09T13:48:26Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00719", "ts": "2026-10-09T13:48:26Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00720", "ts": "2026-10-09T13:48:27Z", "service": "upi-gateway", "level": "WARN", "message": "slow request GET /v1/payments/intent took 2105ms"}
+{"id": "log-00721", "ts": "2026-10-09T13:48:36Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00722", "ts": "2026-10-09T13:48:36Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00723", "ts": "2026-10-09T13:48:39Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00724", "ts": "2026-10-09T13:48:45Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00725", "ts": "2026-10-09T13:48:48Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00726", "ts": "2026-10-09T13:48:48Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00727", "ts": "2026-10-09T13:48:57Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00728", "ts": "2026-10-09T13:49:00Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00729", "ts": "2026-10-09T13:49:02Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/accounts 200 in 96ms"}
+{"id": "log-00730", "ts": "2026-10-09T13:49:06Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00731", "ts": "2026-10-09T13:49:20Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00732", "ts": "2026-10-09T13:49:20Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00733", "ts": "2026-10-09T13:49:23Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00734", "ts": "2026-10-09T13:49:25Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00735", "ts": "2026-10-09T13:49:32Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/accounts 200 in 159ms"}
+{"id": "log-00736", "ts": "2026-10-09T13:49:34Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-7ea01 OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00737", "ts": "2026-10-09T13:49:36Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00738", "ts": "2026-10-09T13:49:41Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00739", "ts": "2026-10-09T13:49:53Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00740", "ts": "2026-10-09T13:49:58Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00741", "ts": "2026-10-09T13:49:59Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00742", "ts": "2026-10-09T13:49:59Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00743", "ts": "2026-10-09T13:50:05Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00744", "ts": "2026-10-09T13:50:10Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00745", "ts": "2026-10-09T13:50:12Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00746", "ts": "2026-10-09T13:50:16Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00747", "ts": "2026-10-09T13:50:26Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-52e0c OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00748", "ts": "2026-10-09T13:50:34Z", "service": "aa-connector", "level": "WARN", "message": "slow request GET /v1/orders took 1153ms"}
+{"id": "log-00749", "ts": "2026-10-09T13:50:37Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/sip 200 in 314ms"}
+{"id": "log-00750", "ts": "2026-10-09T13:50:48Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/accounts 200 in 236ms"}
+{"id": "log-00751", "ts": "2026-10-09T13:50:50Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00752", "ts": "2026-10-09T13:50:56Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00753", "ts": "2026-10-09T13:50:56Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00754", "ts": "2026-10-09T13:50:59Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00755", "ts": "2026-10-09T13:51:00Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/profile 200 in 209ms"}
+{"id": "log-00756", "ts": "2026-10-09T13:51:07Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00757", "ts": "2026-10-09T13:51:09Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00758", "ts": "2026-10-09T13:51:21Z", "service": "kubernetes", "level": "INFO", "message": "Pod kyc-service-c453f readiness probe ok"}
+{"id": "log-00759", "ts": "2026-10-09T13:51:23Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00760", "ts": "2026-10-09T13:51:29Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00761", "ts": "2026-10-09T13:51:32Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00762", "ts": "2026-10-09T13:51:35Z", "service": "payments-api", "level": "WARN", "message": "slow request GET /v1/accounts took 2278ms"}
+{"id": "log-00763", "ts": "2026-10-09T13:51:42Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00764", "ts": "2026-10-09T13:51:43Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-f55cc OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00765", "ts": "2026-10-09T13:51:44Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00766", "ts": "2026-10-09T13:51:44Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00767", "ts": "2026-10-09T13:51:45Z", "service": "ledger-service", "level": "WARN", "message": "retrying call to ledger-db (attempt 1 of 3)"}
+{"id": "log-00768", "ts": "2026-10-09T13:51:46Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/holdings 200 in 148ms"}
+{"id": "log-00769", "ts": "2026-10-09T13:51:55Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00770", "ts": "2026-10-09T13:51:55Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00771", "ts": "2026-10-09T13:51:59Z", "service": "kyc-service", "level": "WARN", "message": "retrying call to user-db (attempt 1 of 3)"}
+{"id": "log-00772", "ts": "2026-10-09T13:52:00Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00773", "ts": "2026-10-09T13:52:03Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00774", "ts": "2026-10-09T13:52:08Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00775", "ts": "2026-10-09T13:52:15Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00776", "ts": "2026-10-09T13:52:23Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/receipts 200 in 111ms"}
+{"id": "log-00777", "ts": "2026-10-09T13:52:28Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00778", "ts": "2026-10-09T13:52:33Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-6e2ee OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00779", "ts": "2026-10-09T13:52:40Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/receipts 201 in 255ms"}
+{"id": "log-00780", "ts": "2026-10-09T13:52:44Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00781", "ts": "2026-10-09T13:52:45Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00782", "ts": "2026-10-09T13:52:48Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00783", "ts": "2026-10-09T13:52:50Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00784", "ts": "2026-10-09T13:52:51Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00785", "ts": "2026-10-09T13:52:58Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00786", "ts": "2026-10-09T13:53:03Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00787", "ts": "2026-10-09T13:53:05Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00788", "ts": "2026-10-09T13:53:09Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/receipts 200 in 130ms"}
+{"id": "log-00789", "ts": "2026-10-09T13:53:13Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00790", "ts": "2026-10-09T13:53:14Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00791", "ts": "2026-10-09T13:53:18Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00792", "ts": "2026-10-09T13:53:22Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/orders 200 in 290ms"}
+{"id": "log-00793", "ts": "2026-10-09T13:53:27Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 848 buffers"}
+{"id": "log-00794", "ts": "2026-10-09T13:53:29Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00795", "ts": "2026-10-09T13:53:31Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00796", "ts": "2026-10-09T13:53:32Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/payments/intent 201 in 259ms"}
+{"id": "log-00797", "ts": "2026-10-09T13:53:42Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-e0adb OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00798", "ts": "2026-10-09T13:53:42Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/receipts 200 in 235ms"}
+{"id": "log-00799", "ts": "2026-10-09T13:53:46Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment auth-service replicas unchanged"}
+{"id": "log-00800", "ts": "2026-10-09T13:53:52Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00801", "ts": "2026-10-09T13:53:52Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00802", "ts": "2026-10-09T13:53:59Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00803", "ts": "2026-10-09T13:54:02Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00804", "ts": "2026-10-09T13:54:06Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00805", "ts": "2026-10-09T13:54:27Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00806", "ts": "2026-10-09T13:54:30Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00807", "ts": "2026-10-09T13:54:30Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00808", "ts": "2026-10-09T13:54:30Z", "service": "notification-service", "level": "WARN", "message": "slow request GET /v1/holdings took 2288ms"}
+{"id": "log-00809", "ts": "2026-10-09T13:54:43Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00810", "ts": "2026-10-09T13:54:43Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00811", "ts": "2026-10-09T13:54:43Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00812", "ts": "2026-10-09T13:54:45Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/receipts 201 in 251ms"}
+{"id": "log-00813", "ts": "2026-10-09T13:54:47Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/holdings 201 in 40ms"}
+{"id": "log-00814", "ts": "2026-10-09T13:54:47Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00815", "ts": "2026-10-09T13:54:47Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00816", "ts": "2026-10-09T13:54:50Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00817", "ts": "2026-10-09T13:54:50Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 454 buffers"}
+{"id": "log-00818", "ts": "2026-10-09T13:54:51Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-8014b OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00819", "ts": "2026-10-09T13:55:03Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-ee464 OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00820", "ts": "2026-10-09T13:55:05Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00821", "ts": "2026-10-09T13:55:07Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00822", "ts": "2026-10-09T13:55:11Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00823", "ts": "2026-10-09T13:55:16Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00824", "ts": "2026-10-09T13:55:18Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00825", "ts": "2026-10-09T13:55:23Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/receipts 201 in 27ms"}
+{"id": "log-00826", "ts": "2026-10-09T13:55:28Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00827", "ts": "2026-10-09T13:55:29Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 417ms"}
+{"id": "log-00828", "ts": "2026-10-09T13:55:31Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00829", "ts": "2026-10-09T13:55:37Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00830", "ts": "2026-10-09T13:55:40Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00831", "ts": "2026-10-09T13:56:15Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00832", "ts": "2026-10-09T13:56:17Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00833", "ts": "2026-10-09T13:56:19Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00834", "ts": "2026-10-09T13:56:29Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00835", "ts": "2026-10-09T13:56:39Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-4433d OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00836", "ts": "2026-10-09T13:56:41Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/sip 200 in 360ms"}
+{"id": "log-00837", "ts": "2026-10-09T13:56:48Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00838", "ts": "2026-10-09T13:56:48Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00839", "ts": "2026-10-09T13:56:55Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00840", "ts": "2026-10-09T13:56:56Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00841", "ts": "2026-10-09T13:56:57Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00842", "ts": "2026-10-09T13:56:59Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00843", "ts": "2026-10-09T13:57:00Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00844", "ts": "2026-10-09T13:57:05Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/receipts 201 in 180ms"}
+{"id": "log-00845", "ts": "2026-10-09T13:57:09Z", "service": "mobile-bff", "level": "WARN", "message": "slow request GET /v1/receipts took 1179ms"}
+{"id": "log-00846", "ts": "2026-10-09T13:57:14Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00847", "ts": "2026-10-09T13:57:14Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00848", "ts": "2026-10-09T13:57:27Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00849", "ts": "2026-10-09T13:57:28Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00850", "ts": "2026-10-09T13:57:30Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00851", "ts": "2026-10-09T13:57:32Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00852", "ts": "2026-10-09T13:57:36Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00853", "ts": "2026-10-09T13:57:36Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00854", "ts": "2026-10-09T13:57:41Z", "service": "kubernetes", "level": "INFO", "message": "Pod upi-gateway-a7fef readiness probe ok"}
+{"id": "log-00855", "ts": "2026-10-09T13:57:56Z", "service": "fraud-service", "level": "WARN", "message": "slow request GET /v1/accounts took 2057ms"}
+{"id": "log-00856", "ts": "2026-10-09T13:57:58Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00857", "ts": "2026-10-09T13:58:02Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00858", "ts": "2026-10-09T13:58:03Z", "service": "upi-gateway", "level": "WARN", "message": "retrying call to npci-switch (attempt 1 of 3)"}
+{"id": "log-00859", "ts": "2026-10-09T13:58:15Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00860", "ts": "2026-10-09T13:58:20Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00861", "ts": "2026-10-09T13:58:22Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 124ms"}
+{"id": "log-00862", "ts": "2026-10-09T13:58:22Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00863", "ts": "2026-10-09T13:58:32Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/sip 201 in 399ms"}
+{"id": "log-00864", "ts": "2026-10-09T13:58:41Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00865", "ts": "2026-10-09T13:58:41Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00866", "ts": "2026-10-09T13:58:41Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00867", "ts": "2026-10-09T13:58:45Z", "service": "aa-connector", "level": "WARN", "message": "retrying call to aa-fiu-gateway (attempt 1 of 3)"}
+{"id": "log-00868", "ts": "2026-10-09T13:58:45Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00869", "ts": "2026-10-09T13:58:47Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/holdings 200 in 448ms"}
+{"id": "log-00870", "ts": "2026-10-09T13:58:50Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/profile 200 in 198ms"}
+{"id": "log-00871", "ts": "2026-10-09T13:58:58Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/sip 200 in 351ms"}
+{"id": "log-00872", "ts": "2026-10-09T13:59:09Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00873", "ts": "2026-10-09T13:59:19Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-7c16d OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00874", "ts": "2026-10-09T13:59:19Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00875", "ts": "2026-10-09T13:59:33Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00876", "ts": "2026-10-09T13:59:33Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00877", "ts": "2026-10-09T13:59:34Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00878", "ts": "2026-10-09T13:59:37Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00879", "ts": "2026-10-09T13:59:38Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00880", "ts": "2026-10-09T13:59:39Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/payments/intent 200 in 245ms"}
+{"id": "log-00881", "ts": "2026-10-09T13:59:43Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment payments-api replicas unchanged"}
+{"id": "log-00882", "ts": "2026-10-09T13:59:44Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/profile 201 in 63ms"}
+{"id": "log-00883", "ts": "2026-10-09T13:59:56Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00884", "ts": "2026-10-09T14:00:08Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-a5694 OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00885", "ts": "2026-10-09T14:00:08Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/holdings 200 in 407ms"}
+{"id": "log-00886", "ts": "2026-10-09T14:00:09Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00887", "ts": "2026-10-09T14:00:09Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/payments/intent 200 in 194ms"}
+{"id": "log-00888", "ts": "2026-10-09T14:00:14Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00889", "ts": "2026-10-09T14:00:29Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00890", "ts": "2026-10-09T14:00:30Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00891", "ts": "2026-10-09T14:00:31Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00892", "ts": "2026-10-09T14:00:35Z", "service": "market-data-service", "level": "WARN", "message": "slow request GET /v1/sip took 1372ms"}
+{"id": "log-00893", "ts": "2026-10-09T14:00:35Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00894", "ts": "2026-10-09T14:00:46Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00895", "ts": "2026-10-09T14:00:49Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00896", "ts": "2026-10-09T14:00:52Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00897", "ts": "2026-10-09T14:00:54Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00898", "ts": "2026-10-09T14:01:03Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00899", "ts": "2026-10-09T14:01:17Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00900", "ts": "2026-10-09T14:01:19Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00901", "ts": "2026-10-09T14:01:21Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00902", "ts": "2026-10-09T14:01:22Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00903", "ts": "2026-10-09T14:01:24Z", "service": "notification-service", "level": "WARN", "message": "slow request GET /v1/receipts took 1128ms"}
+{"id": "log-00904", "ts": "2026-10-09T14:01:28Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00905", "ts": "2026-10-09T14:01:37Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00906", "ts": "2026-10-09T14:01:37Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00907", "ts": "2026-10-09T14:01:42Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-32a3c OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00908", "ts": "2026-10-09T14:01:43Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00909", "ts": "2026-10-09T14:01:44Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00910", "ts": "2026-10-09T14:01:49Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00911", "ts": "2026-10-09T14:01:51Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00912", "ts": "2026-10-09T14:01:59Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/receipts 200 in 219ms"}
+{"id": "log-00913", "ts": "2026-10-09T14:02:08Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00914", "ts": "2026-10-09T14:02:10Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment mobile-bff replicas unchanged"}
+{"id": "log-00915", "ts": "2026-10-09T14:02:10Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00916", "ts": "2026-10-09T14:02:12Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00917", "ts": "2026-10-09T14:02:18Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00918", "ts": "2026-10-09T14:02:25Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00919", "ts": "2026-10-09T14:02:26Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/holdings 200 in 339ms"}
+{"id": "log-00920", "ts": "2026-10-09T14:02:26Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00921", "ts": "2026-10-09T14:02:26Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00922", "ts": "2026-10-09T14:02:42Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00923", "ts": "2026-10-09T14:02:45Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00924", "ts": "2026-10-09T14:02:45Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/accounts 200 in 192ms"}
+{"id": "log-00925", "ts": "2026-10-09T14:02:54Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00926", "ts": "2026-10-09T14:02:55Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00927", "ts": "2026-10-09T14:02:56Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00928", "ts": "2026-10-09T14:03:01Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/profile 200 in 320ms"}
+{"id": "log-00929", "ts": "2026-10-09T14:03:04Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00930", "ts": "2026-10-09T14:03:14Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/orders 201 in 195ms"}
+{"id": "log-00931", "ts": "2026-10-09T14:03:19Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00932", "ts": "2026-10-09T14:03:19Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00933", "ts": "2026-10-09T14:03:27Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/receipts 200 in 89ms"}
+{"id": "log-00934", "ts": "2026-10-09T14:03:28Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-47eb7 OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00935", "ts": "2026-10-09T14:03:29Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/profile 200 in 216ms"}
+{"id": "log-00936", "ts": "2026-10-09T14:03:30Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00937", "ts": "2026-10-09T14:03:31Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00938", "ts": "2026-10-09T14:03:31Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00939", "ts": "2026-10-09T14:03:33Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00940", "ts": "2026-10-09T14:03:47Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/profile 200 in 162ms"}
+{"id": "log-00941", "ts": "2026-10-09T14:03:49Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00942", "ts": "2026-10-09T14:03:52Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00943", "ts": "2026-10-09T14:03:53Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00944", "ts": "2026-10-09T14:03:54Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00945", "ts": "2026-10-09T14:03:58Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/receipts 200 in 18ms"}
+{"id": "log-00946", "ts": "2026-10-09T14:04:01Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00947", "ts": "2026-10-09T14:04:02Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00948", "ts": "2026-10-09T14:04:06Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00949", "ts": "2026-10-09T14:04:18Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00950", "ts": "2026-10-09T14:04:21Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/holdings 200 in 436ms"}
+{"id": "log-00951", "ts": "2026-10-09T14:04:22Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00952", "ts": "2026-10-09T14:04:23Z", "service": "kubernetes", "level": "INFO", "message": "Pod mobile-bff-9ca83 readiness probe ok"}
+{"id": "log-00953", "ts": "2026-10-09T14:04:31Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00954", "ts": "2026-10-09T14:04:41Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00955", "ts": "2026-10-09T14:04:57Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 451 buffers"}
+{"id": "log-00956", "ts": "2026-10-09T14:05:07Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00957", "ts": "2026-10-09T14:05:15Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/accounts 200 in 293ms"}
+{"id": "log-00958", "ts": "2026-10-09T14:05:15Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00959", "ts": "2026-10-09T14:05:27Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00960", "ts": "2026-10-09T14:05:31Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00961", "ts": "2026-10-09T14:05:32Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/accounts 200 in 176ms"}
+{"id": "log-00962", "ts": "2026-10-09T14:05:36Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00963", "ts": "2026-10-09T14:05:39Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00964", "ts": "2026-10-09T14:05:39Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00965", "ts": "2026-10-09T14:05:40Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/payments/intent 200 in 252ms"}
+{"id": "log-00966", "ts": "2026-10-09T14:05:41Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00967", "ts": "2026-10-09T14:05:42Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00968", "ts": "2026-10-09T14:05:44Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-13509 OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00969", "ts": "2026-10-09T14:05:44Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00970", "ts": "2026-10-09T14:05:48Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00971", "ts": "2026-10-09T14:05:50Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00972", "ts": "2026-10-09T14:05:58Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00973", "ts": "2026-10-09T14:06:03Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00974", "ts": "2026-10-09T14:06:03Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 347ms"}
+{"id": "log-00975", "ts": "2026-10-09T14:06:15Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00976", "ts": "2026-10-09T14:06:20Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00977", "ts": "2026-10-09T14:06:21Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00978", "ts": "2026-10-09T14:06:22Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00979", "ts": "2026-10-09T14:06:22Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00980", "ts": "2026-10-09T14:06:39Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00981", "ts": "2026-10-09T14:06:42Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00982", "ts": "2026-10-09T14:06:44Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00983", "ts": "2026-10-09T14:06:45Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00984", "ts": "2026-10-09T14:06:56Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00985", "ts": "2026-10-09T14:06:56Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00986", "ts": "2026-10-09T14:07:00Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00987", "ts": "2026-10-09T14:07:00Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00988", "ts": "2026-10-09T14:07:04Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00989", "ts": "2026-10-09T14:07:10Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment portfolio-service replicas unchanged"}
+{"id": "log-00990", "ts": "2026-10-09T14:07:15Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-197b1 OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-00991", "ts": "2026-10-09T14:07:23Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 686 buffers"}
+{"id": "log-00992", "ts": "2026-10-09T14:07:27Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00993", "ts": "2026-10-09T14:07:30Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/profile 200 in 192ms"}
+{"id": "log-00994", "ts": "2026-10-09T14:07:37Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00995", "ts": "2026-10-09T14:07:39Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/receipts 200 in 305ms"}
+{"id": "log-00996", "ts": "2026-10-09T14:07:41Z", "service": "payments-api", "level": "WARN", "message": "slow request GET /v1/accounts took 2107ms"}
+{"id": "log-00997", "ts": "2026-10-09T14:07:42Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-00998", "ts": "2026-10-09T14:07:46Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00999", "ts": "2026-10-09T14:07:48Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-01000", "ts": "2026-10-09T14:07:48Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01001", "ts": "2026-10-09T14:07:50Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01002", "ts": "2026-10-09T14:07:55Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/receipts 200 in 286ms"}
+{"id": "log-01003", "ts": "2026-10-09T14:07:58Z", "service": "auth-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-01004", "ts": "2026-10-09T14:07:59Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01005", "ts": "2026-10-09T14:07:59Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01006", "ts": "2026-10-09T14:08:03Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 218 buffers"}
+{"id": "log-01007", "ts": "2026-10-09T14:08:09Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01008", "ts": "2026-10-09T14:08:14Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-01009", "ts": "2026-10-09T14:08:24Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01010", "ts": "2026-10-09T14:08:25Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01011", "ts": "2026-10-09T14:08:25Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01012", "ts": "2026-10-09T14:08:27Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01013", "ts": "2026-10-09T14:08:27Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01014", "ts": "2026-10-09T14:08:30Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01015", "ts": "2026-10-09T14:08:35Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-601eb OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-01016", "ts": "2026-10-09T14:08:40Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01017", "ts": "2026-10-09T14:08:41Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/receipts 200 in 319ms"}
+{"id": "log-01018", "ts": "2026-10-09T14:08:43Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01019", "ts": "2026-10-09T14:08:57Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01020", "ts": "2026-10-09T14:09:00Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01021", "ts": "2026-10-09T14:09:02Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 371 buffers"}
+{"id": "log-01022", "ts": "2026-10-09T14:09:04Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01023", "ts": "2026-10-09T14:09:08Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-01024", "ts": "2026-10-09T14:09:12Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-fe405 OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-01025", "ts": "2026-10-09T14:09:12Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01026", "ts": "2026-10-09T14:09:14Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01027", "ts": "2026-10-09T14:09:18Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01028", "ts": "2026-10-09T14:09:25Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01029", "ts": "2026-10-09T14:09:27Z", "service": "notification-service", "level": "WARN", "message": "retrying call to event-bus (attempt 1 of 3)"}
+{"id": "log-01030", "ts": "2026-10-09T14:09:27Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-01031", "ts": "2026-10-09T14:09:31Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01032", "ts": "2026-10-09T14:09:32Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01033", "ts": "2026-10-09T14:09:38Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-01034", "ts": "2026-10-09T14:09:42Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01035", "ts": "2026-10-09T14:09:51Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01036", "ts": "2026-10-09T14:09:52Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/sip 200 in 448ms"}
+{"id": "log-01037", "ts": "2026-10-09T14:09:53Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/holdings 200 in 251ms"}
+{"id": "log-01038", "ts": "2026-10-09T14:10:00Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/payments/intent 200 in 388ms"}
+{"id": "log-01039", "ts": "2026-10-09T14:10:01Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment market-data-service replicas unchanged"}
+{"id": "log-01040", "ts": "2026-10-09T14:10:05Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01041", "ts": "2026-10-09T14:10:09Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01042", "ts": "2026-10-09T14:10:12Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01043", "ts": "2026-10-09T14:10:18Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01044", "ts": "2026-10-09T14:10:19Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01045", "ts": "2026-10-09T14:10:19Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01046", "ts": "2026-10-09T14:10:23Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-01047", "ts": "2026-10-09T14:10:24Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-01048", "ts": "2026-10-09T14:10:35Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01049", "ts": "2026-10-09T14:10:37Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01050", "ts": "2026-10-09T14:10:38Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/orders 200 in 144ms"}
+{"id": "log-01051", "ts": "2026-10-09T14:10:40Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01052", "ts": "2026-10-09T14:10:42Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/profile 200 in 375ms"}
+{"id": "log-01053", "ts": "2026-10-09T14:11:02Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01054", "ts": "2026-10-09T14:11:12Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01055", "ts": "2026-10-09T14:11:15Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01056", "ts": "2026-10-09T14:11:16Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-01057", "ts": "2026-10-09T14:11:21Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-01058", "ts": "2026-10-09T14:11:23Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01059", "ts": "2026-10-09T14:11:25Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/orders 201 in 79ms"}
+{"id": "log-01060", "ts": "2026-10-09T14:11:31Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01061", "ts": "2026-10-09T14:11:32Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 804 buffers"}
+{"id": "log-01062", "ts": "2026-10-09T14:11:34Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/profile 201 in 252ms"}
+{"id": "log-01063", "ts": "2026-10-09T14:11:39Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/orders 201 in 23ms"}
+{"id": "log-01064", "ts": "2026-10-09T14:11:44Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/accounts 200 in 180ms"}
+{"id": "log-01065", "ts": "2026-10-09T14:11:52Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01066", "ts": "2026-10-09T14:11:54Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01067", "ts": "2026-10-09T14:12:00Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01068", "ts": "2026-10-09T14:12:02Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-c0318 OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-01069", "ts": "2026-10-09T14:12:02Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01070", "ts": "2026-10-09T14:12:06Z", "service": "kubernetes", "level": "INFO", "message": "Pod payments-api-2974d readiness probe ok"}
+{"id": "log-01071", "ts": "2026-10-09T14:12:06Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01072", "ts": "2026-10-09T14:12:09Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01073", "ts": "2026-10-09T14:12:28Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01074", "ts": "2026-10-09T14:12:29Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-01075", "ts": "2026-10-09T14:12:36Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/accounts 201 in 180ms"}
+{"id": "log-01076", "ts": "2026-10-09T14:12:37Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-01077", "ts": "2026-10-09T14:12:38Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-01078", "ts": "2026-10-09T14:12:48Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01079", "ts": "2026-10-09T14:12:53Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/profile 200 in 145ms"}
+{"id": "log-01080", "ts": "2026-10-09T14:13:02Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01081", "ts": "2026-10-09T14:13:06Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-01082", "ts": "2026-10-09T14:13:08Z", "service": "kubernetes", "level": "WARN", "message": "Pod portfolio-service-7d9f8-2a1f1 OOMKilled (container portfolio-service, memory limit 2Gi), restarting"}
+{"id": "log-01083", "ts": "2026-10-09T14:13:11Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01084", "ts": "2026-10-09T14:13:23Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/orders 200 in 388ms"}
+{"id": "log-01085", "ts": "2026-10-09T14:13:24Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01086", "ts": "2026-10-09T14:13:29Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01087", "ts": "2026-10-09T14:13:32Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01088", "ts": "2026-10-09T14:13:50Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/profile 200 in 186ms"}
+{"id": "log-01089", "ts": "2026-10-09T14:13:51Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-01090", "ts": "2026-10-09T14:13:55Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-01091", "ts": "2026-10-09T14:13:55Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01092", "ts": "2026-10-09T14:14:00Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-01093", "ts": "2026-10-09T14:14:02Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/holdings 200 in 99ms"}
+{"id": "log-01094", "ts": "2026-10-09T14:14:07Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 98ms"}
+{"id": "log-01095", "ts": "2026-10-09T14:14:07Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01096", "ts": "2026-10-09T14:14:13Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-01097", "ts": "2026-10-09T14:14:14Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01098", "ts": "2026-10-09T14:14:18Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01099", "ts": "2026-10-09T14:14:31Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01100", "ts": "2026-10-09T14:14:32Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}
+{"id": "log-01101", "ts": "2026-10-09T14:14:32Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-01102", "ts": "2026-10-09T14:14:41Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/holdings 200 in 91ms"}
+{"id": "log-01103", "ts": "2026-10-09T14:14:45Z", "service": "mobile-bff", "level": "ERROR", "message": "upstream portfolio-service: connection reset by peer (GET /v1/holdings)"}

@@ -1,0 +1,12 @@
+{
+  "id": "INC-10",
+  "title": "Login failures, OTP not received",
+  "reported_at": "2026-10-13T14:00:00Z",
+  "reporter": "on-call SRE (Priya)",
+  "description": "Login failures spiking since ~13:40; users say the OTP never arrives. auth-service was deployed at 13:05 today, probably the culprit.",
+  "symptom_services": [
+    "auth-service",
+    "mobile-bff"
+  ],
+  "customer_impact": "About a third of logins fail."
+}

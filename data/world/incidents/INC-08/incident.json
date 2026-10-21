@@ -1,0 +1,11 @@
+{
+  "id": "INC-08",
+  "title": "Payments slow, logs full of warnings",
+  "reported_at": "2026-10-11T13:45:00Z",
+  "reporter": "payments on-call (Arjun)",
+  "description": "payments-api p99 went from ~400ms to ~3s since ~13:20. payments-api logs are full of TLS deprecation warnings, maybe related?",
+  "symptom_services": [
+    "payments-api"
+  ],
+  "customer_impact": "Payments are slow; a small number time out."
+}

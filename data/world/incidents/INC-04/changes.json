@@ -1,0 +1,206 @@
+[
+ {
+  "id": "chg-1691",
+  "ts": "2026-09-29T23:09:00Z",
+  "service": "fraud-service",
+  "kind": "deploy",
+  "summary": "fraud-service v6.5.9: minor bug fixes",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-1787",
+  "ts": "2026-09-30T01:17:00Z",
+  "service": "orders-service",
+  "kind": "feature_flag",
+  "summary": "orders-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-2112",
+  "ts": "2026-10-01T14:30:00Z",
+  "service": "portfolio-db",
+  "kind": "infra",
+  "summary": "portfolio-db node pool patch: kernel security update",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-2140",
+  "ts": "2026-10-01T14:49:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v4.3.1: dependency bumps",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-2142",
+  "ts": "2026-10-01T16:01:00Z",
+  "service": "event-bus",
+  "kind": "config",
+  "summary": "event-bus raise request timeout 5s -> 6s",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-2346",
+  "ts": "2026-10-02T07:04:00Z",
+  "service": "aa-connector",
+  "kind": "config",
+  "summary": "aa-connector rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-2805",
+  "ts": "2026-10-02T23:11:00Z",
+  "service": "notification-service",
+  "kind": "feature_flag",
+  "summary": "notification-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-2815",
+  "ts": "2026-10-03T02:07:00Z",
+  "service": "redis-session",
+  "kind": "infra",
+  "summary": "redis-session node pool patch: kernel security update",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-3276",
+  "ts": "2026-10-03T15:01:00Z",
+  "service": "upi-gateway",
+  "kind": "infra",
+  "summary": "upi-gateway node pool patch: kernel security update",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-3990",
+  "ts": "2026-10-03T16:53:00Z",
+  "service": "ledger-service",
+  "kind": "deploy",
+  "summary": "ledger-service v2.12.7: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-4631",
+  "ts": "2026-10-03T22:25:00Z",
+  "service": "market-data-service",
+  "kind": "feature_flag",
+  "summary": "market-data-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-5104",
+  "ts": "2026-10-03T22:43:00Z",
+  "service": "fraud-service",
+  "kind": "config",
+  "summary": "fraud-service rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5115",
+  "ts": "2026-10-04T18:10:00Z",
+  "service": "redis-session",
+  "kind": "deploy",
+  "summary": "redis-session v9.14.7: minor bug fixes",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-5141",
+  "ts": "2026-10-05T10:56:00Z",
+  "service": "orders-service",
+  "kind": "feature_flag",
+  "summary": "orders-service enable new_onboarding_copy for 20% of users",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-5463",
+  "ts": "2026-10-05T11:20:00Z",
+  "service": "mobile-bff",
+  "kind": "feature_flag",
+  "summary": "mobile-bff enable new_onboarding_copy for 20% of users",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-5479",
+  "ts": "2026-10-05T12:12:00Z",
+  "service": "redis-session",
+  "kind": "deploy",
+  "summary": "redis-session v7.7.1: dependency bumps",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-5705",
+  "ts": "2026-10-05T20:45:00Z",
+  "service": "kyc-service",
+  "kind": "infra",
+  "summary": "kyc-service node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6802",
+  "ts": "2026-10-05T20:54:00Z",
+  "service": "redis-session",
+  "kind": "config",
+  "summary": "redis-session raise request timeout 5s -> 6s",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8200",
+  "ts": "2026-10-06T12:35:00Z",
+  "service": "event-bus",
+  "kind": "deploy",
+  "summary": "event-bus v6.16.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8270",
+  "ts": "2026-10-06T12:36:00Z",
+  "service": "fraud-service",
+  "kind": "deploy",
+  "summary": "fraud-service v1.4.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8919",
+  "ts": "2026-10-06T13:12:00Z",
+  "service": "ledger-service",
+  "kind": "config",
+  "summary": "config-sync: normalize db.pool.max_size across services",
+  "author": "platform-bot",
+  "details": {
+   "key": "db.pool.max_size",
+   "old": 50,
+   "new": 5
+  }
+ },
+ {
+  "id": "chg-9900",
+  "ts": "2026-10-06T13:40:00Z",
+  "service": "portfolio-service",
+  "kind": "deploy",
+  "summary": "portfolio-service v3.7.2: show XIRR on holdings",
+  "author": "ci (dev)",
+  "details": {
+   "version": "3.7.2"
+  }
+ }
+]

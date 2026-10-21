@@ -1,0 +1,12 @@
+{
+  "id": "INC-01",
+  "title": "Payments failing after lunch",
+  "reported_at": "2026-10-02T14:20:00Z",
+  "reporter": "on-call SRE (Priya)",
+  "description": "Since about 14:05 the app shows 'Payment failed, try again' for many UPI payments. Error alerts fired on mobile-bff and payments-api.",
+  "symptom_services": [
+    "mobile-bff",
+    "payments-api"
+  ],
+  "customer_impact": "About 15% of payment attempts fail."
+}

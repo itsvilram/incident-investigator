@@ -1,0 +1,195 @@
+[
+ {
+  "id": "chg-1489",
+  "ts": "2026-09-27T14:34:00Z",
+  "service": "event-bus",
+  "kind": "feature_flag",
+  "summary": "event-bus enable new_onboarding_copy for 20% of users",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-2190",
+  "ts": "2026-09-27T17:35:00Z",
+  "service": "upi-gateway",
+  "kind": "config",
+  "summary": "upi-gateway raise request timeout 5s -> 6s",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-2925",
+  "ts": "2026-09-29T15:46:00Z",
+  "service": "portfolio-db",
+  "kind": "deploy",
+  "summary": "portfolio-db v3.5.7: minor bug fixes",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-3682",
+  "ts": "2026-09-30T06:48:00Z",
+  "service": "upi-gateway",
+  "kind": "deploy",
+  "summary": "upi-gateway v9.8.4: dependency bumps",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-3820",
+  "ts": "2026-09-30T11:55:00Z",
+  "service": "ledger-service",
+  "kind": "config",
+  "summary": "ledger-service rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-3971",
+  "ts": "2026-09-30T12:45:00Z",
+  "service": "auth-service",
+  "kind": "config",
+  "summary": "auth-service rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-4295",
+  "ts": "2026-09-30T14:00:00Z",
+  "service": "auth-service",
+  "kind": "config",
+  "summary": "auth-service raise request timeout 5s -> 6s",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-4320",
+  "ts": "2026-09-30T15:15:00Z",
+  "service": "market-data-service",
+  "kind": "deploy",
+  "summary": "market-data-service v1.8.4: logging improvements",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-5866",
+  "ts": "2026-10-01T00:33:00Z",
+  "service": "redis-cache",
+  "kind": "deploy",
+  "summary": "redis-cache v7.9.1: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5892",
+  "ts": "2026-10-01T01:02:00Z",
+  "service": "ledger-service",
+  "kind": "config",
+  "summary": "ledger-service raise request timeout 5s -> 6s",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6178",
+  "ts": "2026-10-01T06:02:00Z",
+  "service": "user-db",
+  "kind": "deploy",
+  "summary": "user-db v8.12.4: minor bug fixes",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-6437",
+  "ts": "2026-10-01T09:31:00Z",
+  "service": "fraud-service",
+  "kind": "deploy",
+  "summary": "fraud-service v1.14.3: minor bug fixes",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-6644",
+  "ts": "2026-10-01T21:28:00Z",
+  "service": "fraud-service",
+  "kind": "deploy",
+  "summary": "fraud-service v9.16.6: logging improvements",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-7285",
+  "ts": "2026-10-02T03:24:00Z",
+  "service": "aa-connector",
+  "kind": "config",
+  "summary": "aa-connector rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-7663",
+  "ts": "2026-10-02T22:35:00Z",
+  "service": "portfolio-db",
+  "kind": "feature_flag",
+  "summary": "portfolio-db enable new_onboarding_copy for 20% of users",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8441",
+  "ts": "2026-10-03T06:45:00Z",
+  "service": "auth-service",
+  "kind": "config",
+  "summary": "auth-service rotate API credentials (scheduled)",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-8974",
+  "ts": "2026-10-03T14:25:00Z",
+  "service": "kyc-service",
+  "kind": "infra",
+  "summary": "kyc-service node pool patch: kernel security update",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-9016",
+  "ts": "2026-10-03T14:47:00Z",
+  "service": "market-data-service",
+  "kind": "deploy",
+  "summary": "market-data-service v7.13.8: dependency bumps",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-9328",
+  "ts": "2026-10-04T12:07:00Z",
+  "service": "orders-service",
+  "kind": "deploy",
+  "summary": "orders-service v1.25.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9500",
+  "ts": "2026-10-04T12:29:00Z",
+  "service": "ledger-service",
+  "kind": "deploy",
+  "summary": "ledger-service v6.7.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9502",
+  "ts": "2026-10-04T13:30:00Z",
+  "service": "fraud-service",
+  "kind": "config",
+  "summary": "fraud rules: raise velocity threshold from 5 to 7 transactions/min",
+  "author": "risk-team (sana)",
+  "details": {
+   "key": "velocity_threshold",
+   "old": 5,
+   "new": 7
+  }
+ }
+]

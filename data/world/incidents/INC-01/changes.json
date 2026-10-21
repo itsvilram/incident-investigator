@@ -1,0 +1,194 @@
+[
+ {
+  "id": "chg-1476",
+  "ts": "2026-09-25T16:55:00Z",
+  "service": "user-db",
+  "kind": "feature_flag",
+  "summary": "user-db enable new_onboarding_copy for 20% of users",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-2403",
+  "ts": "2026-09-26T01:34:00Z",
+  "service": "redis-cache",
+  "kind": "deploy",
+  "summary": "redis-cache v1.4.4: minor bug fixes",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-2407",
+  "ts": "2026-09-26T02:15:00Z",
+  "service": "portfolio-service",
+  "kind": "config",
+  "summary": "portfolio-service rotate API credentials (scheduled)",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-3534",
+  "ts": "2026-09-26T12:08:00Z",
+  "service": "fraud-service",
+  "kind": "feature_flag",
+  "summary": "fraud-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-4038",
+  "ts": "2026-09-26T19:47:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v5.13.4: dependency bumps",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-4186",
+  "ts": "2026-09-26T23:28:00Z",
+  "service": "portfolio-service",
+  "kind": "feature_flag",
+  "summary": "portfolio-service enable new_onboarding_copy for 20% of users",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-5225",
+  "ts": "2026-09-26T23:58:00Z",
+  "service": "upi-gateway",
+  "kind": "feature_flag",
+  "summary": "upi-gateway enable new_onboarding_copy for 20% of users",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6752",
+  "ts": "2026-09-27T11:31:00Z",
+  "service": "portfolio-service",
+  "kind": "config",
+  "summary": "portfolio-service raise request timeout 5s -> 6s",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-7144",
+  "ts": "2026-09-27T17:13:00Z",
+  "service": "notification-service",
+  "kind": "deploy",
+  "summary": "notification-service v8.8.4: dependency bumps",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-7384",
+  "ts": "2026-09-27T17:49:00Z",
+  "service": "kyc-service",
+  "kind": "infra",
+  "summary": "kyc-service node pool patch: kernel security update",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-7390",
+  "ts": "2026-09-27T22:15:00Z",
+  "service": "event-bus",
+  "kind": "infra",
+  "summary": "event-bus node pool patch: kernel security update",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-7590",
+  "ts": "2026-09-27T23:49:00Z",
+  "service": "portfolio-service",
+  "kind": "deploy",
+  "summary": "portfolio-service v7.3.3: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-7924",
+  "ts": "2026-09-28T03:59:00Z",
+  "service": "market-data-service",
+  "kind": "deploy",
+  "summary": "market-data-service v7.15.9: logging improvements",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-7967",
+  "ts": "2026-09-28T05:35:00Z",
+  "service": "market-data-service",
+  "kind": "deploy",
+  "summary": "market-data-service v9.17.3: minor bug fixes",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-8190",
+  "ts": "2026-09-28T07:20:00Z",
+  "service": "portfolio-service",
+  "kind": "deploy",
+  "summary": "portfolio-service v1.0.1: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8212",
+  "ts": "2026-09-28T12:34:00Z",
+  "service": "orders-service",
+  "kind": "feature_flag",
+  "summary": "orders-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-8605",
+  "ts": "2026-10-01T16:15:00Z",
+  "service": "upi-gateway",
+  "kind": "deploy",
+  "summary": "upi-gateway v1.18.3: minor bug fixes",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-8908",
+  "ts": "2026-10-02T03:43:00Z",
+  "service": "user-db",
+  "kind": "deploy",
+  "summary": "user-db v9.17.3: logging improvements",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9177",
+  "ts": "2026-10-02T12:22:00Z",
+  "service": "market-data-service",
+  "kind": "deploy",
+  "summary": "market-data-service v6.7.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9557",
+  "ts": "2026-10-02T12:23:00Z",
+  "service": "market-data-service",
+  "kind": "deploy",
+  "summary": "market-data-service v1.17.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9890",
+  "ts": "2026-10-02T14:02:00Z",
+  "service": "payments-api",
+  "kind": "deploy",
+  "summary": "payments-api v2.14.0: refactor payment-intent validation, bump json library",
+  "author": "ci (ananya)",
+  "details": {
+   "version": "2.14.0",
+   "previous": "2.13.4"
+  }
+ }
+]

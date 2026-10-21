@@ -1,0 +1,12 @@
+{
+  "id": "INC-12",
+  "title": "UPI payments failing for some users",
+  "reported_at": "2026-10-07T14:30:00Z",
+  "reporter": "payments on-call (Arjun)",
+  "description": "About 8% of UPI payments fail since ~14:08. Two changes went out around 14:05: payments-api v2.15.0 and an upi-gateway routing config update. Not sure which.",
+  "symptom_services": [
+    "payments-api",
+    "upi-gateway"
+  ],
+  "customer_impact": "About 8% of UPI payments fail, all from one bank's users."
+}

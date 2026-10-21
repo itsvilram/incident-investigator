@@ -1,0 +1,194 @@
+[
+ {
+  "id": "chg-1566",
+  "ts": "2026-10-06T15:21:00Z",
+  "service": "portfolio-db",
+  "kind": "config",
+  "summary": "portfolio-db rotate API credentials (scheduled)",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-1780",
+  "ts": "2026-10-06T20:05:00Z",
+  "service": "market-data-service",
+  "kind": "deploy",
+  "summary": "market-data-service v9.18.3: dependency bumps",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-1814",
+  "ts": "2026-10-06T20:21:00Z",
+  "service": "mobile-bff",
+  "kind": "config",
+  "summary": "mobile-bff rotate API credentials (scheduled)",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-1905",
+  "ts": "2026-10-07T21:45:00Z",
+  "service": "portfolio-db",
+  "kind": "deploy",
+  "summary": "portfolio-db v8.1.6: minor bug fixes",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-2266",
+  "ts": "2026-10-08T10:38:00Z",
+  "service": "redis-cache",
+  "kind": "deploy",
+  "summary": "redis-cache v1.17.2: minor bug fixes",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-3784",
+  "ts": "2026-10-08T19:15:00Z",
+  "service": "orders-service",
+  "kind": "feature_flag",
+  "summary": "orders-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-4358",
+  "ts": "2026-10-08T23:55:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v9.9.0: logging improvements",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-4408",
+  "ts": "2026-10-09T04:32:00Z",
+  "service": "upi-gateway",
+  "kind": "feature_flag",
+  "summary": "upi-gateway enable new_onboarding_copy for 20% of users",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5107",
+  "ts": "2026-10-09T16:19:00Z",
+  "service": "redis-cache",
+  "kind": "config",
+  "summary": "redis-cache raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-5560",
+  "ts": "2026-10-09T20:54:00Z",
+  "service": "aa-connector",
+  "kind": "infra",
+  "summary": "aa-connector node pool patch: kernel security update",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-5590",
+  "ts": "2026-10-10T02:42:00Z",
+  "service": "upi-gateway",
+  "kind": "feature_flag",
+  "summary": "upi-gateway enable new_onboarding_copy for 20% of users",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-5735",
+  "ts": "2026-10-10T06:50:00Z",
+  "service": "market-data-service",
+  "kind": "deploy",
+  "summary": "market-data-service v3.5.1: minor bug fixes",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-5973",
+  "ts": "2026-10-10T13:58:00Z",
+  "service": "orders-service",
+  "kind": "feature_flag",
+  "summary": "orders-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6058",
+  "ts": "2026-10-10T23:13:00Z",
+  "service": "mobile-bff",
+  "kind": "config",
+  "summary": "mobile-bff raise request timeout 5s -> 6s",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6272",
+  "ts": "2026-10-11T01:40:00Z",
+  "service": "payments-api",
+  "kind": "feature_flag",
+  "summary": "payments-api enable new_onboarding_copy for 20% of users",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-6759",
+  "ts": "2026-10-11T18:04:00Z",
+  "service": "mobile-bff",
+  "kind": "deploy",
+  "summary": "mobile-bff v2.15.6: logging improvements",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-7227",
+  "ts": "2026-10-12T05:00:00Z",
+  "service": "portfolio-db",
+  "kind": "deploy",
+  "summary": "portfolio-db v9.19.2: logging improvements",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-7763",
+  "ts": "2026-10-12T07:54:00Z",
+  "service": "aa-connector",
+  "kind": "deploy",
+  "summary": "aa-connector v3.6.7: minor bug fixes",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8588",
+  "ts": "2026-10-13T12:24:00Z",
+  "service": "orders-service",
+  "kind": "deploy",
+  "summary": "orders-service v4.6.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9012",
+  "ts": "2026-10-13T12:34:00Z",
+  "service": "ledger-db",
+  "kind": "deploy",
+  "summary": "ledger-db v5.26.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9363",
+  "ts": "2026-10-13T13:05:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v7.1.3: limit OTP resends to 3 per 10 minutes",
+  "author": "ci (ishaan)",
+  "details": {
+   "version": "7.1.3",
+   "previous": "7.1.2"
+  }
+ }
+]

@@ -1,0 +1,194 @@
+[
+ {
+  "id": "chg-1139",
+  "ts": "2026-10-07T17:50:00Z",
+  "service": "kyc-service",
+  "kind": "deploy",
+  "summary": "kyc-service v5.17.7: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-1898",
+  "ts": "2026-10-08T00:45:00Z",
+  "service": "ledger-service",
+  "kind": "deploy",
+  "summary": "ledger-service v6.4.0: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-1976",
+  "ts": "2026-10-08T05:56:00Z",
+  "service": "mobile-bff",
+  "kind": "deploy",
+  "summary": "mobile-bff v1.13.7: logging improvements",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-2154",
+  "ts": "2026-10-08T15:02:00Z",
+  "service": "event-bus",
+  "kind": "config",
+  "summary": "event-bus rotate API credentials (scheduled)",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-2158",
+  "ts": "2026-10-08T19:09:00Z",
+  "service": "fraud-service",
+  "kind": "deploy",
+  "summary": "fraud-service v1.6.9: dependency bumps",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-2395",
+  "ts": "2026-10-08T23:26:00Z",
+  "service": "user-db",
+  "kind": "deploy",
+  "summary": "user-db v7.2.1: minor bug fixes",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-2608",
+  "ts": "2026-10-09T13:33:00Z",
+  "service": "orders-service",
+  "kind": "infra",
+  "summary": "orders-service node pool patch: kernel security update",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-3231",
+  "ts": "2026-10-09T16:35:00Z",
+  "service": "kyc-service",
+  "kind": "config",
+  "summary": "kyc-service raise request timeout 5s -> 6s",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-3547",
+  "ts": "2026-10-09T23:09:00Z",
+  "service": "user-db",
+  "kind": "config",
+  "summary": "user-db rotate API credentials (scheduled)",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-3645",
+  "ts": "2026-10-10T13:41:00Z",
+  "service": "ledger-service",
+  "kind": "config",
+  "summary": "ledger-service raise request timeout 5s -> 6s",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-4120",
+  "ts": "2026-10-10T22:08:00Z",
+  "service": "upi-gateway",
+  "kind": "infra",
+  "summary": "upi-gateway node pool patch: kernel security update",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-4336",
+  "ts": "2026-10-11T03:21:00Z",
+  "service": "redis-cache",
+  "kind": "infra",
+  "summary": "redis-cache node pool patch: kernel security update",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-4434",
+  "ts": "2026-10-11T07:28:00Z",
+  "service": "redis-cache",
+  "kind": "infra",
+  "summary": "redis-cache node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-4869",
+  "ts": "2026-10-11T10:10:00Z",
+  "service": "upi-gateway",
+  "kind": "infra",
+  "summary": "upi-gateway node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5019",
+  "ts": "2026-10-12T08:19:00Z",
+  "service": "notification-service",
+  "kind": "infra",
+  "summary": "notification-service node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5845",
+  "ts": "2026-10-12T16:21:00Z",
+  "service": "ledger-db",
+  "kind": "infra",
+  "summary": "ledger-db node pool patch: kernel security update",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-5969",
+  "ts": "2026-10-12T21:06:00Z",
+  "service": "orders-service",
+  "kind": "feature_flag",
+  "summary": "orders-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-6073",
+  "ts": "2026-10-13T18:31:00Z",
+  "service": "ledger-db",
+  "kind": "deploy",
+  "summary": "ledger-db v6.13.1: dependency bumps",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-7372",
+  "ts": "2026-10-14T12:13:00Z",
+  "service": "fraud-service",
+  "kind": "deploy",
+  "summary": "fraud-service v6.1.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8168",
+  "ts": "2026-10-14T12:30:00Z",
+  "service": "aa-connector",
+  "kind": "deploy",
+  "summary": "aa-connector v5.13.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8542",
+  "ts": "2026-10-14T13:22:00Z",
+  "service": "coredns",
+  "kind": "infra",
+  "summary": "coredns: scale replicas 4 -> 1 (cost optimisation)",
+  "author": "platform-oncall",
+  "details": {
+   "replicas_old": 4,
+   "replicas_new": 1
+  }
+ }
+]

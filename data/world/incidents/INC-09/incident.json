@@ -1,0 +1,11 @@
+{
+  "id": "INC-09",
+  "title": "Transaction alerts delayed",
+  "reported_at": "2026-10-12T14:30:00Z",
+  "reporter": "support lead (Fatima)",
+  "description": "A few users report payment confirmation SMS/push arriving 5-10 minutes late since ~14:00. Scope unclear, only a handful of tickets.",
+  "symptom_services": [
+    "notification-service"
+  ],
+  "customer_impact": "Some transaction alerts are delayed; payments themselves work."
+}

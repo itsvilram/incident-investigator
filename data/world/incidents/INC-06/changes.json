@@ -1,0 +1,194 @@
+[
+ {
+  "id": "chg-1044",
+  "ts": "2026-10-02T12:52:00Z",
+  "service": "user-db",
+  "kind": "infra",
+  "summary": "user-db node pool patch: kernel security update",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-1384",
+  "ts": "2026-10-02T20:57:00Z",
+  "service": "payments-api",
+  "kind": "deploy",
+  "summary": "payments-api v8.0.1: minor bug fixes",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-1587",
+  "ts": "2026-10-03T06:22:00Z",
+  "service": "portfolio-service",
+  "kind": "deploy",
+  "summary": "portfolio-service v4.11.5: minor bug fixes",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-1921",
+  "ts": "2026-10-03T06:56:00Z",
+  "service": "portfolio-service",
+  "kind": "feature_flag",
+  "summary": "portfolio-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-3494",
+  "ts": "2026-10-03T08:16:00Z",
+  "service": "kyc-service",
+  "kind": "deploy",
+  "summary": "kyc-service v8.16.0: logging improvements",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-3932",
+  "ts": "2026-10-03T13:16:00Z",
+  "service": "event-bus",
+  "kind": "deploy",
+  "summary": "event-bus v4.14.8: logging improvements",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-4115",
+  "ts": "2026-10-05T15:07:00Z",
+  "service": "ledger-db",
+  "kind": "deploy",
+  "summary": "ledger-db v7.20.0: logging improvements",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-4250",
+  "ts": "2026-10-05T22:49:00Z",
+  "service": "market-data-service",
+  "kind": "deploy",
+  "summary": "market-data-service v5.17.6: logging improvements",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-4513",
+  "ts": "2026-10-06T10:02:00Z",
+  "service": "aa-connector",
+  "kind": "deploy",
+  "summary": "aa-connector v6.20.3: minor bug fixes",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-5065",
+  "ts": "2026-10-06T12:01:00Z",
+  "service": "kyc-service",
+  "kind": "config",
+  "summary": "kyc-service raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-5407",
+  "ts": "2026-10-06T18:18:00Z",
+  "service": "mobile-bff",
+  "kind": "config",
+  "summary": "mobile-bff rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6406",
+  "ts": "2026-10-07T11:50:00Z",
+  "service": "ledger-db",
+  "kind": "deploy",
+  "summary": "ledger-db v2.0.8: dependency bumps",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-6441",
+  "ts": "2026-10-08T00:46:00Z",
+  "service": "fraud-service",
+  "kind": "config",
+  "summary": "fraud-service raise request timeout 5s -> 6s",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-6652",
+  "ts": "2026-10-08T08:30:00Z",
+  "service": "kyc-service",
+  "kind": "deploy",
+  "summary": "kyc-service v4.11.8: minor bug fixes",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-6888",
+  "ts": "2026-10-08T11:08:00Z",
+  "service": "kyc-service",
+  "kind": "infra",
+  "summary": "kyc-service node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-7001",
+  "ts": "2026-10-08T18:20:00Z",
+  "service": "portfolio-service",
+  "kind": "deploy",
+  "summary": "portfolio-service v3.8.0: keep per-user holdings snapshots in memory",
+  "author": "ci (dev)",
+  "details": {
+   "version": "3.8.0",
+   "previous": "3.7.2"
+  }
+ },
+ {
+  "id": "chg-7695",
+  "ts": "2026-10-09T01:32:00Z",
+  "service": "redis-session",
+  "kind": "infra",
+  "summary": "redis-session node pool patch: kernel security update",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-8141",
+  "ts": "2026-10-09T01:33:00Z",
+  "service": "notification-service",
+  "kind": "config",
+  "summary": "notification-service rotate API credentials (scheduled)",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-8380",
+  "ts": "2026-10-09T03:40:00Z",
+  "service": "kyc-service",
+  "kind": "deploy",
+  "summary": "kyc-service v2.6.7: dependency bumps",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-9271",
+  "ts": "2026-10-09T12:27:00Z",
+  "service": "portfolio-db",
+  "kind": "deploy",
+  "summary": "portfolio-db v1.1.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9690",
+  "ts": "2026-10-09T12:46:00Z",
+  "service": "aa-connector",
+  "kind": "deploy",
+  "summary": "aa-connector v2.1.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ }
+]

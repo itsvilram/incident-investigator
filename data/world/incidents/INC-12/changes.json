@@ -1,0 +1,209 @@
+[
+ {
+  "id": "chg-1738",
+  "ts": "2026-09-30T14:54:00Z",
+  "service": "payments-api",
+  "kind": "deploy",
+  "summary": "payments-api v6.18.6: minor bug fixes",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-2683",
+  "ts": "2026-09-30T15:56:00Z",
+  "service": "mobile-bff",
+  "kind": "deploy",
+  "summary": "mobile-bff v7.14.3: logging improvements",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-2871",
+  "ts": "2026-09-30T16:34:00Z",
+  "service": "portfolio-service",
+  "kind": "feature_flag",
+  "summary": "portfolio-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-3462",
+  "ts": "2026-09-30T16:40:00Z",
+  "service": "kyc-service",
+  "kind": "config",
+  "summary": "kyc-service rotate API credentials (scheduled)",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-3567",
+  "ts": "2026-10-01T00:10:00Z",
+  "service": "portfolio-db",
+  "kind": "deploy",
+  "summary": "portfolio-db v1.14.7: minor bug fixes",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-3608",
+  "ts": "2026-10-02T01:57:00Z",
+  "service": "orders-service",
+  "kind": "config",
+  "summary": "orders-service rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-3639",
+  "ts": "2026-10-02T06:29:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v4.11.0: logging improvements",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-4120",
+  "ts": "2026-10-02T19:47:00Z",
+  "service": "redis-session",
+  "kind": "deploy",
+  "summary": "redis-session v4.8.9: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-4181",
+  "ts": "2026-10-04T05:58:00Z",
+  "service": "mobile-bff",
+  "kind": "deploy",
+  "summary": "mobile-bff v3.6.5: logging improvements",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-4493",
+  "ts": "2026-10-04T13:43:00Z",
+  "service": "event-bus",
+  "kind": "config",
+  "summary": "event-bus rotate API credentials (scheduled)",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-4501",
+  "ts": "2026-10-04T16:30:00Z",
+  "service": "redis-session",
+  "kind": "infra",
+  "summary": "redis-session node pool patch: kernel security update",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-5187",
+  "ts": "2026-10-05T04:00:00Z",
+  "service": "auth-service",
+  "kind": "config",
+  "summary": "auth-service rotate API credentials (scheduled)",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-5194",
+  "ts": "2026-10-05T17:19:00Z",
+  "service": "ledger-db",
+  "kind": "infra",
+  "summary": "ledger-db node pool patch: kernel security update",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-5323",
+  "ts": "2026-10-05T19:37:00Z",
+  "service": "payments-api",
+  "kind": "config",
+  "summary": "payments-api raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-6916",
+  "ts": "2026-10-06T09:40:00Z",
+  "service": "fraud-service",
+  "kind": "feature_flag",
+  "summary": "fraud-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-7155",
+  "ts": "2026-10-06T09:50:00Z",
+  "service": "kyc-service",
+  "kind": "feature_flag",
+  "summary": "kyc-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-7731",
+  "ts": "2026-10-06T13:13:00Z",
+  "service": "portfolio-db",
+  "kind": "deploy",
+  "summary": "portfolio-db v8.6.4: logging improvements",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-7970",
+  "ts": "2026-10-06T16:40:00Z",
+  "service": "kyc-service",
+  "kind": "infra",
+  "summary": "kyc-service node pool patch: kernel security update",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-9282",
+  "ts": "2026-10-07T12:24:00Z",
+  "service": "kyc-service",
+  "kind": "deploy",
+  "summary": "kyc-service v4.24.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9399",
+  "ts": "2026-10-07T12:50:00Z",
+  "service": "kyc-service",
+  "kind": "deploy",
+  "summary": "kyc-service v3.16.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9649",
+  "ts": "2026-10-07T14:05:00Z",
+  "service": "payments-api",
+  "kind": "deploy",
+  "summary": "payments-api v2.15.0: receipt PDF endpoint, copy changes",
+  "author": "ci (ananya)",
+  "details": {
+   "version": "2.15.0",
+   "previous": "2.14.1"
+  }
+ },
+ {
+  "id": "chg-9824",
+  "ts": "2026-10-07T14:06:00Z",
+  "service": "upi-gateway",
+  "kind": "config",
+  "summary": "routing table: move @okbank handles to partner-bank-api /v3/collect",
+  "author": "payments-infra (vivek)",
+  "details": {
+   "handles": [
+    "@okbank"
+   ],
+   "old": "/v2/collect",
+   "new": "/v3/collect"
+  }
+ }
+]

@@ -1,0 +1,181 @@
+[
+ {
+  "id": "hist-2026-0907",
+  "date": "2026-09-07",
+  "title": "AA consent requests timing out",
+  "services": [
+   "aa-connector",
+   "aa-fiu-gateway"
+  ],
+  "symptoms": "Users could not link bank accounts via Account Aggregator; consent requests timed out; aa-connector error rate rose gradually over 20 min.",
+  "root_cause": "aa-fiu-gateway rate-limited our FIU client after a retry storm.",
+  "category": "third_party_outage",
+  "resolution": "Added exponential backoff and a token bucket on aa-connector."
+ },
+ {
+  "id": "hist-2026-0815",
+  "date": "2026-08-15",
+  "title": "Login failures after auth-service release",
+  "services": [
+   "auth-service"
+  ],
+  "symptoms": "Login failures and OTP verification errors right after a deploy.",
+  "root_cause": "auth-service v7.0.0 changed the OTP hash format; old OTPs failed.",
+  "category": "bad_deploy",
+  "resolution": "Rolled back to v6.9.4."
+ },
+ {
+  "id": "hist-2026-0722",
+  "date": "2026-07-22",
+  "title": "Ledger writes failing, payments PENDING",
+  "services": [
+   "ledger-db",
+   "ledger-service",
+   "payments-api"
+  ],
+  "symptoms": "Payments stuck in PENDING; ledger inserts failing.",
+  "root_cause": "WAL archiving stalled and ledger-db disk filled up.",
+  "category": "resource_exhaustion",
+  "resolution": "Freed disk, fixed archiver, added disk alert at 85%."
+ },
+ {
+  "id": "hist-2026-0618",
+  "date": "2026-06-18",
+  "title": "UPI timeouts during partner bank degradation",
+  "services": [
+   "upi-gateway",
+   "partner-bank-api",
+   "payments-api"
+  ],
+  "symptoms": "UPI collect latency above 8s, payments-api timeouts.",
+  "root_cause": "Partner bank API degraded (their DB failover).",
+  "category": "third_party_outage",
+  "resolution": "Waited for partner recovery; added circuit breaker on upi-gateway."
+ },
+ {
+  "id": "hist-2026-0530",
+  "date": "2026-05-30",
+  "title": "upi-gateway thread pool too small",
+  "services": [
+   "upi-gateway",
+   "payments-api"
+  ],
+  "symptoms": "UPI timeouts and worker pool exhausted errors at peak traffic.",
+  "root_cause": "upi-gateway worker pool sized for last year's traffic.",
+  "category": "resource_exhaustion",
+  "resolution": "Raised worker pool from 100 to 200."
+ },
+ {
+  "id": "hist-2026-0702",
+  "date": "2026-07-02",
+  "title": "NullPointerException after payments-api deploy",
+  "services": [
+   "payments-api"
+  ],
+  "symptoms": "Payment intents failing with 500 right after a release.",
+  "root_cause": "Missing null check in a refactored validator.",
+  "category": "bad_deploy",
+  "resolution": "Rolled back, added contract tests."
+ },
+ {
+  "id": "hist-2026-0811",
+  "date": "2026-08-11",
+  "title": "Hikari pool exhaustion in ledger-service",
+  "services": [
+   "ledger-service",
+   "ledger-db"
+  ],
+  "symptoms": "Connection is not available errors; ledger-db CPU at 95%.",
+  "root_cause": "Slow queries held connections; the pool drained.",
+  "category": "dependency_failure",
+  "resolution": "Added index, raised statement timeout alerts."
+ },
+ {
+  "id": "hist-2026-0520",
+  "date": "2026-05-20",
+  "title": "portfolio-service OOM after caching change",
+  "services": [
+   "portfolio-service"
+  ],
+  "symptoms": "Portfolio screen errors, pods restarting.",
+  "root_cause": "An in-memory cache without eviction leaked memory.",
+  "category": "resource_exhaustion",
+  "resolution": "Rolled back; added memory limit alerts."
+ },
+ {
+  "id": "hist-2026-0901",
+  "date": "2026-09-01",
+  "title": "orders-service overload during NFO launch",
+  "services": [
+   "orders-service"
+  ],
+  "symptoms": "Order placement failures, executor queue full, max replicas reached.",
+  "root_cause": "Launch traffic beyond capacity; autoscaler max too low.",
+  "category": "traffic_spike",
+  "resolution": "Raised max replicas; added queue-based load shedding."
+ },
+ {
+  "id": "hist-2026-0410",
+  "date": "2026-04-10",
+  "title": "Slow ledger queries after migration",
+  "services": [
+   "ledger-db",
+   "ledger-service"
+  ],
+  "symptoms": "High ledger-db CPU, payments slow.",
+  "root_cause": "A migration dropped an index on ledger_entries.",
+  "category": "dependency_failure",
+  "resolution": "Recreated the index."
+ },
+ {
+  "id": "hist-2026-0325",
+  "date": "2026-03-25",
+  "title": "Transaction SMS delayed",
+  "services": [
+   "notification-service",
+   "sms-vendor"
+  ],
+  "symptoms": "SMS alerts arriving minutes late.",
+  "root_cause": "sms-vendor throttled our sender ID.",
+  "category": "third_party_outage",
+  "resolution": "Vendor raised our throughput limit."
+ },
+ {
+  "id": "hist-2026-0228",
+  "date": "2026-02-28",
+  "title": "EAI_AGAIN errors across services",
+  "services": [
+   "coredns",
+   "notification-service",
+   "kyc-service"
+  ],
+  "symptoms": "Intermittent DNS resolution failures in several services.",
+  "root_cause": "coredns ndots misconfiguration multiplied lookups.",
+  "category": "network_dns",
+  "resolution": "Fixed ndots; scaled coredns."
+ },
+ {
+  "id": "hist-2026-0612",
+  "date": "2026-06-12",
+  "title": "Document upload broken after kyc-service deploy",
+  "services": [
+   "kyc-service"
+  ],
+  "symptoms": "KYC document uploads failing after release.",
+  "root_cause": "kyc-service deploy changed the upload content type.",
+  "category": "bad_deploy",
+  "resolution": "Rolled back."
+ },
+ {
+  "id": "hist-2026-0805",
+  "date": "2026-08-05",
+  "title": "redis-cache eviction burst",
+  "services": [
+   "redis-cache"
+  ],
+  "symptoms": "Short eviction spikes; no user impact.",
+  "root_cause": "Batch job warmed the cache; harmless.",
+  "category": "unknown",
+  "resolution": "None needed."
+ }
+]

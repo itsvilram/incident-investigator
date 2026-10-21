@@ -1,0 +1,12 @@
+{
+  "id": "INC-02",
+  "title": "Payments stuck in PENDING",
+  "reported_at": "2026-10-03T14:15:00Z",
+  "reporter": "payments on-call (Arjun)",
+  "description": "Since around 14:00 payments are stuck in PENDING and never complete. kyc-service had a deploy at 14:00, maybe related? Please check.",
+  "symptom_services": [
+    "payments-api",
+    "ledger-service"
+  ],
+  "customer_impact": "Payments debit the user but stay PENDING; support tickets rising."
+}
