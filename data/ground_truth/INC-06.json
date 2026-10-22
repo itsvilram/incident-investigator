@@ -47,5 +47,6 @@
   "'logs are clean' because log shipping died, not because the service is healthy",
   "the trigger was deployed the day before, outside the default time window"
  ],
- "explanation": "v3.8.0 (deployed yesterday) leaks memory; pods hit the 2Gi limit and are OOM-killed from 13:42. The log shipper died too, so service logs went silent."
+ "explanation": "v3.8.0 (deployed yesterday) leaks memory; pods hit the 2Gi limit and are OOM-killed from 13:42. The log shipper died too, so service logs went silent.",
+ "split": "dev"
 }

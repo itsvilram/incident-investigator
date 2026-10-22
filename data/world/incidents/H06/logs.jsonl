@@ -1,0 +1,1133 @@
+{"id": "log-00001", "ts": "2026-10-15T12:00:03Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 195 buffers"}
+{"id": "log-00002", "ts": "2026-10-15T12:00:04Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/holdings 200 in 195ms"}
+{"id": "log-00003", "ts": "2026-10-15T12:00:04Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00004", "ts": "2026-10-15T12:00:22Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 32 buffers"}
+{"id": "log-00005", "ts": "2026-10-15T12:00:26Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00006", "ts": "2026-10-15T12:00:34Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/sip 200 in 218ms"}
+{"id": "log-00007", "ts": "2026-10-15T12:00:38Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/profile 200 in 410ms"}
+{"id": "log-00008", "ts": "2026-10-15T12:00:45Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/payments/intent 201 in 445ms"}
+{"id": "log-00009", "ts": "2026-10-15T12:00:49Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00010", "ts": "2026-10-15T12:00:50Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00011", "ts": "2026-10-15T12:00:52Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00012", "ts": "2026-10-15T12:00:54Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/profile 200 in 190ms"}
+{"id": "log-00013", "ts": "2026-10-15T12:01:03Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00014", "ts": "2026-10-15T12:01:04Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00015", "ts": "2026-10-15T12:01:33Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/orders 200 in 264ms"}
+{"id": "log-00016", "ts": "2026-10-15T12:01:47Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00017", "ts": "2026-10-15T12:01:55Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/accounts 200 in 336ms"}
+{"id": "log-00018", "ts": "2026-10-15T12:01:58Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/sip 200 in 38ms"}
+{"id": "log-00019", "ts": "2026-10-15T12:01:59Z", "service": "kubernetes", "level": "INFO", "message": "Pod auth-service-de779 readiness probe ok"}
+{"id": "log-00020", "ts": "2026-10-15T12:01:59Z", "service": "ledger-service", "level": "WARN", "message": "retrying call to ledger-db (attempt 1 of 3)"}
+{"id": "log-00021", "ts": "2026-10-15T12:02:29Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/sip 201 in 260ms"}
+{"id": "log-00022", "ts": "2026-10-15T12:03:02Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00023", "ts": "2026-10-15T12:03:43Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00024", "ts": "2026-10-15T12:03:50Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00025", "ts": "2026-10-15T12:03:55Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/accounts 200 in 436ms"}
+{"id": "log-00026", "ts": "2026-10-15T12:04:05Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00027", "ts": "2026-10-15T12:04:25Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00028", "ts": "2026-10-15T12:04:37Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00029", "ts": "2026-10-15T12:04:38Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/sip 201 in 136ms"}
+{"id": "log-00030", "ts": "2026-10-15T12:04:50Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00031", "ts": "2026-10-15T12:04:51Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00032", "ts": "2026-10-15T12:04:53Z", "service": "upi-gateway", "level": "WARN", "message": "slow request GET /v1/accounts took 1759ms"}
+{"id": "log-00033", "ts": "2026-10-15T12:04:55Z", "service": "market-data-service", "level": "WARN", "message": "retrying call to market-feed (attempt 1 of 3)"}
+{"id": "log-00034", "ts": "2026-10-15T12:05:17Z", "service": "ledger-service", "level": "WARN", "message": "retrying call to ledger-db (attempt 1 of 3)"}
+{"id": "log-00035", "ts": "2026-10-15T12:05:18Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 346ms"}
+{"id": "log-00036", "ts": "2026-10-15T12:05:29Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00037", "ts": "2026-10-15T12:05:30Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/receipts 200 in 63ms"}
+{"id": "log-00038", "ts": "2026-10-15T12:05:50Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment auth-service replicas unchanged"}
+{"id": "log-00039", "ts": "2026-10-15T12:05:59Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00040", "ts": "2026-10-15T12:06:00Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/holdings 200 in 33ms"}
+{"id": "log-00041", "ts": "2026-10-15T12:06:17Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00042", "ts": "2026-10-15T12:06:29Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00043", "ts": "2026-10-15T12:06:47Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/profile 200 in 438ms"}
+{"id": "log-00044", "ts": "2026-10-15T12:06:56Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/holdings 200 in 226ms"}
+{"id": "log-00045", "ts": "2026-10-15T12:07:10Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 889 buffers"}
+{"id": "log-00046", "ts": "2026-10-15T12:07:20Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00047", "ts": "2026-10-15T12:07:27Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00048", "ts": "2026-10-15T12:07:31Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00049", "ts": "2026-10-15T12:07:31Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00050", "ts": "2026-10-15T12:07:56Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/holdings 200 in 39ms"}
+{"id": "log-00051", "ts": "2026-10-15T12:08:14Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/payments/intent 200 in 113ms"}
+{"id": "log-00052", "ts": "2026-10-15T12:08:21Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment portfolio-service replicas unchanged"}
+{"id": "log-00053", "ts": "2026-10-15T12:08:31Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/profile 200 in 134ms"}
+{"id": "log-00054", "ts": "2026-10-15T12:08:32Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/sip 200 in 55ms"}
+{"id": "log-00055", "ts": "2026-10-15T12:08:32Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/orders 200 in 430ms"}
+{"id": "log-00056", "ts": "2026-10-15T12:08:33Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00057", "ts": "2026-10-15T12:08:40Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/profile 200 in 136ms"}
+{"id": "log-00058", "ts": "2026-10-15T12:08:41Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/profile 201 in 228ms"}
+{"id": "log-00059", "ts": "2026-10-15T12:09:07Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00060", "ts": "2026-10-15T12:09:17Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00061", "ts": "2026-10-15T12:09:22Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00062", "ts": "2026-10-15T12:09:33Z", "service": "auth-service", "level": "WARN", "message": "slow request GET /v1/sip took 2143ms"}
+{"id": "log-00063", "ts": "2026-10-15T12:10:21Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/sip 200 in 123ms"}
+{"id": "log-00064", "ts": "2026-10-15T12:10:24Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00065", "ts": "2026-10-15T12:10:40Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/payments/intent 200 in 101ms"}
+{"id": "log-00066", "ts": "2026-10-15T12:10:45Z", "service": "orders-service", "level": "WARN", "message": "retrying call to portfolio-db (attempt 1 of 3)"}
+{"id": "log-00067", "ts": "2026-10-15T12:10:45Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00068", "ts": "2026-10-15T12:10:59Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 277 buffers"}
+{"id": "log-00069", "ts": "2026-10-15T12:11:13Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/profile 200 in 62ms"}
+{"id": "log-00070", "ts": "2026-10-15T12:11:14Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00071", "ts": "2026-10-15T12:11:15Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00072", "ts": "2026-10-15T12:11:16Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00073", "ts": "2026-10-15T12:11:33Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00074", "ts": "2026-10-15T12:11:41Z", "service": "kubernetes", "level": "INFO", "message": "Pod auth-service-eef07 readiness probe ok"}
+{"id": "log-00075", "ts": "2026-10-15T12:11:44Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00076", "ts": "2026-10-15T12:11:51Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/accounts 200 in 152ms"}
+{"id": "log-00077", "ts": "2026-10-15T12:12:04Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/accounts 201 in 176ms"}
+{"id": "log-00078", "ts": "2026-10-15T12:12:30Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00079", "ts": "2026-10-15T12:12:40Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 449ms"}
+{"id": "log-00080", "ts": "2026-10-15T12:12:47Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/accounts 200 in 269ms"}
+{"id": "log-00081", "ts": "2026-10-15T12:12:52Z", "service": "auth-service", "level": "WARN", "message": "retrying call to otp-provider (attempt 1 of 3)"}
+{"id": "log-00082", "ts": "2026-10-15T12:12:58Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/orders 200 in 375ms"}
+{"id": "log-00083", "ts": "2026-10-15T12:13:10Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 514 buffers"}
+{"id": "log-00084", "ts": "2026-10-15T12:13:11Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00085", "ts": "2026-10-15T12:13:17Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/sip 200 in 308ms"}
+{"id": "log-00086", "ts": "2026-10-15T12:13:19Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00087", "ts": "2026-10-15T12:13:22Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00088", "ts": "2026-10-15T12:13:32Z", "service": "market-data-service", "level": "WARN", "message": "retrying call to market-feed (attempt 1 of 3)"}
+{"id": "log-00089", "ts": "2026-10-15T12:13:54Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00090", "ts": "2026-10-15T12:13:59Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/sip 201 in 124ms"}
+{"id": "log-00091", "ts": "2026-10-15T12:14:13Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00092", "ts": "2026-10-15T12:14:13Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00093", "ts": "2026-10-15T12:14:22Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/holdings 200 in 357ms"}
+{"id": "log-00094", "ts": "2026-10-15T12:14:24Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 585 buffers"}
+{"id": "log-00095", "ts": "2026-10-15T12:14:55Z", "service": "kubernetes", "level": "INFO", "message": "Pod notification-service-00cf8 readiness probe ok"}
+{"id": "log-00096", "ts": "2026-10-15T12:15:03Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00097", "ts": "2026-10-15T12:15:05Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00098", "ts": "2026-10-15T12:15:19Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/sip 200 in 79ms"}
+{"id": "log-00099", "ts": "2026-10-15T12:15:24Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 251ms"}
+{"id": "log-00100", "ts": "2026-10-15T12:15:29Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/profile 201 in 43ms"}
+{"id": "log-00101", "ts": "2026-10-15T12:15:39Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 839 buffers"}
+{"id": "log-00102", "ts": "2026-10-15T12:15:48Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 422ms"}
+{"id": "log-00103", "ts": "2026-10-15T12:15:48Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00104", "ts": "2026-10-15T12:16:07Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00105", "ts": "2026-10-15T12:16:21Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/sip 201 in 336ms"}
+{"id": "log-00106", "ts": "2026-10-15T12:16:26Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/profile 200 in 246ms"}
+{"id": "log-00107", "ts": "2026-10-15T12:16:27Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00108", "ts": "2026-10-15T12:16:46Z", "service": "payments-api", "level": "WARN", "message": "retrying call to redis-cache (attempt 1 of 3)"}
+{"id": "log-00109", "ts": "2026-10-15T12:17:07Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00110", "ts": "2026-10-15T12:17:11Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/accounts 200 in 144ms"}
+{"id": "log-00111", "ts": "2026-10-15T12:17:11Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/accounts 201 in 386ms"}
+{"id": "log-00112", "ts": "2026-10-15T12:17:14Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 823 buffers"}
+{"id": "log-00113", "ts": "2026-10-15T12:17:31Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/profile 201 in 426ms"}
+{"id": "log-00114", "ts": "2026-10-15T12:17:36Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment fraud-service replicas unchanged"}
+{"id": "log-00115", "ts": "2026-10-15T12:17:39Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/accounts 200 in 159ms"}
+{"id": "log-00116", "ts": "2026-10-15T12:17:50Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00117", "ts": "2026-10-15T12:18:07Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/holdings 200 in 231ms"}
+{"id": "log-00118", "ts": "2026-10-15T12:18:12Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00119", "ts": "2026-10-15T12:18:20Z", "service": "mobile-bff", "level": "WARN", "message": "retrying call to kyc-service (attempt 1 of 3)"}
+{"id": "log-00120", "ts": "2026-10-15T12:18:30Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/accounts 200 in 240ms"}
+{"id": "log-00121", "ts": "2026-10-15T12:18:32Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00122", "ts": "2026-10-15T12:18:37Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 311 buffers"}
+{"id": "log-00123", "ts": "2026-10-15T12:18:44Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00124", "ts": "2026-10-15T12:18:54Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00125", "ts": "2026-10-15T12:19:08Z", "service": "auth-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00126", "ts": "2026-10-15T12:19:26Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00127", "ts": "2026-10-15T12:19:30Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00128", "ts": "2026-10-15T12:19:56Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/payments/intent 200 in 187ms"}
+{"id": "log-00129", "ts": "2026-10-15T12:20:00Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00130", "ts": "2026-10-15T12:20:08Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00131", "ts": "2026-10-15T12:20:13Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00132", "ts": "2026-10-15T12:20:16Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/sip 201 in 250ms"}
+{"id": "log-00133", "ts": "2026-10-15T12:20:53Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 292ms"}
+{"id": "log-00134", "ts": "2026-10-15T12:20:55Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00135", "ts": "2026-10-15T12:21:12Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00136", "ts": "2026-10-15T12:21:24Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00137", "ts": "2026-10-15T12:21:35Z", "service": "mobile-bff", "level": "WARN", "message": "retrying call to orders-service (attempt 1 of 3)"}
+{"id": "log-00138", "ts": "2026-10-15T12:21:43Z", "service": "kubernetes", "level": "INFO", "message": "Pod market-data-service-ee83d readiness probe ok"}
+{"id": "log-00139", "ts": "2026-10-15T12:21:54Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/accounts 200 in 127ms"}
+{"id": "log-00140", "ts": "2026-10-15T12:21:57Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/sip 201 in 173ms"}
+{"id": "log-00141", "ts": "2026-10-15T12:21:59Z", "service": "aa-connector", "level": "WARN", "message": "slow request GET /v1/orders took 2237ms"}
+{"id": "log-00142", "ts": "2026-10-15T12:22:05Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/profile 201 in 102ms"}
+{"id": "log-00143", "ts": "2026-10-15T12:22:10Z", "service": "payments-api", "level": "WARN", "message": "slow request GET /v1/receipts took 1968ms"}
+{"id": "log-00144", "ts": "2026-10-15T12:22:11Z", "service": "market-data-service", "level": "WARN", "message": "retrying call to market-feed (attempt 1 of 3)"}
+{"id": "log-00145", "ts": "2026-10-15T12:22:14Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 250ms"}
+{"id": "log-00146", "ts": "2026-10-15T12:22:29Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00147", "ts": "2026-10-15T12:22:39Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00148", "ts": "2026-10-15T12:22:57Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/accounts 200 in 339ms"}
+{"id": "log-00149", "ts": "2026-10-15T12:23:20Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/payments/intent 200 in 448ms"}
+{"id": "log-00150", "ts": "2026-10-15T12:23:24Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00151", "ts": "2026-10-15T12:23:49Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 50 buffers"}
+{"id": "log-00152", "ts": "2026-10-15T12:24:08Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/receipts 200 in 284ms"}
+{"id": "log-00153", "ts": "2026-10-15T12:24:14Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00154", "ts": "2026-10-15T12:24:16Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00155", "ts": "2026-10-15T12:24:18Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00156", "ts": "2026-10-15T12:24:27Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/profile 200 in 116ms"}
+{"id": "log-00157", "ts": "2026-10-15T12:24:46Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00158", "ts": "2026-10-15T12:24:58Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/orders 201 in 285ms"}
+{"id": "log-00159", "ts": "2026-10-15T12:25:02Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/sip 201 in 292ms"}
+{"id": "log-00160", "ts": "2026-10-15T12:25:05Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00161", "ts": "2026-10-15T12:25:05Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/profile 200 in 446ms"}
+{"id": "log-00162", "ts": "2026-10-15T12:25:11Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00163", "ts": "2026-10-15T12:25:19Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/profile 200 in 241ms"}
+{"id": "log-00164", "ts": "2026-10-15T12:25:24Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00165", "ts": "2026-10-15T12:25:40Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00166", "ts": "2026-10-15T12:25:47Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/holdings 200 in 280ms"}
+{"id": "log-00167", "ts": "2026-10-15T12:25:51Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment auth-service replicas unchanged"}
+{"id": "log-00168", "ts": "2026-10-15T12:26:06Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/holdings 201 in 344ms"}
+{"id": "log-00169", "ts": "2026-10-15T12:26:11Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 46ms"}
+{"id": "log-00170", "ts": "2026-10-15T12:26:30Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/holdings 200 in 195ms"}
+{"id": "log-00171", "ts": "2026-10-15T12:26:30Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00172", "ts": "2026-10-15T12:27:10Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/holdings 200 in 149ms"}
+{"id": "log-00173", "ts": "2026-10-15T12:27:20Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00174", "ts": "2026-10-15T12:27:28Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/accounts 200 in 198ms"}
+{"id": "log-00175", "ts": "2026-10-15T12:27:33Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 623 buffers"}
+{"id": "log-00176", "ts": "2026-10-15T12:27:48Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/sip 200 in 317ms"}
+{"id": "log-00177", "ts": "2026-10-15T12:28:04Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00178", "ts": "2026-10-15T12:28:10Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00179", "ts": "2026-10-15T12:28:16Z", "service": "auth-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00180", "ts": "2026-10-15T12:28:20Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/orders 200 in 377ms"}
+{"id": "log-00181", "ts": "2026-10-15T12:28:27Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/holdings 200 in 119ms"}
+{"id": "log-00182", "ts": "2026-10-15T12:28:37Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/receipts 200 in 443ms"}
+{"id": "log-00183", "ts": "2026-10-15T12:28:44Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00184", "ts": "2026-10-15T12:28:53Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00185", "ts": "2026-10-15T12:28:58Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/holdings 200 in 144ms"}
+{"id": "log-00186", "ts": "2026-10-15T12:29:02Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00187", "ts": "2026-10-15T12:29:04Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00188", "ts": "2026-10-15T12:29:09Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00189", "ts": "2026-10-15T12:29:43Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00190", "ts": "2026-10-15T12:29:48Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/receipts 200 in 352ms"}
+{"id": "log-00191", "ts": "2026-10-15T12:29:50Z", "service": "notification-service", "level": "WARN", "message": "retrying call to event-bus (attempt 1 of 3)"}
+{"id": "log-00192", "ts": "2026-10-15T12:29:54Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment notification-service replicas unchanged"}
+{"id": "log-00193", "ts": "2026-10-15T12:29:57Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/accounts 200 in 35ms"}
+{"id": "log-00194", "ts": "2026-10-15T12:30:01Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/profile 200 in 28ms"}
+{"id": "log-00195", "ts": "2026-10-15T12:30:02Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00196", "ts": "2026-10-15T12:30:05Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00197", "ts": "2026-10-15T12:30:08Z", "service": "ledger-service", "level": "WARN", "message": "slow request GET /v1/orders took 1430ms"}
+{"id": "log-00198", "ts": "2026-10-15T12:30:17Z", "service": "upi-gateway", "level": "WARN", "message": "slow request GET /v1/accounts took 1621ms"}
+{"id": "log-00199", "ts": "2026-10-15T12:30:28Z", "service": "auth-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00200", "ts": "2026-10-15T12:30:33Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00201", "ts": "2026-10-15T12:30:40Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/accounts 201 in 277ms"}
+{"id": "log-00202", "ts": "2026-10-15T12:30:59Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00203", "ts": "2026-10-15T12:31:03Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00204", "ts": "2026-10-15T12:31:25Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00205", "ts": "2026-10-15T12:31:42Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/receipts 201 in 229ms"}
+{"id": "log-00206", "ts": "2026-10-15T12:31:45Z", "service": "orders-service", "level": "WARN", "message": "retrying call to broker-api (attempt 1 of 3)"}
+{"id": "log-00207", "ts": "2026-10-15T12:31:57Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/orders 201 in 228ms"}
+{"id": "log-00208", "ts": "2026-10-15T12:32:27Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00209", "ts": "2026-10-15T12:32:47Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/holdings 200 in 243ms"}
+{"id": "log-00210", "ts": "2026-10-15T12:32:50Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00211", "ts": "2026-10-15T12:32:55Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/accounts 201 in 54ms"}
+{"id": "log-00212", "ts": "2026-10-15T12:32:57Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00213", "ts": "2026-10-15T12:33:00Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00214", "ts": "2026-10-15T12:33:11Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/accounts 200 in 218ms"}
+{"id": "log-00215", "ts": "2026-10-15T12:33:21Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/payments/intent 200 in 94ms"}
+{"id": "log-00216", "ts": "2026-10-15T12:33:37Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/receipts 201 in 387ms"}
+{"id": "log-00217", "ts": "2026-10-15T12:33:41Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00218", "ts": "2026-10-15T12:33:45Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 76 buffers"}
+{"id": "log-00219", "ts": "2026-10-15T12:33:46Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment aa-connector replicas unchanged"}
+{"id": "log-00220", "ts": "2026-10-15T12:33:46Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00221", "ts": "2026-10-15T12:34:09Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00222", "ts": "2026-10-15T12:34:29Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00223", "ts": "2026-10-15T12:34:46Z", "service": "orders-service", "level": "WARN", "message": "retrying call to broker-api (attempt 1 of 3)"}
+{"id": "log-00224", "ts": "2026-10-15T12:34:48Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/orders 200 in 287ms"}
+{"id": "log-00225", "ts": "2026-10-15T12:34:52Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/receipts 201 in 222ms"}
+{"id": "log-00226", "ts": "2026-10-15T12:35:00Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00227", "ts": "2026-10-15T12:35:03Z", "service": "auth-service", "level": "WARN", "message": "retrying call to otp-provider (attempt 1 of 3)"}
+{"id": "log-00228", "ts": "2026-10-15T12:35:15Z", "service": "upi-gateway", "level": "WARN", "message": "retrying call to npci-switch (attempt 1 of 3)"}
+{"id": "log-00229", "ts": "2026-10-15T12:35:34Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00230", "ts": "2026-10-15T12:35:42Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00231", "ts": "2026-10-15T12:35:58Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00232", "ts": "2026-10-15T12:35:59Z", "service": "ledger-service", "level": "WARN", "message": "retrying call to ledger-db (attempt 1 of 3)"}
+{"id": "log-00233", "ts": "2026-10-15T12:36:05Z", "service": "kubernetes", "level": "INFO", "message": "Pod payments-api-8aa62 readiness probe ok"}
+{"id": "log-00234", "ts": "2026-10-15T12:36:06Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00235", "ts": "2026-10-15T12:36:10Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/orders 200 in 176ms"}
+{"id": "log-00236", "ts": "2026-10-15T12:36:30Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 384 buffers"}
+{"id": "log-00237", "ts": "2026-10-15T12:36:36Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/profile 200 in 38ms"}
+{"id": "log-00238", "ts": "2026-10-15T12:36:42Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00239", "ts": "2026-10-15T12:36:50Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00240", "ts": "2026-10-15T12:36:52Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/holdings 200 in 275ms"}
+{"id": "log-00241", "ts": "2026-10-15T12:37:05Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00242", "ts": "2026-10-15T12:37:07Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/receipts 200 in 360ms"}
+{"id": "log-00243", "ts": "2026-10-15T12:37:27Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00244", "ts": "2026-10-15T12:37:40Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/profile 200 in 393ms"}
+{"id": "log-00245", "ts": "2026-10-15T12:37:44Z", "service": "kubernetes", "level": "INFO", "message": "Pod upi-gateway-2940e readiness probe ok"}
+{"id": "log-00246", "ts": "2026-10-15T12:38:01Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/sip 200 in 342ms"}
+{"id": "log-00247", "ts": "2026-10-15T12:38:38Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/profile 200 in 414ms"}
+{"id": "log-00248", "ts": "2026-10-15T12:38:39Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/sip 200 in 316ms"}
+{"id": "log-00249", "ts": "2026-10-15T12:38:43Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/receipts 200 in 255ms"}
+{"id": "log-00250", "ts": "2026-10-15T12:38:43Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 290 buffers"}
+{"id": "log-00251", "ts": "2026-10-15T12:38:45Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00252", "ts": "2026-10-15T12:38:51Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/receipts 200 in 39ms"}
+{"id": "log-00253", "ts": "2026-10-15T12:38:56Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/sip 200 in 354ms"}
+{"id": "log-00254", "ts": "2026-10-15T12:38:58Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00255", "ts": "2026-10-15T12:39:08Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 520 buffers"}
+{"id": "log-00256", "ts": "2026-10-15T12:39:12Z", "service": "auth-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00257", "ts": "2026-10-15T12:39:19Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/sip 200 in 146ms"}
+{"id": "log-00258", "ts": "2026-10-15T12:39:43Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/accounts 201 in 29ms"}
+{"id": "log-00259", "ts": "2026-10-15T12:39:51Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00260", "ts": "2026-10-15T12:39:53Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00261", "ts": "2026-10-15T12:39:54Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00262", "ts": "2026-10-15T12:39:58Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/profile 200 in 256ms"}
+{"id": "log-00263", "ts": "2026-10-15T12:40:20Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/receipts 200 in 273ms"}
+{"id": "log-00264", "ts": "2026-10-15T12:40:20Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/holdings 201 in 332ms"}
+{"id": "log-00265", "ts": "2026-10-15T12:40:21Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 543 buffers"}
+{"id": "log-00266", "ts": "2026-10-15T12:40:46Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00267", "ts": "2026-10-15T12:40:47Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment orders-service replicas unchanged"}
+{"id": "log-00268", "ts": "2026-10-15T12:41:00Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/sip 201 in 206ms"}
+{"id": "log-00269", "ts": "2026-10-15T12:41:22Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00270", "ts": "2026-10-15T12:41:29Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/holdings 200 in 377ms"}
+{"id": "log-00271", "ts": "2026-10-15T12:42:13Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00272", "ts": "2026-10-15T12:42:26Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 472 buffers"}
+{"id": "log-00273", "ts": "2026-10-15T12:42:26Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 166ms"}
+{"id": "log-00274", "ts": "2026-10-15T12:42:27Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00275", "ts": "2026-10-15T12:42:49Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00276", "ts": "2026-10-15T12:42:53Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/holdings 200 in 286ms"}
+{"id": "log-00277", "ts": "2026-10-15T12:43:01Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/profile 200 in 144ms"}
+{"id": "log-00278", "ts": "2026-10-15T12:43:08Z", "service": "kyc-service", "level": "WARN", "message": "slow request GET /v1/receipts took 1132ms"}
+{"id": "log-00279", "ts": "2026-10-15T12:43:09Z", "service": "ledger-service", "level": "WARN", "message": "retrying call to ledger-db (attempt 1 of 3)"}
+{"id": "log-00280", "ts": "2026-10-15T12:43:24Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/accounts 201 in 17ms"}
+{"id": "log-00281", "ts": "2026-10-15T12:43:39Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00282", "ts": "2026-10-15T12:43:52Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00283", "ts": "2026-10-15T12:43:53Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/payments/intent 201 in 397ms"}
+{"id": "log-00284", "ts": "2026-10-15T12:44:09Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/receipts 200 in 410ms"}
+{"id": "log-00285", "ts": "2026-10-15T12:44:27Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment notification-service replicas unchanged"}
+{"id": "log-00286", "ts": "2026-10-15T12:44:33Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00287", "ts": "2026-10-15T12:44:36Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/orders 200 in 227ms"}
+{"id": "log-00288", "ts": "2026-10-15T12:44:43Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00289", "ts": "2026-10-15T12:44:49Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00290", "ts": "2026-10-15T12:44:54Z", "service": "fraud-service", "level": "WARN", "message": "retrying call to redis-cache (attempt 1 of 3)"}
+{"id": "log-00291", "ts": "2026-10-15T12:44:56Z", "service": "orders-service", "level": "WARN", "message": "slow request GET /v1/accounts took 1358ms"}
+{"id": "log-00292", "ts": "2026-10-15T12:45:02Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/receipts 201 in 134ms"}
+{"id": "log-00293", "ts": "2026-10-15T12:45:22Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/receipts 200 in 157ms"}
+{"id": "log-00294", "ts": "2026-10-15T12:45:29Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00295", "ts": "2026-10-15T12:45:45Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 679 buffers"}
+{"id": "log-00296", "ts": "2026-10-15T12:45:56Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/accounts 200 in 154ms"}
+{"id": "log-00297", "ts": "2026-10-15T12:46:03Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/accounts 201 in 88ms"}
+{"id": "log-00298", "ts": "2026-10-15T12:46:14Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00299", "ts": "2026-10-15T12:46:33Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00300", "ts": "2026-10-15T12:46:36Z", "service": "mobile-bff", "level": "WARN", "message": "slow request GET /v1/sip took 1917ms"}
+{"id": "log-00301", "ts": "2026-10-15T12:46:43Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/orders 201 in 33ms"}
+{"id": "log-00302", "ts": "2026-10-15T12:46:49Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/receipts 200 in 98ms"}
+{"id": "log-00303", "ts": "2026-10-15T12:47:06Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00304", "ts": "2026-10-15T12:47:22Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 797 buffers"}
+{"id": "log-00305", "ts": "2026-10-15T12:47:27Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/holdings 200 in 167ms"}
+{"id": "log-00306", "ts": "2026-10-15T12:48:02Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00307", "ts": "2026-10-15T12:48:09Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 94ms"}
+{"id": "log-00308", "ts": "2026-10-15T12:48:17Z", "service": "kubernetes", "level": "INFO", "message": "Pod payments-api-ce984 readiness probe ok"}
+{"id": "log-00309", "ts": "2026-10-15T12:48:19Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/holdings 201 in 159ms"}
+{"id": "log-00310", "ts": "2026-10-15T12:48:42Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/holdings 200 in 201ms"}
+{"id": "log-00311", "ts": "2026-10-15T12:48:43Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00312", "ts": "2026-10-15T12:48:47Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00313", "ts": "2026-10-15T12:49:05Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 394 buffers"}
+{"id": "log-00314", "ts": "2026-10-15T12:49:23Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 468 buffers"}
+{"id": "log-00315", "ts": "2026-10-15T12:49:26Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/orders 200 in 371ms"}
+{"id": "log-00316", "ts": "2026-10-15T12:49:28Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00317", "ts": "2026-10-15T12:49:38Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00318", "ts": "2026-10-15T12:49:45Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/holdings 200 in 73ms"}
+{"id": "log-00319", "ts": "2026-10-15T12:50:21Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00320", "ts": "2026-10-15T12:50:27Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00321", "ts": "2026-10-15T12:50:40Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00322", "ts": "2026-10-15T12:50:45Z", "service": "auth-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00323", "ts": "2026-10-15T12:50:49Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment fraud-service replicas unchanged"}
+{"id": "log-00324", "ts": "2026-10-15T12:50:51Z", "service": "kyc-service", "level": "WARN", "message": "slow request GET /v1/receipts took 1154ms"}
+{"id": "log-00325", "ts": "2026-10-15T12:51:04Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/receipts 200 in 128ms"}
+{"id": "log-00326", "ts": "2026-10-15T12:51:17Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00327", "ts": "2026-10-15T12:51:23Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/sip 200 in 335ms"}
+{"id": "log-00328", "ts": "2026-10-15T12:51:36Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/holdings 200 in 404ms"}
+{"id": "log-00329", "ts": "2026-10-15T12:51:39Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00330", "ts": "2026-10-15T12:51:41Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00331", "ts": "2026-10-15T12:51:51Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00332", "ts": "2026-10-15T12:51:55Z", "service": "aa-connector", "level": "WARN", "message": "slow request GET /v1/receipts took 1264ms"}
+{"id": "log-00333", "ts": "2026-10-15T12:52:18Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/receipts 201 in 68ms"}
+{"id": "log-00334", "ts": "2026-10-15T12:52:25Z", "service": "portfolio-service", "level": "WARN", "message": "slow request GET /v1/accounts took 1661ms"}
+{"id": "log-00335", "ts": "2026-10-15T12:52:30Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 586 buffers"}
+{"id": "log-00336", "ts": "2026-10-15T12:52:55Z", "service": "auth-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00337", "ts": "2026-10-15T12:52:57Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00338", "ts": "2026-10-15T12:53:03Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/orders 200 in 137ms"}
+{"id": "log-00339", "ts": "2026-10-15T12:53:07Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00340", "ts": "2026-10-15T12:53:30Z", "service": "ledger-service", "level": "WARN", "message": "slow request GET /v1/holdings took 1710ms"}
+{"id": "log-00341", "ts": "2026-10-15T12:53:34Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/accounts 200 in 259ms"}
+{"id": "log-00342", "ts": "2026-10-15T12:53:45Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment kyc-service replicas unchanged"}
+{"id": "log-00343", "ts": "2026-10-15T12:54:00Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00344", "ts": "2026-10-15T12:54:05Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00345", "ts": "2026-10-15T12:54:08Z", "service": "market-data-service", "level": "WARN", "message": "slow request GET /v1/profile took 1143ms"}
+{"id": "log-00346", "ts": "2026-10-15T12:54:10Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00347", "ts": "2026-10-15T12:54:11Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00348", "ts": "2026-10-15T12:54:28Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00349", "ts": "2026-10-15T12:54:40Z", "service": "payments-api", "level": "WARN", "message": "retrying call to event-bus (attempt 1 of 3)"}
+{"id": "log-00350", "ts": "2026-10-15T12:55:15Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00351", "ts": "2026-10-15T12:55:23Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/receipts 200 in 372ms"}
+{"id": "log-00352", "ts": "2026-10-15T12:55:49Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 294ms"}
+{"id": "log-00353", "ts": "2026-10-15T12:55:54Z", "service": "aa-connector", "level": "WARN", "message": "retrying call to aa-fiu-gateway (attempt 1 of 3)"}
+{"id": "log-00354", "ts": "2026-10-15T12:55:55Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/sip 200 in 225ms"}
+{"id": "log-00355", "ts": "2026-10-15T12:55:55Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/receipts 201 in 227ms"}
+{"id": "log-00356", "ts": "2026-10-15T12:56:04Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment aa-connector replicas unchanged"}
+{"id": "log-00357", "ts": "2026-10-15T12:56:06Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00358", "ts": "2026-10-15T12:56:08Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00359", "ts": "2026-10-15T12:56:15Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00360", "ts": "2026-10-15T12:56:23Z", "service": "orders-service", "level": "WARN", "message": "retrying call to portfolio-db (attempt 1 of 3)"}
+{"id": "log-00361", "ts": "2026-10-15T12:56:44Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/receipts 201 in 157ms"}
+{"id": "log-00362", "ts": "2026-10-15T12:56:45Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 216 buffers"}
+{"id": "log-00363", "ts": "2026-10-15T12:56:53Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/profile 201 in 142ms"}
+{"id": "log-00364", "ts": "2026-10-15T12:57:22Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00365", "ts": "2026-10-15T12:57:34Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/holdings 200 in 214ms"}
+{"id": "log-00366", "ts": "2026-10-15T12:57:42Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00367", "ts": "2026-10-15T12:58:01Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00368", "ts": "2026-10-15T12:58:05Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/receipts 201 in 344ms"}
+{"id": "log-00369", "ts": "2026-10-15T12:58:11Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/accounts 200 in 26ms"}
+{"id": "log-00370", "ts": "2026-10-15T12:58:13Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00371", "ts": "2026-10-15T12:58:27Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 511 buffers"}
+{"id": "log-00372", "ts": "2026-10-15T12:58:32Z", "service": "payments-api", "level": "WARN", "message": "slow request GET /v1/profile took 2490ms"}
+{"id": "log-00373", "ts": "2026-10-15T12:59:12Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00374", "ts": "2026-10-15T12:59:14Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00375", "ts": "2026-10-15T12:59:21Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/receipts 200 in 335ms"}
+{"id": "log-00376", "ts": "2026-10-15T12:59:22Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00377", "ts": "2026-10-15T12:59:25Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/payments/intent 200 in 162ms"}
+{"id": "log-00378", "ts": "2026-10-15T12:59:27Z", "service": "kubernetes", "level": "INFO", "message": "Pod portfolio-service-09142 readiness probe ok"}
+{"id": "log-00379", "ts": "2026-10-15T12:59:44Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/orders 201 in 157ms"}
+{"id": "log-00380", "ts": "2026-10-15T13:00:02Z", "service": "upi-gateway", "level": "WARN", "message": "retrying call to npci-switch (attempt 1 of 3)"}
+{"id": "log-00381", "ts": "2026-10-15T13:00:11Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/sip 201 in 363ms"}
+{"id": "log-00382", "ts": "2026-10-15T13:00:17Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 29ms"}
+{"id": "log-00383", "ts": "2026-10-15T13:00:18Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00384", "ts": "2026-10-15T13:00:29Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/receipts 200 in 371ms"}
+{"id": "log-00385", "ts": "2026-10-15T13:00:58Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/payments/intent 201 in 63ms"}
+{"id": "log-00386", "ts": "2026-10-15T13:01:00Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/holdings 200 in 380ms"}
+{"id": "log-00387", "ts": "2026-10-15T13:01:16Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00388", "ts": "2026-10-15T13:01:23Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/profile 200 in 120ms"}
+{"id": "log-00389", "ts": "2026-10-15T13:01:25Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/sip 200 in 294ms"}
+{"id": "log-00390", "ts": "2026-10-15T13:01:35Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00391", "ts": "2026-10-15T13:01:36Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00392", "ts": "2026-10-15T13:01:37Z", "service": "kubernetes", "level": "INFO", "message": "Pod aa-connector-f9f20 readiness probe ok"}
+{"id": "log-00393", "ts": "2026-10-15T13:01:39Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00394", "ts": "2026-10-15T13:01:51Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00395", "ts": "2026-10-15T13:01:57Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00396", "ts": "2026-10-15T13:02:38Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00397", "ts": "2026-10-15T13:02:55Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/sip 201 in 407ms"}
+{"id": "log-00398", "ts": "2026-10-15T13:03:03Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/profile 200 in 147ms"}
+{"id": "log-00399", "ts": "2026-10-15T13:03:08Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 393ms"}
+{"id": "log-00400", "ts": "2026-10-15T13:03:28Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/accounts 200 in 411ms"}
+{"id": "log-00401", "ts": "2026-10-15T13:03:33Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00402", "ts": "2026-10-15T13:03:47Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 420ms"}
+{"id": "log-00403", "ts": "2026-10-15T13:03:59Z", "service": "kubernetes", "level": "INFO", "message": "Pod payments-api-b4576 readiness probe ok"}
+{"id": "log-00404", "ts": "2026-10-15T13:04:17Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00405", "ts": "2026-10-15T13:04:17Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00406", "ts": "2026-10-15T13:04:21Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/receipts 201 in 182ms"}
+{"id": "log-00407", "ts": "2026-10-15T13:04:28Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/receipts 200 in 37ms"}
+{"id": "log-00408", "ts": "2026-10-15T13:04:32Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00409", "ts": "2026-10-15T13:04:40Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/profile 201 in 265ms"}
+{"id": "log-00410", "ts": "2026-10-15T13:04:51Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00411", "ts": "2026-10-15T13:04:52Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/receipts 200 in 271ms"}
+{"id": "log-00412", "ts": "2026-10-15T13:04:52Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/accounts 200 in 275ms"}
+{"id": "log-00413", "ts": "2026-10-15T13:04:54Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00414", "ts": "2026-10-15T13:05:02Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/sip 200 in 350ms"}
+{"id": "log-00415", "ts": "2026-10-15T13:05:12Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00416", "ts": "2026-10-15T13:05:31Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00417", "ts": "2026-10-15T13:05:43Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/holdings 201 in 365ms"}
+{"id": "log-00418", "ts": "2026-10-15T13:05:52Z", "service": "kyc-service", "level": "WARN", "message": "slow request GET /v1/orders took 1246ms"}
+{"id": "log-00419", "ts": "2026-10-15T13:06:20Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 803 buffers"}
+{"id": "log-00420", "ts": "2026-10-15T13:06:35Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/sip 200 in 239ms"}
+{"id": "log-00421", "ts": "2026-10-15T13:06:53Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00422", "ts": "2026-10-15T13:07:20Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00423", "ts": "2026-10-15T13:07:21Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/profile 201 in 113ms"}
+{"id": "log-00424", "ts": "2026-10-15T13:07:22Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00425", "ts": "2026-10-15T13:07:37Z", "service": "upi-gateway", "level": "WARN", "message": "retrying call to npci-switch (attempt 1 of 3)"}
+{"id": "log-00426", "ts": "2026-10-15T13:07:43Z", "service": "ledger-service", "level": "WARN", "message": "retrying call to ledger-db (attempt 1 of 3)"}
+{"id": "log-00427", "ts": "2026-10-15T13:07:47Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/holdings 201 in 228ms"}
+{"id": "log-00428", "ts": "2026-10-15T13:07:50Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/receipts 200 in 201ms"}
+{"id": "log-00429", "ts": "2026-10-15T13:08:02Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/payments/intent 200 in 131ms"}
+{"id": "log-00430", "ts": "2026-10-15T13:08:04Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment orders-service replicas unchanged"}
+{"id": "log-00431", "ts": "2026-10-15T13:08:11Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/orders 200 in 185ms"}
+{"id": "log-00432", "ts": "2026-10-15T13:08:28Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 651 buffers"}
+{"id": "log-00433", "ts": "2026-10-15T13:08:55Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/profile 200 in 124ms"}
+{"id": "log-00434", "ts": "2026-10-15T13:09:11Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/sip 200 in 22ms"}
+{"id": "log-00435", "ts": "2026-10-15T13:09:15Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/sip 200 in 331ms"}
+{"id": "log-00436", "ts": "2026-10-15T13:09:15Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00437", "ts": "2026-10-15T13:09:17Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00438", "ts": "2026-10-15T13:09:27Z", "service": "kyc-service", "level": "WARN", "message": "slow request GET /v1/orders took 1211ms"}
+{"id": "log-00439", "ts": "2026-10-15T13:09:43Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/payments/intent 201 in 149ms"}
+{"id": "log-00440", "ts": "2026-10-15T13:09:54Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/orders 200 in 312ms"}
+{"id": "log-00441", "ts": "2026-10-15T13:10:02Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/receipts 200 in 341ms"}
+{"id": "log-00442", "ts": "2026-10-15T13:10:15Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/orders 200 in 298ms"}
+{"id": "log-00443", "ts": "2026-10-15T13:10:29Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00444", "ts": "2026-10-15T13:10:30Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/payments/intent 200 in 204ms"}
+{"id": "log-00445", "ts": "2026-10-15T13:10:51Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/orders 201 in 325ms"}
+{"id": "log-00446", "ts": "2026-10-15T13:10:52Z", "service": "auth-service", "level": "WARN", "message": "retrying call to user-db (attempt 1 of 3)"}
+{"id": "log-00447", "ts": "2026-10-15T13:10:54Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00448", "ts": "2026-10-15T13:11:06Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment aa-connector replicas unchanged"}
+{"id": "log-00449", "ts": "2026-10-15T13:11:11Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/orders 201 in 126ms"}
+{"id": "log-00450", "ts": "2026-10-15T13:11:17Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00451", "ts": "2026-10-15T13:11:18Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00452", "ts": "2026-10-15T13:11:29Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/profile 201 in 246ms"}
+{"id": "log-00453", "ts": "2026-10-15T13:11:31Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/accounts 200 in 388ms"}
+{"id": "log-00454", "ts": "2026-10-15T13:11:49Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/sip 200 in 174ms"}
+{"id": "log-00455", "ts": "2026-10-15T13:11:55Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00456", "ts": "2026-10-15T13:12:20Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 437ms"}
+{"id": "log-00457", "ts": "2026-10-15T13:12:31Z", "service": "auth-service", "level": "WARN", "message": "slow request GET /v1/orders took 1560ms"}
+{"id": "log-00458", "ts": "2026-10-15T13:12:45Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/sip 200 in 312ms"}
+{"id": "log-00459", "ts": "2026-10-15T13:12:48Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00460", "ts": "2026-10-15T13:12:54Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 92ms"}
+{"id": "log-00461", "ts": "2026-10-15T13:12:55Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00462", "ts": "2026-10-15T13:12:55Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/accounts 201 in 343ms"}
+{"id": "log-00463", "ts": "2026-10-15T13:13:05Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/sip 200 in 132ms"}
+{"id": "log-00464", "ts": "2026-10-15T13:13:23Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00465", "ts": "2026-10-15T13:13:31Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment portfolio-service replicas unchanged"}
+{"id": "log-00466", "ts": "2026-10-15T13:13:43Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00467", "ts": "2026-10-15T13:14:02Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/sip 200 in 319ms"}
+{"id": "log-00468", "ts": "2026-10-15T13:14:21Z", "service": "aa-connector", "level": "WARN", "message": "retrying call to aa-fiu-gateway (attempt 1 of 3)"}
+{"id": "log-00469", "ts": "2026-10-15T13:14:36Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00470", "ts": "2026-10-15T13:14:47Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00471", "ts": "2026-10-15T13:14:59Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00472", "ts": "2026-10-15T13:15:20Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00473", "ts": "2026-10-15T13:15:24Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/sip 200 in 379ms"}
+{"id": "log-00474", "ts": "2026-10-15T13:15:31Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00475", "ts": "2026-10-15T13:15:33Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00476", "ts": "2026-10-15T13:15:46Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/profile 200 in 279ms"}
+{"id": "log-00477", "ts": "2026-10-15T13:15:57Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00478", "ts": "2026-10-15T13:16:09Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/orders 201 in 118ms"}
+{"id": "log-00479", "ts": "2026-10-15T13:16:09Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/receipts 200 in 252ms"}
+{"id": "log-00480", "ts": "2026-10-15T13:16:22Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/orders 201 in 45ms"}
+{"id": "log-00481", "ts": "2026-10-15T13:16:27Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 61ms"}
+{"id": "log-00482", "ts": "2026-10-15T13:16:48Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00483", "ts": "2026-10-15T13:17:01Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/receipts 201 in 225ms"}
+{"id": "log-00484", "ts": "2026-10-15T13:17:02Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00485", "ts": "2026-10-15T13:17:27Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/sip 200 in 34ms"}
+{"id": "log-00486", "ts": "2026-10-15T13:17:33Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00487", "ts": "2026-10-15T13:17:34Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00488", "ts": "2026-10-15T13:17:47Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/accounts 201 in 222ms"}
+{"id": "log-00489", "ts": "2026-10-15T13:18:03Z", "service": "ledger-service", "level": "WARN", "message": "retrying call to ledger-db (attempt 1 of 3)"}
+{"id": "log-00490", "ts": "2026-10-15T13:18:11Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00491", "ts": "2026-10-15T13:18:17Z", "service": "kubernetes", "level": "INFO", "message": "Pod orders-service-00877 readiness probe ok"}
+{"id": "log-00492", "ts": "2026-10-15T13:18:21Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00493", "ts": "2026-10-15T13:18:21Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00494", "ts": "2026-10-15T13:18:40Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 409ms"}
+{"id": "log-00495", "ts": "2026-10-15T13:18:48Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00496", "ts": "2026-10-15T13:18:52Z", "service": "orders-service", "level": "WARN", "message": "retrying call to portfolio-db (attempt 1 of 3)"}
+{"id": "log-00497", "ts": "2026-10-15T13:18:55Z", "service": "market-data-service", "level": "WARN", "message": "retrying call to redis-cache (attempt 1 of 3)"}
+{"id": "log-00498", "ts": "2026-10-15T13:18:57Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/profile 201 in 419ms"}
+{"id": "log-00499", "ts": "2026-10-15T13:19:06Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1275 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00500", "ts": "2026-10-15T13:19:11Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1800 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00501", "ts": "2026-10-15T13:19:22Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1859ms"}
+{"id": "log-00502", "ts": "2026-10-15T13:19:24Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00503", "ts": "2026-10-15T13:19:24Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00504", "ts": "2026-10-15T13:19:42Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1592ms"}
+{"id": "log-00505", "ts": "2026-10-15T13:19:44Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00506", "ts": "2026-10-15T13:19:50Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00507", "ts": "2026-10-15T13:19:58Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2314 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00508", "ts": "2026-10-15T13:19:59Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1545 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00509", "ts": "2026-10-15T13:20:00Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00510", "ts": "2026-10-15T13:20:02Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00511", "ts": "2026-10-15T13:20:10Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/sip 200 in 131ms"}
+{"id": "log-00512", "ts": "2026-10-15T13:20:18Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1513 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00513", "ts": "2026-10-15T13:20:34Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1333ms"}
+{"id": "log-00514", "ts": "2026-10-15T13:20:40Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1949ms"}
+{"id": "log-00515", "ts": "2026-10-15T13:20:41Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/orders 200 in 138ms"}
+{"id": "log-00516", "ts": "2026-10-15T13:20:42Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2240 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00517", "ts": "2026-10-15T13:20:47Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/payments/intent 201 in 407ms"}
+{"id": "log-00518", "ts": "2026-10-15T13:20:48Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1729ms"}
+{"id": "log-00519", "ts": "2026-10-15T13:21:04Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00520", "ts": "2026-10-15T13:21:12Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2143 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00521", "ts": "2026-10-15T13:21:22Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00522", "ts": "2026-10-15T13:21:26Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 38ms"}
+{"id": "log-00523", "ts": "2026-10-15T13:21:26Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/orders 200 in 151ms"}
+{"id": "log-00524", "ts": "2026-10-15T13:21:28Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2056ms"}
+{"id": "log-00525", "ts": "2026-10-15T13:21:29Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2413 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00526", "ts": "2026-10-15T13:21:29Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1878ms"}
+{"id": "log-00527", "ts": "2026-10-15T13:21:35Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2208ms"}
+{"id": "log-00528", "ts": "2026-10-15T13:21:38Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00529", "ts": "2026-10-15T13:21:46Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1261ms"}
+{"id": "log-00530", "ts": "2026-10-15T13:21:50Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/accounts 200 in 171ms"}
+{"id": "log-00531", "ts": "2026-10-15T13:21:59Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1249 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00532", "ts": "2026-10-15T13:22:02Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00533", "ts": "2026-10-15T13:22:03Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/accounts 200 in 183ms"}
+{"id": "log-00534", "ts": "2026-10-15T13:22:08Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1448 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00535", "ts": "2026-10-15T13:22:09Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1874 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00536", "ts": "2026-10-15T13:22:14Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1189ms"}
+{"id": "log-00537", "ts": "2026-10-15T13:22:22Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/accounts 201 in 428ms"}
+{"id": "log-00538", "ts": "2026-10-15T13:22:25Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00539", "ts": "2026-10-15T13:22:31Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/sip 200 in 91ms"}
+{"id": "log-00540", "ts": "2026-10-15T13:22:37Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00541", "ts": "2026-10-15T13:22:45Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1751ms"}
+{"id": "log-00542", "ts": "2026-10-15T13:22:57Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1179ms"}
+{"id": "log-00543", "ts": "2026-10-15T13:22:59Z", "service": "kubernetes", "level": "INFO", "message": "Pod upi-gateway-170f9 readiness probe ok"}
+{"id": "log-00544", "ts": "2026-10-15T13:23:07Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2176ms"}
+{"id": "log-00545", "ts": "2026-10-15T13:23:15Z", "service": "upi-gateway", "level": "WARN", "message": "retrying call to npci-switch (attempt 1 of 3)"}
+{"id": "log-00546", "ts": "2026-10-15T13:23:17Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/profile 200 in 307ms"}
+{"id": "log-00547", "ts": "2026-10-15T13:23:17Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/orders 201 in 40ms"}
+{"id": "log-00548", "ts": "2026-10-15T13:23:21Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1906 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00549", "ts": "2026-10-15T13:23:23Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1460 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00550", "ts": "2026-10-15T13:23:24Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1145ms"}
+{"id": "log-00551", "ts": "2026-10-15T13:23:30Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1714 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00552", "ts": "2026-10-15T13:23:34Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00553", "ts": "2026-10-15T13:23:51Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/profile 201 in 153ms"}
+{"id": "log-00554", "ts": "2026-10-15T13:23:53Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00555", "ts": "2026-10-15T13:23:53Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 96%"}
+{"id": "log-00556", "ts": "2026-10-15T13:23:55Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/sip 201 in 81ms"}
+{"id": "log-00557", "ts": "2026-10-15T13:24:03Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/holdings 200 in 288ms"}
+{"id": "log-00558", "ts": "2026-10-15T13:24:12Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1599 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00559", "ts": "2026-10-15T13:24:13Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2347ms"}
+{"id": "log-00560", "ts": "2026-10-15T13:24:16Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00561", "ts": "2026-10-15T13:24:16Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1100 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00562", "ts": "2026-10-15T13:24:16Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2481ms"}
+{"id": "log-00563", "ts": "2026-10-15T13:24:17Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00564", "ts": "2026-10-15T13:24:39Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1417ms"}
+{"id": "log-00565", "ts": "2026-10-15T13:24:44Z", "service": "kubernetes", "level": "INFO", "message": "Pod notification-service-a1746 readiness probe ok"}
+{"id": "log-00566", "ts": "2026-10-15T13:24:48Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00567", "ts": "2026-10-15T13:25:13Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1501ms"}
+{"id": "log-00568", "ts": "2026-10-15T13:25:15Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00569", "ts": "2026-10-15T13:25:16Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2350ms"}
+{"id": "log-00570", "ts": "2026-10-15T13:25:31Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1538ms"}
+{"id": "log-00571", "ts": "2026-10-15T13:25:42Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1362 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00572", "ts": "2026-10-15T13:25:43Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-00573", "ts": "2026-10-15T13:25:43Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1926 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00574", "ts": "2026-10-15T13:25:44Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1194 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00575", "ts": "2026-10-15T13:25:55Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/holdings 200 in 254ms"}
+{"id": "log-00576", "ts": "2026-10-15T13:26:04Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1692 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00577", "ts": "2026-10-15T13:26:04Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00578", "ts": "2026-10-15T13:26:07Z", "service": "portfolio-service", "level": "WARN", "message": "slow request GET /v1/accounts took 1434ms"}
+{"id": "log-00579", "ts": "2026-10-15T13:26:11Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2250 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00580", "ts": "2026-10-15T13:26:11Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00581", "ts": "2026-10-15T13:26:23Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00582", "ts": "2026-10-15T13:26:24Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00583", "ts": "2026-10-15T13:26:25Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-00584", "ts": "2026-10-15T13:26:34Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/holdings 201 in 308ms"}
+{"id": "log-00585", "ts": "2026-10-15T13:26:35Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1710 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00586", "ts": "2026-10-15T13:26:41Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1392ms"}
+{"id": "log-00587", "ts": "2026-10-15T13:26:42Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1110ms"}
+{"id": "log-00588", "ts": "2026-10-15T13:26:51Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1445ms"}
+{"id": "log-00589", "ts": "2026-10-15T13:26:55Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/holdings 200 in 175ms"}
+{"id": "log-00590", "ts": "2026-10-15T13:27:00Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/holdings 201 in 363ms"}
+{"id": "log-00591", "ts": "2026-10-15T13:27:04Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/sip 200 in 86ms"}
+{"id": "log-00592", "ts": "2026-10-15T13:27:07Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1856ms"}
+{"id": "log-00593", "ts": "2026-10-15T13:27:15Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00594", "ts": "2026-10-15T13:27:18Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/accounts 201 in 100ms"}
+{"id": "log-00595", "ts": "2026-10-15T13:27:21Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2287 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00596", "ts": "2026-10-15T13:27:22Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/profile 200 in 47ms"}
+{"id": "log-00597", "ts": "2026-10-15T13:27:23Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/profile 201 in 245ms"}
+{"id": "log-00598", "ts": "2026-10-15T13:27:25Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2163 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00599", "ts": "2026-10-15T13:27:27Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1429ms"}
+{"id": "log-00600", "ts": "2026-10-15T13:27:27Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1116ms"}
+{"id": "log-00601", "ts": "2026-10-15T13:27:28Z", "service": "aa-connector", "level": "INFO", "message": "POST /v1/payments/intent 201 in 50ms"}
+{"id": "log-00602", "ts": "2026-10-15T13:27:42Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1901 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00603", "ts": "2026-10-15T13:27:44Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 95%"}
+{"id": "log-00604", "ts": "2026-10-15T13:27:49Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1274 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00605", "ts": "2026-10-15T13:27:57Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00606", "ts": "2026-10-15T13:27:57Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00607", "ts": "2026-10-15T13:28:05Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00608", "ts": "2026-10-15T13:28:05Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2479ms"}
+{"id": "log-00609", "ts": "2026-10-15T13:28:09Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2337 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00610", "ts": "2026-10-15T13:28:12Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1968ms"}
+{"id": "log-00611", "ts": "2026-10-15T13:28:18Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1147ms"}
+{"id": "log-00612", "ts": "2026-10-15T13:28:22Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1292ms"}
+{"id": "log-00613", "ts": "2026-10-15T13:28:24Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00614", "ts": "2026-10-15T13:28:37Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1940 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00615", "ts": "2026-10-15T13:28:45Z", "service": "kubernetes", "level": "INFO", "message": "Pod payments-api-a04e9 readiness probe ok"}
+{"id": "log-00616", "ts": "2026-10-15T13:28:52Z", "service": "orders-service", "level": "WARN", "message": "retrying call to portfolio-db (attempt 1 of 3)"}
+{"id": "log-00617", "ts": "2026-10-15T13:29:03Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/orders 201 in 237ms"}
+{"id": "log-00618", "ts": "2026-10-15T13:29:06Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/payments/intent 201 in 338ms"}
+{"id": "log-00619", "ts": "2026-10-15T13:29:08Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00620", "ts": "2026-10-15T13:29:09Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2344ms"}
+{"id": "log-00621", "ts": "2026-10-15T13:29:21Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/accounts 201 in 215ms"}
+{"id": "log-00622", "ts": "2026-10-15T13:29:25Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/sip 200 in 289ms"}
+{"id": "log-00623", "ts": "2026-10-15T13:29:31Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00624", "ts": "2026-10-15T13:29:32Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2195ms"}
+{"id": "log-00625", "ts": "2026-10-15T13:29:33Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1181ms"}
+{"id": "log-00626", "ts": "2026-10-15T13:29:36Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00627", "ts": "2026-10-15T13:29:39Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2329 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00628", "ts": "2026-10-15T13:29:49Z", "service": "auth-service", "level": "WARN", "message": "retrying call to redis-session (attempt 1 of 3)"}
+{"id": "log-00629", "ts": "2026-10-15T13:29:49Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/accounts 200 in 216ms"}
+{"id": "log-00630", "ts": "2026-10-15T13:29:51Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00631", "ts": "2026-10-15T13:29:52Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1156 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00632", "ts": "2026-10-15T13:29:57Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2344 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00633", "ts": "2026-10-15T13:29:58Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/accounts 200 in 399ms"}
+{"id": "log-00634", "ts": "2026-10-15T13:30:08Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00635", "ts": "2026-10-15T13:30:09Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1896 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00636", "ts": "2026-10-15T13:30:14Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1769 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00637", "ts": "2026-10-15T13:30:17Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1940ms"}
+{"id": "log-00638", "ts": "2026-10-15T13:30:21Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 93%"}
+{"id": "log-00639", "ts": "2026-10-15T13:30:26Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1498ms"}
+{"id": "log-00640", "ts": "2026-10-15T13:30:47Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00641", "ts": "2026-10-15T13:30:50Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/receipts 200 in 36ms"}
+{"id": "log-00642", "ts": "2026-10-15T13:31:00Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1116 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00643", "ts": "2026-10-15T13:31:03Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00644", "ts": "2026-10-15T13:31:08Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2060 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00645", "ts": "2026-10-15T13:31:14Z", "service": "kubernetes", "level": "INFO", "message": "Pod upi-gateway-4c4aa readiness probe ok"}
+{"id": "log-00646", "ts": "2026-10-15T13:31:23Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/profile 200 in 103ms"}
+{"id": "log-00647", "ts": "2026-10-15T13:31:27Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1765ms"}
+{"id": "log-00648", "ts": "2026-10-15T13:31:29Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/orders 200 in 110ms"}
+{"id": "log-00649", "ts": "2026-10-15T13:31:34Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1514ms"}
+{"id": "log-00650", "ts": "2026-10-15T13:31:37Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00651", "ts": "2026-10-15T13:31:43Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00652", "ts": "2026-10-15T13:31:46Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2147ms"}
+{"id": "log-00653", "ts": "2026-10-15T13:31:57Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 477 buffers"}
+{"id": "log-00654", "ts": "2026-10-15T13:32:05Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/orders 200 in 117ms"}
+{"id": "log-00655", "ts": "2026-10-15T13:32:08Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00656", "ts": "2026-10-15T13:32:14Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 99%"}
+{"id": "log-00657", "ts": "2026-10-15T13:32:19Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2188ms"}
+{"id": "log-00658", "ts": "2026-10-15T13:32:19Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/accounts 200 in 267ms"}
+{"id": "log-00659", "ts": "2026-10-15T13:32:22Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1591ms"}
+{"id": "log-00660", "ts": "2026-10-15T13:32:27Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/holdings 200 in 106ms"}
+{"id": "log-00661", "ts": "2026-10-15T13:32:33Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2418 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00662", "ts": "2026-10-15T13:32:37Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00663", "ts": "2026-10-15T13:32:37Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1109 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00664", "ts": "2026-10-15T13:32:38Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00665", "ts": "2026-10-15T13:32:52Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1833 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00666", "ts": "2026-10-15T13:32:58Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2323ms"}
+{"id": "log-00667", "ts": "2026-10-15T13:33:03Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1127ms"}
+{"id": "log-00668", "ts": "2026-10-15T13:33:06Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1450 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00669", "ts": "2026-10-15T13:33:14Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 99%"}
+{"id": "log-00670", "ts": "2026-10-15T13:33:20Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1666 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00671", "ts": "2026-10-15T13:33:25Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00672", "ts": "2026-10-15T13:33:25Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment ledger-service replicas unchanged"}
+{"id": "log-00673", "ts": "2026-10-15T13:33:26Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1137ms"}
+{"id": "log-00674", "ts": "2026-10-15T13:33:30Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1148 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00675", "ts": "2026-10-15T13:33:31Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/receipts 201 in 365ms"}
+{"id": "log-00676", "ts": "2026-10-15T13:33:41Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1251 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00677", "ts": "2026-10-15T13:33:46Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 667 buffers"}
+{"id": "log-00678", "ts": "2026-10-15T13:33:49Z", "service": "orders-service", "level": "WARN", "message": "retrying call to broker-api (attempt 1 of 3)"}
+{"id": "log-00679", "ts": "2026-10-15T13:33:53Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2258ms"}
+{"id": "log-00680", "ts": "2026-10-15T13:34:01Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/receipts 200 in 365ms"}
+{"id": "log-00681", "ts": "2026-10-15T13:34:15Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 406 buffers"}
+{"id": "log-00682", "ts": "2026-10-15T13:34:20Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1712 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00683", "ts": "2026-10-15T13:34:20Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00684", "ts": "2026-10-15T13:34:23Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1413 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00685", "ts": "2026-10-15T13:34:27Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00686", "ts": "2026-10-15T13:34:29Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1715ms"}
+{"id": "log-00687", "ts": "2026-10-15T13:34:37Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00688", "ts": "2026-10-15T13:34:39Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/orders 200 in 428ms"}
+{"id": "log-00689", "ts": "2026-10-15T13:34:40Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2051ms"}
+{"id": "log-00690", "ts": "2026-10-15T13:34:41Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1700 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00691", "ts": "2026-10-15T13:34:42Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/accounts 201 in 368ms"}
+{"id": "log-00692", "ts": "2026-10-15T13:34:46Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 98%"}
+{"id": "log-00693", "ts": "2026-10-15T13:34:46Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2158ms"}
+{"id": "log-00694", "ts": "2026-10-15T13:34:49Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/payments/intent 200 in 217ms"}
+{"id": "log-00695", "ts": "2026-10-15T13:34:58Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 862 buffers"}
+{"id": "log-00696", "ts": "2026-10-15T13:35:01Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1580ms"}
+{"id": "log-00697", "ts": "2026-10-15T13:35:01Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 341ms"}
+{"id": "log-00698", "ts": "2026-10-15T13:35:03Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2434 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00699", "ts": "2026-10-15T13:35:13Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/orders 201 in 170ms"}
+{"id": "log-00700", "ts": "2026-10-15T13:35:16Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 326ms"}
+{"id": "log-00701", "ts": "2026-10-15T13:35:22Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00702", "ts": "2026-10-15T13:35:23Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 290ms"}
+{"id": "log-00703", "ts": "2026-10-15T13:35:29Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1872ms"}
+{"id": "log-00704", "ts": "2026-10-15T13:35:32Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1511 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00705", "ts": "2026-10-15T13:35:38Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2469ms"}
+{"id": "log-00706", "ts": "2026-10-15T13:35:40Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2262 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00707", "ts": "2026-10-15T13:35:52Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00708", "ts": "2026-10-15T13:35:55Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00709", "ts": "2026-10-15T13:36:11Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1724 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00710", "ts": "2026-10-15T13:36:11Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00711", "ts": "2026-10-15T13:36:17Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1239 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00712", "ts": "2026-10-15T13:36:20Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1913ms"}
+{"id": "log-00713", "ts": "2026-10-15T13:36:34Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00714", "ts": "2026-10-15T13:36:39Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 96%"}
+{"id": "log-00715", "ts": "2026-10-15T13:36:40Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00716", "ts": "2026-10-15T13:36:45Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/profile 201 in 246ms"}
+{"id": "log-00717", "ts": "2026-10-15T13:36:47Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1283ms"}
+{"id": "log-00718", "ts": "2026-10-15T13:36:52Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/receipts 200 in 66ms"}
+{"id": "log-00719", "ts": "2026-10-15T13:36:53Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1698ms"}
+{"id": "log-00720", "ts": "2026-10-15T13:37:05Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1728ms"}
+{"id": "log-00721", "ts": "2026-10-15T13:37:06Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/receipts 200 in 82ms"}
+{"id": "log-00722", "ts": "2026-10-15T13:37:13Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00723", "ts": "2026-10-15T13:37:22Z", "service": "kubernetes", "level": "INFO", "message": "Pod aa-connector-a6a8e readiness probe ok"}
+{"id": "log-00724", "ts": "2026-10-15T13:37:25Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2208 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00725", "ts": "2026-10-15T13:37:26Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1750ms"}
+{"id": "log-00726", "ts": "2026-10-15T13:37:31Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2162ms"}
+{"id": "log-00727", "ts": "2026-10-15T13:37:34Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00728", "ts": "2026-10-15T13:37:41Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1203 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00729", "ts": "2026-10-15T13:37:44Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/profile 201 in 278ms"}
+{"id": "log-00730", "ts": "2026-10-15T13:37:54Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1630 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00731", "ts": "2026-10-15T13:37:59Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1213 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00732", "ts": "2026-10-15T13:37:59Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1517ms"}
+{"id": "log-00733", "ts": "2026-10-15T13:38:03Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1551ms"}
+{"id": "log-00734", "ts": "2026-10-15T13:38:05Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1655 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00735", "ts": "2026-10-15T13:38:12Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00736", "ts": "2026-10-15T13:38:15Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1480 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00737", "ts": "2026-10-15T13:38:22Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00738", "ts": "2026-10-15T13:38:25Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1124 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00739", "ts": "2026-10-15T13:38:37Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00740", "ts": "2026-10-15T13:38:37Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1532 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00741", "ts": "2026-10-15T13:38:38Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2195ms"}
+{"id": "log-00742", "ts": "2026-10-15T13:38:39Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1723ms"}
+{"id": "log-00743", "ts": "2026-10-15T13:38:41Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/accounts 200 in 326ms"}
+{"id": "log-00744", "ts": "2026-10-15T13:38:56Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00745", "ts": "2026-10-15T13:39:01Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1740 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00746", "ts": "2026-10-15T13:39:09Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2053 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00747", "ts": "2026-10-15T13:39:15Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2422 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00748", "ts": "2026-10-15T13:39:21Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/receipts 201 in 285ms"}
+{"id": "log-00749", "ts": "2026-10-15T13:39:23Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/orders 201 in 76ms"}
+{"id": "log-00750", "ts": "2026-10-15T13:39:24Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/orders 200 in 213ms"}
+{"id": "log-00751", "ts": "2026-10-15T13:39:27Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1700ms"}
+{"id": "log-00752", "ts": "2026-10-15T13:39:28Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/accounts 200 in 208ms"}
+{"id": "log-00753", "ts": "2026-10-15T13:39:31Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00754", "ts": "2026-10-15T13:39:31Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/accounts 201 in 202ms"}
+{"id": "log-00755", "ts": "2026-10-15T13:39:36Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2497ms"}
+{"id": "log-00756", "ts": "2026-10-15T13:39:36Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00757", "ts": "2026-10-15T13:39:41Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1676ms"}
+{"id": "log-00758", "ts": "2026-10-15T13:39:56Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2034ms"}
+{"id": "log-00759", "ts": "2026-10-15T13:40:01Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/accounts 200 in 344ms"}
+{"id": "log-00760", "ts": "2026-10-15T13:40:07Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00761", "ts": "2026-10-15T13:40:09Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 92%"}
+{"id": "log-00762", "ts": "2026-10-15T13:40:20Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1940 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00763", "ts": "2026-10-15T13:40:26Z", "service": "ledger-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00764", "ts": "2026-10-15T13:40:28Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00765", "ts": "2026-10-15T13:40:30Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2068ms"}
+{"id": "log-00766", "ts": "2026-10-15T13:40:34Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00767", "ts": "2026-10-15T13:40:37Z", "service": "mobile-bff", "level": "INFO", "message": "health check ok"}
+{"id": "log-00768", "ts": "2026-10-15T13:40:44Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2176 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00769", "ts": "2026-10-15T13:40:59Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2416ms"}
+{"id": "log-00770", "ts": "2026-10-15T13:41:06Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 99%"}
+{"id": "log-00771", "ts": "2026-10-15T13:41:07Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1235 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00772", "ts": "2026-10-15T13:41:08Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/sip 200 in 157ms"}
+{"id": "log-00773", "ts": "2026-10-15T13:41:21Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00774", "ts": "2026-10-15T13:41:25Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 67ms"}
+{"id": "log-00775", "ts": "2026-10-15T13:41:27Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 442ms"}
+{"id": "log-00776", "ts": "2026-10-15T13:41:33Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1563ms"}
+{"id": "log-00777", "ts": "2026-10-15T13:41:34Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00778", "ts": "2026-10-15T13:41:37Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2303ms"}
+{"id": "log-00779", "ts": "2026-10-15T13:41:43Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1874ms"}
+{"id": "log-00780", "ts": "2026-10-15T13:41:51Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2309 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00781", "ts": "2026-10-15T13:41:58Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/profile 200 in 401ms"}
+{"id": "log-00782", "ts": "2026-10-15T13:42:01Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/sip 201 in 320ms"}
+{"id": "log-00783", "ts": "2026-10-15T13:42:04Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2377ms"}
+{"id": "log-00784", "ts": "2026-10-15T13:42:07Z", "service": "kubernetes", "level": "INFO", "message": "Pod auth-service-3a790 readiness probe ok"}
+{"id": "log-00785", "ts": "2026-10-15T13:42:07Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1336 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00786", "ts": "2026-10-15T13:42:08Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00787", "ts": "2026-10-15T13:42:18Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1330 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00788", "ts": "2026-10-15T13:42:18Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2137ms"}
+{"id": "log-00789", "ts": "2026-10-15T13:42:19Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2043 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00790", "ts": "2026-10-15T13:42:21Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1624ms"}
+{"id": "log-00791", "ts": "2026-10-15T13:42:30Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 96%"}
+{"id": "log-00792", "ts": "2026-10-15T13:42:41Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/receipts 200 in 253ms"}
+{"id": "log-00793", "ts": "2026-10-15T13:42:44Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00794", "ts": "2026-10-15T13:42:46Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1813 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00795", "ts": "2026-10-15T13:42:55Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2166ms"}
+{"id": "log-00796", "ts": "2026-10-15T13:42:57Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/accounts 200 in 84ms"}
+{"id": "log-00797", "ts": "2026-10-15T13:43:04Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1262 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00798", "ts": "2026-10-15T13:43:09Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00799", "ts": "2026-10-15T13:43:12Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 200 buffers"}
+{"id": "log-00800", "ts": "2026-10-15T13:43:20Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2460ms"}
+{"id": "log-00801", "ts": "2026-10-15T13:43:20Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00802", "ts": "2026-10-15T13:43:29Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2252 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00803", "ts": "2026-10-15T13:43:36Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2059 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00804", "ts": "2026-10-15T13:43:41Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1341 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00805", "ts": "2026-10-15T13:43:43Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2210ms"}
+{"id": "log-00806", "ts": "2026-10-15T13:43:43Z", "service": "notification-service", "level": "WARN", "message": "slow request GET /v1/payments/intent took 2082ms"}
+{"id": "log-00807", "ts": "2026-10-15T13:43:45Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1856ms"}
+{"id": "log-00808", "ts": "2026-10-15T13:43:50Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00809", "ts": "2026-10-15T13:43:58Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00810", "ts": "2026-10-15T13:43:58Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00811", "ts": "2026-10-15T13:44:00Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1289ms"}
+{"id": "log-00812", "ts": "2026-10-15T13:44:00Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2410ms"}
+{"id": "log-00813", "ts": "2026-10-15T13:44:01Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00814", "ts": "2026-10-15T13:44:06Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/sip 200 in 189ms"}
+{"id": "log-00815", "ts": "2026-10-15T13:44:26Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1411 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00816", "ts": "2026-10-15T13:44:28Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2293 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00817", "ts": "2026-10-15T13:44:34Z", "service": "mobile-bff", "level": "INFO", "message": "POST /v1/orders 201 in 195ms"}
+{"id": "log-00818", "ts": "2026-10-15T13:44:35Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00819", "ts": "2026-10-15T13:44:38Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1848ms"}
+{"id": "log-00820", "ts": "2026-10-15T13:44:44Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2144 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00821", "ts": "2026-10-15T13:44:52Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/sip 200 in 429ms"}
+{"id": "log-00822", "ts": "2026-10-15T13:44:54Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00823", "ts": "2026-10-15T13:44:55Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/payments/intent 201 in 203ms"}
+{"id": "log-00824", "ts": "2026-10-15T13:44:57Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/orders 201 in 108ms"}
+{"id": "log-00825", "ts": "2026-10-15T13:45:00Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1290ms"}
+{"id": "log-00826", "ts": "2026-10-15T13:45:02Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment kyc-service replicas unchanged"}
+{"id": "log-00827", "ts": "2026-10-15T13:45:02Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2487 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00828", "ts": "2026-10-15T13:45:12Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2320ms"}
+{"id": "log-00829", "ts": "2026-10-15T13:45:25Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1855 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00830", "ts": "2026-10-15T13:45:27Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/receipts 200 in 439ms"}
+{"id": "log-00831", "ts": "2026-10-15T13:45:29Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2063 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00832", "ts": "2026-10-15T13:45:45Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1923ms"}
+{"id": "log-00833", "ts": "2026-10-15T13:46:03Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2251 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00834", "ts": "2026-10-15T13:46:10Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00835", "ts": "2026-10-15T13:46:16Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/receipts 200 in 390ms"}
+{"id": "log-00836", "ts": "2026-10-15T13:46:18Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/accounts 200 in 75ms"}
+{"id": "log-00837", "ts": "2026-10-15T13:46:19Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00838", "ts": "2026-10-15T13:46:19Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1243ms"}
+{"id": "log-00839", "ts": "2026-10-15T13:46:21Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00840", "ts": "2026-10-15T13:46:24Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1892 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00841", "ts": "2026-10-15T13:46:25Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2234ms"}
+{"id": "log-00842", "ts": "2026-10-15T13:46:39Z", "service": "mobile-bff", "level": "WARN", "message": "slow request GET /v1/accounts took 2316ms"}
+{"id": "log-00843", "ts": "2026-10-15T13:46:43Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1295ms"}
+{"id": "log-00844", "ts": "2026-10-15T13:46:45Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2268 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00845", "ts": "2026-10-15T13:46:48Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00846", "ts": "2026-10-15T13:46:48Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/receipts 200 in 26ms"}
+{"id": "log-00847", "ts": "2026-10-15T13:46:52Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-00848", "ts": "2026-10-15T13:46:52Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2436 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00849", "ts": "2026-10-15T13:47:00Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/accounts 201 in 421ms"}
+{"id": "log-00850", "ts": "2026-10-15T13:47:13Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1984ms"}
+{"id": "log-00851", "ts": "2026-10-15T13:47:29Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00852", "ts": "2026-10-15T13:47:32Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1980 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00853", "ts": "2026-10-15T13:47:32Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1671 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00854", "ts": "2026-10-15T13:47:35Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2037ms"}
+{"id": "log-00855", "ts": "2026-10-15T13:47:41Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1835 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00856", "ts": "2026-10-15T13:47:44Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1319ms"}
+{"id": "log-00857", "ts": "2026-10-15T13:47:52Z", "service": "portfolio-service", "level": "WARN", "message": "slow request GET /v1/orders took 2319ms"}
+{"id": "log-00858", "ts": "2026-10-15T13:48:17Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2347ms"}
+{"id": "log-00859", "ts": "2026-10-15T13:48:22Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/payments/intent 201 in 427ms"}
+{"id": "log-00860", "ts": "2026-10-15T13:48:25Z", "service": "orders-service", "level": "INFO", "message": "POST /v1/holdings 201 in 27ms"}
+{"id": "log-00861", "ts": "2026-10-15T13:48:27Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2219ms"}
+{"id": "log-00862", "ts": "2026-10-15T13:48:31Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1867ms"}
+{"id": "log-00863", "ts": "2026-10-15T13:48:41Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1936 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00864", "ts": "2026-10-15T13:48:45Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00865", "ts": "2026-10-15T13:48:56Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1503 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00866", "ts": "2026-10-15T13:48:59Z", "service": "auth-service", "level": "WARN", "message": "slow request GET /v1/payments/intent took 1976ms"}
+{"id": "log-00867", "ts": "2026-10-15T13:49:01Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/sip 200 in 187ms"}
+{"id": "log-00868", "ts": "2026-10-15T13:49:05Z", "service": "kyc-service", "level": "WARN", "message": "retrying call to user-db (attempt 1 of 3)"}
+{"id": "log-00869", "ts": "2026-10-15T13:49:09Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00870", "ts": "2026-10-15T13:49:16Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment notification-service replicas unchanged"}
+{"id": "log-00871", "ts": "2026-10-15T13:49:16Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"ledger_entries\": index scans: 1"}
+{"id": "log-00872", "ts": "2026-10-15T13:49:23Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00873", "ts": "2026-10-15T13:49:34Z", "service": "ledger-service", "level": "WARN", "message": "retrying call to ledger-db (attempt 1 of 3)"}
+{"id": "log-00874", "ts": "2026-10-15T13:49:34Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2245ms"}
+{"id": "log-00875", "ts": "2026-10-15T13:49:37Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/orders 201 in 229ms"}
+{"id": "log-00876", "ts": "2026-10-15T13:49:39Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/payments/intent 200 in 235ms"}
+{"id": "log-00877", "ts": "2026-10-15T13:49:42Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1686ms"}
+{"id": "log-00878", "ts": "2026-10-15T13:49:44Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1112ms"}
+{"id": "log-00879", "ts": "2026-10-15T13:49:54Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1925 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00880", "ts": "2026-10-15T13:49:58Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/accounts 201 in 45ms"}
+{"id": "log-00881", "ts": "2026-10-15T13:49:59Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2286 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00882", "ts": "2026-10-15T13:50:00Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1670ms"}
+{"id": "log-00883", "ts": "2026-10-15T13:50:11Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1694 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00884", "ts": "2026-10-15T13:50:22Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00885", "ts": "2026-10-15T13:50:23Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2352 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00886", "ts": "2026-10-15T13:50:23Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1758ms"}
+{"id": "log-00887", "ts": "2026-10-15T13:50:24Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00888", "ts": "2026-10-15T13:50:26Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/receipts 200 in 351ms"}
+{"id": "log-00889", "ts": "2026-10-15T13:50:34Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-00890", "ts": "2026-10-15T13:50:35Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2355ms"}
+{"id": "log-00891", "ts": "2026-10-15T13:50:36Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/orders 200 in 420ms"}
+{"id": "log-00892", "ts": "2026-10-15T13:50:39Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/orders 201 in 156ms"}
+{"id": "log-00893", "ts": "2026-10-15T13:50:47Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-00894", "ts": "2026-10-15T13:50:56Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1604ms"}
+{"id": "log-00895", "ts": "2026-10-15T13:51:04Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 199 buffers"}
+{"id": "log-00896", "ts": "2026-10-15T13:51:22Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1437ms"}
+{"id": "log-00897", "ts": "2026-10-15T13:51:25Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/profile 200 in 339ms"}
+{"id": "log-00898", "ts": "2026-10-15T13:51:25Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00899", "ts": "2026-10-15T13:51:28Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1311ms"}
+{"id": "log-00900", "ts": "2026-10-15T13:51:29Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1948 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00901", "ts": "2026-10-15T13:51:36Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1133ms"}
+{"id": "log-00902", "ts": "2026-10-15T13:51:37Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1166 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00903", "ts": "2026-10-15T13:51:42Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00904", "ts": "2026-10-15T13:51:53Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1523 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00905", "ts": "2026-10-15T13:51:55Z", "service": "kubernetes", "level": "INFO", "message": "Pod orders-service-6c56d readiness probe ok"}
+{"id": "log-00906", "ts": "2026-10-15T13:52:00Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/sip 200 in 403ms"}
+{"id": "log-00907", "ts": "2026-10-15T13:52:04Z", "service": "auth-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00908", "ts": "2026-10-15T13:52:06Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00909", "ts": "2026-10-15T13:52:22Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1367 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00910", "ts": "2026-10-15T13:52:22Z", "service": "market-data-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00911", "ts": "2026-10-15T13:52:35Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1422 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00912", "ts": "2026-10-15T13:52:39Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2073ms"}
+{"id": "log-00913", "ts": "2026-10-15T13:52:41Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 833 buffers"}
+{"id": "log-00914", "ts": "2026-10-15T13:52:46Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1813ms"}
+{"id": "log-00915", "ts": "2026-10-15T13:52:53Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2307ms"}
+{"id": "log-00916", "ts": "2026-10-15T13:52:56Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1280 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00917", "ts": "2026-10-15T13:52:57Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/orders 200 in 267ms"}
+{"id": "log-00918", "ts": "2026-10-15T13:53:03Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1111 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00919", "ts": "2026-10-15T13:53:07Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00920", "ts": "2026-10-15T13:53:08Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/sip 200 in 119ms"}
+{"id": "log-00921", "ts": "2026-10-15T13:53:09Z", "service": "portfolio-service", "level": "INFO", "message": "GET /v1/accounts 200 in 150ms"}
+{"id": "log-00922", "ts": "2026-10-15T13:53:17Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-00923", "ts": "2026-10-15T13:53:21Z", "service": "user-db", "level": "INFO", "message": "checkpoint complete: wrote 308 buffers"}
+{"id": "log-00924", "ts": "2026-10-15T13:53:24Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 303ms"}
+{"id": "log-00925", "ts": "2026-10-15T13:53:25Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1136ms"}
+{"id": "log-00926", "ts": "2026-10-15T13:53:30Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1710 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00927", "ts": "2026-10-15T13:53:35Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1543ms"}
+{"id": "log-00928", "ts": "2026-10-15T13:53:47Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/orders 200 in 411ms"}
+{"id": "log-00929", "ts": "2026-10-15T13:53:49Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 95%"}
+{"id": "log-00930", "ts": "2026-10-15T13:53:50Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00931", "ts": "2026-10-15T13:53:53Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2172ms"}
+{"id": "log-00932", "ts": "2026-10-15T13:53:53Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/sip 200 in 195ms"}
+{"id": "log-00933", "ts": "2026-10-15T13:53:57Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/sip 200 in 321ms"}
+{"id": "log-00934", "ts": "2026-10-15T13:53:59Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 783 buffers"}
+{"id": "log-00935", "ts": "2026-10-15T13:54:10Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2042ms"}
+{"id": "log-00936", "ts": "2026-10-15T13:54:16Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/orders 200 in 93ms"}
+{"id": "log-00937", "ts": "2026-10-15T13:54:18Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1458 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00938", "ts": "2026-10-15T13:54:41Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2097 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00939", "ts": "2026-10-15T13:54:48Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1157ms"}
+{"id": "log-00940", "ts": "2026-10-15T13:54:51Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2018ms"}
+{"id": "log-00941", "ts": "2026-10-15T13:54:55Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2300 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00942", "ts": "2026-10-15T13:55:03Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1155 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00943", "ts": "2026-10-15T13:55:09Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2034 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00944", "ts": "2026-10-15T13:55:10Z", "service": "portfolio-service", "level": "WARN", "message": "retrying call to portfolio-db (attempt 1 of 3)"}
+{"id": "log-00945", "ts": "2026-10-15T13:55:13Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/receipts 201 in 162ms"}
+{"id": "log-00946", "ts": "2026-10-15T13:55:14Z", "service": "kyc-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 227ms"}
+{"id": "log-00947", "ts": "2026-10-15T13:55:14Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00948", "ts": "2026-10-15T13:55:15Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1789 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00949", "ts": "2026-10-15T13:55:21Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 99%"}
+{"id": "log-00950", "ts": "2026-10-15T13:55:21Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2399ms"}
+{"id": "log-00951", "ts": "2026-10-15T13:55:25Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00952", "ts": "2026-10-15T13:55:35Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/holdings 200 in 132ms"}
+{"id": "log-00953", "ts": "2026-10-15T13:55:39Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1424ms"}
+{"id": "log-00954", "ts": "2026-10-15T13:55:50Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-00955", "ts": "2026-10-15T13:55:51Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1555ms"}
+{"id": "log-00956", "ts": "2026-10-15T13:55:52Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-00957", "ts": "2026-10-15T13:55:55Z", "service": "redis-session", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-00958", "ts": "2026-10-15T13:56:07Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1955 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00959", "ts": "2026-10-15T13:56:08Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1533 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00960", "ts": "2026-10-15T13:56:08Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00961", "ts": "2026-10-15T13:56:12Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2088 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00962", "ts": "2026-10-15T13:56:21Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1703 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00963", "ts": "2026-10-15T13:56:31Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1283ms"}
+{"id": "log-00964", "ts": "2026-10-15T13:56:38Z", "service": "fraud-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00965", "ts": "2026-10-15T13:56:41Z", "service": "auth-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00966", "ts": "2026-10-15T13:56:45Z", "service": "kubernetes", "level": "INFO", "message": "Pod orders-service-ff141 readiness probe ok"}
+{"id": "log-00967", "ts": "2026-10-15T13:56:51Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/orders 200 in 87ms"}
+{"id": "log-00968", "ts": "2026-10-15T13:56:56Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1298ms"}
+{"id": "log-00969", "ts": "2026-10-15T13:56:56Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2221ms"}
+{"id": "log-00970", "ts": "2026-10-15T13:57:00Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00971", "ts": "2026-10-15T13:57:02Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1101ms"}
+{"id": "log-00972", "ts": "2026-10-15T13:57:15Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1662ms"}
+{"id": "log-00973", "ts": "2026-10-15T13:57:18Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2308 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00974", "ts": "2026-10-15T13:57:21Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/sip 200 in 82ms"}
+{"id": "log-00975", "ts": "2026-10-15T13:57:28Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1782 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00976", "ts": "2026-10-15T13:57:28Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/profile 200 in 109ms"}
+{"id": "log-00977", "ts": "2026-10-15T13:57:29Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-00978", "ts": "2026-10-15T13:57:33Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1913 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00979", "ts": "2026-10-15T13:57:37Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-00980", "ts": "2026-10-15T13:57:39Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00981", "ts": "2026-10-15T13:57:45Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"orders\": index scans: 1"}
+{"id": "log-00982", "ts": "2026-10-15T13:57:58Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1282ms"}
+{"id": "log-00983", "ts": "2026-10-15T13:58:05Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1765 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00984", "ts": "2026-10-15T13:58:05Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/sip 201 in 68ms"}
+{"id": "log-00985", "ts": "2026-10-15T13:58:13Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1234ms"}
+{"id": "log-00986", "ts": "2026-10-15T13:58:14Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 30ms"}
+{"id": "log-00987", "ts": "2026-10-15T13:58:14Z", "service": "notification-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-00988", "ts": "2026-10-15T13:58:24Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/orders 200 in 93ms"}
+{"id": "log-00989", "ts": "2026-10-15T13:58:36Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1530ms"}
+{"id": "log-00990", "ts": "2026-10-15T13:58:39Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1815 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00991", "ts": "2026-10-15T13:58:42Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-00992", "ts": "2026-10-15T13:58:43Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1858 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00993", "ts": "2026-10-15T13:58:58Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-00994", "ts": "2026-10-15T13:59:00Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 196ms"}
+{"id": "log-00995", "ts": "2026-10-15T13:59:09Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1936ms"}
+{"id": "log-00996", "ts": "2026-10-15T13:59:18Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1372ms"}
+{"id": "log-00997", "ts": "2026-10-15T13:59:19Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2359ms"}
+{"id": "log-00998", "ts": "2026-10-15T13:59:22Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2123 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-00999", "ts": "2026-10-15T13:59:26Z", "service": "fraud-service", "level": "WARN", "message": "retrying call to redis-cache (attempt 1 of 3)"}
+{"id": "log-01000", "ts": "2026-10-15T13:59:26Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2266ms"}
+{"id": "log-01001", "ts": "2026-10-15T13:59:46Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1565 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01002", "ts": "2026-10-15T13:59:48Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/holdings 201 in 76ms"}
+{"id": "log-01003", "ts": "2026-10-15T13:59:52Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/sip 200 in 371ms"}
+{"id": "log-01004", "ts": "2026-10-15T13:59:55Z", "service": "orders-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-01005", "ts": "2026-10-15T13:59:56Z", "service": "payments-api", "level": "INFO", "message": "GET /v1/holdings 200 in 31ms"}
+{"id": "log-01006", "ts": "2026-10-15T13:59:59Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1857 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01007", "ts": "2026-10-15T14:00:00Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-01008", "ts": "2026-10-15T14:00:03Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1124 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01009", "ts": "2026-10-15T14:00:13Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2191ms"}
+{"id": "log-01010", "ts": "2026-10-15T14:00:18Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2158ms"}
+{"id": "log-01011", "ts": "2026-10-15T14:00:25Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2226 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01012", "ts": "2026-10-15T14:00:26Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1754 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01013", "ts": "2026-10-15T14:00:37Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment auth-service replicas unchanged"}
+{"id": "log-01014", "ts": "2026-10-15T14:00:38Z", "service": "upi-gateway", "level": "INFO", "message": "POST /v1/sip 201 in 450ms"}
+{"id": "log-01015", "ts": "2026-10-15T14:00:47Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/holdings 200 in 315ms"}
+{"id": "log-01016", "ts": "2026-10-15T14:00:47Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-01017", "ts": "2026-10-15T14:00:49Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1265 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01018", "ts": "2026-10-15T14:00:57Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group ledger-events"}
+{"id": "log-01019", "ts": "2026-10-15T14:01:01Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1475ms"}
+{"id": "log-01020", "ts": "2026-10-15T14:01:04Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1502 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01021", "ts": "2026-10-15T14:01:08Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1137 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01022", "ts": "2026-10-15T14:01:17Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1515 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01023", "ts": "2026-10-15T14:01:39Z", "service": "ledger-db", "level": "INFO", "message": "storage migration progress 97%"}
+{"id": "log-01024", "ts": "2026-10-15T14:01:40Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"users\": index scans: 1"}
+{"id": "log-01025", "ts": "2026-10-15T14:01:42Z", "service": "portfolio-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-01026", "ts": "2026-10-15T14:01:47Z", "service": "notification-service", "level": "INFO", "message": "GET /v1/profile 200 in 247ms"}
+{"id": "log-01027", "ts": "2026-10-15T14:01:49Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1294ms"}
+{"id": "log-01028", "ts": "2026-10-15T14:01:52Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-01029", "ts": "2026-10-15T14:01:52Z", "service": "payments-api", "level": "INFO", "message": "health check ok"}
+{"id": "log-01030", "ts": "2026-10-15T14:01:58Z", "service": "ledger-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-01031", "ts": "2026-10-15T14:02:00Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1885ms"}
+{"id": "log-01032", "ts": "2026-10-15T14:02:00Z", "service": "market-data-service", "level": "INFO", "message": "POST /v1/profile 201 in 49ms"}
+{"id": "log-01033", "ts": "2026-10-15T14:02:02Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/holdings 200 in 291ms"}
+{"id": "log-01034", "ts": "2026-10-15T14:02:03Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1652ms"}
+{"id": "log-01035", "ts": "2026-10-15T14:02:06Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-01036", "ts": "2026-10-15T14:02:17Z", "service": "aa-connector", "level": "INFO", "message": "GET /v1/accounts 200 in 419ms"}
+{"id": "log-01037", "ts": "2026-10-15T14:02:31Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1355 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01038", "ts": "2026-10-15T14:02:32Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1602 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01039", "ts": "2026-10-15T14:02:37Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1221ms"}
+{"id": "log-01040", "ts": "2026-10-15T14:02:40Z", "service": "ledger-service", "level": "WARN", "message": "slow request GET /v1/sip took 1928ms"}
+{"id": "log-01041", "ts": "2026-10-15T14:02:41Z", "service": "auth-service", "level": "INFO", "message": "POST /v1/accounts 201 in 222ms"}
+{"id": "log-01042", "ts": "2026-10-15T14:02:44Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2309 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01043", "ts": "2026-10-15T14:02:46Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-01044", "ts": "2026-10-15T14:03:09Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2242ms"}
+{"id": "log-01045", "ts": "2026-10-15T14:03:10Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1609 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01046", "ts": "2026-10-15T14:03:14Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1676ms"}
+{"id": "log-01047", "ts": "2026-10-15T14:03:19Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1664 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01048", "ts": "2026-10-15T14:03:23Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2224 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01049", "ts": "2026-10-15T14:03:25Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-01050", "ts": "2026-10-15T14:03:26Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1769ms"}
+{"id": "log-01051", "ts": "2026-10-15T14:03:28Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-01052", "ts": "2026-10-15T14:03:33Z", "service": "notification-service", "level": "WARN", "message": "retrying call to sms-vendor (attempt 1 of 3)"}
+{"id": "log-01053", "ts": "2026-10-15T14:03:37Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1963ms"}
+{"id": "log-01054", "ts": "2026-10-15T14:03:38Z", "service": "kyc-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-01055", "ts": "2026-10-15T14:03:40Z", "service": "ledger-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-01056", "ts": "2026-10-15T14:03:48Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/accounts 200 in 44ms"}
+{"id": "log-01057", "ts": "2026-10-15T14:03:51Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2456 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01058", "ts": "2026-10-15T14:04:00Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1474 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01059", "ts": "2026-10-15T14:04:06Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment orders-service replicas unchanged"}
+{"id": "log-01060", "ts": "2026-10-15T14:04:06Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1123ms"}
+{"id": "log-01061", "ts": "2026-10-15T14:04:09Z", "service": "orders-service", "level": "WARN", "message": "slow request GET /v1/payments/intent took 1121ms"}
+{"id": "log-01062", "ts": "2026-10-15T14:04:21Z", "service": "ledger-service", "level": "INFO", "message": "POST /v1/orders 201 in 345ms"}
+{"id": "log-01063", "ts": "2026-10-15T14:04:23Z", "service": "mobile-bff", "level": "WARN", "message": "retrying call to auth-service (attempt 1 of 3)"}
+{"id": "log-01064", "ts": "2026-10-15T14:04:24Z", "service": "fraud-service", "level": "INFO", "message": "GET /v1/orders 200 in 107ms"}
+{"id": "log-01065", "ts": "2026-10-15T14:04:33Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2392 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01066", "ts": "2026-10-15T14:04:43Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/accounts 200 in 413ms"}
+{"id": "log-01067", "ts": "2026-10-15T14:04:46Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1845 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01068", "ts": "2026-10-15T14:04:47Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1778ms"}
+{"id": "log-01069", "ts": "2026-10-15T14:04:51Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1393ms"}
+{"id": "log-01070", "ts": "2026-10-15T14:05:01Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-01071", "ts": "2026-10-15T14:05:03Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2146ms"}
+{"id": "log-01072", "ts": "2026-10-15T14:05:09Z", "service": "user-db", "level": "INFO", "message": "connection authorized: user=app database=main"}
+{"id": "log-01073", "ts": "2026-10-15T14:05:10Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1188ms"}
+{"id": "log-01074", "ts": "2026-10-15T14:05:14Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2140 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01075", "ts": "2026-10-15T14:05:16Z", "service": "redis-cache", "level": "INFO", "message": "Background saving started"}
+{"id": "log-01076", "ts": "2026-10-15T14:05:24Z", "service": "upi-gateway", "level": "INFO", "message": "health check ok"}
+{"id": "log-01077", "ts": "2026-10-15T14:05:25Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2360ms"}
+{"id": "log-01078", "ts": "2026-10-15T14:05:32Z", "service": "portfolio-db", "level": "INFO", "message": "checkpoint complete: wrote 114 buffers"}
+{"id": "log-01079", "ts": "2026-10-15T14:05:37Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2010ms"}
+{"id": "log-01080", "ts": "2026-10-15T14:05:41Z", "service": "orders-service", "level": "WARN", "message": "retrying call to broker-api (attempt 1 of 3)"}
+{"id": "log-01081", "ts": "2026-10-15T14:05:44Z", "service": "portfolio-service", "level": "INFO", "message": "POST /v1/payments/intent 201 in 226ms"}
+{"id": "log-01082", "ts": "2026-10-15T14:05:47Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1103 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01083", "ts": "2026-10-15T14:05:51Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group notif-alerts"}
+{"id": "log-01084", "ts": "2026-10-15T14:05:52Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2129 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01085", "ts": "2026-10-15T14:05:54Z", "service": "kubernetes", "level": "INFO", "message": "Scaled deployment orders-service replicas unchanged"}
+{"id": "log-01086", "ts": "2026-10-15T14:05:59Z", "service": "kyc-service", "level": "INFO", "message": "GET /v1/holdings 200 in 241ms"}
+{"id": "log-01087", "ts": "2026-10-15T14:06:09Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-01088", "ts": "2026-10-15T14:06:16Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1342 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01089", "ts": "2026-10-15T14:06:16Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 396ms"}
+{"id": "log-01090", "ts": "2026-10-15T14:06:39Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1186 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01091", "ts": "2026-10-15T14:06:40Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1330ms"}
+{"id": "log-01092", "ts": "2026-10-15T14:06:47Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1748ms"}
+{"id": "log-01093", "ts": "2026-10-15T14:06:47Z", "service": "mobile-bff", "level": "INFO", "message": "GET /v1/holdings 200 in 346ms"}
+{"id": "log-01094", "ts": "2026-10-15T14:06:47Z", "service": "payments-api", "level": "INFO", "message": "POST /v1/payments/intent 201 in 223ms"}
+{"id": "log-01095", "ts": "2026-10-15T14:06:48Z", "service": "aa-connector", "level": "INFO", "message": "health check ok"}
+{"id": "log-01096", "ts": "2026-10-15T14:06:50Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1976 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01097", "ts": "2026-10-15T14:06:51Z", "service": "ledger-db", "level": "INFO", "message": "checkpoint complete: wrote 184 buffers"}
+{"id": "log-01098", "ts": "2026-10-15T14:06:51Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1567ms"}
+{"id": "log-01099", "ts": "2026-10-15T14:06:52Z", "service": "auth-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 206ms"}
+{"id": "log-01100", "ts": "2026-10-15T14:06:53Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1752 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01101", "ts": "2026-10-15T14:06:59Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2433ms"}
+{"id": "log-01102", "ts": "2026-10-15T14:07:06Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1224ms"}
+{"id": "log-01103", "ts": "2026-10-15T14:07:14Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2094 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01104", "ts": "2026-10-15T14:07:21Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1183ms"}
+{"id": "log-01105", "ts": "2026-10-15T14:07:37Z", "service": "kubernetes", "level": "INFO", "message": "Pod kyc-service-1e494 readiness probe ok"}
+{"id": "log-01106", "ts": "2026-10-15T14:07:47Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1449 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01107", "ts": "2026-10-15T14:07:50Z", "service": "redis-cache", "level": "INFO", "message": "DB saved on disk"}
+{"id": "log-01108", "ts": "2026-10-15T14:07:53Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1965 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01109", "ts": "2026-10-15T14:07:54Z", "service": "redis-session", "level": "INFO", "message": "Background saving started"}
+{"id": "log-01110", "ts": "2026-10-15T14:07:57Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2303ms"}
+{"id": "log-01111", "ts": "2026-10-15T14:08:03Z", "service": "notification-service", "level": "INFO", "message": "POST /v1/profile 201 in 210ms"}
+{"id": "log-01112", "ts": "2026-10-15T14:08:04Z", "service": "coredns", "level": "INFO", "message": "[INFO] plugin/reload: configuration unchanged"}
+{"id": "log-01113", "ts": "2026-10-15T14:08:05Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2279ms"}
+{"id": "log-01114", "ts": "2026-10-15T14:08:11Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1916 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01115", "ts": "2026-10-15T14:08:23Z", "service": "portfolio-service", "level": "INFO", "message": "health check ok"}
+{"id": "log-01116", "ts": "2026-10-15T14:08:26Z", "service": "market-data-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 372ms"}
+{"id": "log-01117", "ts": "2026-10-15T14:08:36Z", "service": "ledger-service", "level": "INFO", "message": "GET /v1/payments/intent 200 in 324ms"}
+{"id": "log-01118", "ts": "2026-10-15T14:08:36Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2162ms"}
+{"id": "log-01119", "ts": "2026-10-15T14:08:41Z", "service": "portfolio-db", "level": "INFO", "message": "automatic vacuum of table \"holdings\": index scans: 1"}
+{"id": "log-01120", "ts": "2026-10-15T14:08:49Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1542ms"}
+{"id": "log-01121", "ts": "2026-10-15T14:08:51Z", "service": "fraud-service", "level": "INFO", "message": "POST /v1/accounts 201 in 328ms"}
+{"id": "log-01122", "ts": "2026-10-15T14:08:52Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1571 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01123", "ts": "2026-10-15T14:08:52Z", "service": "orders-service", "level": "INFO", "message": "GET /v1/orders 200 in 223ms"}
+{"id": "log-01124", "ts": "2026-10-15T14:08:53Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2054 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01125", "ts": "2026-10-15T14:08:58Z", "service": "event-bus", "level": "INFO", "message": "Committed offsets for group fraud-signals"}
+{"id": "log-01126", "ts": "2026-10-15T14:09:04Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 1576ms"}
+{"id": "log-01127", "ts": "2026-10-15T14:09:08Z", "service": "ledger-db", "level": "WARN", "message": "duration: 2078 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01128", "ts": "2026-10-15T14:09:16Z", "service": "user-db", "level": "INFO", "message": "automatic vacuum of table \"sessions\": index scans: 1"}
+{"id": "log-01129", "ts": "2026-10-15T14:09:21Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1755 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01130", "ts": "2026-10-15T14:09:50Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1145 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01131", "ts": "2026-10-15T14:09:54Z", "service": "ledger-service", "level": "WARN", "message": "slow ledger query took 2201ms"}
+{"id": "log-01132", "ts": "2026-10-15T14:09:57Z", "service": "ledger-db", "level": "WARN", "message": "duration: 1527 ms statement: SELECT * FROM ledger_entries WHERE account_id = $1"}
+{"id": "log-01133", "ts": "2026-10-15T14:09:57Z", "service": "upi-gateway", "level": "INFO", "message": "GET /v1/accounts 200 in 369ms"}

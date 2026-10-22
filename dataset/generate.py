@@ -23,7 +23,7 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from scenarios import HISTORY, SCENARIOS, Scenario
+from scenarios import HELDOUT, HISTORY, SCENARIOS, Scenario
 
 ROOT = Path(__file__).resolve().parents[1]
 WORLD = ROOT / "data" / "world"
@@ -306,6 +306,11 @@ def build_changes(sc: Scenario, start: datetime, rng: random.Random):
     involved = set(sc.symptom_services)
     if sc.truth.service:
         involved.add(sc.truth.service)
+    if sc.split == "heldout":
+        # Keep routine in-window deploys off the services the scenario changes, so they
+        # cannot become an unintended extra suspect. (Dev incidents keep their original
+        # data byte for byte, so this applies to held-out incidents only.)
+        involved |= {ch.service for ch in sc.changes}
     internal = [s for s, v in SERVICES.items() if v[0] in ("api", "db", "cache", "queue")]
     changes: list[dict] = []
     for _ in range(18):  # routine changes over the past week, before the data window
@@ -399,7 +404,7 @@ def generate(sc: Scenario) -> None:
         "id": sc.id, "verdict": t.verdict, "root_cause_service": t.service,
         "category": t.category, "accepted": accepted,
         "key_evidence": resolve_keys(t.key_evidence, log_keys, change_keys),
-        "traps": t.traps, "explanation": t.explanation,
+        "traps": t.traps, "explanation": t.explanation, "split": sc.split,
     }, indent=1))
     print(f"{sc.id}: {len(logs)} log lines, {len(changes)} changes, {minutes} min of metrics")
 
@@ -407,7 +412,7 @@ def generate(sc: Scenario) -> None:
 def main() -> None:
     WORLD.mkdir(parents=True, exist_ok=True)
     (WORLD / "history.json").write_text(json.dumps(HISTORY, indent=1))
-    for sc in SCENARIOS:
+    for sc in SCENARIOS + HELDOUT:
         generate(sc)
 
 

@@ -1,0 +1,206 @@
+[
+ {
+  "id": "chg-1290",
+  "ts": "2026-10-09T19:39:00Z",
+  "service": "user-db",
+  "kind": "infra",
+  "summary": "user-db node pool patch: kernel security update",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-1887",
+  "ts": "2026-10-10T00:25:00Z",
+  "service": "notification-service",
+  "kind": "feature_flag",
+  "summary": "notification-service enable new_onboarding_copy for 20% of users",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-2074",
+  "ts": "2026-10-10T15:35:00Z",
+  "service": "notification-service",
+  "kind": "feature_flag",
+  "summary": "notification-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-2673",
+  "ts": "2026-10-10T19:48:00Z",
+  "service": "payments-api",
+  "kind": "config",
+  "summary": "payments-api raise request timeout 5s -> 6s",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-3064",
+  "ts": "2026-10-10T19:48:00Z",
+  "service": "market-data-service",
+  "kind": "config",
+  "summary": "market-data-service raise request timeout 5s -> 6s",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-3526",
+  "ts": "2026-10-11T13:23:00Z",
+  "service": "ledger-service",
+  "kind": "config",
+  "summary": "ledger-service raise request timeout 5s -> 6s",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-3575",
+  "ts": "2026-10-11T19:00:00Z",
+  "service": "fraud-service",
+  "kind": "deploy",
+  "summary": "fraud-service v2.12.8: dependency bumps",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-4300",
+  "ts": "2026-10-11T20:50:00Z",
+  "service": "ledger-service",
+  "kind": "config",
+  "summary": "ledger-service rotate API credentials (scheduled)",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-4369",
+  "ts": "2026-10-12T00:18:00Z",
+  "service": "auth-service",
+  "kind": "feature_flag",
+  "summary": "auth-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-5257",
+  "ts": "2026-10-12T03:25:00Z",
+  "service": "orders-service",
+  "kind": "config",
+  "summary": "orders-service rotate API credentials (scheduled)",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-5882",
+  "ts": "2026-10-12T04:28:00Z",
+  "service": "redis-cache",
+  "kind": "config",
+  "summary": "redis-cache rotate API credentials (scheduled)",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-5929",
+  "ts": "2026-10-12T05:00:00Z",
+  "service": "kyc-service",
+  "kind": "deploy",
+  "summary": "kyc-service v2.0.7: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5979",
+  "ts": "2026-10-12T18:50:00Z",
+  "service": "portfolio-db",
+  "kind": "deploy",
+  "summary": "portfolio-db v4.0.0: logging improvements",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-6191",
+  "ts": "2026-10-13T02:24:00Z",
+  "service": "aa-connector",
+  "kind": "deploy",
+  "summary": "aa-connector v5.8.6: logging improvements",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6508",
+  "ts": "2026-10-14T03:14:00Z",
+  "service": "kyc-service",
+  "kind": "infra",
+  "summary": "kyc-service node pool patch: kernel security update",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-7752",
+  "ts": "2026-10-14T05:09:00Z",
+  "service": "fraud-service",
+  "kind": "deploy",
+  "summary": "fraud-service v4.14.6: dependency bumps",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-8214",
+  "ts": "2026-10-14T16:00:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v7.2.0: session refresh UX",
+  "author": "ci (ishaan)",
+  "details": {
+   "version": "7.2.0",
+   "previous": "7.1.3"
+  }
+ },
+ {
+  "id": "chg-8615",
+  "ts": "2026-10-15T01:03:00Z",
+  "service": "mobile-bff",
+  "kind": "deploy",
+  "summary": "mobile-bff v7.19.8: minor bug fixes",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-9046",
+  "ts": "2026-10-16T03:22:00Z",
+  "service": "portfolio-db",
+  "kind": "infra",
+  "summary": "portfolio-db node pool patch: kernel security update",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-9254",
+  "ts": "2026-10-16T12:05:00Z",
+  "service": "portfolio-db",
+  "kind": "deploy",
+  "summary": "portfolio-db v4.7.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9289",
+  "ts": "2026-10-16T12:31:00Z",
+  "service": "ledger-service",
+  "kind": "deploy",
+  "summary": "ledger-service v6.6.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9296",
+  "ts": "2026-10-16T13:36:00Z",
+  "service": "kubernetes",
+  "kind": "infra",
+  "summary": "node pool np-3: new node image 2026.10.3 (time sync: chrony -> systemd-timesyncd)",
+  "author": "platform-oncall",
+  "details": {
+   "pool": "np-3",
+   "image": "2026.10.3"
+  }
+ }
+]

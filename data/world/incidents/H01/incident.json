@@ -1,0 +1,12 @@
+{
+  "id": "H01",
+  "title": "Logins rejected after OTP",
+  "reported_at": "2026-10-16T14:10:00Z",
+  "reporter": "identity on-call (Ishaan)",
+  "description": "Since ~13:40 about a third of logins fail with 'session invalid' right after the OTP step. auth-service had a release two days ago, maybe a delayed bug?",
+  "symptom_services": [
+    "auth-service",
+    "mobile-bff"
+  ],
+  "customer_impact": "About a third of logins fail; retrying sometimes works."
+}

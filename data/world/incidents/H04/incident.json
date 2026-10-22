@@ -1,0 +1,12 @@
+{
+  "id": "H04",
+  "title": "Mobile app users locked out",
+  "reported_at": "2026-10-19T14:05:00Z",
+  "reporter": "on-call SRE (Priya)",
+  "description": "Mobile app users can't log in or load anything since ~13:30; the website seems fine. auth-service was deployed at 13:00.",
+  "symptom_services": [
+    "mobile-bff",
+    "auth-service"
+  ],
+  "customer_impact": "A large share of mobile users get errors on every screen."
+}

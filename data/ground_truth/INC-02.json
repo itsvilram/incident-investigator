@@ -362,5 +362,6 @@
   "reporter blames a deploy",
   "the blamed deploy happened 8 minutes AFTER onset"
  ],
- "explanation": "ledger-db's disk filled up (rising since noon, warnings from 13:20); writes fail from 13:52. The kyc-service deploy at 14:00 is after the onset and unrelated."
+ "explanation": "ledger-db's disk filled up (rising since noon, warnings from 13:20); writes fail from 13:52. The kyc-service deploy at 14:00 is after the onset and unrelated.",
+ "split": "dev"
 }

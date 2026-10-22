@@ -1,0 +1,12 @@
+{
+  "id": "H03",
+  "title": "KYC onboarding failing",
+  "reported_at": "2026-10-18T14:20:00Z",
+  "reporter": "growth on-call (Neha)",
+  "description": "KYC onboarding fails for many new users since ~13:50. kyc-service threads look exhausted. kyc-service was deployed yesterday.",
+  "symptom_services": [
+    "kyc-service",
+    "mobile-bff"
+  ],
+  "customer_impact": "Roughly 40% of new users cannot finish KYC."
+}

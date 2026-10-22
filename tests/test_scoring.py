@@ -84,3 +84,19 @@ def test_missing_symptomatic_telemetry_blocks_acceptance():
         contradicting=[], assumptions=[], confidence=0.9)])
     flags = check_hypotheses(hset, ctx)
     assert any("could not be retrieved" in f for f in blocking_flags(flags, hset))
+
+
+def test_commit_and_hold_back_metrics():
+    t02, t09 = load_truth("INC-02"), load_truth("INC-09")
+    rows = [
+        score(result("INC-02", "root_cause_identified",
+                     [("ledger-db", "resource_exhaustion", 0.9)], [], []), t02),   # right
+        score(result("INC-09", "root_cause_identified",
+                     [("sms-vendor", "third_party_outage", 0.85)], [], []), t09),  # wrong, sure
+        score(result("INC-02", "inconclusive",
+                     [("ledger-db", "resource_exhaustion", 0.3)], [], []), t02),   # held back
+    ]
+    agg = aggregate(rows)["multi_agent"]
+    assert agg["concluded"] == 2 and agg["wrong_conclusion"] == 1
+    assert agg["wrong_confident"] == 1 and agg["precision"] == 0.5
+    assert agg["false_inconclusive"] == 1

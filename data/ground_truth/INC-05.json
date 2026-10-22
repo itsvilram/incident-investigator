@@ -321,5 +321,6 @@
   "the reporter and a past incident point to gateway rate limiting",
   "the gateway itself is healthy"
  ],
- "explanation": "aa-connector's mTLS client certificate expired at exactly 13:30. Errors jump from 0 to 97% in one minute (no ramp, unlike rate limiting) and fail fast."
+ "explanation": "aa-connector's mTLS client certificate expired at exactly 13:30. Errors jump from 0 to 97% in one minute (no ramp, unlike rate limiting) and fail fast.",
+ "split": "dev"
 }

@@ -465,5 +465,6 @@
   "the deploy went out 35 minutes before onset with clean metrics in between",
   "the new resend limit shows up in logs and looks related"
  ],
- "explanation": "The OTP vendor started returning 503s at 13:40. auth-service v7.1.3 ran cleanly for 35 minutes before that; its resend limit only amplifies user frustration."
+ "explanation": "The OTP vendor started returning 503s at 13:40. auth-service v7.1.3 ran cleanly for 35 minutes before that; its resend limit only amplifies user frustration.",
+ "split": "dev"
 }

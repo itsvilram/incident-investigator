@@ -1,0 +1,207 @@
+[
+ {
+  "id": "chg-1251",
+  "ts": "2026-10-08T19:28:00Z",
+  "service": "aa-connector",
+  "kind": "config",
+  "summary": "aa-connector raise request timeout 5s -> 6s",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-1954",
+  "ts": "2026-10-09T00:09:00Z",
+  "service": "event-bus",
+  "kind": "deploy",
+  "summary": "event-bus v8.7.1: logging improvements",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-2329",
+  "ts": "2026-10-09T06:04:00Z",
+  "service": "aa-connector",
+  "kind": "config",
+  "summary": "aa-connector raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-2604",
+  "ts": "2026-10-10T12:57:00Z",
+  "service": "event-bus",
+  "kind": "config",
+  "summary": "event-bus raise request timeout 5s -> 6s",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-2932",
+  "ts": "2026-10-11T00:44:00Z",
+  "service": "fraud-service",
+  "kind": "config",
+  "summary": "fraud-service raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-3458",
+  "ts": "2026-10-11T06:54:00Z",
+  "service": "payments-api",
+  "kind": "config",
+  "summary": "payments-api rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-4033",
+  "ts": "2026-10-11T10:12:00Z",
+  "service": "fraud-service",
+  "kind": "infra",
+  "summary": "fraud-service node pool patch: kernel security update",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-4326",
+  "ts": "2026-10-11T13:30:00Z",
+  "service": "ledger-service",
+  "kind": "feature_flag",
+  "summary": "ledger-service enable new_onboarding_copy for 20% of users",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-4413",
+  "ts": "2026-10-11T15:34:00Z",
+  "service": "user-db",
+  "kind": "deploy",
+  "summary": "user-db v7.6.2: logging improvements",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-4720",
+  "ts": "2026-10-12T06:41:00Z",
+  "service": "aa-connector",
+  "kind": "config",
+  "summary": "aa-connector rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-4971",
+  "ts": "2026-10-12T17:05:00Z",
+  "service": "aa-connector",
+  "kind": "feature_flag",
+  "summary": "aa-connector enable new_onboarding_copy for 20% of users",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5667",
+  "ts": "2026-10-13T07:59:00Z",
+  "service": "user-db",
+  "kind": "infra",
+  "summary": "user-db node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6174",
+  "ts": "2026-10-13T09:05:00Z",
+  "service": "payments-api",
+  "kind": "feature_flag",
+  "summary": "payments-api enable new_onboarding_copy for 20% of users",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-6747",
+  "ts": "2026-10-13T09:42:00Z",
+  "service": "redis-cache",
+  "kind": "infra",
+  "summary": "redis-cache node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-6943",
+  "ts": "2026-10-13T13:01:00Z",
+  "service": "orders-service",
+  "kind": "config",
+  "summary": "orders-service rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-7461",
+  "ts": "2026-10-13T13:17:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v7.5.9: minor bug fixes",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-8089",
+  "ts": "2026-10-14T04:03:00Z",
+  "service": "portfolio-db",
+  "kind": "infra",
+  "summary": "portfolio-db node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8172",
+  "ts": "2026-10-15T01:49:00Z",
+  "service": "ledger-db",
+  "kind": "feature_flag",
+  "summary": "ledger-db enable new_onboarding_copy for 20% of users",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-8372",
+  "ts": "2026-10-15T12:22:00Z",
+  "service": "aa-connector",
+  "kind": "deploy",
+  "summary": "aa-connector v4.1.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8654",
+  "ts": "2026-10-15T12:27:00Z",
+  "service": "redis-session",
+  "kind": "deploy",
+  "summary": "redis-session v3.4.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8940",
+  "ts": "2026-10-15T13:18:00Z",
+  "service": "ledger-service",
+  "kind": "config",
+  "summary": "ledger query batch size 100 -> 1000",
+  "author": "ravi (ledger team)",
+  "details": {
+   "key": "query.batch_size",
+   "old": 100,
+   "new": 1000
+  }
+ },
+ {
+  "id": "chg-9095",
+  "ts": "2026-10-15T13:18:00Z",
+  "service": "ledger-db",
+  "kind": "infra",
+  "summary": "storage class migration gp3 -> io2 (online)",
+  "author": "platform-data",
+  "details": {
+   "volume": "ledger-db-data",
+   "online": true
+  }
+ }
+]

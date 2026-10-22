@@ -21,12 +21,19 @@ def aggregate(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
         rs = [r for r in rows if r["system"] == system]
         right = [r["top_confidence"] for r in rs if r["correct"]]
         wrong = [r["top_confidence"] for r in rs if not r["correct"]]
+        concluded = [r for r in rs if r["verdict"] == "root_cause_identified"]
+        wrong_concluded = [r for r in concluded if not r["correct"]]
         out[system] = {
             "runs": len(rs),
             "accuracy": _mean([float(r["correct"]) for r in rs]),
             "top3": _mean([float(r["top3"]) for r in rs]),
             "service_accuracy": _mean([float(r["service_correct"]) for r in rs]),
             "false_inconclusive": sum(r["false_inconclusive"] for r in rs),
+            "concluded": len(concluded),
+            "wrong_conclusion": len(wrong_concluded),
+            "wrong_confident": sum(r["top_confidence"] >= 0.8 for r in wrong_concluded),
+            "precision": (sum(r["correct"] for r in concluded) / len(concluded)
+                          if concluded else None),
             "citation_validity": _mean([r["citation_validity"] for r in rs]),
             "invented_citations": sum(r["invented_citations"] for r in rs),
             "key_evidence_recall": _mean([r["key_evidence_recall"] for r in rs]),
@@ -62,7 +69,11 @@ METRICS = [
     ("Root-cause accuracy (top-1)", "accuracy", "pct"),
     ("Correct answer in top 3", "top3", "pct"),
     ("Right service (any category)", "service_accuracy", "pct"),
-    ("Wrongly said inconclusive", "false_inconclusive", "int"),
+    ("Concluded a root cause (runs)", "concluded", "int"),
+    ("Wrong conclusion (runs)", "wrong_conclusion", "int"),
+    ("  of which confident, top confidence >= 0.8 (runs)", "wrong_confident", "int"),
+    ("Right when it concluded", "precision", "pct"),
+    ("Held back when it could have answered (runs)", "false_inconclusive", "int"),
     ("Citation validity (cited IDs really retrieved)", "citation_validity", "pct"),
     ("Invented citations (total)", "invented_citations", "int"),
     ("Key-evidence recall", "key_evidence_recall", "pct"),

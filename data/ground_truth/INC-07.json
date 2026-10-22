@@ -518,5 +518,6 @@
   "logs come back partial",
   "an earlier, unrelated broker-api 429 blip"
  ],
- "explanation": "A push campaign at 13:30 sent 2.1M users to place SIPs; orders-service traffic rose 6x, it hit max replicas and its executor queue overflowed."
+ "explanation": "A push campaign at 13:30 sent 2.1M users to place SIPs; orders-service traffic rose 6x, it hit max replicas and its executor queue overflowed.",
+ "split": "dev"
 }

@@ -385,5 +385,6 @@
   "very loud but harmless deprecation warnings (present all day)",
   "the cause is a flag, not a deploy, and two services away"
  ],
- "explanation": "Turning ledger.reconciliation_v2 to 100% at 13:18 enabled an unindexed query (sequential scans of 48M rows); ledger-db CPU and latency rise and slow payments."
+ "explanation": "Turning ledger.reconciliation_v2 to 100% at 13:18 enabled an unindexed query (sequential scans of 48M rows); ledger-db CPU and latency rise and slow payments.",
+ "split": "dev"
 }

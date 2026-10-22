@@ -1,0 +1,11 @@
+{
+  "id": "H05",
+  "title": "Payment confirmations not sent",
+  "reported_at": "2026-10-20T14:40:00Z",
+  "reporter": "support lead (Fatima)",
+  "description": "Payment confirmation SMS/push are not being sent since ~14:10, and notification-service pods keep restarting. Looks like the SMS vendor issue from March again?",
+  "symptom_services": [
+    "notification-service"
+  ],
+  "customer_impact": "No payment confirmations are delivered; payments themselves succeed."
+}

@@ -241,5 +241,6 @@
   "an unrelated config change at 13:30",
   "a harmless cache eviction burst"
  ],
- "explanation": "The partner bank API slowed from 13:40; upi-gateway's workers block on it and payments-api times out on upi-gateway. npci-switch stays healthy."
+ "explanation": "The partner bank API slowed from 13:40; upi-gateway's workers block on it and payments-api times out on upi-gateway. npci-switch stays healthy.",
+ "split": "dev"
 }

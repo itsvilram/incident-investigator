@@ -378,5 +378,6 @@
   "a config change, not a deploy: 'no deploys today' is true",
   "the database looks healthy (low CPU, few connections)"
  ],
- "explanation": "A config sync cut ledger-service's DB pool from 50 to 5 at 13:12. ledger-db is idle (5 connections, low CPU) while ledger-service waits for connections."
+ "explanation": "A config sync cut ledger-service's DB pool from 50 to 5 at 13:12. ledger-db is idle (5 connections, low CPU) while ledger-service waits for connections.",
+ "split": "dev"
 }

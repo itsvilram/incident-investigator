@@ -82,6 +82,7 @@ class Scenario:
     truth: Truth
     faults: list[Fault] = field(default_factory=list)
     log_blackout: list[tuple[str, str]] = field(default_factory=list)  # (service, from)
+    split: str = "dev"  # "dev": used while building; "heldout": written after the code freeze
 
 
 SCENARIOS = [
@@ -675,6 +676,303 @@ SCENARIOS = [
             "The upi-gateway routing change sent @okbank handles to /v3/collect, which "
             "returns 404. Only @okbank payments fail; payments-api just relays the error.",
         ),
+    ),
+]
+
+# Held-out incidents: written AFTER the code freeze (git tag freeze-before-heldout) and never
+# used to tune prompts or code. Only these measure how the systems do on unseen incidents.
+HELDOUT = [
+    Scenario(
+        id="H01",
+        day="2026-10-16",
+        title="Logins rejected after OTP",
+        reported_at="14:10",
+        reporter="identity on-call (Ishaan)",
+        description=(
+            "Since ~13:40 about a third of logins fail with 'session invalid' right after the "
+            "OTP step. auth-service had a release two days ago, maybe a delayed bug?"
+        ),
+        symptom_services=["auth-service", "mobile-bff"],
+        customer_impact="About a third of logins fail; retrying sometimes works.",
+        changes=[
+            Change(
+                "-2d 16:00", "auth-service", "deploy",
+                "auth-service v7.2.0: session refresh UX", "ci (ishaan)",
+                {"version": "7.2.0", "previous": "7.1.3"}, key="herring",
+            ),
+            Change(
+                "13:36", "kubernetes", "infra",
+                "node pool np-3: new node image 2026.10.3 (time sync: chrony -> systemd-timesyncd)",
+                "platform-oncall", {"pool": "np-3", "image": "2026.10.3"}, key="trigger",
+            ),
+        ],
+        metrics=[
+            Metric("auth-service", "error_rate_pct", "13:40", 31),
+            Metric("mobile-bff", "error_rate_pct", "13:40", 6),
+        ],
+        logs=[
+            Log("kubernetes", "INFO",
+                "node pool np-3 rolled to image 2026.10.3 (3 nodes replaced)", "13:36",
+                once=True),
+            Log("kubernetes", "WARN",
+                "node np-3-a1: clock offset +{p}s exceeds 5s threshold (time sync not "
+                "synchronised)", "13:38", rate=0.5, key="offset"),
+            Log("auth-service", "ERROR",
+                "JWT validation failed on pod auth-service-6f7d-k2x9p (node np-3-a1): token "
+                "issued in the future (iat skew {p}s)", "13:40", rate=12, key="skew"),
+            Log("mobile-bff", "WARN", "upstream auth-service returned 401 for POST /v1/session",
+                "13:40", rate=5),
+        ],
+        truth=Truth(
+            "identified", "kubernetes", "config_change",
+            ["change:trigger", "log:offset", "log:skew"],
+            ["looks like an auth-service bug", "an auth-service deploy 2 days earlier",
+             "only pods on one node fail"],
+            "A node-image change on pool np-3 broke time sync; node np-3-a1's clock runs "
+            "~95s ahead, so tokens validated on the auth pod there look 'issued in the future'.",
+            alternatives=[("kubernetes", "bad_deploy")],
+        ),
+        split="heldout",
+    ),
+    Scenario(
+        id="H02",
+        day="2026-10-17",
+        title="Payments timing out",
+        reported_at="13:35",
+        reporter="payments on-call (Arjun)",
+        description=(
+            "Payments are timing out since ~13:05. payments-api had a config change at 13:02, "
+            "probably that."
+        ),
+        symptom_services=["payments-api", "ledger-service"],
+        customer_impact="About 12% of payments time out.",
+        changes=[
+            Change(
+                "13:02", "payments-api", "config",
+                "logging: ledger client log level INFO -> DEBUG for 1h", "arjun",
+                {"key": "logging.ledger_client", "old": "INFO", "new": "DEBUG"}, key="herring",
+            ),
+        ],
+        metrics=[
+            Metric("ledger-db", "latency_p99_ms", "13:05", 9500),
+            Metric("ledger-db", "connections_active", "13:05", 180),
+            Metric("ledger-db", "cpu_pct", "13:05", 21),
+            Metric("ledger-service", "latency_p99_ms", "13:05", 10000),
+            Metric("ledger-service", "error_rate_pct", "13:06", 15),
+            Metric("payments-api", "latency_p99_ms", "13:06", 10500),
+            Metric("payments-api", "error_rate_pct", "13:06", 12),
+        ],
+        logs=[
+            Log("payments-api", "INFO", "ledger client debug: POST /entries for payment {id}",
+                "13:02", rate=6),
+            Log("ledger-db", "INFO",
+                "cron: reconcile_daily started (LOCK TABLE ledger_entries IN SHARE ROW "
+                "EXCLUSIVE MODE)", "13:04", once=True, key="cron"),
+            Log("ledger-db", "WARN",
+                "process {n} still waiting for RowExclusiveLock on relation ledger_entries after "
+                "1000.0 ms", "13:05", rate=12, key="lockwait"),
+            Log("ledger-service", "ERROR",
+                "statement timeout: INSERT INTO ledger_entries (payment {id}) canceled after "
+                "10000 ms", "13:06", rate=10, key="timeout"),
+            Log("payments-api", "ERROR",
+                "ledger-service POST /entries timed out after 10s (payment {id})", "13:06",
+                rate=10),
+        ],
+        truth=Truth(
+            "identified", "ledger-db", "resource_exhaustion",
+            ["log:cron", "log:lockwait", "metric:ledger-db:latency_p99_ms"],
+            ["the blamed config change comes 3 minutes BEFORE onset, so the timing fits",
+             "database CPU drops: lock waits, not load"],
+            "A scheduled reconciliation job took a table lock on ledger_entries at 13:04; "
+            "inserts queue behind it. The payments-api change only raised a log level.",
+            alternatives=[("ledger-db", "dependency_failure")],
+        ),
+        split="heldout",
+    ),
+    Scenario(
+        id="H03",
+        day="2026-10-18",
+        title="KYC onboarding failing",
+        reported_at="14:20",
+        reporter="growth on-call (Neha)",
+        description=(
+            "KYC onboarding fails for many new users since ~13:50. kyc-service threads look "
+            "exhausted. kyc-service was deployed yesterday."
+        ),
+        symptom_services=["kyc-service", "mobile-bff"],
+        customer_impact="Roughly 40% of new users cannot finish KYC.",
+        changes=[
+            Change(
+                "-1d 17:30", "kyc-service", "deploy",
+                "kyc-service v5.3.0: new PAN verification screen flow", "ci (meera)",
+                {"version": "5.3.0", "previous": "5.2.0"}, key="herring",
+            ),
+        ],
+        metrics=[
+            Metric("kyc-service", "latency_p99_ms", "13:50", 28000, shape="ramp", until="13:54"),
+            Metric("kyc-service", "error_rate_pct", "13:52", 38),
+            Metric("mobile-bff", "error_rate_pct", "13:52", 2.5),
+        ],
+        logs=[
+            Log("kyc-service", "WARN",
+                "kyc-vendor POST /v2/pan/verify returned 504 Gateway Timeout after 30000ms "
+                "(request {id})", "13:50", rate=10, key="vendor504"),
+            Log("kyc-service", "INFO", "kyc-vendor POST /v2/aadhaar/otp 200 in {fast}ms",
+                "13:50", rate=4),
+            Log("kyc-service", "WARN", "retrying kyc-vendor pan/verify (attempt 3 of 3)",
+                "13:51", rate=8),
+            Log("kyc-service", "ERROR",
+                "verification worker pool exhausted (64/64 busy); request rejected", "13:53",
+                rate=6, key="pool"),
+        ],
+        truth=Truth(
+            "identified", "kyc-vendor", "third_party_outage",
+            ["log:vendor504"],
+            ["the vendor's health probe stays green", "kyc-service's own thread pool looks "
+             "like the cause", "a kyc-service deploy the day before"],
+            "The KYC vendor's PAN-verification endpoint times out from 13:50 (other endpoints "
+            "work, so its health probe is green); retries fill kyc-service's worker pool.",
+        ),
+        split="heldout",
+    ),
+    Scenario(
+        id="H04",
+        day="2026-10-19",
+        title="Mobile app users locked out",
+        reported_at="14:05",
+        reporter="on-call SRE (Priya)",
+        description=(
+            "Mobile app users can't log in or load anything since ~13:30; the website seems "
+            "fine. auth-service was deployed at 13:00."
+        ),
+        symptom_services=["mobile-bff", "auth-service"],
+        customer_impact="A large share of mobile users get errors on every screen.",
+        changes=[
+            Change(
+                "13:00", "auth-service", "deploy", "auth-service v7.2.1: OTP SMS template copy",
+                "ci (ishaan)", {"version": "7.2.1", "previous": "7.2.0"}, key="herring",
+            ),
+            Change(
+                "13:28", "mobile-bff", "config",
+                "edge rate limit: tighten per-client-IP limit", "platform-bot",
+                {"key": "ratelimit.per_ip_rps", "old": 1000, "new": 100}, key="trigger",
+            ),
+        ],
+        metrics=[
+            Metric("mobile-bff", "error_rate_pct", "13:29", 27),
+            Metric("auth-service", "rps", "13:29", 92),
+            Metric("payments-api", "rps", "13:29", 175),
+            Metric("portfolio-service", "rps", "13:29", 255),
+            Metric("otp-provider", "error_rate_pct", "12:40", 15, end="12:44"),
+        ],
+        logs=[
+            Log("mobile-bff", "INFO", "config reloaded: ratelimit.per_ip_rps=100", "13:28",
+                once=True, key="reload"),
+            Log("mobile-bff", "WARN",
+                "rate limit exceeded for client ip 49.36.{p}.{p} (limit 100/s): responding 429",
+                "13:29", rate=20, key="ratelimit"),
+            Log("auth-service", "WARN",
+                "OTP send failed: otp-provider responded 503 (request {id})", "12:40", rate=3,
+                end="12:44"),
+        ],
+        truth=Truth(
+            "identified", "mobile-bff", "config_change",
+            ["change:trigger", "log:ratelimit", "metric:auth-service:rps"],
+            ["an auth-service deploy 30 minutes earlier", "an earlier, unrelated OTP-vendor "
+             "blip", "downstream services look healthy: their traffic DROPS"],
+            "A rate-limit change on mobile-bff cut the per-IP limit to 100/s; mobile users "
+            "behind shared carrier IPs get 429s, so less traffic reaches downstream services.",
+        ),
+        split="heldout",
+    ),
+    Scenario(
+        id="H05",
+        day="2026-10-20",
+        title="Payment confirmations not sent",
+        reported_at="14:40",
+        reporter="support lead (Fatima)",
+        description=(
+            "Payment confirmation SMS/push are not being sent since ~14:10, and "
+            "notification-service pods keep restarting. Looks like the SMS vendor issue from "
+            "March again?"
+        ),
+        symptom_services=["notification-service"],
+        customer_impact="No payment confirmations are delivered; payments themselves succeed.",
+        changes=[
+            Change(
+                "14:05", "payments-api", "deploy",
+                "payments-api v2.16.0: PaymentCompleted event v3 (rename amount -> amount_minor)",
+                "ci (ananya)", {"version": "2.16.0", "previous": "2.15.0"}, key="trigger",
+            ),
+        ],
+        metrics=[
+            Metric("notification-service", "pod_restarts", "14:08", 2, shape="pulse", every=3),
+            Metric("notification-service", "error_rate_pct", "14:08", 60),
+            Metric("event-bus", "consumer_lag", "14:08", 25000, shape="ramp", until="14:40"),
+        ],
+        logs=[
+            Log("payments-api", "INFO", "Started payments-api v2.16.0 in 8.1s", "14:05",
+                once=True),
+            Log("notification-service", "ERROR",
+                "DeserializationError: PaymentCompleted v3 missing required field 'amount' "
+                "(partition 4, offset {n})", "14:08", rate=10, key="deser"),
+            Log("kubernetes", "WARN",
+                "Pod notification-service-5d9c-{h} CrashLoopBackOff (exit code 1), restarting",
+                "14:09", rate=0.5, key="crash"),
+        ],
+        truth=Truth(
+            "identified", "payments-api", "bad_deploy",
+            ["change:trigger", "log:deser"],
+            ["symptoms are two hops away, behind the event bus", "restarting pods look like a "
+             "memory problem", "a past incident blames the SMS vendor"],
+            "payments-api v2.16.0 renamed a field in the PaymentCompleted event; "
+            "notification-service fails to parse it and crash-loops, so the backlog grows.",
+        ),
+        split="heldout",
+    ),
+    Scenario(
+        id="H06",
+        day="2026-10-15",
+        title="Payments slower than usual",
+        reported_at="14:00",
+        reporter="payments on-call (Arjun)",
+        description="payments-api p99 latency is up 3x since ~13:20. No errors to speak of.",
+        symptom_services=["payments-api"],
+        customer_impact="Payments are slower; no failures.",
+        changes=[
+            Change(
+                "13:18", "ledger-service", "config", "ledger query batch size 100 -> 1000",
+                "ravi (ledger team)", {"key": "query.batch_size", "old": 100, "new": 1000},
+                key="c1",
+            ),
+            Change(
+                "13:18", "ledger-db", "infra", "storage class migration gp3 -> io2 (online)",
+                "platform-data", {"volume": "ledger-db-data", "online": True}, key="c2",
+            ),
+        ],
+        metrics=[
+            Metric("ledger-db", "latency_p99_ms", "13:19", 120),
+            Metric("ledger-db", "cpu_pct", "13:19", 48),
+            Metric("ledger-service", "latency_p99_ms", "13:19", 900),
+            Metric("payments-api", "latency_p99_ms", "13:20", 1300),
+        ],
+        logs=[
+            Log("ledger-service", "WARN", "slow ledger query took {slow}ms", "13:19", rate=3),
+            Log("ledger-db", "WARN",
+                "duration: {slow} ms statement: SELECT * FROM ledger_entries WHERE account_id "
+                "= $1", "13:19", rate=3),
+            Log("ledger-db", "INFO", "storage migration progress {p}%", "13:20", rate=0.2),
+        ],
+        truth=Truth(
+            "inconclusive", None, None,
+            [],
+            ["two changes in the same minute on two services in the same path",
+             "the symptoms fit both, and no evidence separates them"],
+            "A ledger-service batch-size change and a ledger-db storage migration both started "
+            "at 13:18, and the data cannot tell which slowed the queries. The right answer is "
+            "inconclusive, with 'revert one at a time' as the next step.",
+        ),
+        split="heldout",
     ),
 ]
 

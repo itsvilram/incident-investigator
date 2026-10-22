@@ -1,0 +1,14 @@
+{
+ "id": "H06",
+ "verdict": "inconclusive",
+ "root_cause_service": null,
+ "category": null,
+ "accepted": [],
+ "key_evidence": [],
+ "traps": [
+  "two changes in the same minute on two services in the same path",
+  "the symptoms fit both, and no evidence separates them"
+ ],
+ "explanation": "A ledger-service batch-size change and a ledger-db storage migration both started at 13:18, and the data cannot tell which slowed the queries. The right answer is inconclusive, with 'revert one at a time' as the next step.",
+ "split": "heldout"
+}

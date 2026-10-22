@@ -456,5 +456,6 @@
   "the dependency graph has no edge to coredns: it is a platform service",
   "other services show the same DNS errors"
  ],
- "explanation": "coredns was scaled from 4 replicas to 1 at 13:22; it saturates and DNS lookups time out (EAI_AGAIN) across several services, worst for notification-service."
+ "explanation": "coredns was scaled from 4 replicas to 1 at 13:22; it saturates and DNS lookups time out (EAI_AGAIN) across several services, worst for notification-service.",
+ "split": "dev"
 }

@@ -1,0 +1,12 @@
+{
+  "id": "H02",
+  "title": "Payments timing out",
+  "reported_at": "2026-10-17T13:35:00Z",
+  "reporter": "payments on-call (Arjun)",
+  "description": "Payments are timing out since ~13:05. payments-api had a config change at 13:02, probably that.",
+  "symptom_services": [
+    "payments-api",
+    "ledger-service"
+  ],
+  "customer_impact": "About 12% of payments time out."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "H06",
+  "title": "Payments slower than usual",
+  "reported_at": "2026-10-15T14:00:00Z",
+  "reporter": "payments on-call (Arjun)",
+  "description": "payments-api p99 latency is up 3x since ~13:20. No errors to speak of.",
+  "symptom_services": [
+    "payments-api"
+  ],
+  "customer_impact": "Payments are slower; no failures."
+}

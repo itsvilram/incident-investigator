@@ -1,0 +1,207 @@
+[
+ {
+  "id": "chg-1529",
+  "ts": "2026-10-12T17:34:00Z",
+  "service": "fraud-service",
+  "kind": "config",
+  "summary": "fraud-service raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-1582",
+  "ts": "2026-10-12T19:10:00Z",
+  "service": "ledger-db",
+  "kind": "infra",
+  "summary": "ledger-db node pool patch: kernel security update",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-1592",
+  "ts": "2026-10-12T22:15:00Z",
+  "service": "market-data-service",
+  "kind": "deploy",
+  "summary": "market-data-service v9.19.2: dependency bumps",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-2969",
+  "ts": "2026-10-13T14:58:00Z",
+  "service": "orders-service",
+  "kind": "config",
+  "summary": "orders-service rotate API credentials (scheduled)",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-3530",
+  "ts": "2026-10-13T19:35:00Z",
+  "service": "kyc-service",
+  "kind": "deploy",
+  "summary": "kyc-service v1.9.5: minor bug fixes",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-3906",
+  "ts": "2026-10-14T01:52:00Z",
+  "service": "redis-session",
+  "kind": "infra",
+  "summary": "redis-session node pool patch: kernel security update",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-4018",
+  "ts": "2026-10-14T07:34:00Z",
+  "service": "portfolio-db",
+  "kind": "config",
+  "summary": "portfolio-db raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-5392",
+  "ts": "2026-10-14T15:20:00Z",
+  "service": "upi-gateway",
+  "kind": "deploy",
+  "summary": "upi-gateway v6.11.4: minor bug fixes",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5406",
+  "ts": "2026-10-15T13:38:00Z",
+  "service": "payments-api",
+  "kind": "config",
+  "summary": "payments-api raise request timeout 5s -> 6s",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5885",
+  "ts": "2026-10-15T15:22:00Z",
+  "service": "payments-api",
+  "kind": "config",
+  "summary": "payments-api rotate API credentials (scheduled)",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-5970",
+  "ts": "2026-10-16T07:02:00Z",
+  "service": "payments-api",
+  "kind": "deploy",
+  "summary": "payments-api v5.12.0: logging improvements",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-6433",
+  "ts": "2026-10-16T14:19:00Z",
+  "service": "aa-connector",
+  "kind": "config",
+  "summary": "aa-connector rotate API credentials (scheduled)",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-6437",
+  "ts": "2026-10-17T02:30:00Z",
+  "service": "aa-connector",
+  "kind": "infra",
+  "summary": "aa-connector node pool patch: kernel security update",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-6825",
+  "ts": "2026-10-17T10:45:00Z",
+  "service": "redis-session",
+  "kind": "config",
+  "summary": "redis-session rotate API credentials (scheduled)",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-7223",
+  "ts": "2026-10-17T23:33:00Z",
+  "service": "payments-api",
+  "kind": "deploy",
+  "summary": "payments-api v4.1.5: logging improvements",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-7332",
+  "ts": "2026-10-18T00:02:00Z",
+  "service": "user-db",
+  "kind": "config",
+  "summary": "user-db rotate API credentials (scheduled)",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-7631",
+  "ts": "2026-10-18T01:20:00Z",
+  "service": "mobile-bff",
+  "kind": "deploy",
+  "summary": "mobile-bff v7.7.3: dependency bumps",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-8243",
+  "ts": "2026-10-19T09:24:00Z",
+  "service": "portfolio-db",
+  "kind": "infra",
+  "summary": "portfolio-db node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8562",
+  "ts": "2026-10-19T12:05:00Z",
+  "service": "ledger-db",
+  "kind": "deploy",
+  "summary": "ledger-db v5.2.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8806",
+  "ts": "2026-10-19T12:27:00Z",
+  "service": "event-bus",
+  "kind": "deploy",
+  "summary": "event-bus v5.27.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9803",
+  "ts": "2026-10-19T13:00:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v7.2.1: OTP SMS template copy",
+  "author": "ci (ishaan)",
+  "details": {
+   "version": "7.2.1",
+   "previous": "7.2.0"
+  }
+ },
+ {
+  "id": "chg-9849",
+  "ts": "2026-10-19T13:28:00Z",
+  "service": "mobile-bff",
+  "kind": "config",
+  "summary": "edge rate limit: tighten per-client-IP limit",
+  "author": "platform-bot",
+  "details": {
+   "key": "ratelimit.per_ip_rps",
+   "old": 1000,
+   "new": 100
+  }
+ }
+]

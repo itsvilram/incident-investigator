@@ -342,5 +342,6 @@
   "payments-api errors are pass-through from upi-gateway",
   "the new payments-api endpoint works fine"
  ],
- "explanation": "The upi-gateway routing change sent @okbank handles to /v3/collect, which returns 404. Only @okbank payments fail; payments-api just relays the error."
+ "explanation": "The upi-gateway routing change sent @okbank handles to /v3/collect, which returns 404. Only @okbank payments fail; payments-api just relays the error.",
+ "split": "dev"
 }

@@ -1,0 +1,194 @@
+[
+ {
+  "id": "chg-1513",
+  "ts": "2026-10-14T12:25:00Z",
+  "service": "user-db",
+  "kind": "deploy",
+  "summary": "user-db v5.5.0: dependency bumps",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-2693",
+  "ts": "2026-10-14T20:20:00Z",
+  "service": "upi-gateway",
+  "kind": "feature_flag",
+  "summary": "upi-gateway enable new_onboarding_copy for 20% of users",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-2748",
+  "ts": "2026-10-15T15:06:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v3.9.0: logging improvements",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-3029",
+  "ts": "2026-10-17T05:36:00Z",
+  "service": "portfolio-db",
+  "kind": "feature_flag",
+  "summary": "portfolio-db enable new_onboarding_copy for 20% of users",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-3126",
+  "ts": "2026-10-17T06:49:00Z",
+  "service": "ledger-db",
+  "kind": "deploy",
+  "summary": "ledger-db v8.20.5: minor bug fixes",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-3346",
+  "ts": "2026-10-17T16:42:00Z",
+  "service": "redis-cache",
+  "kind": "feature_flag",
+  "summary": "redis-cache enable new_onboarding_copy for 20% of users",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-3412",
+  "ts": "2026-10-17T17:55:00Z",
+  "service": "ledger-db",
+  "kind": "deploy",
+  "summary": "ledger-db v8.7.1: minor bug fixes",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-3694",
+  "ts": "2026-10-17T17:57:00Z",
+  "service": "portfolio-service",
+  "kind": "config",
+  "summary": "portfolio-service rotate API credentials (scheduled)",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-4641",
+  "ts": "2026-10-17T20:03:00Z",
+  "service": "portfolio-service",
+  "kind": "infra",
+  "summary": "portfolio-service node pool patch: kernel security update",
+  "author": "ci (ananya)",
+  "details": {}
+ },
+ {
+  "id": "chg-5385",
+  "ts": "2026-10-18T00:25:00Z",
+  "service": "auth-service",
+  "kind": "deploy",
+  "summary": "auth-service v2.17.2: logging improvements",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-5916",
+  "ts": "2026-10-18T11:09:00Z",
+  "service": "upi-gateway",
+  "kind": "deploy",
+  "summary": "upi-gateway v4.13.1: logging improvements",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-7103",
+  "ts": "2026-10-18T20:04:00Z",
+  "service": "mobile-bff",
+  "kind": "feature_flag",
+  "summary": "mobile-bff enable new_onboarding_copy for 20% of users",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-7472",
+  "ts": "2026-10-18T22:24:00Z",
+  "service": "orders-service",
+  "kind": "config",
+  "summary": "orders-service raise request timeout 5s -> 6s",
+  "author": "ci (meera)",
+  "details": {}
+ },
+ {
+  "id": "chg-7569",
+  "ts": "2026-10-19T06:51:00Z",
+  "service": "market-data-service",
+  "kind": "deploy",
+  "summary": "market-data-service v6.8.1: minor bug fixes",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-7654",
+  "ts": "2026-10-19T09:37:00Z",
+  "service": "aa-connector",
+  "kind": "deploy",
+  "summary": "aa-connector v7.7.6: logging improvements",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-7809",
+  "ts": "2026-10-19T11:18:00Z",
+  "service": "kyc-service",
+  "kind": "infra",
+  "summary": "kyc-service node pool patch: kernel security update",
+  "author": "platform-bot",
+  "details": {}
+ },
+ {
+  "id": "chg-7837",
+  "ts": "2026-10-20T04:55:00Z",
+  "service": "orders-service",
+  "kind": "config",
+  "summary": "orders-service raise request timeout 5s -> 6s",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-8724",
+  "ts": "2026-10-20T05:53:00Z",
+  "service": "user-db",
+  "kind": "infra",
+  "summary": "user-db node pool patch: kernel security update",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9102",
+  "ts": "2026-10-20T12:14:00Z",
+  "service": "ledger-db",
+  "kind": "deploy",
+  "summary": "ledger-db v5.8.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9742",
+  "ts": "2026-10-20T12:46:00Z",
+  "service": "orders-service",
+  "kind": "deploy",
+  "summary": "orders-service v2.27.0: routine release",
+  "author": "ci (dev)",
+  "details": {}
+ },
+ {
+  "id": "chg-9973",
+  "ts": "2026-10-20T14:05:00Z",
+  "service": "payments-api",
+  "kind": "deploy",
+  "summary": "payments-api v2.16.0: PaymentCompleted event v3 (rename amount -> amount_minor)",
+  "author": "ci (ananya)",
+  "details": {
+   "version": "2.16.0",
+   "previous": "2.15.0"
+  }
+ }
+]
