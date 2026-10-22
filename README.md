@@ -15,7 +15,6 @@ Built for the Orange Invest AI Engineer take-home.
 | Evaluation | [docs/EVALUATION.md](docs/EVALUATION.md) · raw: [held-out](results/heldout/summary.md), [dev](results/summary.md) |
 | Test cases and results | [docs/TEST_RESULTS.md](docs/TEST_RESULTS.md) (all 18 incidents, every run) |
 | Dataset | [dataset/scenarios.py](dataset/scenarios.py) (18 incidents and their traps) · generated data in `data/` |
-| AI assistant transcript | [transcript/](transcript/) |
 
 ## Results
 
@@ -156,8 +155,3 @@ results/            final evaluation output
   incidents (listed in [docs/EVALUATION.md](docs/EVALUATION.md)), so dev scores are optimistic. The held-out
   set was written after the freeze tag `freeze-before-heldout`; `git diff freeze-before-heldout --
   src/investigator/agents` shows no change since. The same author wrote both sets.
-
-## AI coding assistant
-
-Built with Claude Code (as the assignment allows). The full session transcript is in
-[transcript/](transcript/). Redacted parts are marked where they occur; see [transcript/README.md](transcript/README.md).
