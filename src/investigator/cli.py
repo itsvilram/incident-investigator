@@ -42,6 +42,8 @@ def main() -> None:
     ev.add_argument("--incidents", default="all", help="comma-separated IDs, or 'all'")
     ev.add_argument("--systems", default="multi,baseline")
     ev.add_argument("--repeats", type=int, default=1)
+    ev.add_argument("--strict", action="store_true",
+                    help="discard runs that hit rate limits or fell back to another model")
     ev.add_argument("--concurrency", type=int, default=1,
                     help="incidents investigated at the same time")
     _common(ev)

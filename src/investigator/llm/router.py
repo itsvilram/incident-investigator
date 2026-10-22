@@ -40,6 +40,9 @@ class Router:
         self._max_wait_s = max_wait_s
         self._sleep = sleep
         self._exhausted: set[int] = set()  # clients whose daily quota is gone
+        # Calls that fell back to another model or failed on rate limits. The eval's strict
+        # mode discards runs where this grew, so every scored run used the intended model.
+        self.degraded_calls = 0
 
     def describe(self) -> dict[str, list[str]]:
         return {tier: [f"{c.provider}:{c.model}" for c in clients]
@@ -89,6 +92,7 @@ class Router:
                 ctx.tracer.event("llm_fallback", to=f"{client.provider}:{client.model}",
                                  reason=errors[-1][:200])
                 span["fallback"] = True
+                self.degraded_calls += 1
             for wait in range(self._rate_limit_waits + 1):
                 try:
                     return await client.chat(messages, tools=tools, schema=schema)
@@ -107,6 +111,8 @@ class Router:
                 except LLMError as error:
                     errors.append(str(error))
                     break
+        if any("rate limiting" in e for e in errors):
+            self.degraded_calls += 1
         raise LLMError("All providers failed: " + " | ".join(e[:200] for e in errors))
 
 

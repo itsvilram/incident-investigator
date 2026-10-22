@@ -50,6 +50,8 @@ def score(result: dict[str, Any], truth: dict[str, Any]) -> dict[str, Any]:
         "llm_calls": result["llm_calls"],
         "tokens": result["total_tokens"],
         "latency_s": result["latency_s"],
+        "rate_limit_wait_s": result.get("rate_limit_wait_s", 0.0),
+        "latency_ex_waits_s": round(result["latency_s"] - result.get("rate_limit_wait_s", 0.0), 2),
         "rounds": result["rounds"],
         "stop_reason": result["stop_reason"],
         "gaps": len(result["gaps"]),

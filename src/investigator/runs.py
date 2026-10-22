@@ -25,6 +25,7 @@ class RunResult:
     cited_ids: list[str]
     gaps: list[str]
     models: dict[str, list[str]] = field(default_factory=dict)
+    rate_limit_wait_s: float = 0.0  # time spent waiting on provider rate limits (in latency)
 
     @property
     def total_tokens(self) -> int:
@@ -42,6 +43,7 @@ class RunResult:
             completion_tokens=b.completion_tokens, latency_s=round(latency_s, 2),
             retrieved_ids=sorted(ctx.evidence.items), cited_ids=cited_ids(report),
             gaps=list(dict.fromkeys(ctx.gaps)), models=models,
+            rate_limit_wait_s=rate_limit_wait(ctx.tracer.spans),
         )
 
     def to_json(self) -> dict:
@@ -49,6 +51,10 @@ class RunResult:
         data["report"] = self.report.model_dump(mode="json")
         data["total_tokens"] = self.total_tokens
         return data
+
+
+def rate_limit_wait(spans: list[dict]) -> float:
+    return round(sum(s.get("wait_s", 0) for s in spans if s["name"] == "llm_rate_limited"), 1)
 
 
 def save_run(result: RunResult, ctx: RunContext, out_dir: Path,

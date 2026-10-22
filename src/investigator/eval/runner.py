@@ -40,23 +40,38 @@ async def run_eval(args: argparse.Namespace) -> Path:
                   f"cache: {'off' if args.no_cache else 'on'}")
     started = time.monotonic()
 
+    paused = False
+
     async def job(rep: int, incident: str, system: str) -> dict[str, Any] | None:
+        nonlocal paused
         folder = out / f"rep{rep}"
         existing = folder / system / incident / "result.json"
         if existing.exists():
             return json.loads(existing.read_text())
         async with slots:
+            if paused:
+                return None
+            degraded_before = router.degraded_calls
             try:
                 world = World.load(incident)
                 seed = args.seed + rep - 1
                 if system == "multi_agent":
                     result, state = await multi_agent.investigate(
                         world, router, seed=seed, fault_rate=args.fault_rate)
-                    save_run(result, state.ctx, folder, multi_agent.state_snapshot(state))
+                    run_ctx, snapshot = state.ctx, multi_agent.state_snapshot(state)
                 else:
-                    result, ctx = await baseline.investigate(
+                    result, run_ctx = await baseline.investigate(
                         world, router, seed=seed, fault_rate=args.fault_rate)
-                    save_run(result, ctx, folder)
+                    snapshot = None
+                if args.strict and router.degraded_calls > degraded_before:
+                    # Rate limited or fell back to another model: not a fair run. Keep it
+                    # out of the results and stop; rerunning later resumes from here.
+                    paused = True
+                    console.print(f"[yellow]{incident} {system} rep{rep}: rate limited or "
+                                  "fell back to another model; discarded. Pausing the eval; "
+                                  "run the same command later to resume.[/]")
+                    return None
+                save_run(result, run_ctx, folder, snapshot)
             except Exception as error:  # one broken run must not sink the whole eval
                 console.print(f"[red]{incident} {system} rep{rep} crashed: {error}[/]")
                 (folder / system / incident).mkdir(parents=True, exist_ok=True)
@@ -81,7 +96,11 @@ async def run_eval(args: argparse.Namespace) -> Path:
         f"faults). Wall time: {time.monotonic() - started:.0f}s.",
     ]
     if failed:
-        notes.append(f"**{failed} run(s) crashed** and are not in the table; see error.txt.")
+        notes.append(f"**{failed} run(s) missing** (crashed, or discarded in strict mode); "
+                     "rerun the same command to resume.")
+    if not rows:
+        console.print("[red]No finished runs yet.[/]")
+        return out
     path = write_summary(rows, out, title="Evaluation: multi-agent vs single-agent", notes=notes)
     console.print(f"[bold]Summary:[/] {path}")
     return path

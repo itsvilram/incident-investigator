@@ -36,6 +36,8 @@ def aggregate(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
             "tokens_total": sum(r["tokens"] for r in rs),
             "latency_s": _mean([r["latency_s"] for r in rs]),
             "latency_p50_s": statistics.median([r["latency_s"] for r in rs]),
+            "rate_limit_wait_s": _mean([r["rate_limit_wait_s"] for r in rs]),
+            "latency_ex_waits_s": _mean([r["latency_ex_waits_s"] for r in rs]),
             "confidence_when_right": _mean(right),
             "confidence_when_wrong": _mean(wrong),
         }
@@ -70,6 +72,8 @@ METRICS = [
     ("Tokens, all incidents", "tokens_total", "int"),
     ("Latency per incident (mean)", "latency_s", "s"),
     ("Latency per incident (median)", "latency_p50_s", "s"),
+    ("  of which waiting on rate limits (mean)", "rate_limit_wait_s", "s"),
+    ("Latency without rate-limit waits (mean)", "latency_ex_waits_s", "s"),
     ("Mean top confidence when right", "confidence_when_right", ""),
     ("Mean top confidence when wrong", "confidence_when_wrong", ""),
 ]
