@@ -6,6 +6,7 @@ no hypotheses, or a top confidence below 0.4, means inconclusive.
 
 from investigator.agents import prompts
 from investigator.agents.base import AgentFailed, AgentRuntime, incident_block, run_agent
+from investigator.agents.checks import blocking_flags
 from investigator.harness.context import BudgetExceeded
 from investigator.harness.state import InvestigationState
 from investigator.llm.client import LLMError
@@ -36,6 +37,14 @@ async def write_report(rt: AgentRuntime, state: InvestigationState) -> FinalRepo
         report = fallback_report(state)
     if critique and critique.verdict == "inconclusive":
         report = report.model_copy(update={"verdict": "inconclusive"})
+    open_checks = blocking_flags(state.check_flags, state.hypotheses)
+    if open_checks and report.verdict == "root_cause_identified":
+        rt.ctx.tracer.event("verdict_downgraded", flags=open_checks)
+        report = report.model_copy(update={
+            "verdict": "inconclusive",
+            "evidence_gaps": [*report.evidence_gaps,
+                              *(f"Unresolved automatic check: {f}" for f in open_checks)],
+        })
     return finalize(report)
 
 

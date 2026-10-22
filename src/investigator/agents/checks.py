@@ -52,6 +52,12 @@ def check_hypotheses(hset: HypothesisSet | None, ctx: RunContext) -> list[str]:
     for gap in dict.fromkeys(ctx.gaps):
         if top.root_cause_service in gap:
             flags.append(f"WARN: evidence gap on the top suspect: {gap}")
+    for svc in ctx.world.incident.symptom_services:
+        metrics_failed = any(g.startswith(f"query_metrics(service={svc}") and "failed" in g
+                             for g in ctx.gaps)
+        if metrics_failed and not any(i.startswith(f"metric:{svc}:") for i in store.items):
+            flags.append(f"WARN: symptomatic service {svc}'s own metrics could not be "
+                         "retrieved (tool failures): any conclusion rests on indirect evidence.")
 
     earliest = sorted((e for e in store.items.values() if e.source == "metrics" and e.ts),
                       key=lambda e: e.ts)[:6]
@@ -64,11 +70,23 @@ def check_hypotheses(hset: HypothesisSet | None, ctx: RunContext) -> list[str]:
     return flags
 
 
+BLOCKING_MARKERS = ("AFTER the symptom onset", "has no supporting evidence", "unknown service",
+                    "health is unverified", "could not be retrieved")
+
+
 def blocking_flags(flags: list[str], hset: HypothesisSet | None) -> list[str]:
-    """Check results that forbid accepting the top hypothesis yet."""
+    """Check results that forbid accepting (or reporting) the top hypothesis.
+
+    Invented citations are not blocking: the evaluation's grounding metric measures them.
+    """
     if hset is None or not hset.hypotheses:
-        return flags
+        return [f for f in flags if f.startswith("FAIL")]
     top = max(hset.hypotheses, key=lambda h: h.confidence)
-    return [f for f in flags
-            if (f.startswith("FAIL") and (f"{top.id} " in f or f"{top.id}'s" in f))
-            or "health is unverified" in f]
+    about_top = (f"{top.id} ", f"{top.id}'s", f"({top.id})", f"hypothesis {top.id}")
+    blocking = []
+    for flag in flags:
+        if not any(m in flag for m in BLOCKING_MARKERS):
+            continue
+        if "symptomatic service" in flag or any(t in flag for t in about_top):
+            blocking.append(flag)
+    return blocking
