@@ -1,0 +1,301 @@
+{
+ "system": "multi_agent",
+ "incident_id": "INC-10",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Login failures and OTP not received issues started at 2026-10-13T13:40:00+00:00 because the external dependency otp-provider began returning 503 Service Unavailable errors and experiencing high latency. This caused synchronous authentication requests to fail in auth-service, which cascaded into error rate increases in mobile-bff.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "External Third-Party Outage: otp-provider Service Degradation",
+    "root_cause_service": "otp-provider",
+    "category": "third_party_outage",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "metric:auth-service:error_rate_pct",
+      "note": "auth-service error rate spiked sharply from 0.33% to ~33.65% starting precisely at 13:40."
+     },
+     {
+      "evidence_id": "metric:otp-provider:error_rate_pct",
+      "note": "otp-provider error rate spiked from baseline 0.3% to a peak of 80.04% at 13:52, starting precisely at 13:40."
+     },
+     {
+      "evidence_id": "metric:otp-provider:latency_p99_ms",
+      "note": "otp-provider p99 latency jumped from 907.65 ms to 5495.16 ms starting at 13:40."
+     },
+     {
+      "evidence_id": "log-00604",
+      "note": "auth-service logs explicitly show OTP send failures because otp-provider responded with 503 Service Unavailable starting at 13:40:13."
+     },
+     {
+      "evidence_id": "metric:mobile-bff:error_rate_pct",
+      "note": "mobile-bff error rate increased starting at 13:41 due to its synchronous dependency on auth-service."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:otp-provider:rps",
+      "note": "otp-provider request rate remained completely stable with no traffic surges or volume anomalies during the incident window."
+     }
+    ]
+   },
+   {
+    "rank": 2,
+    "title": "Auth-Service v7.1.3 Deployment Bug / Integration Interaction",
+    "root_cause_service": "auth-service",
+    "category": "bad_deploy",
+    "confidence": 0.05,
+    "supporting": [
+     {
+      "evidence_id": "chg-9363",
+      "note": "auth-service v7.1.3 was deployed 35 minutes prior to the onset at 13:05 with changes to limit OTP resends to 3 per 10 minutes."
+     },
+     {
+      "evidence_id": "log-00660",
+      "note": "auth-service logged that OTP resend limits were reached starting at 13:42."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "log-00604",
+      "note": "The primary error is an explicit 503 Service Unavailable returned by otp-provider, and otp-provider metrics independently confirm severe vendor-side degradation starting at the exact same minute (13:40)."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "auth-service error rate spiked to 34.07% starting at 2026-10-13T13:40:00+00:00.",
+    "evidence_ids": [
+     "metric:auth-service:error_rate_pct"
+    ]
+   },
+   {
+    "text": "mobile-bff error rate increased to 3.98% starting at 2026-10-13T13:41:00+00:00.",
+    "evidence_ids": [
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   },
+   {
+    "text": "auth-service logs show repeated OTP send failures because otp-provider responded with 503 Service Unavailable, first seen at 2026-10-13T13:40:13+00:00.",
+    "evidence_ids": [
+     "log-00604"
+    ]
+   },
+   {
+    "text": "auth-service depends synchronously on otp-provider, user-db, and redis-session.",
+    "evidence_ids": [
+     "dep:auth-service->otp-provider",
+     "dep:auth-service->user-db",
+     "dep:auth-service->redis-session"
+    ]
+   },
+   {
+    "text": "mobile-bff depends on auth-service.",
+    "evidence_ids": [
+     "dep:mobile-bff->auth-service"
+    ]
+   },
+   {
+    "text": "auth-service was deployed at 2026-10-13T13:05:00+00:00 with summary auth-service v7.1.3: limit OTP resends to 3 per 10 minutes.",
+    "evidence_ids": [
+     "chg-9363"
+    ]
+   },
+   {
+    "text": "otp-provider error rate spiked starting at 13:40, going from a baseline of 0.3% to a peak of 80.04% at 13:52.",
+    "evidence_ids": [
+     "metric:otp-provider:error_rate_pct"
+    ]
+   },
+   {
+    "text": "otp-provider p99 latency spiked starting at 13:40, going from a baseline of 907.65 ms to a peak of 5495.16 ms at 13:56.",
+    "evidence_ids": [
+     "metric:otp-provider:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "otp-provider request rate remained stable with no traffic anomalies during the incident window.",
+    "evidence_ids": [
+     "metric:otp-provider:rps"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The external vendor (otp-provider) experienced internal infrastructure or capacity failures starting at 13:40 independent of client traffic volume."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-13T13:05:00Z",
+    "event": "auth-service v7.1.3 deployed, limiting OTP resends to 3 per 10 minutes",
+    "evidence_id": "chg-9363"
+   },
+   {
+    "ts": "2026-10-13T13:40:00Z",
+    "event": "otp-provider error rate and p99 latency spike; auth-service error rate spikes",
+    "evidence_id": "metric:otp-provider:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-13T13:40:13Z",
+    "event": "auth-service logs first OTP send failure due to otp-provider 503 Service Unavailable response",
+    "evidence_id": "log-00604"
+   },
+   {
+    "ts": "2026-10-13T13:41:00Z",
+    "event": "mobile-bff error rate increases due to upstream auth-service dependency failures",
+    "evidence_id": "metric:mobile-bff:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-13T13:42:00Z",
+    "event": "auth-service logs that OTP resend limit reached for user",
+    "evidence_id": "log-00660"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Contact the external otp-provider vendor support to report the 503 Service Unavailable errors and high latency starting at 13:40.",
+    "priority": "immediate",
+    "rationale": "External metrics and logs directly show otp-provider is experiencing a major outage.",
+    "evidence_ids": [
+     "metric:otp-provider:error_rate_pct",
+     "metric:otp-provider:latency_p99_ms",
+     "log-00604"
+    ]
+   },
+   {
+    "action": "Implement fallback routing or secondary SMS/OTP vendor integration within auth-service if available.",
+    "priority": "short_term",
+    "rationale": "Mitigates total login failure impact when the primary external provider becomes unavailable.",
+    "evidence_ids": [
+     "log-00604",
+     "dep:auth-service->otp-provider"
+    ]
+   },
+   {
+    "action": "Establish cross-vendor SLA monitoring and automated circuit breakers for external third-party dependencies.",
+    "priority": "long_term",
+    "rationale": "Prevents cascading login failures and improves user feedback transparency during external vendor outages.",
+    "evidence_ids": [
+     "metric:auth-service:error_rate_pct",
+     "metric:otp-provider:error_rate_pct"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 2,
+ "tool_calls": 11,
+ "llm_calls": 19,
+ "prompt_tokens": 93689,
+ "completion_tokens": 10209,
+ "latency_s": 71.73,
+ "retrieved_ids": [
+  "chg-1566",
+  "chg-1780",
+  "chg-1814",
+  "chg-1905",
+  "chg-2266",
+  "chg-3784",
+  "chg-4358",
+  "chg-4408",
+  "chg-5107",
+  "chg-5560",
+  "chg-5590",
+  "chg-5735",
+  "chg-5973",
+  "chg-6058",
+  "chg-6272",
+  "chg-6759",
+  "chg-7227",
+  "chg-7763",
+  "chg-8588",
+  "chg-9012",
+  "chg-9363",
+  "dep:aa-connector->aa-fiu-gateway",
+  "dep:aa-connector->user-db",
+  "dep:auth-service->otp-provider",
+  "dep:auth-service->redis-session",
+  "dep:auth-service->user-db",
+  "dep:kyc-service->kyc-vendor",
+  "dep:kyc-service->user-db",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:notification-service->event-bus",
+  "dep:notification-service->push-provider",
+  "dep:notification-service->sms-vendor",
+  "dep:orders-service->broker-api",
+  "dep:orders-service->portfolio-db",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:portfolio-service->market-data-service",
+  "dep:portfolio-service->portfolio-db",
+  "log-00104",
+  "log-00137",
+  "log-00228",
+  "log-00240",
+  "log-00258",
+  "log-00604",
+  "log-00660",
+  "log-01298",
+  "log-01299",
+  "log-01300",
+  "log-01301",
+  "log-01303",
+  "log-01304",
+  "log-01305",
+  "log-01306",
+  "log-01307",
+  "log-01310",
+  "log-01311",
+  "log-01312",
+  "metric:auth-service:cpu_pct",
+  "metric:auth-service:error_rate_pct",
+  "metric:auth-service:latency_p99_ms",
+  "metric:auth-service:mem_pct",
+  "metric:auth-service:pod_restarts",
+  "metric:auth-service:rps",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps",
+  "metric:otp-provider:error_rate_pct",
+  "metric:otp-provider:latency_p99_ms",
+  "metric:otp-provider:rps"
+ ],
+ "cited_ids": [
+  "metric:auth-service:error_rate_pct",
+  "metric:otp-provider:error_rate_pct",
+  "metric:otp-provider:latency_p99_ms",
+  "log-00604",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:otp-provider:rps",
+  "chg-9363",
+  "log-00660",
+  "dep:auth-service->otp-provider",
+  "dep:auth-service->user-db",
+  "dep:auth-service->redis-session",
+  "dep:mobile-bff->auth-service"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "total_tokens": 103898,
+ "rate_limit_wait_s": 0
+}

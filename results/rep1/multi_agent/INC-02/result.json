@@ -1,0 +1,348 @@
+{
+ "system": "multi_agent",
+ "incident_id": "INC-02",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Payments became stuck in PENDING because the ledger database volume ran completely out of disk space, resulting in PostgreSQL write failures ('No space left on device') starting at 13:52 UTC. This caused ledger-service and payments-api to fail database INSERT operations and mark payments for retry.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Ledger Database Disk Exhaustion",
+    "root_cause_service": "ledger-db",
+    "category": "resource_exhaustion",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "metric:ledger-db:disk_used_pct",
+      "note": "Shows disk usage upward anomaly starting at 13:19 UTC and saturating at 100.7% at 13:59 UTC."
+     },
+     {
+      "evidence_id": "log-00514",
+      "note": "Shows ledger-db warning for disk usage at 96% at 13:22 UTC."
+     },
+     {
+      "evidence_id": "log-00706",
+      "note": "Shows explicit PostgreSQL disk full errors starting at 13:52 UTC."
+     },
+     {
+      "evidence_id": "metric:ledger-db:error_rate_pct",
+      "note": "Shows ledger-db error rate rising sharply at 13:52 UTC."
+     },
+     {
+      "evidence_id": "log-00704",
+      "note": "Shows ledger-service logging PSQLException 'No space left on device' during INSERT operations starting at 13:52 UTC."
+     },
+     {
+      "evidence_id": "metric:ledger-service:error_rate_pct",
+      "note": "Shows ledger-service error rate spiking at 13:52 UTC."
+     },
+     {
+      "evidence_id": "log-00735",
+      "note": "Shows payments-api marking payments as PENDING for retry starting at 13:53 UTC due to ledger write failures."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "KYC Service Deployment Interference",
+    "root_cause_service": "kyc-service",
+    "category": "bad_deploy",
+    "confidence": 0.02,
+    "supporting": [
+     {
+      "evidence_id": "chg-9369",
+      "note": "Shows kyc-service was deployed at 14:00 UTC, aligning with the reported timing in the incident summary."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "log-00706",
+      "note": "Ledger-db disk exhaustion and write errors started at 13:52 UTC, which is 8 minutes before the kyc-service deployment."
+     },
+     {
+      "evidence_id": "log-00704",
+      "note": "Ledger-service disk errors started at 13:52 UTC."
+     },
+     {
+      "evidence_id": "metric:ledger-service:error_rate_pct",
+      "note": "Ledger-service error rates started rising at 13:52 UTC."
+     },
+     {
+      "evidence_id": "metric:payments-api:error_rate_pct",
+      "note": "Payments-api error rates started rising at 13:53 UTC."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "Ledger-db disk_used_pct showed an upward anomaly starting at 2026-10-03T13:19:00+00:00 and reached a saturated peak of 100.7% at 13:59:00+00:00.",
+    "evidence_ids": [
+     "metric:ledger-db:disk_used_pct"
+    ]
+   },
+   {
+    "text": "Ledger-db logged warning for disk usage at 96% starting at 2026-10-03T13:22:49+00:00.",
+    "evidence_ids": [
+     "log-00514"
+    ]
+   },
+   {
+    "text": "Ledger-service error rate and latency anomalies started at 2026-10-03T13:52:00+00:00.",
+    "evidence_ids": [
+     "metric:ledger-service:error_rate_pct",
+     "metric:ledger-service:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "Ledger-service logged disk full errors during INSERT operations starting at 2026-10-03T13:52:00+00:00.",
+    "evidence_ids": [
+     "log-00704"
+    ]
+   },
+   {
+    "text": "Ledger-db error_rate_pct increased sharply from its baseline of 0.05% starting at 2026-10-03T13:52:00+00:00.",
+    "evidence_ids": [
+     "metric:ledger-db:error_rate_pct"
+    ]
+   },
+   {
+    "text": "Ledger-db logged database extension errors (No space left on device) starting at 2026-10-03T13:52:08+00:00.",
+    "evidence_ids": [
+     "log-00706"
+    ]
+   },
+   {
+    "text": "Payments-api error rates started rising at 2026-10-03T13:53:00+00:00.",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct"
+    ]
+   },
+   {
+    "text": "Payments-api began logging ledger write failures and marking payments as PENDING for retry at 2026-10-03T13:53:03+00:00.",
+    "evidence_ids": [
+     "log-00735"
+    ]
+   },
+   {
+    "text": "Kyc-service was deployed to version v5.2.0 via chg-9369 at 2026-10-03T14:00:00+00:00.",
+    "evidence_ids": [
+     "chg-9369"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The underlying storage volume reached maximum capacity due to natural data accumulation or database growth without an explicit prior administrative failure log.",
+   "The timestamps of ledger-db and ledger-service errors occurring 8 minutes prior to the deploy are coincidental."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-03T13:19:00Z",
+    "event": "Ledger-db disk usage upward anomaly begins",
+    "evidence_id": "metric:ledger-db:disk_used_pct"
+   },
+   {
+    "ts": "2026-10-03T13:22:49Z",
+    "event": "Ledger-db logs warning for disk usage at 96%",
+    "evidence_id": "log-00514"
+   },
+   {
+    "ts": "2026-10-03T13:52:00Z",
+    "event": "Ledger-service and ledger-db begin experiencing disk full write errors and error rate spikes",
+    "evidence_id": "log-00704"
+   },
+   {
+    "ts": "2026-10-03T13:53:00Z",
+    "event": "Payments-api error rate rises and payments are marked PENDING for retry",
+    "evidence_id": "metric:payments-api:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-03T13:59:00Z",
+    "event": "Ledger-db disk usage reaches saturated peak of 100.7%",
+    "evidence_id": "metric:ledger-db:disk_used_pct"
+   },
+   {
+    "ts": "2026-10-03T14:00:00Z",
+    "event": "kyc-service deployed to version v5.2.0",
+    "evidence_id": "chg-9369"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Immediately expand the storage volume backing ledger-db to restore write operations.",
+    "priority": "immediate",
+    "rationale": "Ledger-db is completely out of disk space (100.7%), causing database write failures and leaving payments stuck in PENDING.",
+    "evidence_ids": [
+     "metric:ledger-db:disk_used_pct",
+     "log-00706"
+    ]
+   },
+   {
+    "action": "Implement automated recovery mechanisms and retry processing for payments stuck in PENDING once ledger-db storage is expanded.",
+    "priority": "short_term",
+    "rationale": "Hundreds of payments were marked as PENDING for retry due to ledger write failures and will need reconciliation.",
+    "evidence_ids": [
+     "log-00735"
+    ]
+   },
+   {
+    "action": "Set up proactive storage utilization alerts and automated volume scaling for ledger-db before disk usage reaches critical thresholds like 90%.",
+    "priority": "long_term",
+    "rationale": "Disk usage warnings at 96% were logged well before complete saturation, indicating a need for better capacity monitoring and early alerting.",
+    "evidence_ids": [
+     "log-00514",
+     "metric:ledger-db:disk_used_pct"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 2,
+ "tool_calls": 10,
+ "llm_calls": 18,
+ "prompt_tokens": 101970,
+ "completion_tokens": 11818,
+ "latency_s": 63.83,
+ "retrieved_ids": [
+  "chg-1309",
+  "chg-1429",
+  "chg-1490",
+  "chg-1499",
+  "chg-1500",
+  "chg-1694",
+  "chg-3172",
+  "chg-3207",
+  "chg-3360",
+  "chg-3619",
+  "chg-4497",
+  "chg-4908",
+  "chg-6269",
+  "chg-6297",
+  "chg-6677",
+  "chg-6920",
+  "chg-7351",
+  "chg-7687",
+  "chg-7952",
+  "chg-9369",
+  "dep:aa-connector->user-db",
+  "dep:auth-service->user-db",
+  "dep:fraud-service->redis-cache",
+  "dep:kyc-service->kyc-vendor",
+  "dep:kyc-service->user-db",
+  "dep:ledger-service->ledger-db",
+  "dep:market-data-service->redis-cache",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:notification-service->event-bus",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "log-00001",
+  "log-00004",
+  "log-00026",
+  "log-00041",
+  "log-00080",
+  "log-00139",
+  "log-00149",
+  "log-00192",
+  "log-00233",
+  "log-00239",
+  "log-00245",
+  "log-00257",
+  "log-00428",
+  "log-00514",
+  "log-00529",
+  "log-00704",
+  "log-00706",
+  "log-00735",
+  "log-01982",
+  "log-02085",
+  "log-02088",
+  "log-02089",
+  "log-02090",
+  "log-02091",
+  "log-02093",
+  "log-02096",
+  "log-02097",
+  "log-02098",
+  "log-02099",
+  "log-02100",
+  "log-02101",
+  "log-02102",
+  "log-02103",
+  "log-02104",
+  "log-02106",
+  "log-02107",
+  "log-02108",
+  "log-02110",
+  "log-02111",
+  "log-02112",
+  "log-02113",
+  "log-02114",
+  "log-02115",
+  "log-02117",
+  "log-02118",
+  "log-02119",
+  "log-02120",
+  "log-02121",
+  "log-02122",
+  "log-02123",
+  "log-02124",
+  "log-02125",
+  "log-02126",
+  "log-02127",
+  "log-02128",
+  "metric:ledger-db:connections_active",
+  "metric:ledger-db:cpu_pct",
+  "metric:ledger-db:disk_used_pct",
+  "metric:ledger-db:error_rate_pct",
+  "metric:ledger-db:latency_p99_ms",
+  "metric:ledger-db:mem_pct",
+  "metric:ledger-db:rps",
+  "metric:ledger-service:cpu_pct",
+  "metric:ledger-service:error_rate_pct",
+  "metric:ledger-service:latency_p99_ms",
+  "metric:ledger-service:mem_pct",
+  "metric:ledger-service:pod_restarts",
+  "metric:ledger-service:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps"
+ ],
+ "cited_ids": [
+  "metric:ledger-db:disk_used_pct",
+  "log-00514",
+  "log-00706",
+  "metric:ledger-db:error_rate_pct",
+  "log-00704",
+  "metric:ledger-service:error_rate_pct",
+  "log-00735",
+  "chg-9369",
+  "metric:payments-api:error_rate_pct",
+  "metric:ledger-service:latency_p99_ms"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "total_tokens": 113788,
+ "rate_limit_wait_s": 0
+}

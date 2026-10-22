@@ -1,0 +1,13 @@
+incident,system,expected,verdict,top_answer,top_confidence,correct,top3,service_correct,false_inconclusive,citation_validity,invented_citations,key_evidence_recall,tool_calls,llm_calls,tokens,latency_s,rate_limit_wait_s,latency_ex_waits_s,rounds,stop_reason,gaps
+H01,multi_agent,kubernetes / config_change,root_cause_identified,kubernetes / network_dns,0.95,False,False,True,False,1.0,0,1.0,10,18,103007,52.56,0,52.56,2,critic accepted the top hypothesis,0
+H01,baseline,kubernetes / config_change,root_cause_identified,kubernetes / network_dns,0.92,False,False,True,False,1.0,0,1.0,11,5,56010,25.73,10.0,15.73,1,agent finished,0
+H02,multi_agent,ledger-db / resource_exhaustion,root_cause_identified,ledger-db / dependency_failure,0.95,True,True,True,False,1.0,0,1.0,16,19,132447,79.41,30.0,49.41,2,critic accepted the top hypothesis,0
+H02,baseline,ledger-db / resource_exhaustion,root_cause_identified,ledger-db / resource_exhaustion,0.9,True,True,True,False,1.0,0,0.3333333333333333,12,5,68714,19.18,0,19.18,1,agent finished,0
+H03,multi_agent,kyc-vendor / third_party_outage,root_cause_identified,kyc-vendor / third_party_outage,0.85,True,True,True,False,1.0,0,1.0,14,24,149417,85.12,20.0,65.12,2,critic accepted the top hypothesis,1
+H03,baseline,kyc-vendor / third_party_outage,root_cause_identified,kyc-vendor / third_party_outage,0.85,True,True,True,False,1.0,0,1.0,10,5,53492,19.09,0,19.09,1,agent finished,1
+H04,multi_agent,mobile-bff / config_change,root_cause_identified,mobile-bff / config_change,0.95,True,True,True,False,1.0,0,1.0,10,13,78231,41.1,10.0,31.1,1,critic accepted the top hypothesis,0
+H04,baseline,mobile-bff / config_change,root_cause_identified,mobile-bff / config_change,0.92,True,True,True,False,1.0,0,0.6666666666666666,8,4,39395,14.18,0,14.18,1,agent finished,0
+H05,multi_agent,payments-api / bad_deploy,root_cause_identified,payments-api / bad_deploy,0.95,True,True,True,False,1.0,0,1.0,15,22,97006,86.27,30.0,56.27,2,critic accepted the top hypothesis,0
+H05,baseline,payments-api / bad_deploy,root_cause_identified,payments-api / bad_deploy,0.92,True,True,True,False,1.0,0,1.0,8,4,31396,13.59,0,13.59,1,agent finished,0
+H06,multi_agent,inconclusive,root_cause_identified,ledger-service / config_change,0.95,False,False,False,False,1.0,0,,13,19,94736,76.11,30.0,46.11,2,critic accepted the top hypothesis,0
+H06,baseline,inconclusive,root_cause_identified,ledger-service / config_change,0.9,False,False,False,False,1.0,0,,13,6,91559,17.02,0,17.02,1,agent finished,0

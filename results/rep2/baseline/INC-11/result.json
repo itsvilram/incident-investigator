@@ -1,0 +1,212 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-11",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "CoreDNS replicas were scaled down from 4 to 1 at 13:22, overloading the remaining replica and causing CPU saturation, request timeouts, and widespread DNS resolution failures (EAI_AGAIN) across the cluster, including notification-service calls to SMS and push vendors.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "CoreDNS replica scale-down causes DNS resolution failures",
+    "root_cause_service": "coredns",
+    "category": "resource_exhaustion",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-8542",
+      "note": "CoreDNS scaled down from 4 to 1 replicas at 13:22, just before the incident onset."
+     },
+     {
+      "evidence_id": "metric:coredns:cpu_pct",
+      "note": "CoreDNS CPU utilization spiked to 105.9% right after the scale-down."
+     },
+     {
+      "evidence_id": "log-00525",
+      "note": "CoreDNS logs show plugin/errors timeout querying external vendor endpoints."
+     },
+     {
+      "evidence_id": "log-00533",
+      "note": "notification-service logs EAI_AGAIN errors resolving sms-vendor.example.net starting at 13:25."
+     },
+     {
+      "evidence_id": "log-00531",
+      "note": "notification-service logs EAI_AGAIN errors resolving fcm.push-provider.example.com starting at 13:25."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "External vendor outage",
+    "root_cause_service": "sms-vendor",
+    "category": "third_party_outage",
+    "confidence": 0.05,
+    "supporting": [],
+    "contradicting": [
+     {
+      "evidence_id": "log-00533",
+      "note": "Errors are local DNS resolution failures (EAI_AGAIN) rather than HTTP/transport layer failures from the vendor."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "notification-service error rate anomaly started at 2026-10-14T13:25:00+00:00 and peaked at 26.58%.",
+    "evidence_ids": [
+     "metric:notification-service:error_rate_pct"
+    ]
+   },
+   {
+    "text": "CoreDNS replicas were scaled from 4 to 1 at 2026-10-14T13:22:00+00:00.",
+    "evidence_ids": [
+     "chg-8542"
+    ]
+   },
+   {
+    "text": "CoreDNS error rate and latency spiked starting at 2026-10-14T13:23:00+00:00.",
+    "evidence_ids": [
+     "metric:coredns:error_rate_pct",
+     "metric:coredns:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "notification-service logged EAI_AGAIN errors for sms-vendor and push-provider starting at 13:25.",
+    "evidence_ids": [
+     "log-00531",
+     "log-00533"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The reduction of CoreDNS replicas from 4 to 1 directly caused CPU saturation and packet/timeout drops under normal cluster DNS load."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-14T13:22:00Z",
+    "event": "CoreDNS scaled down from 4 to 1 replicas for cost optimisation",
+    "evidence_id": "chg-8542"
+   },
+   {
+    "ts": "2026-10-14T13:23:00Z",
+    "event": "CoreDNS CPU and latency metrics spike",
+    "evidence_id": "metric:coredns:cpu_pct"
+   },
+   {
+    "ts": "2026-10-14T13:24:03Z",
+    "event": "CoreDNS logs first UDP timeout error",
+    "evidence_id": "log-00525"
+   },
+   {
+    "ts": "2026-10-14T13:25:00Z",
+    "event": "notification-service error rate anomaly begins",
+    "evidence_id": "metric:notification-service:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-14T13:25:05Z",
+    "event": "notification-service logs first EAI_AGAIN DNS resolution failure",
+    "evidence_id": "log-00531"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Scale CoreDNS replicas back to at least 4",
+    "priority": "immediate",
+    "rationale": "Restores cluster DNS processing capacity and resolves CPU exhaustion and timeouts.",
+    "evidence_ids": [
+     "chg-8542",
+     "metric:coredns:cpu_pct"
+    ]
+   },
+   {
+    "action": "Implement safety thresholds on infrastructure replica count changes",
+    "priority": "short_term",
+    "rationale": "Prevents accidental or unauthorized critical infrastructure scale-down below high availability requirements.",
+    "evidence_ids": [
+     "chg-8542"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 8,
+ "llm_calls": 4,
+ "prompt_tokens": 29890,
+ "completion_tokens": 3016,
+ "latency_s": 12.11,
+ "retrieved_ids": [
+  "chg-8542",
+  "dep:notification-service->event-bus",
+  "dep:notification-service->push-provider",
+  "dep:notification-service->sms-vendor",
+  "hist-2026-0228",
+  "hist-2026-0325",
+  "log-00296",
+  "log-00391",
+  "log-00487",
+  "log-00515",
+  "log-00525",
+  "log-00531",
+  "log-00533",
+  "log-01230",
+  "log-01231",
+  "log-01235",
+  "log-01250",
+  "log-01251",
+  "log-01259",
+  "log-01268",
+  "log-01275",
+  "log-01276",
+  "log-01277",
+  "log-01288",
+  "log-01289",
+  "log-01290",
+  "log-01291",
+  "log-01292",
+  "log-01293",
+  "log-01295",
+  "log-01297",
+  "log-01298",
+  "log-01299",
+  "log-01300",
+  "log-01301",
+  "log-01302",
+  "log-01303",
+  "metric:coredns:cpu_pct",
+  "metric:coredns:error_rate_pct",
+  "metric:coredns:latency_p99_ms",
+  "metric:coredns:mem_pct",
+  "metric:coredns:rps",
+  "metric:notification-service:cpu_pct",
+  "metric:notification-service:error_rate_pct",
+  "metric:notification-service:latency_p99_ms",
+  "metric:notification-service:mem_pct",
+  "metric:notification-service:pod_restarts",
+  "metric:notification-service:rps"
+ ],
+ "cited_ids": [
+  "chg-8542",
+  "metric:coredns:cpu_pct",
+  "log-00525",
+  "log-00533",
+  "log-00531",
+  "metric:notification-service:error_rate_pct",
+  "metric:coredns:error_rate_pct",
+  "metric:coredns:latency_p99_ms"
+ ],
+ "gaps": [
+  "get_deployments(service=notification-service) returned partial data"
+ ],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 0,
+ "total_tokens": 32906
+}

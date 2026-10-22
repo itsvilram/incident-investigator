@@ -1,0 +1,674 @@
+{
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 3,
+ "plans": [
+  {
+   "rationale": "First round of investigation. We need to check metrics and logs on the symptomatic notification-service to establish the exact symptom onset and error patterns, and run a dependency/change query across the entire system and specifically around notification-service and its upstream/downstream integrations.",
+   "tasks": [
+    {
+     "agent": "observability",
+     "goal": "Check error rates, latency, and queue/processing logs for notification-service starting from 13:45 to determine the exact symptom onset and identify why SMS/push notifications are delayed.",
+     "services": [
+      "notification-service"
+     ]
+    },
+    {
+     "agent": "dependency",
+     "goal": "Retrieve recent deploys, configuration changes, and feature flags across all services, and map the direct dependencies of notification-service (including sms-vendor and push-provider).",
+     "services": [
+      "notification-service",
+      "event-bus",
+      "sms-vendor",
+      "push-provider"
+     ]
+    }
+   ],
+   "stop": false
+  },
+  {
+   "rationale": "Following the Critic's request, we need to gather observability data directly for sms-vendor and push-provider to verify whether the latency is originating on their side. Additionally, we should check if any other downstream consumers or the event bus are showing broader queue or delivery issues.",
+   "tasks": [
+    {
+     "agent": "observability",
+     "goal": "Retrieve error rates, latency metrics, and logs for sms-vendor and push-provider around the 14:00 UTC window to verify external vendor health and response times.",
+     "services": [
+      "sms-vendor",
+      "push-provider"
+     ]
+    },
+    {
+     "agent": "observability",
+     "goal": "Check metrics and logs for event-bus and notification-service to assess message consumption rates, queue lag, and confirm if notification-service metrics backend is still returning 503 errors.",
+     "services": [
+      "notification-service",
+      "event-bus"
+     ]
+    }
+   ],
+   "stop": false
+  },
+  {
+   "rationale": "We need to check sms-vendor's own metrics and WARN/ERROR logs to directly verify if the vendor was unhealthy starting right around the symptom onset at 14:02 UTC, addressing the Critic's request and resolving the evidence gap regarding external vendor health.",
+   "tasks": [
+    {
+     "agent": "observability",
+     "goal": "Retrieve error rates, latency metrics, and WARN/ERROR logs for sms-vendor around the 14:00 UTC window to verify vendor-side health and pinpoint when degradation began.",
+     "services": [
+      "sms-vendor"
+     ]
+    }
+   ],
+   "stop": false
+  }
+ ],
+ "tasks": [
+  {
+   "id": "r1-observability-1",
+   "agent": "observability",
+   "goal": "Check error rates, latency, and queue/processing logs for notification-service starting from 13:45 to determine the exact symptom onset and identify why SMS/push notifications are delayed.",
+   "services": [
+    "notification-service"
+   ],
+   "round": 1,
+   "depends_on": [],
+   "requires": [],
+   "created_by": "orchestrator",
+   "status": "done",
+   "attempts": 1,
+   "max_attempts": 2,
+   "error": null
+  },
+  {
+   "id": "r1-dependency-2",
+   "agent": "dependency",
+   "goal": "Retrieve recent deploys, configuration changes, and feature flags across all services, and map the direct dependencies of notification-service (including sms-vendor and push-provider).",
+   "services": [
+    "notification-service",
+    "event-bus",
+    "sms-vendor",
+    "push-provider"
+   ],
+   "round": 1,
+   "depends_on": [],
+   "requires": [],
+   "created_by": "orchestrator",
+   "status": "done",
+   "attempts": 1,
+   "max_attempts": 2,
+   "error": null
+  },
+  {
+   "id": "r1-reasoning",
+   "agent": "reasoning",
+   "goal": "Build and rank competing root-cause hypotheses",
+   "services": [],
+   "round": 1,
+   "depends_on": [
+    "r1-observability-1",
+    "r1-dependency-2"
+   ],
+   "requires": [],
+   "created_by": "orchestrator",
+   "status": "done",
+   "attempts": 1,
+   "max_attempts": 2,
+   "error": null
+  },
+  {
+   "id": "r1-critic",
+   "agent": "critic",
+   "goal": "Challenge the hypotheses",
+   "services": [],
+   "round": 1,
+   "depends_on": [],
+   "requires": [
+    "r1-reasoning"
+   ],
+   "created_by": "orchestrator",
+   "status": "done",
+   "attempts": 1,
+   "max_attempts": 2,
+   "error": null
+  },
+  {
+   "id": "r2-observability-1",
+   "agent": "observability",
+   "goal": "Retrieve error rates, latency metrics, and logs for sms-vendor and push-provider around the 14:00 UTC window to verify external vendor health and response times.",
+   "services": [
+    "sms-vendor",
+    "push-provider"
+   ],
+   "round": 2,
+   "depends_on": [],
+   "requires": [],
+   "created_by": "orchestrator",
+   "status": "done",
+   "attempts": 1,
+   "max_attempts": 2,
+   "error": null
+  },
+  {
+   "id": "r2-observability-2",
+   "agent": "observability",
+   "goal": "Check metrics and logs for event-bus and notification-service to assess message consumption rates, queue lag, and confirm if notification-service metrics backend is still returning 503 errors.",
+   "services": [
+    "notification-service",
+    "event-bus"
+   ],
+   "round": 2,
+   "depends_on": [],
+   "requires": [],
+   "created_by": "orchestrator",
+   "status": "done",
+   "attempts": 1,
+   "max_attempts": 2,
+   "error": null
+  },
+  {
+   "id": "r2-reasoning",
+   "agent": "reasoning",
+   "goal": "Build and rank competing root-cause hypotheses",
+   "services": [],
+   "round": 2,
+   "depends_on": [
+    "r2-observability-1",
+    "r2-observability-2"
+   ],
+   "requires": [],
+   "created_by": "orchestrator",
+   "status": "done",
+   "attempts": 1,
+   "max_attempts": 2,
+   "error": null
+  },
+  {
+   "id": "r2-critic",
+   "agent": "critic",
+   "goal": "Challenge the hypotheses",
+   "services": [],
+   "round": 2,
+   "depends_on": [],
+   "requires": [
+    "r2-reasoning"
+   ],
+   "created_by": "orchestrator",
+   "status": "done",
+   "attempts": 1,
+   "max_attempts": 2,
+   "error": null
+  },
+  {
+   "id": "r3-observability-1",
+   "agent": "observability",
+   "goal": "Retrieve error rates, latency metrics, and WARN/ERROR logs for sms-vendor around the 14:00 UTC window to verify vendor-side health and pinpoint when degradation began.",
+   "services": [
+    "sms-vendor"
+   ],
+   "round": 3,
+   "depends_on": [],
+   "requires": [],
+   "created_by": "orchestrator",
+   "status": "done",
+   "attempts": 1,
+   "max_attempts": 2,
+   "error": null
+  },
+  {
+   "id": "r3-reasoning",
+   "agent": "reasoning",
+   "goal": "Build and rank competing root-cause hypotheses",
+   "services": [],
+   "round": 3,
+   "depends_on": [
+    "r3-observability-1"
+   ],
+   "requires": [],
+   "created_by": "orchestrator",
+   "status": "done",
+   "attempts": 1,
+   "max_attempts": 2,
+   "error": null
+  },
+  {
+   "id": "r3-critic",
+   "agent": "critic",
+   "goal": "Challenge the hypotheses",
+   "services": [],
+   "round": 3,
+   "depends_on": [],
+   "requires": [
+    "r3-reasoning"
+   ],
+   "created_by": "orchestrator",
+   "status": "done",
+   "attempts": 1,
+   "max_attempts": 2,
+   "error": null
+  }
+ ],
+ "findings": {
+  "r1-observability-1": {
+   "summary": "Investigation of notification-service shows that notification delivery delays began with high latency when communicating with external vendors (sms-vendor and push-provider) around 14:02 UTC, leading to message queue lag starting at 14:18 UTC.",
+   "findings": [
+    {
+     "statement": "sms-vendor send took 5519ms starting at 2026-10-12T14:02:53+00:00",
+     "kind": "fact",
+     "evidence_ids": [
+      "log-00763"
+     ],
+     "service": "notification-service"
+    },
+    {
+     "statement": "push send to push-provider took 7278ms starting at 2026-10-12T14:06:19+00:00",
+     "kind": "fact",
+     "evidence_ids": [
+      "log-00781"
+     ],
+     "service": "notification-service"
+    },
+    {
+     "statement": "Consumer group notif-alerts lag of 279 messages was recorded at 2026-10-12T14:18:26+00:00",
+     "kind": "fact",
+     "evidence_ids": [
+      "log-00860"
+     ],
+     "service": "notification-service"
+    },
+    {
+     "statement": "Metrics query tool failed with 503 Service Unavailable, leaving metrics data unavailable.",
+     "kind": "fact",
+     "evidence_ids": [],
+     "service": "notification-service"
+    }
+   ],
+   "suspected_services": [
+    "notification-service",
+    "sms-vendor",
+    "push-provider"
+   ],
+   "open_questions": [
+    "What caused the external vendors (sms-vendor and push-provider) to experience high latency starting around 14:02 UTC?"
+   ]
+  },
+  "r1-dependency-2": {
+   "summary": "Retrieved service dependencies and recent changes for notification-service, event-bus, sms-vendor, and push-provider. Mapped all configuration changes, feature flags, and deployments across the platform for the past 7 days preceding INC-09.",
+   "findings": [
+    {
+     "statement": "notification-service depends asynchronously on event-bus and synchronously on sms-vendor and push-provider.",
+     "kind": "fact",
+     "evidence_ids": [
+      "dep:notification-service->event-bus",
+      "dep:notification-service->sms-vendor",
+      "dep:notification-service->push-provider"
+     ],
+     "service": "notification-service"
+    },
+    {
+     "statement": "payments-api sends events to event-bus which is consumed by notification-service.",
+     "kind": "fact",
+     "evidence_ids": [
+      "dep:payments-api->event-bus"
+     ],
+     "service": "payments-api"
+    },
+    {
+     "statement": "notification-service had a scheduled API credential rotation configuration change on 2026-10-12T07:38:00+00:00.",
+     "kind": "fact",
+     "evidence_ids": [
+      "chg-9140"
+     ],
+     "service": "notification-service"
+    },
+    {
+     "statement": "event-bus had a request timeout configuration change raised on 2026-10-12T05:21:00+00:00.",
+     "kind": "fact",
+     "evidence_ids": [
+      "chg-8599"
+     ],
+     "service": "event-bus"
+    },
+    {
+     "statement": "portfolio-service and auth-service had routine deployments shortly before the incident onset at 14:00.",
+     "kind": "fact",
+     "evidence_ids": [
+      "chg-9719",
+      "chg-9757"
+     ],
+     "service": "portfolio-service"
+    }
+   ],
+   "suspected_services": [
+    "notification-service",
+    "event-bus",
+    "sms-vendor",
+    "push-provider"
+   ],
+   "open_questions": [
+    "What specific error status codes or latency distributions are experienced by notification-service when calling sms-vendor and push-provider?"
+   ]
+  },
+  "r2-observability-1": {
+   "summary": "Telemetry retrieved for sms-vendor and push-provider shows that sms-vendor experienced a p99 latency spike starting at 14:05 UTC peaking at 1569 ms, while push-provider metrics remained entirely normal.",
+   "findings": [
+    {
+     "statement": "sms-vendor p99 latency spiked starting at 14:05:00+00:00, reaching a peak of 1569.0 ms.",
+     "kind": "fact",
+     "evidence_ids": [
+      "metric:sms-vendor:latency_p99_ms"
+     ],
+     "service": "sms-vendor"
+    },
+    {
+     "statement": "sms-vendor error rate and request rates remained stable around baseline levels during the 12:00 to 14:40 UTC window.",
+     "kind": "fact",
+     "evidence_ids": [
+      "metric:sms-vendor:rps",
+      "metric:sms-vendor:error_rate_pct"
+     ],
+     "service": "sms-vendor"
+    },
+    {
+     "statement": "push-provider metrics (RPS, error rate, and p99 latency) showed no anomalies and remained entirely stable around baseline throughout the window.",
+     "kind": "fact",
+     "evidence_ids": [
+      "metric:push-provider:rps",
+      "metric:push-provider:error_rate_pct",
+      "metric:push-provider:latency_p99_ms"
+     ],
+     "service": "push-provider"
+    }
+   ],
+   "suspected_services": [
+    "sms-vendor"
+   ],
+   "open_questions": [
+    "Why did push-provider take over 7200ms in log-00781 if push-provider metrics showed no latency anomaly?"
+   ]
+  },
+  "r2-observability-2": {
+   "summary": "Telemetry verification shows that notification-service metrics backend returns 503 errors, and event-bus consumer lag began rising sharply at 14:07 UTC. Notification-service logs confirm high lag in the notif-alerts consumer group and slow downstream requests to sms-vendor and push-provider.",
+   "findings": [
+    {
+     "statement": "The query_metrics backend for notification-service returned 503 Service Unavailable errors after 3 attempts.",
+     "kind": "fact",
+     "evidence_ids": [],
+     "service": "notification-service"
+    },
+    {
+     "statement": "Event-bus consumer lag metric anomaly started at 2026-10-12T14:07:00+00:00, rising from a baseline of ~123 messages to a peak of 1006.69 messages at 14:33:00+00:00.",
+     "kind": "fact",
+     "evidence_ids": [
+      "metric:event-bus:consumer_lag"
+     ],
+     "service": "event-bus"
+    },
+    {
+     "statement": "Notification-service logged slow outbound calls to sms-vendor starting at 14:02:53+00:00 (5519ms) and push-provider at 14:06:19+00:00 (7278ms).",
+     "kind": "fact",
+     "evidence_ids": [
+      "log-00763",
+      "log-00781"
+     ],
+     "service": "notification-service"
+    },
+    {
+     "statement": "Notification-service recorded consumer group notif-alerts lag warnings starting at 14:18:26+00:00.",
+     "kind": "fact",
+     "evidence_ids": [
+      "log-00860"
+     ],
+     "service": "notification-service"
+    }
+   ],
+   "suspected_services": [
+    "notification-service",
+    "event-bus",
+    "sms-vendor",
+    "push-provider"
+   ],
+   "open_questions": [
+    "What caused the metrics backend for notification-service to return 503 errors?",
+    "Were the slow responses from sms-vendor and push-provider caused by external vendor degradation or downstream client-side saturation?"
+   ]
+  },
+  "r3-observability-1": {
+   "summary": "Verified sms-vendor metrics around the 14:00 UTC window: latency_p99_ms showed an upward anomaly starting at 14:05 UTC and peaking at 1569.0 ms, while rps and error_rate_pct remained normal with no anomaly.",
+   "findings": [
+    {
+     "statement": "sms-vendor latency_p99_ms experienced an upward anomaly starting at 14:05 UTC, peaking at 1569.0 ms at 14:05 UTC from a baseline of 597.02 ms.",
+     "kind": "fact",
+     "evidence_ids": [
+      "metric:sms-vendor:latency_p99_ms"
+     ],
+     "service": "sms-vendor"
+    },
+    {
+     "statement": "sms-vendor rps showed no anomaly in the 12:00-14:40 window, staying near its baseline of 88.69 req/s.",
+     "kind": "fact",
+     "evidence_ids": [
+      "metric:sms-vendor:rps"
+     ],
+     "service": "sms-vendor"
+    },
+    {
+     "statement": "sms-vendor error_rate_pct showed no anomaly in the 12:00-14:40 window, staying near its baseline of 0.33%.",
+     "kind": "fact",
+     "evidence_ids": [
+      "metric:sms-vendor:error_rate_pct"
+     ],
+     "service": "sms-vendor"
+    },
+    {
+     "statement": "notification-service recorded slow sms-vendor send calls starting at 14:02 UTC.",
+     "kind": "fact",
+     "evidence_ids": [
+      "log-00763"
+     ],
+     "service": "sms-vendor"
+    }
+   ],
+   "suspected_services": [
+    "sms-vendor"
+   ],
+   "open_questions": [
+    "What caused the temporary spike in sms-vendor latency at 14:05 UTC?"
+   ]
+  }
+ },
+ "hypotheses": {
+  "onset": "2026-10-12T14:02:53Z",
+  "hypotheses": [
+   {
+    "id": "H1",
+    "title": "External SMS Vendor Latency Degradation",
+    "root_cause_service": "sms-vendor",
+    "category": "third_party_outage",
+    "mechanism": "The external third-party vendor (sms-vendor) experienced transient internal latency degradation, causing synchronous outbound API requests from notification-service to block. This thread/connection exhaustion backed up the local notification message queue (notif-alerts), resulting in delayed SMS and push notifications for users.",
+    "trigger_evidence_id": null,
+    "supporting": [
+     {
+      "evidence_id": "log-00763",
+      "note": "sms-vendor send took 5519ms starting at 14:02:53+00:00."
+     },
+     {
+      "evidence_id": "metric:sms-vendor:latency_p99_ms",
+      "note": "sms-vendor latency_p99_ms experienced an upward anomaly starting at 14:05 UTC, peaking at 1569.0 ms."
+     },
+     {
+      "evidence_id": "log-00860",
+      "note": "Consumer group notif-alerts lag recorded starting at 14:18:26+00:00 as a downstream consequence of blocked workers."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:push-provider:latency_p99_ms",
+      "note": "push-provider metrics showed zero latency or error anomalies, yet notification-service logged a slow push call in log-00781 (7278ms), suggesting local resource contention or thread pool blocking inside notification-service."
+     }
+    ],
+    "assumptions": [
+     "The independent p99 latency spike on sms-vendor reflects genuine vendor-side processing delays rather than purely client-side connection starvation."
+    ],
+    "confidence": 0.85
+   },
+   {
+    "id": "H2",
+    "title": "Notification-Service Client-Side Connection Pool Exhaustion / Thread Starvation",
+    "root_cause_service": "notification-service",
+    "category": "resource_exhaustion",
+    "mechanism": "The scheduled API credential rotation configuration change (chg-9140) executed earlier in the day on notification-service introduced latent inefficiencies in connection reuse or token refreshing, leading to connection pool saturation and cascading timeouts when calling external APIs under peak queue consumption.",
+    "trigger_evidence_id": "chg-9140",
+    "supporting": [
+     {
+      "evidence_id": "chg-9140",
+      "note": "notification-service had a scheduled API credential rotation configuration change on 2026-10-12 at 07:38:00+00:00."
+     },
+     {
+      "evidence_id": "log-00781",
+      "note": "push-provider took 7278ms in notification-service logs despite metric:push-provider:latency_p99_ms showing completely normal vendor metrics, pointing to a client-side bottleneck."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "chg-9140",
+      "note": "chg-9140 occurred 6.5 hours prior to the onset at 14:02:53 UTC."
+     },
+     {
+      "evidence_id": "metric:sms-vendor:latency_p99_ms",
+      "note": "sms-vendor metrics independently showed an upward latency anomaly starting at 14:05 UTC on the vendor side."
+     }
+    ],
+    "assumptions": [
+     "Credential rotation degraded connection pool efficiency or introduced synchronization locks that only manifested under peak concurrency."
+    ],
+    "confidence": 0.12
+   },
+   {
+    "id": "H3",
+    "title": "Event-Bus Upstream Congestion",
+    "root_cause_service": "event-bus",
+    "category": "resource_exhaustion",
+    "mechanism": "Message broker queuing delays caused events to be delivered out-of-order or with delayed timestamps to notification-service, creating consumer lag that manifested as delayed end-user notifications.",
+    "trigger_evidence_id": null,
+    "supporting": [
+     {
+      "evidence_id": "metric:event-bus:consumer_lag",
+      "note": "Consumer lag anomaly started rising sharply at 14:07:00+00:00, peaking at 1006.69 messages."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "log-00763",
+      "note": "The first slow vendor call occurred at 14:02:53+00:00, before the event-bus consumer lag metric anomaly started rising at 14:07:00+00:00."
+     },
+     {
+      "evidence_id": "metric:event-bus:cpu_pct",
+      "note": "Event-bus CPU, error rate, and p99 latency metrics showed zero anomalies."
+     }
+    ],
+    "assumptions": [
+     "Undetected broker-side partition buffering delayed event delivery."
+    ],
+    "confidence": 0.03
+   }
+  ],
+  "reasoning_summary": "Symptom onset is established at 14:02:53 UTC via log-00763. H1 remains our primary hypothesis because sms-vendor metrics independently confirm an upward latency anomaly at 14:05 UTC, aligning with the observed slow calls. H2 captures the client-side possibility due to push-provider having normal vendor metrics despite notification-service logging a slow push call. H3 is kept as a low-confidence alternative since consumer lag started after the initial vendor slow call."
+ },
+ "critiques": {
+  "1": {
+   "verdict": "investigate_more",
+   "issues": [
+    "Automatic checks warn that the top suspect's (sms-vendor) own health and logs are unverified.",
+    "Metrics for the symptomatic service notification-service are missing due to a 503 backend failure."
+   ],
+   "requests": [
+    {
+     "agent": "observability",
+     "goal": "Retrieve error rates, latency metrics, and logs for sms-vendor and push-provider around the 14:00 UTC window to verify external vendor health.",
+     "services": [
+      "sms-vendor",
+      "push-provider"
+     ],
+     "reason": "Direct telemetry from the third-party providers is needed to confirm if they are experiencing an outage or latency degradation."
+    }
+   ],
+   "adjustments": [
+    {
+     "hypothesis_id": "H1",
+     "confidence": 0.8,
+     "reason": "Strongly supported by notification-service logs showing synchronous calls taking several seconds starting right at onset, but vendor-side health verification is still missing."
+    },
+    {
+     "hypothesis_id": "H2",
+     "confidence": 0.15,
+     "reason": "Long time gap between credential rotation and onset makes this alternative unlikely."
+    }
+   ]
+  },
+  "2": {
+   "verdict": "investigate_more",
+   "issues": [
+    "Notification-service metrics backend is currently returning 503 errors, restricting telemetry to indirect client logs and upstream/downstream metrics.",
+    "WARN: symptomatic service notification-service's own metrics could not be retrieved (tool failures): any conclusion rests on indirect evidence."
+   ],
+   "requests": [
+    {
+     "agent": "observability",
+     "goal": "Check sms-vendor's own metrics and WARN/ERROR logs: is it unhealthy, and since when?",
+     "services": [
+      "sms-vendor"
+     ],
+     "reason": "automatic check blocked acceptance"
+    }
+   ],
+   "adjustments": [
+    {
+     "hypothesis_id": "H1",
+     "confidence": 0.85,
+     "reason": "Supported by direct log evidence of slow sms-vendor and push-provider calls starting at 14:02 and 14:06, matching the independent sms-vendor p99 latency spike starting at 14:05. Past incident history (hist-2026-0325) also points to vendor throttling."
+    },
+    {
+     "hypothesis_id": "H2",
+     "confidence": 0.1,
+     "reason": "Credential rotation (chg-9140) occurred 6.5 hours prior to onset, making it an unlikely direct trigger for latency starting precisely at 14:02 UTC."
+    },
+    {
+     "hypothesis_id": "H3",
+     "confidence": 0.05,
+     "reason": "Event-bus consumer lag started at 14:07, which is after the initial slow vendor calls at 14:02, confirming the lag is a symptom of blocked notification workers rather than the root cause."
+    }
+   ]
+  },
+  "3": {
+   "verdict": "accept",
+   "issues": [
+    "Automatic checks noted that notification-service's own metrics backend returned 503 Service Unavailable errors, leaving its direct internal resource metrics unverified. However, extensive log and dependency data provide sufficient convergent evidence."
+   ],
+   "requests": [],
+   "adjustments": [
+    {
+     "hypothesis_id": "H1",
+     "confidence": 0.85,
+     "reason": "Confirmed by independent sms-vendor p99 latency anomaly starting at 14:05 UTC (metric:sms-vendor:latency_p99_ms) and matching historical precedent (hist-2026-0325)."
+    },
+    {
+     "hypothesis_id": "H2",
+     "confidence": 0.12,
+     "reason": "Credential rotation (chg-9140) occurred 6.5 hours prior to the incident without immediate impact, making it less likely than the active external vendor latency."
+    },
+    {
+     "hypothesis_id": "H3",
+     "confidence": 0.03,
+     "reason": "Event-bus consumer lag started rising after the initial notification-service slow calls, ruling it out as the root cause."
+    }
+   ]
+  }
+ },
+ "check_flags": [
+  "WARN: symptomatic service notification-service's own metrics could not be retrieved (tool failures): any conclusion rests on indirect evidence.",
+  "INFO: earliest metric anomalies retrieved: sms-vendor latency_p99_ms from 14:05; event-bus consumer_lag from 14:07"
+ ],
+ "gaps": [
+  "query_logs(service=notification-service) returned partial data",
+  "query_metrics(service=notification-service) failed: query_metrics backend returned 503 Service Unavailable after 3 tries"
+ ]
+}

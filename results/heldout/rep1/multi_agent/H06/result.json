@@ -1,0 +1,317 @@
+{
+ "system": "multi_agent",
+ "incident_id": "H06",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "payments-api experienced a ~3x increase in p99 latency starting at 13:20 on 2026-10-15 due to downstream latency propagation from ledger-service and ledger-db. The root cause was configuration change chg-8940 at 13:18, which increased the ledger query batch size from 100 to 1000, causing larger database operations, CPU spikes, and slower query responses starting at 13:19.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Ledger query batch size configuration change caused latency",
+    "root_cause_service": "ledger-service",
+    "category": "config_change",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-8940",
+      "note": "Configuration change modifying query batch size directly precedes the database and service latency increase."
+     },
+     {
+      "evidence_id": "metric:ledger-service:latency_p99_ms",
+      "note": "ledger-service p99 latency increased immediately following the configuration change."
+     },
+     {
+      "evidence_id": "metric:ledger-db:latency_p99_ms",
+      "note": "ledger-db p99 latency increased at the same time."
+     },
+     {
+      "evidence_id": "log-00501",
+      "note": "ledger-service logged slow ledger queries starting at 13:19."
+     },
+     {
+      "evidence_id": "log-00499",
+      "note": "ledger-db logged slow statements starting at 13:19."
+     },
+     {
+      "evidence_id": "metric:payments-api:latency_p99_ms",
+      "note": "payments-api latency spiked right after downstream ledger latency increased."
+     },
+     {
+      "evidence_id": "dep:payments-api->ledger-service",
+      "note": "Synchronous dependency links payments-api performance directly to ledger-service."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:payments-api:error_rate_pct",
+      "note": "Error rate and request rate remained stable, indicating successful completion rather than failure or timeouts."
+     }
+    ]
+   },
+   {
+    "rank": 2,
+    "title": "Third-party UPI gateway or partner bank latency",
+    "root_cause_service": "upi-gateway",
+    "category": "third_party_outage",
+    "confidence": 0.08,
+    "supporting": [
+     {
+      "evidence_id": "dep:payments-api->upi-gateway",
+      "note": "payments-api depends synchronously on upi-gateway."
+     },
+     {
+      "evidence_id": "metric:payments-api:latency_p99_ms",
+      "note": "p99 latency increase matches external gateway slowness symptoms."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "chg-8940",
+      "note": "An internal config change occurred precisely before onset, making internal config regression much more probable."
+     },
+     {
+      "evidence_id": "metric:ledger-service:latency_p99_ms",
+      "note": "ledger-service also degraded at the exact same time, aligning with the internal config change."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "payments-api p99 latency rose from a baseline of ~370-395 ms to 1252.38 ms at 2026-10-15T13:20:00+00:00, peaking at 1485.07 ms.",
+    "evidence_ids": [
+     "metric:payments-api:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "payments-api request rate and error rate remained stable with no significant anomalies during the incident window.",
+    "evidence_ids": [
+     "metric:payments-api:rps",
+     "metric:payments-api:error_rate_pct"
+    ]
+   },
+   {
+    "text": "payments-api has synchronous dependencies on ledger-service, upi-gateway, fraud-service, and redis-cache, and an asynchronous dependency on event-bus.",
+    "evidence_ids": [
+     "dep:payments-api->ledger-service",
+     "dep:payments-api->upi-gateway",
+     "dep:payments-api->fraud-service",
+     "dep:payments-api->redis-cache",
+     "dep:payments-api->event-bus"
+    ]
+   },
+   {
+    "text": "A configuration change chg-8940 occurred on ledger-service at 2026-10-15T13:18:00+00:00 modifying the query batch size from 100 to 1000.",
+    "evidence_ids": [
+     "chg-8940"
+    ]
+   },
+   {
+    "text": "ledger-service p99 latency increased starting at 2026-10-15T13:19:00+00:00, with baseline 121.05 ms and peak 975.46 ms.",
+    "evidence_ids": [
+     "metric:ledger-service:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "ledger-service began logging slow ledger queries starting at 2026-10-15T13:19:22+00:00.",
+    "evidence_ids": [
+     "log-00501"
+    ]
+   },
+   {
+    "text": "ledger-db p99 latency increased starting at 2026-10-15T13:19:00+00:00, moving from a baseline of 14.77 ms to a peak of 138.58 ms.",
+    "evidence_ids": [
+     "metric:ledger-db:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "ledger-db CPU usage increased starting at 2026-10-15T13:19:00+00:00, peaking at 52.86%.",
+    "evidence_ids": [
+     "metric:ledger-db:cpu_pct"
+    ]
+   },
+   {
+    "text": "ledger-db logged slow SQL statements starting at 2026-10-15T13:19:06+00:00.",
+    "evidence_ids": [
+     "log-00499"
+    ]
+   }
+  ],
+  "assumptions": [
+   "Synchronous calls from payments-api wait for ledger-service transactions to complete, causing request duration to track the increased database and ledger-service latency."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-15T13:18:00Z",
+    "event": "Configuration change chg-8940 increases ledger query batch size from 100 to 1000 on ledger-service.",
+    "evidence_id": "chg-8940"
+   },
+   {
+    "ts": "2026-10-15T13:19:00Z",
+    "event": "ledger-service and ledger-db p99 latency metrics begin to increase; ledger-db CPU usage rises.",
+    "evidence_id": "metric:ledger-service:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-15T13:19:06Z",
+    "event": "ledger-db logs slow SQL statements.",
+    "evidence_id": "log-00499"
+   },
+   {
+    "ts": "2026-10-15T13:19:22Z",
+    "event": "ledger-service logs slow ledger queries.",
+    "evidence_id": "log-00501"
+   },
+   {
+    "ts": "2026-10-15T13:20:00Z",
+    "event": "payments-api p99 latency increases significantly (onset of reported symptoms).",
+    "evidence_id": "metric:payments-api:latency_p99_ms"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Roll back configuration change chg-8940 on ledger-service to revert the query batch size from 1000 back to 100.",
+    "priority": "immediate",
+    "rationale": "Reverting the configuration change directly eliminates the root cause of the increased database load and latency propagation.",
+    "evidence_ids": [
+     "chg-8940"
+    ]
+   },
+   {
+    "action": "Monitor ledger-service, ledger-db, and payments-api p99 latency metrics to confirm recovery after rollback.",
+    "priority": "short_term",
+    "rationale": "Ensures that latency returns to established baseline levels following remediation.",
+    "evidence_ids": [
+     "metric:payments-api:latency_p99_ms",
+     "metric:ledger-service:latency_p99_ms",
+     "metric:ledger-db:latency_p99_ms"
+    ]
+   },
+   {
+    "action": "Implement pre-deployment query performance and batch size impact testing for database-interacting configurations.",
+    "priority": "long_term",
+    "rationale": "Prevents similar query size configuration regressions from impacting downstream synchronous clients in the future.",
+    "evidence_ids": [
+     "chg-8940",
+     "log-00501"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 2,
+ "tool_calls": 13,
+ "llm_calls": 19,
+ "prompt_tokens": 83974,
+ "completion_tokens": 10762,
+ "latency_s": 76.11,
+ "retrieved_ids": [
+  "chg-2932",
+  "chg-3458",
+  "chg-4033",
+  "chg-4326",
+  "chg-6174",
+  "chg-8940",
+  "dep:fraud-service->redis-cache",
+  "dep:ledger-service->ledger-db",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "hist-2026-0410",
+  "hist-2026-0722",
+  "hist-2026-0811",
+  "log-00001",
+  "log-00020",
+  "log-00030",
+  "log-00055",
+  "log-00064",
+  "log-00079",
+  "log-00156",
+  "log-00171",
+  "log-00187",
+  "log-00197",
+  "log-00319",
+  "log-00328",
+  "log-00340",
+  "log-00499",
+  "log-00501",
+  "log-00555",
+  "log-00593",
+  "log-00641",
+  "log-01040",
+  "log-01092",
+  "log-01097",
+  "log-01098",
+  "log-01100",
+  "log-01101",
+  "log-01102",
+  "log-01103",
+  "log-01104",
+  "log-01106",
+  "log-01108",
+  "log-01110",
+  "log-01113",
+  "log-01114",
+  "log-01117",
+  "log-01118",
+  "log-01120",
+  "log-01122",
+  "log-01124",
+  "log-01126",
+  "log-01127",
+  "log-01129",
+  "log-01130",
+  "log-01131",
+  "log-01132",
+  "metric:ledger-db:connections_active",
+  "metric:ledger-db:cpu_pct",
+  "metric:ledger-db:disk_used_pct",
+  "metric:ledger-db:error_rate_pct",
+  "metric:ledger-db:latency_p99_ms",
+  "metric:ledger-db:mem_pct",
+  "metric:ledger-db:rps",
+  "metric:ledger-service:cpu_pct",
+  "metric:ledger-service:error_rate_pct",
+  "metric:ledger-service:latency_p99_ms",
+  "metric:ledger-service:mem_pct",
+  "metric:ledger-service:pod_restarts",
+  "metric:ledger-service:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps"
+ ],
+ "cited_ids": [
+  "chg-8940",
+  "metric:ledger-service:latency_p99_ms",
+  "metric:ledger-db:latency_p99_ms",
+  "log-00501",
+  "log-00499",
+  "metric:payments-api:latency_p99_ms",
+  "dep:payments-api->ledger-service",
+  "metric:payments-api:error_rate_pct",
+  "dep:payments-api->upi-gateway",
+  "metric:payments-api:rps",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->event-bus",
+  "metric:ledger-db:cpu_pct"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 30.0,
+ "total_tokens": 94736
+}

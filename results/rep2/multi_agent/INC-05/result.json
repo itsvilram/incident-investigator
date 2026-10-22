@@ -1,0 +1,257 @@
+{
+ "system": "multi_agent",
+ "incident_id": "INC-05",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Account linking via Account Aggregator failed starting at 2026-10-08T13:30:00+00:00 due to an expired SSL certificate on the external dependency aa-fiu-gateway, causing 100% failure rates in aa-connector and elevated error rates in mobile-bff.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Expired SSL certificate on external aa-fiu-gateway",
+    "root_cause_service": "aa-fiu-gateway",
+    "category": "certificate_expiry",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "log-00551",
+      "note": "Explicitly states SSL handshake failed because the certificate expired at notAfter=2026-10-08T13:30:00Z."
+     },
+     {
+      "evidence_id": "log-00559",
+      "note": "Shows FI fetch failed for consents with upstream errors starting at 13:30."
+     },
+     {
+      "evidence_id": "metric:aa-connector:error_rate_pct",
+      "note": "Error rate anomaly started precisely at 13:30."
+     },
+     {
+      "evidence_id": "metric:mobile-bff:error_rate_pct",
+      "note": "Error rate anomaly started precisely at 13:30 due to synchronous calls to aa-connector."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Regression introduced by aa-connector deployment chg-8692",
+    "root_cause_service": "aa-connector",
+    "category": "bad_deploy",
+    "confidence": 0.05,
+    "supporting": [
+     {
+      "evidence_id": "chg-8692",
+      "note": "Deploy on aa-connector occurred prior to the incident window."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "log-00551",
+      "note": "Log explicitly identifies an expired certificate (notAfter=2026-10-08T13:30:00Z) on the external gateway rather than a software regression."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "aa-connector error rate anomaly started at 2026-10-08T13:30:00+00:00 and peaked at 104.34%",
+    "evidence_ids": [
+     "metric:aa-connector:error_rate_pct"
+    ]
+   },
+   {
+    "text": "aa-connector p99 latency dropped sharply at 2026-10-08T13:30:00+00:00 as requests failed immediately",
+    "evidence_ids": [
+     "metric:aa-connector:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "mobile-bff error rate anomaly started at 2026-10-08T13:30:00+00:00",
+    "evidence_ids": [
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   },
+   {
+    "text": "SSL handshake with aa-fiu-gateway failed because the certificate expired at 2026-10-08T13:30:00Z",
+    "evidence_ids": [
+     "log-00551"
+    ]
+   },
+   {
+    "text": "FI fetch failed for multiple consents with upstream error starting at 2026-10-08T13:30:23+00:00",
+    "evidence_ids": [
+     "log-00559"
+    ]
+   },
+   {
+    "text": "mobile-bff makes a synchronous call to aa-connector",
+    "evidence_ids": [
+     "dep:mobile-bff->aa-connector"
+    ]
+   },
+   {
+    "text": "aa-connector makes synchronous calls to aa-fiu-gateway and user-db",
+    "evidence_ids": [
+     "dep:aa-connector->aa-fiu-gateway",
+     "dep:aa-connector->user-db"
+    ]
+   },
+   {
+    "text": "aa-connector had a deploy (v8.18.8 minor bug fixes) on 2026-10-07T01:22:00+00:00",
+    "evidence_ids": [
+     "chg-8692"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The external partner failed to renew or automate rotation of the aa-fiu-gateway certificate, explaining why internal metrics for aa-fiu-gateway showed normal request counts while connection attempts failed at the TLS handshake layer."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-07T01:22:00Z",
+    "event": "aa-connector deploy v8.18.8 occurred",
+    "evidence_id": "chg-8692"
+   },
+   {
+    "ts": "2026-10-08T13:30:00Z",
+    "event": "aa-connector and mobile-bff error rate anomalies begin",
+    "evidence_id": "metric:aa-connector:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-08T13:30:00Z",
+    "event": "SSL certificate on aa-fiu-gateway expired, causing SSL handshake failures",
+    "evidence_id": "log-00551"
+   },
+   {
+    "ts": "2026-10-08T13:30:23Z",
+    "event": "FI fetch failed for consent ee143657 due to upstream error",
+    "evidence_id": "log-00559"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Coordinate immediately with the external aa-fiu-gateway provider to renew and deploy a valid SSL certificate.",
+    "priority": "immediate",
+    "rationale": "Directly resolves the expired certificate causing 100% account linking failures.",
+    "evidence_ids": [
+     "log-00551"
+    ]
+   },
+   {
+    "action": "Implement automated certificate expiration monitoring and alerting for all external dependencies.",
+    "priority": "long_term",
+    "rationale": "Prevents future silent expirations from going unnoticed until runtime connection failures occur.",
+    "evidence_ids": [
+     "log-00551"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 2,
+ "tool_calls": 12,
+ "llm_calls": 19,
+ "prompt_tokens": 109089,
+ "completion_tokens": 10345,
+ "latency_s": 101.83,
+ "retrieved_ids": [
+  "chg-1600",
+  "chg-1826",
+  "chg-2025",
+  "chg-3173",
+  "chg-3824",
+  "chg-4545",
+  "chg-4942",
+  "chg-5433",
+  "chg-5946",
+  "chg-6038",
+  "chg-6346",
+  "chg-6977",
+  "chg-7675",
+  "chg-8044",
+  "chg-8159",
+  "chg-8692",
+  "chg-9048",
+  "chg-9513",
+  "chg-9541",
+  "chg-9816",
+  "dep:aa-connector->aa-fiu-gateway",
+  "dep:aa-connector->user-db",
+  "dep:auth-service->otp-provider",
+  "dep:auth-service->redis-session",
+  "dep:auth-service->user-db",
+  "dep:kyc-service->kyc-vendor",
+  "dep:kyc-service->user-db",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:orders-service->broker-api",
+  "dep:orders-service->portfolio-db",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:portfolio-service->market-data-service",
+  "dep:portfolio-service->portfolio-db",
+  "log-00509",
+  "log-00540",
+  "log-00551",
+  "log-00559",
+  "log-00681",
+  "log-01120",
+  "log-01170",
+  "log-01306",
+  "log-01307",
+  "log-01308",
+  "log-01309",
+  "log-01310",
+  "log-01311",
+  "log-01312",
+  "log-01316",
+  "log-01317",
+  "log-01318",
+  "log-01319",
+  "log-01320",
+  "metric:aa-connector:cpu_pct",
+  "metric:aa-connector:error_rate_pct",
+  "metric:aa-connector:latency_p99_ms",
+  "metric:aa-connector:mem_pct",
+  "metric:aa-connector:pod_restarts",
+  "metric:aa-connector:rps",
+  "metric:aa-fiu-gateway:error_rate_pct",
+  "metric:aa-fiu-gateway:latency_p99_ms",
+  "metric:aa-fiu-gateway:rps",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps"
+ ],
+ "cited_ids": [
+  "log-00551",
+  "log-00559",
+  "metric:aa-connector:error_rate_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "chg-8692",
+  "metric:aa-connector:latency_p99_ms",
+  "dep:mobile-bff->aa-connector",
+  "dep:aa-connector->aa-fiu-gateway",
+  "dep:aa-connector->user-db"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 60.0,
+ "total_tokens": 119434
+}

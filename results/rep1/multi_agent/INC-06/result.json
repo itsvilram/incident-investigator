@@ -1,0 +1,292 @@
+{
+ "system": "multi_agent",
+ "incident_id": "INC-06",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Since ~13:45, about 30% of portfolio screen loads failed. Investigation revealed that portfolio-service experienced memory saturation (99.8% memory usage) and subsequent pod crashes starting at 13:42 due to v3.8.0 deployment (chg-7001), which kept per-user holdings snapshots in memory. This caused portfolio-service to stop producing logs after 13:37 and resulted in upstream connection reset errors for mobile-bff starting at 13:43.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Portfolio-service memory exhaustion via in-memory per-user holdings snapshots (v3.8.0)",
+    "root_cause_service": "portfolio-service",
+    "category": "resource_exhaustion",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-7001",
+      "note": "Introduced the in-memory holdings snapshots feature change on portfolio-service."
+     },
+     {
+      "evidence_id": "metric:portfolio-service:mem_pct",
+      "note": "Shows portfolio-service memory is fully saturated at 99.8%."
+     },
+     {
+      "evidence_id": "metric:portfolio-service:pod_restarts",
+      "note": "Shows portfolio-service pod restarts spiking starting at 13:42."
+     },
+     {
+      "evidence_id": "metric:portfolio-service:error_rate_pct",
+      "note": "Shows portfolio-service error rate spiking at 13:43."
+     },
+     {
+      "evidence_id": "log-00645",
+      "note": "Shows mobile-bff receiving connection reset errors from portfolio-service starting at 13:43."
+     },
+     {
+      "evidence_id": "log-00608",
+      "note": "Explains the clean-logs observation as portfolio-service ceased producing logs entirely after 13:37 during pod restarts."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:portfolio-service:mem_pct",
+      "note": "Reported as flat at 99.8% rather than showing a continuous gradual ramp-up leading directly to 13:42."
+     }
+    ]
+   },
+   {
+    "rank": 2,
+    "title": "Portfolio-db v1.1.0 release regression causing connection pool exhaustion or query deadlocks",
+    "root_cause_service": "portfolio-db",
+    "category": "bad_deploy",
+    "confidence": 0.05,
+    "supporting": [
+     {
+      "evidence_id": "chg-9271",
+      "note": "Routine release deploy on portfolio-db occurred shortly before the incident onset at 12:27 on Oct 9."
+     },
+     {
+      "evidence_id": "metric:portfolio-service:pod_restarts",
+      "note": "Matches the timing of portfolio-service crashes following database issues."
+     },
+     {
+      "evidence_id": "log-00645",
+      "note": "Upstream connection resets correspond to downstream database dependency failures."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:portfolio-service:mem_pct",
+      "note": "Portfolio-service memory is at 99.8% saturation, directly pointing to in-memory caching changes rather than database response anomalies."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "portfolio-service error rate anomaly started at 2026-10-09T13:43:00+00:00, peaking at 32.73%.",
+    "evidence_ids": [
+     "metric:portfolio-service:error_rate_pct"
+    ]
+   },
+   {
+    "text": "portfolio-service pod restarts anomaly started at 2026-10-09T13:42:00+00:00.",
+    "evidence_ids": [
+     "metric:portfolio-service:pod_restarts"
+    ]
+   },
+   {
+    "text": "mobile-bff error rate anomaly started at 2026-10-09T13:43:00+00:00, peaking at 10.23%.",
+    "evidence_ids": [
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   },
+   {
+    "text": "mobile-bff logs show recurring upstream connection reset errors from portfolio-service starting at 2026-10-09T13:43:00+00:00.",
+    "evidence_ids": [
+     "log-00645",
+     "log-01080"
+    ]
+   },
+   {
+    "text": "portfolio-service produced zero logs after its last entry at 2026-10-09T13:37:38+00:00 during the incident window, explaining the clean-logs observation.",
+    "evidence_ids": [
+     "log-00608"
+    ]
+   },
+   {
+    "text": "portfolio-service was deployed with v3.8.0 on 2026-10-08T18:20:00+00:00, introducing in-memory per-user holdings snapshots.",
+    "evidence_ids": [
+     "chg-7001"
+    ]
+   },
+   {
+    "text": "portfolio-db received a routine release deploy (v1.1.0) on 2026-10-09T12:27:00+00:00.",
+    "evidence_ids": [
+     "chg-9271"
+    ]
+   },
+   {
+    "text": "portfolio-service memory percentage (mem_pct) was at 99.8% (saturated).",
+    "evidence_ids": [
+     "metric:portfolio-service:mem_pct"
+    ]
+   }
+  ],
+  "assumptions": [
+   "Memory saturation at 99.8% triggers OOM killer or runtime crash leading to pod restarts and silence when holding cache grows over time."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-08T18:20:00Z",
+    "event": "portfolio-service deployed with v3.8.0 introducing in-memory per-user holdings snapshots",
+    "evidence_id": "chg-7001"
+   },
+   {
+    "ts": "2026-10-09T12:27:00Z",
+    "event": "portfolio-db deployed with v1.1.0 routine release",
+    "evidence_id": "chg-9271"
+   },
+   {
+    "ts": "2026-10-09T13:37:38Z",
+    "event": "portfolio-service ceased producing logs entirely during pod crashes",
+    "evidence_id": "log-00608"
+   },
+   {
+    "ts": "2026-10-09T13:42:00Z",
+    "event": "portfolio-service pod restarts anomaly begins",
+    "evidence_id": "metric:portfolio-service:pod_restarts"
+   },
+   {
+    "ts": "2026-10-09T13:43:00Z",
+    "event": "portfolio-service and mobile-bff error rate anomalies begin, and connection reset errors start appearing in mobile-bff logs",
+    "evidence_id": "metric:portfolio-service:error_rate_pct"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Rollback portfolio-service from version v3.8.0 to v3.7.2 to remove the in-memory per-user holdings snapshots feature.",
+    "priority": "immediate",
+    "rationale": "Deployment chg-7001 introduced the in-memory holdings snapshots causing memory saturation and pod restarts.",
+    "evidence_ids": [
+     "chg-7001",
+     "metric:portfolio-service:mem_pct",
+     "metric:portfolio-service:pod_restarts"
+    ]
+   },
+   {
+    "action": "Implement strict memory limits, pagination, or external caching for user holdings snapshots before reintroducing any in-memory caching features in portfolio-service.",
+    "priority": "long_term",
+    "rationale": "Prevents future resource exhaustion and pod crashes caused by unrestricted memory accumulation of user data.",
+    "evidence_ids": [
+     "chg-7001",
+     "metric:portfolio-service:mem_pct"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 1,
+ "tool_calls": 10,
+ "llm_calls": 12,
+ "prompt_tokens": 56739,
+ "completion_tokens": 7277,
+ "latency_s": 58.07,
+ "retrieved_ids": [
+  "chg-1384",
+  "chg-1587",
+  "chg-1921",
+  "chg-3494",
+  "chg-3932",
+  "chg-4115",
+  "chg-4250",
+  "chg-4513",
+  "chg-5065",
+  "chg-5407",
+  "chg-6406",
+  "chg-6441",
+  "chg-6652",
+  "chg-6888",
+  "chg-7001",
+  "chg-7695",
+  "chg-8141",
+  "chg-8380",
+  "chg-9271",
+  "chg-9690",
+  "dep:aa-connector->aa-fiu-gateway",
+  "dep:aa-connector->user-db",
+  "dep:auth-service->otp-provider",
+  "dep:auth-service->redis-session",
+  "dep:auth-service->user-db",
+  "dep:kyc-service->kyc-vendor",
+  "dep:kyc-service->user-db",
+  "dep:market-data-service->market-feed",
+  "dep:market-data-service->redis-cache",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:orders-service->broker-api",
+  "dep:orders-service->portfolio-db",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:portfolio-service->market-data-service",
+  "dep:portfolio-service->portfolio-db",
+  "log-00390",
+  "log-00402",
+  "log-00432",
+  "log-00450",
+  "log-00469",
+  "log-00496",
+  "log-00520",
+  "log-00555",
+  "log-00562",
+  "log-00590",
+  "log-00608",
+  "log-00623",
+  "log-00645",
+  "log-00845",
+  "log-01080",
+  "log-01083",
+  "log-01085",
+  "log-01086",
+  "log-01087",
+  "log-01091",
+  "log-01095",
+  "log-01097",
+  "log-01098",
+  "log-01099",
+  "log-01100",
+  "log-01103",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps",
+  "metric:portfolio-service:cpu_pct",
+  "metric:portfolio-service:error_rate_pct",
+  "metric:portfolio-service:latency_p99_ms",
+  "metric:portfolio-service:mem_pct",
+  "metric:portfolio-service:pod_restarts",
+  "metric:portfolio-service:rps"
+ ],
+ "cited_ids": [
+  "chg-7001",
+  "metric:portfolio-service:mem_pct",
+  "metric:portfolio-service:pod_restarts",
+  "metric:portfolio-service:error_rate_pct",
+  "log-00645",
+  "log-00608",
+  "chg-9271",
+  "metric:mobile-bff:error_rate_pct",
+  "log-01080"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "total_tokens": 64016,
+ "rate_limit_wait_s": 30.0
+}

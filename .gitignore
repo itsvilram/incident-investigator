@@ -11,3 +11,6 @@ runs/
 # Private working notes
 prep/
 CLAUDE.local.md
+
+# Coding-assistant transcript: sent with the submission, not committed
+transcript/

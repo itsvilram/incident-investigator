@@ -1,0 +1,235 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-06",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Portfolio screen failures since 13:43 are caused by a memory leak in portfolio-service v3.8.0 (chg-7001) which keeps per-user holdings snapshots in memory without proper eviction. This caused memory exhaustion, pod OOMKills, and sidecar log-shipping termination, which explains why application logs appeared clean.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Memory leak in portfolio-service v3.8.0 deployment",
+    "root_cause_service": "portfolio-service",
+    "category": "bad_deploy",
+    "confidence": 0.9,
+    "supporting": [
+     {
+      "evidence_id": "chg-7001",
+      "note": "v3.8.0 introduced in-memory per-user holdings snapshots"
+     },
+     {
+      "evidence_id": "metric:portfolio-service:mem_pct",
+      "note": "Memory usage saturated to 106.64% at 13:44"
+     },
+     {
+      "evidence_id": "metric:portfolio-service:pod_restarts",
+      "note": "Pod restarts began rising at 13:42"
+     },
+     {
+      "evidence_id": "log-00664",
+      "note": "Kubernetes logged multiple OOMKilled events for portfolio-service containers"
+     },
+     {
+      "evidence_id": "log-00626",
+      "note": "fluent-bit sidecar OOMKilled, explaining why application logs appeared clean/empty"
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Traffic surge overloading portfolio-service",
+    "root_cause_service": "portfolio-service",
+    "category": "traffic_spike",
+    "confidence": 0.05,
+    "supporting": [],
+    "contradicting": [
+     {
+      "evidence_id": "metric:portfolio-service:rps",
+      "note": "Request rate remained stable without anomalous surge"
+     },
+     {
+      "evidence_id": "metric:mobile-bff:rps",
+      "note": "Client BFF request rate remained completely normal"
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "portfolio-service v3.8.0 was deployed on 2026-10-08 at 18:20 with summary 'keep per-user holdings snapshots in memory'.",
+    "evidence_ids": [
+     "chg-7001"
+    ]
+   },
+   {
+    "text": "portfolio-service memory usage hit 106.64% saturation at 13:44.",
+    "evidence_ids": [
+     "metric:portfolio-service:mem_pct"
+    ]
+   },
+   {
+    "text": "portfolio-service pod restarts began at 13:42.",
+    "evidence_ids": [
+     "metric:portfolio-service:pod_restarts"
+    ]
+   },
+   {
+    "text": "portfolio-service and mobile-bff error rates spiked starting around 13:40-13:43.",
+    "evidence_ids": [
+     "metric:portfolio-service:error_rate_pct",
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   },
+   {
+    "text": "Kubernetes logged portfolio-service pods and fluent-bit being OOMKilled starting at 13:40.",
+    "evidence_ids": [
+     "log-00626",
+     "log-00664"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The holdings snapshots kept in memory lack proper TTL or LRU eviction policies, leading to unbounded growth.",
+   "The lack of application logs was entirely due to the fluent-bit sidecar being OOMKilled."
+  ],
+  "evidence_gaps": [
+   "Application-level exception stack traces were unavailable due to fluent-bit OOMKill."
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-08T18:20:00Z",
+    "event": "portfolio-service v3.8.0 deployed with in-memory per-user holdings snapshots",
+    "evidence_id": "chg-7001"
+   },
+   {
+    "ts": "2026-10-09T12:53:00Z",
+    "event": "portfolio-service memory usage begins upward creep",
+    "evidence_id": "metric:portfolio-service:mem_pct"
+   },
+   {
+    "ts": "2026-10-09T13:40:00Z",
+    "event": "portfolio-service error rate spikes and fluent-bit sidecar OOMKilled",
+    "evidence_id": "metric:portfolio-service:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-09T13:42:00Z",
+    "event": "portfolio-service pod restarts begin",
+    "evidence_id": "metric:portfolio-service:pod_restarts"
+   },
+   {
+    "ts": "2026-10-09T13:43:00Z",
+    "event": "mobile-bff error rate spikes due to downstream failures",
+    "evidence_id": "metric:mobile-bff:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-09T13:44:35Z",
+    "event": "First container OOMKilled logged for portfolio-service",
+    "evidence_id": "log-00664"
+   },
+   {
+    "ts": "2026-10-09T14:05:00Z",
+    "event": "Incident reported by on-call SRE",
+    "evidence_id": null
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Roll back portfolio-service to version 3.7.2",
+    "priority": "immediate",
+    "rationale": "Removes the memory leak introduced in v3.8.0 and restores portfolio screen stability.",
+    "evidence_ids": [
+     "chg-7001",
+     "metric:portfolio-service:error_rate_pct"
+    ]
+   },
+   {
+    "action": "Restart or adjust fluent-bit sidecar memory limits",
+    "priority": "immediate",
+    "rationale": "Restores log shipping to inspect application logs correctly.",
+    "evidence_ids": [
+     "log-00626"
+    ]
+   },
+   {
+    "action": "Implement proper cache bounds/eviction or externalize caching to redis-cache",
+    "priority": "short_term",
+    "rationale": "Prevents future container OOMs when holding snapshots in memory.",
+    "evidence_ids": [
+     "chg-7001",
+     "log-00664"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 9,
+ "llm_calls": 5,
+ "prompt_tokens": 40354,
+ "completion_tokens": 3769,
+ "latency_s": 16.7,
+ "retrieved_ids": [
+  "chg-7001",
+  "dep:market-data-service->market-feed",
+  "dep:market-data-service->redis-cache",
+  "dep:portfolio-service->market-data-service",
+  "dep:portfolio-service->portfolio-db",
+  "hist-2026-0520",
+  "log-00565",
+  "log-00582",
+  "log-00609",
+  "log-00626",
+  "log-00636",
+  "log-00664",
+  "log-00678",
+  "log-00710",
+  "log-00854",
+  "log-00881",
+  "log-00914",
+  "log-00934",
+  "log-00952",
+  "log-00968",
+  "log-00989",
+  "log-00990",
+  "log-01015",
+  "log-01024",
+  "log-01039",
+  "log-01068",
+  "log-01070",
+  "log-01082",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps",
+  "metric:portfolio-service:cpu_pct",
+  "metric:portfolio-service:error_rate_pct",
+  "metric:portfolio-service:latency_p99_ms",
+  "metric:portfolio-service:mem_pct",
+  "metric:portfolio-service:pod_restarts",
+  "metric:portfolio-service:rps"
+ ],
+ "cited_ids": [
+  "chg-7001",
+  "metric:portfolio-service:mem_pct",
+  "metric:portfolio-service:pod_restarts",
+  "log-00664",
+  "log-00626",
+  "metric:portfolio-service:rps",
+  "metric:mobile-bff:rps",
+  "metric:portfolio-service:error_rate_pct",
+  "metric:mobile-bff:error_rate_pct"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 0,
+ "total_tokens": 44123
+}

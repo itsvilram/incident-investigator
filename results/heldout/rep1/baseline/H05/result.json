@@ -1,0 +1,186 @@
+{
+ "system": "baseline",
+ "incident_id": "H05",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Payment confirmations failed due to a breaking schema change in PaymentCompleted events (v3) deployed by payments-api, which caused DeserializationError exceptions and container restarts in notification-service.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Schema Mismatch due to payments-api Deployment",
+    "root_cause_service": "payments-api",
+    "category": "bad_deploy",
+    "confidence": 0.92,
+    "supporting": [
+     {
+      "evidence_id": "chg-9973",
+      "note": "Deployment of payments-api v2.16.0 renamed 'amount' to 'amount_minor' in PaymentCompleted event v3."
+     },
+     {
+      "evidence_id": "log-00790",
+      "note": "notification-service began logging DeserializationError for missing required field 'amount' starting immediately after the deploy."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "March SMS Vendor Outage recurrence",
+    "root_cause_service": "sms-vendor",
+    "category": "third_party_outage",
+    "confidence": 0.1,
+    "supporting": [],
+    "contradicting": [
+     {
+      "evidence_id": "log-00790",
+      "note": "Telemetry points to internal message deserialization failures rather than external SMS vendor HTTP/connection issues."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "payments-api deployed version v2.16.0 at 2026-10-20T14:05:00+00:00, renaming 'amount' to 'amount_minor' in PaymentCompleted event v3.",
+    "evidence_ids": [
+     "chg-9973"
+    ]
+   },
+   {
+    "text": "notification-service error rate and pod restarts increased starting at 2026-10-20T14:08:00+00:00.",
+    "evidence_ids": [
+     "metric:notification-service:error_rate_pct",
+     "metric:notification-service:pod_restarts"
+    ]
+   },
+   {
+    "text": "notification-service logged DeserializationError: PaymentCompleted v3 missing required field 'amount' starting at 2026-10-20T14:08:02+00:00.",
+    "evidence_ids": [
+     "log-00790"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The notification-service unhandled deserialization exceptions cause container crashes and subsequent pod restarts."
+  ],
+  "evidence_gaps": [
+   "None"
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-20T14:05:00Z",
+    "event": "payments-api deploys version v2.16.0 introducing PaymentCompleted v3 schema changes.",
+    "evidence_id": "chg-9973"
+   },
+   {
+    "ts": "2026-10-20T14:08:00Z",
+    "event": "notification-service error rate anomaly and pod restarts begin.",
+    "evidence_id": "metric:notification-service:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-20T14:08:02Z",
+    "event": "notification-service records first DeserializationError due to missing 'amount' field.",
+    "evidence_id": "log-00790"
+   },
+   {
+    "ts": "2026-10-20T14:40:00Z",
+    "event": "Support lead Fatima reports missing payment confirmations.",
+    "evidence_id": null
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Roll back payments-api to version v2.15.0 or patch notification-service to support PaymentCompleted v3 schema.",
+    "priority": "immediate",
+    "rationale": "Stops the deserialization errors and pod restarts immediately.",
+    "evidence_ids": [
+     "chg-9973",
+     "log-00790"
+    ]
+   },
+   {
+    "action": "Implement contract testing and strict schema compatibility checks between event producers and consumers.",
+    "priority": "short_term",
+    "rationale": "Prevents breaking schema changes from being deployed independently.",
+    "evidence_ids": [
+     "chg-9973"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 8,
+ "llm_calls": 4,
+ "prompt_tokens": 28926,
+ "completion_tokens": 2470,
+ "latency_s": 13.59,
+ "retrieved_ids": [
+  "chg-9973",
+  "dep:notification-service->event-bus",
+  "dep:notification-service->push-provider",
+  "dep:notification-service->sms-vendor",
+  "dep:payments-api->event-bus",
+  "log-00067",
+  "log-00126",
+  "log-00131",
+  "log-00141",
+  "log-00181",
+  "log-00213",
+  "log-00277",
+  "log-00302",
+  "log-00410",
+  "log-00446",
+  "log-00611",
+  "log-00654",
+  "log-00790",
+  "log-00794",
+  "log-00885",
+  "log-00931",
+  "log-00963",
+  "log-01014",
+  "log-01061",
+  "log-01102",
+  "log-01180",
+  "log-01269",
+  "log-01299",
+  "log-01349",
+  "log-01379",
+  "log-01421",
+  "log-01460",
+  "log-01486",
+  "log-01487",
+  "log-01490",
+  "log-01491",
+  "log-01492",
+  "log-01494",
+  "log-01495",
+  "log-01497",
+  "log-01498",
+  "log-01500",
+  "log-01501",
+  "log-01503",
+  "metric:notification-service:cpu_pct",
+  "metric:notification-service:error_rate_pct",
+  "metric:notification-service:latency_p99_ms",
+  "metric:notification-service:mem_pct",
+  "metric:notification-service:pod_restarts",
+  "metric:notification-service:rps"
+ ],
+ "cited_ids": [
+  "chg-9973",
+  "log-00790",
+  "metric:notification-service:error_rate_pct",
+  "metric:notification-service:pod_restarts"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 0,
+ "total_tokens": 31396
+}

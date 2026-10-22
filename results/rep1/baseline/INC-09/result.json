@@ -1,0 +1,223 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-09",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Transaction SMS and push alerts were delayed by 5-10 minutes due to latency spikes and degradation in the external sms-vendor service starting around 14:00 UTC, leading to consumer group message backlogs in notification-service.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "SMS Vendor Latency Spike / Degradation",
+    "root_cause_service": "sms-vendor",
+    "category": "third_party_outage",
+    "confidence": 0.85,
+    "supporting": [
+     {
+      "evidence_id": "metric:sms-vendor:latency_p99_ms",
+      "note": "Latency up anomaly detected starting at 14:05 with peak of 1569ms"
+     },
+     {
+      "evidence_id": "log-00763",
+      "note": "Logs show sms-vendor send taking over 5.5 seconds"
+     },
+     {
+      "evidence_id": "log-00769",
+      "note": "Logs show sms-vendor send taking over 8.5 seconds"
+     },
+     {
+      "evidence_id": "log-00860",
+      "note": "Consumer group lag warnings appearing due to slow downstream vendor calls"
+     },
+     {
+      "evidence_id": "hist-2026-0325",
+      "note": "Past incident shows similar symptom of delayed SMS alerts caused by sms-vendor"
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Scheduled Credential Rotation Side-Effect",
+    "root_cause_service": "notification-service",
+    "category": "config_change",
+    "confidence": 0.25,
+    "supporting": [
+     {
+      "evidence_id": "chg-9140",
+      "note": "Credential rotation performed earlier in the day on notification-service"
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "chg-9140",
+      "note": "Credential rotation occurred at 07:38, several hours before symptoms began at 14:00"
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "Users reported payment confirmation SMS/push arriving 5-10 minutes late since ~14:00.",
+    "evidence_ids": []
+   },
+   {
+    "text": "notification-service depends synchronously on sms-vendor and push-provider and asynchronously on event-bus.",
+    "evidence_ids": [
+     "dep:notification-service->sms-vendor",
+     "dep:notification-service->push-provider",
+     "dep:notification-service->event-bus"
+    ]
+   },
+   {
+    "text": "notification-service credentials were rotated at 2026-10-12T07:38:00+00:00.",
+    "evidence_ids": [
+     "chg-9140"
+    ]
+   },
+   {
+    "text": "sms-vendor p99 latency experienced an anomaly starting at 2026-10-12T14:05:00+00:00 reaching a peak of 1569ms.",
+    "evidence_ids": [
+     "metric:sms-vendor:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "notification-service logged multiple slow requests to sms-vendor and consumer group lag on notif-alerts.",
+    "evidence_ids": [
+     "log-00763",
+     "log-00769",
+     "log-00860"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The 5-minute discrepancy between user-reported onset and metric anomaly onset is within normal telemetry reporting bounds.",
+   "Synchronous blocking on sms-vendor caused thread pool saturation and backpressure on the event-bus consumer group."
+  ],
+  "evidence_gaps": [
+   "notification-service metric query failed with 503 Service Unavailable.",
+   "2 of 3 log shards timed out, resulting in partial log results."
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-12T07:38:00Z",
+    "event": "notification-service rotate API credentials",
+    "evidence_id": "chg-9140"
+   },
+   {
+    "ts": "2026-10-12T14:00:00Z",
+    "event": "Users report delayed transaction SMS/push alerts",
+    "evidence_id": null
+   },
+   {
+    "ts": "2026-10-12T14:02:53Z",
+    "event": "First slow sms-vendor call logged",
+    "evidence_id": "log-00763"
+   },
+   {
+    "ts": "2026-10-12T14:05:00Z",
+    "event": "sms-vendor p99 latency anomaly onset",
+    "evidence_id": "metric:sms-vendor:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-12T14:18:26Z",
+    "event": "Consumer group lag warning logged for notif-alerts",
+    "evidence_id": "log-00860"
+   },
+   {
+    "ts": "2026-10-12T14:30:00Z",
+    "event": "Incident reported by support lead Fatima",
+    "evidence_id": null
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Engage SMS vendor support to check for gateway congestion or throttling.",
+    "priority": "immediate",
+    "rationale": "External vendor latency is the primary bottleneck causing notification delays.",
+    "evidence_ids": [
+     "metric:sms-vendor:latency_p99_ms",
+     "log-00763",
+     "hist-2026-0325"
+    ]
+   },
+   {
+    "action": "Implement circuit breakers and asynchronous timeout controls for sms-vendor calls.",
+    "priority": "short_term",
+    "rationale": "Prevents slow external vendor calls from blocking notification-service worker pools and causing message queue lag.",
+    "evidence_ids": [
+     "log-00860",
+     "dep:notification-service->sms-vendor"
+    ]
+   },
+   {
+    "action": "Establish secondary vendor failover for SMS delivery.",
+    "priority": "long_term",
+    "rationale": "Mitigates future third-party vendor outages and latency spikes.",
+    "evidence_ids": [
+     "hist-2026-0325"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 12,
+ "llm_calls": 6,
+ "prompt_tokens": 32289,
+ "completion_tokens": 3241,
+ "latency_s": 27.74,
+ "retrieved_ids": [
+  "chg-9140",
+  "dep:notification-service->event-bus",
+  "dep:notification-service->push-provider",
+  "dep:notification-service->sms-vendor",
+  "hist-2026-0228",
+  "hist-2026-0325",
+  "hist-2026-0410",
+  "log-00366",
+  "log-00763",
+  "log-00766",
+  "log-00769",
+  "log-00781",
+  "log-00836",
+  "log-00857",
+  "log-00860",
+  "log-00866",
+  "log-00890",
+  "log-00945",
+  "log-00969",
+  "log-00972",
+  "log-01003",
+  "metric:push-provider:error_rate_pct",
+  "metric:push-provider:latency_p99_ms",
+  "metric:push-provider:rps",
+  "metric:sms-vendor:error_rate_pct",
+  "metric:sms-vendor:latency_p99_ms",
+  "metric:sms-vendor:rps"
+ ],
+ "cited_ids": [
+  "metric:sms-vendor:latency_p99_ms",
+  "log-00763",
+  "log-00769",
+  "log-00860",
+  "hist-2026-0325",
+  "chg-9140",
+  "dep:notification-service->sms-vendor",
+  "dep:notification-service->push-provider",
+  "dep:notification-service->event-bus"
+ ],
+ "gaps": [
+  "query_logs(service=notification-service) returned partial data",
+  "query_metrics(service=notification-service) failed: query_metrics backend returned 503 Service Unavailable after 3 tries"
+ ],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "total_tokens": 35530,
+ "rate_limit_wait_s": 10.0
+}

@@ -1,0 +1,205 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-11",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Notification service experienced intermittent push and SMS sending failures starting at 13:25 UTC due to DNS resolution failures (getaddrinfo EAI_AGAIN), caused by a CoreDNS replica scale-down from 4 to 1 for cost optimisation at 13:22 UTC.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "CoreDNS Replicas Scaled Down Causing DNS Resolution Timeouts",
+    "root_cause_service": "coredns",
+    "category": "network_dns",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-8542",
+      "note": "CoreDNS replicas scaled from 4 to 1 at 13:22 UTC, immediately preceding the latency and error spikes."
+     },
+     {
+      "evidence_id": "metric:coredns:latency_p99_ms",
+      "note": "CoreDNS p99 latency spiked starting at 13:23 UTC, reaching over 2,112 ms."
+     },
+     {
+      "evidence_id": "metric:coredns:error_rate_pct",
+      "note": "CoreDNS error rate jumped starting at 13:23 UTC to ~22%."
+     },
+     {
+      "evidence_id": "metric:coredns:cpu_pct",
+      "note": "CoreDNS CPU usage spiked to over 105% immediately after the scale-down."
+     },
+     {
+      "evidence_id": "metric:notification-service:error_rate_pct",
+      "note": "Notification service error rate spiked to ~26.58% starting at 13:25 UTC."
+     },
+     {
+      "evidence_id": "log-00531",
+      "note": "Logs show continuous getaddrinfo EAI_AGAIN errors resolving fcm.push-provider.example.com starting at 13:25 UTC."
+     },
+     {
+      "evidence_id": "log-00533",
+      "note": "Logs show continuous getaddrinfo EAI_AGAIN errors resolving sms-vendor.example.net starting at 13:25 UTC."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "External Vendor Outages",
+    "root_cause_service": "sms-vendor",
+    "category": "third_party_outage",
+    "confidence": 0.05,
+    "supporting": [],
+    "contradicting": [
+     {
+      "evidence_id": "log-00531",
+      "note": "Errors are local DNS resolution failures (getaddrinfo EAI_AGAIN), not HTTP or connection failures from successfully resolved vendor endpoints."
+     },
+     {
+      "evidence_id": "chg-8542",
+      "note": "The exact timing of failures directly correlates with DNS infrastructure downscaling rather than external vendor incidents."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "CoreDNS replicas were scaled down from 4 to 1 at 2026-10-14T13:22:00+00:00.",
+    "evidence_ids": [
+     "chg-8542"
+    ]
+   },
+   {
+    "text": "CoreDNS latency, CPU usage, and error rate spiked starting at 2026-10-14T13:23:00+00:00.",
+    "evidence_ids": [
+     "metric:coredns:latency_p99_ms",
+     "metric:coredns:error_rate_pct",
+     "metric:coredns:cpu_pct"
+    ]
+   },
+   {
+    "text": "notification-service error rate spiked starting at 2026-10-14T13:25:00+00:00, reaching a peak of 26.58%.",
+    "evidence_ids": [
+     "metric:notification-service:error_rate_pct"
+    ]
+   },
+   {
+    "text": "notification-service logged getaddrinfo EAI_AGAIN errors for sms-vendor.example.net and fcm.push-provider.example.com starting at 2026-10-14T13:25:00+00:00.",
+    "evidence_ids": [
+     "log-00531",
+     "log-00533"
+    ]
+   }
+  ],
+  "assumptions": [
+   "Reducing CoreDNS replicas from 4 to 1 resulted in severe resource exhaustion and query throttling, causing DNS resolution requests to time out."
+  ],
+  "evidence_gaps": [
+   "Metrics for other services depending on CoreDNS were not reviewed in detail, although notification-service clearly captures the impact."
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-14T13:22:00Z",
+    "event": "CoreDNS replicas scaled from 4 to 1",
+    "evidence_id": "chg-8542"
+   },
+   {
+    "ts": "2026-10-14T13:23:00Z",
+    "event": "CoreDNS latency, error rate, and CPU metrics begin spiking",
+    "evidence_id": "metric:coredns:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-14T13:25:00Z",
+    "event": "notification-service error rate increases and getaddrinfo EAI_AGAIN errors begin",
+    "evidence_id": "metric:notification-service:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-14T13:50:00Z",
+    "event": "Incident INC-11 reported by on-call SRE",
+    "evidence_id": null
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Scale CoreDNS back up to 4 replicas",
+    "priority": "immediate",
+    "rationale": "Restores cluster DNS capacity, resolves query throttling, and stops notification failures.",
+    "evidence_ids": [
+     "chg-8542"
+    ]
+   },
+   {
+    "action": "Implement minimum replica limits for platform infrastructure services",
+    "priority": "short_term",
+    "rationale": "Prevents accidental single-replica downscaling of critical shared components like CoreDNS.",
+    "evidence_ids": [
+     "chg-8542"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 8,
+ "llm_calls": 4,
+ "prompt_tokens": 30061,
+ "completion_tokens": 3578,
+ "latency_s": 44.32,
+ "retrieved_ids": [
+  "chg-5019",
+  "chg-8542",
+  "dep:notification-service->event-bus",
+  "dep:notification-service->push-provider",
+  "dep:notification-service->sms-vendor",
+  "dep:payments-api->event-bus",
+  "log-00296",
+  "log-00391",
+  "log-00487",
+  "log-00515",
+  "log-00531",
+  "log-00533",
+  "log-01288",
+  "log-01289",
+  "log-01290",
+  "log-01291",
+  "log-01292",
+  "log-01293",
+  "log-01295",
+  "log-01297",
+  "log-01298",
+  "log-01300",
+  "log-01302",
+  "log-01303",
+  "metric:coredns:cpu_pct",
+  "metric:coredns:error_rate_pct",
+  "metric:coredns:latency_p99_ms",
+  "metric:coredns:mem_pct",
+  "metric:coredns:rps",
+  "metric:notification-service:cpu_pct",
+  "metric:notification-service:error_rate_pct",
+  "metric:notification-service:latency_p99_ms",
+  "metric:notification-service:mem_pct",
+  "metric:notification-service:pod_restarts",
+  "metric:notification-service:rps"
+ ],
+ "cited_ids": [
+  "chg-8542",
+  "metric:coredns:latency_p99_ms",
+  "metric:coredns:error_rate_pct",
+  "metric:coredns:cpu_pct",
+  "metric:notification-service:error_rate_pct",
+  "log-00531",
+  "log-00533"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 30.0,
+ "total_tokens": 33639
+}

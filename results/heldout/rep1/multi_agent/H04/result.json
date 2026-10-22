@@ -1,0 +1,266 @@
+{
+ "system": "multi_agent",
+ "incident_id": "H04",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Mobile app users experienced lockouts and errors starting at 13:29 due to a configuration change on mobile-bff that lowered the per-client-IP rate limit from 1000 rps to 100 rps. This immediately generated HTTP 429 rate limit exceeded warnings and caused a simultaneous drop in downstream auth-service request volume starting at 13:30.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Mobile-bff edge rate limit set too low causing widespread HTTP 429 errors",
+    "root_cause_service": "mobile-bff",
+    "category": "config_change",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-9849",
+      "note": "Tightened the per-client-IP rate limit on mobile-bff at 13:28, exactly one minute before the symptom onset."
+     },
+     {
+      "evidence_id": "metric:mobile-bff:error_rate_pct",
+      "note": "Mobile-bff error rate spiked to nearly 30% starting at 13:29."
+     },
+     {
+      "evidence_id": "log-00575",
+      "note": "Logs confirm mobile-bff returning HTTP 429 rate limit exceeded warnings for client IPs starting at 13:29:03."
+     },
+     {
+      "evidence_id": "metric:auth-service:rps",
+      "note": "Auth-service RPS dropped simultaneously at 13:30 as traffic was blocked upstream."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Auth-service v7.2.1 deployment introduced login failures locking out mobile users",
+    "root_cause_service": "auth-service",
+    "category": "bad_deploy",
+    "confidence": 0.02,
+    "supporting": [
+     {
+      "evidence_id": "chg-9803",
+      "note": "Auth-service was deployed at 13:00 with v7.2.1."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:auth-service:error_rate_pct",
+      "note": "Auth-service error rate showed no anomaly during the incident window."
+     },
+     {
+      "evidence_id": "metric:auth-service:latency_p99_ms",
+      "note": "Auth-service latency showed no anomaly."
+     },
+     {
+      "evidence_id": "chg-9849",
+      "note": "A rate limit configuration change at 13:28 on mobile-bff provides a direct, time-correlated explanation for the error spike starting at 13:29."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "mobile-bff error rate anomaly began at 13:29, peaking at 29.99% at 13:39",
+    "evidence_ids": [
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   },
+   {
+    "text": "mobile-bff logged rate limit exceeded warnings returning HTTP 429 starting at 13:29:03 with log-00575",
+    "evidence_ids": [
+     "log-00575"
+    ]
+   },
+   {
+    "text": "auth-service request throughput (rps) dropped anomaly began at 13:30, falling from a baseline of ~134 req/s to ~85 req/s",
+    "evidence_ids": [
+     "metric:auth-service:rps"
+    ]
+   },
+   {
+    "text": "auth-service was deployed at 2026-10-19T13:00:00+00:00 (v7.2.1: OTP SMS template copy)",
+    "evidence_ids": [
+     "chg-9803"
+    ]
+   },
+   {
+    "text": "mobile-bff had an edge rate limit configuration change at 2026-10-19T13:28:00+00:00, tightening the per-client-IP limit from 1000 to 100 rps",
+    "evidence_ids": [
+     "chg-9849"
+    ]
+   }
+  ],
+  "assumptions": [
+   "Normal mobile app client connection patterns generate aggregate request rates per IP exceeding 100 rps."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-19T13:00:00Z",
+    "event": "auth-service deployed v7.2.1",
+    "evidence_id": "chg-9803"
+   },
+   {
+    "ts": "2026-10-19T13:28:00Z",
+    "event": "mobile-bff edge rate limit tightened from 1000 to 100 rps per client IP",
+    "evidence_id": "chg-9849"
+   },
+   {
+    "ts": "2026-10-19T13:29:00Z",
+    "event": "mobile-bff error rate anomaly begins and HTTP 429 rate limit errors start",
+    "evidence_id": "metric:mobile-bff:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-19T13:29:03Z",
+    "event": "mobile-bff logs rate limit exceeded warning returning HTTP 429",
+    "evidence_id": "log-00575"
+   },
+   {
+    "ts": "2026-10-19T13:30:00Z",
+    "event": "auth-service request throughput (rps) drops",
+    "evidence_id": "metric:auth-service:rps"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Immediate rollback or adjustment of the mobile-bff edge rate limit configuration back to 1000 rps or an appropriate higher threshold.",
+    "priority": "immediate",
+    "rationale": "Configuration change chg-9849 directly caused the HTTP 429 rate limit errors and customer lockouts starting at 13:29.",
+    "evidence_ids": [
+     "chg-9849",
+     "metric:mobile-bff:error_rate_pct",
+     "log-00575"
+    ]
+   },
+   {
+    "action": "Review configuration change management processes for edge rate limits to prevent abrupt, unvalidated tightening.",
+    "priority": "long_term",
+    "rationale": "Prevents similar widespread client-facing outages caused by overly restrictive gateway rate limits.",
+    "evidence_ids": [
+     "chg-9849"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 1,
+ "tool_calls": 10,
+ "llm_calls": 13,
+ "prompt_tokens": 70965,
+ "completion_tokens": 7266,
+ "latency_s": 41.1,
+ "retrieved_ids": [
+  "chg-1529",
+  "chg-1582",
+  "chg-1592",
+  "chg-2969",
+  "chg-3530",
+  "chg-3906",
+  "chg-4018",
+  "chg-5392",
+  "chg-5406",
+  "chg-5885",
+  "chg-5970",
+  "chg-6433",
+  "chg-6437",
+  "chg-6825",
+  "chg-7223",
+  "chg-7332",
+  "chg-7631",
+  "chg-8243",
+  "chg-8562",
+  "chg-8806",
+  "chg-9803",
+  "chg-9849",
+  "dep:aa-connector->aa-fiu-gateway",
+  "dep:aa-connector->user-db",
+  "dep:auth-service->otp-provider",
+  "dep:auth-service->redis-session",
+  "dep:auth-service->user-db",
+  "dep:kyc-service->kyc-vendor",
+  "dep:kyc-service->user-db",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:orders-service->broker-api",
+  "dep:orders-service->portfolio-db",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:portfolio-service->market-data-service",
+  "dep:portfolio-service->portfolio-db",
+  "hist-2026-0907",
+  "log-00026",
+  "log-00046",
+  "log-00058",
+  "log-00070",
+  "log-00094",
+  "log-00104",
+  "log-00140",
+  "log-00225",
+  "log-00249",
+  "log-00264",
+  "log-00265",
+  "log-00268",
+  "log-00271",
+  "log-00273",
+  "log-00274",
+  "log-00282",
+  "log-00283",
+  "log-00285",
+  "log-00310",
+  "log-00487",
+  "log-00575",
+  "log-00881",
+  "log-01777",
+  "log-01778",
+  "log-01779",
+  "log-01781",
+  "log-01782",
+  "log-01783",
+  "log-01784",
+  "log-01785",
+  "log-01786",
+  "log-01787",
+  "log-01788",
+  "log-01789",
+  "metric:auth-service:cpu_pct",
+  "metric:auth-service:error_rate_pct",
+  "metric:auth-service:latency_p99_ms",
+  "metric:auth-service:mem_pct",
+  "metric:auth-service:pod_restarts",
+  "metric:auth-service:rps",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps"
+ ],
+ "cited_ids": [
+  "chg-9849",
+  "metric:mobile-bff:error_rate_pct",
+  "log-00575",
+  "metric:auth-service:rps",
+  "chg-9803",
+  "metric:auth-service:error_rate_pct",
+  "metric:auth-service:latency_p99_ms"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 10.0,
+ "total_tokens": 78231
+}

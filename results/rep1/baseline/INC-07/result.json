@@ -1,0 +1,246 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-07",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Push campaign sent to 2.1M users at 13:30 triggered a massive traffic surge that overwhelmed orders-service, exhausting its executor queue and causing error rates to spike.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Traffic surge triggered by diwali_sip_offer push campaign overwhelming orders-service capacity",
+    "root_cause_service": "orders-service",
+    "category": "traffic_spike",
+    "confidence": 0.9,
+    "supporting": [
+     {
+      "evidence_id": "chg-9674",
+      "note": "Push campaign sent at 13:30 to 2.1M users with deep link orders/new-sip."
+     },
+     {
+      "evidence_id": "metric:mobile-bff:rps",
+      "note": "mobile-bff traffic jumped immediately after campaign."
+     },
+     {
+      "evidence_id": "metric:orders-service:rps",
+      "note": "orders-service traffic spiked from ~120 req/s to over 800 req/s."
+     },
+     {
+      "evidence_id": "metric:orders-service:error_rate_pct",
+      "note": "Error rate spiked to over 14% at 13:32."
+     },
+     {
+      "evidence_id": "log-00593",
+      "note": "RejectedExecutionException showing executor queue full."
+     },
+     {
+      "evidence_id": "log-00972",
+      "note": "Autoscaler reached max replicas (6/6)."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Downstream broker-api slowness blocking order threads",
+    "root_cause_service": "broker-api",
+    "category": "dependency_failure",
+    "confidence": 0.15,
+    "supporting": [
+     {
+      "evidence_id": "dep:orders-service->broker-api",
+      "note": "orders-service depends on broker-api synchronously."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "log-00593",
+      "note": "Queue full errors point to incoming request volume rather than waiting on downstream connections."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "Push campaign 'diwali_sip_offer' was sent to 2.1M users at 2026-10-10T13:30:00+00:00.",
+    "evidence_ids": [
+     "chg-9674"
+    ]
+   },
+   {
+    "text": "mobile-bff and orders-service request rates spiked starting at 2026-10-10T13:31:00+00:00.",
+    "evidence_ids": [
+     "metric:mobile-bff:rps",
+     "metric:orders-service:rps"
+    ]
+   },
+   {
+    "text": "orders-service and mobile-bff error rates began increasing at 2026-10-10T13:32:00+00:00.",
+    "evidence_ids": [
+     "metric:mobile-bff:error_rate_pct",
+     "metric:orders-service:error_rate_pct"
+    ]
+   },
+   {
+    "text": "orders-service logged RejectedExecutionException due to order-executor queue full capacity starting at 2026-10-10T13:32:04+00:00.",
+    "evidence_ids": [
+     "log-00593"
+    ]
+   },
+   {
+    "text": "orders-service reached maximum replicas (6/6) at 2026-10-10T13:50:19+00:00.",
+    "evidence_ids": [
+     "log-00972"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The push campaign deep link directed users directly to create new SIPs, causing simultaneous submission spikes.",
+   "The default thread pool and queue limits on orders-service are insufficient for multi-million user campaign bursts."
+  ],
+  "evidence_gaps": [
+   "Metrics for orders-service initially timed out and required log/dependent metric correlation.",
+   "External vendor metrics for broker-api are limited."
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-10T13:30:00Z",
+    "event": "Push campaign 'diwali_sip_offer' sent to 2.1M users",
+    "evidence_id": "chg-9674"
+   },
+   {
+    "ts": "2026-10-10T13:31:00Z",
+    "event": "mobile-bff and orders-service traffic (RPS) begins spiking",
+    "evidence_id": "metric:mobile-bff:rps"
+   },
+   {
+    "ts": "2026-10-10T13:32:00Z",
+    "event": "Error rates and latencies start rising on orders-service and mobile-bff",
+    "evidence_id": "metric:orders-service:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-10T13:32:04Z",
+    "event": "First RejectedExecutionException logged in orders-service",
+    "evidence_id": "log-00593"
+   },
+   {
+    "ts": "2026-10-10T13:50:19Z",
+    "event": "orders-service autoscaler reaches max replicas (6/6)",
+    "evidence_id": "log-00972"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Increase horizontal autoscaling limits (max replicas) for orders-service",
+    "priority": "immediate",
+    "rationale": "Service reached max replicas and saturated CPU during the campaign surge.",
+    "evidence_ids": [
+     "log-00972",
+     "metric:orders-service:cpu_pct"
+    ]
+   },
+   {
+    "action": "Tune and increase order-executor queue and thread pool capacity",
+    "priority": "immediate",
+    "rationale": "Queue capacity 500 was fully exhausted causing rejections.",
+    "evidence_ids": [
+     "log-00593"
+    ]
+   },
+   {
+    "action": "Implement rate limiting and staggered push notifications for marketing campaigns",
+    "priority": "short_term",
+    "rationale": "Broadcasting to 2.1M users simultaneously causes unsustainable traffic spikes.",
+    "evidence_ids": [
+     "chg-9674"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 12,
+ "llm_calls": 5,
+ "prompt_tokens": 44183,
+ "completion_tokens": 3500,
+ "latency_s": 14.5,
+ "retrieved_ids": [
+  "chg-8205",
+  "chg-8412",
+  "chg-8912",
+  "chg-9148",
+  "chg-9417",
+  "chg-9674",
+  "dep:orders-service->broker-api",
+  "dep:orders-service->portfolio-db",
+  "hist-2026-0410",
+  "hist-2026-0722",
+  "hist-2026-0901",
+  "log-00550",
+  "log-00554",
+  "log-00574",
+  "log-00593",
+  "log-00600",
+  "log-00665",
+  "log-00715",
+  "log-00753",
+  "log-00842",
+  "log-00890",
+  "log-00911",
+  "log-00950",
+  "log-00972",
+  "log-00984",
+  "log-01024",
+  "log-01075",
+  "log-01181",
+  "log-01227",
+  "log-01242",
+  "log-01245",
+  "log-01251",
+  "log-01254",
+  "log-01257",
+  "log-01260",
+  "log-01266",
+  "log-01269",
+  "log-01278",
+  "log-01281",
+  "log-01287",
+  "log-01290",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps",
+  "metric:orders-service:cpu_pct",
+  "metric:orders-service:error_rate_pct",
+  "metric:orders-service:latency_p99_ms",
+  "metric:orders-service:mem_pct",
+  "metric:orders-service:pod_restarts",
+  "metric:orders-service:rps"
+ ],
+ "cited_ids": [
+  "chg-9674",
+  "metric:mobile-bff:rps",
+  "metric:orders-service:rps",
+  "metric:orders-service:error_rate_pct",
+  "log-00593",
+  "log-00972",
+  "dep:orders-service->broker-api",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:orders-service:cpu_pct"
+ ],
+ "gaps": [
+  "query_metrics(service=orders-service) failed: timed out after 0.3s after 3 tries",
+  "query_logs(service=orders-service) returned partial data"
+ ],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "total_tokens": 47683,
+ "rate_limit_wait_s": 0
+}

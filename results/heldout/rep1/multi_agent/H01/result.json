@@ -1,0 +1,298 @@
+{
+ "system": "multi_agent",
+ "incident_id": "H01",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "An infrastructure node pool patch at 13:36:00 UTC updated node pool np-3 and changed time synchronization from chrony to systemd-timesyncd, causing a +99s clock offset on node np-3-a1. This clock skew caused auth-service pods running on that node to reject incoming JWTs due to 'token issued in the future (iat skew)' starting at 13:40:00 UTC, leading to user login failures.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Node image update time-sync configuration shift causes clock skew and JWT iat validation failure",
+    "root_cause_service": "kubernetes",
+    "category": "network_dns",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-9296",
+      "note": "Infrastructure update changing time sync method occurred at 13:36:00 UTC, four minutes prior to the incident onset."
+     },
+     {
+      "evidence_id": "log-00607",
+      "note": "Kubernetes node log explicitly shows clock offset +99s on node np-3-a1 starting at 13:39:27."
+     },
+     {
+      "evidence_id": "log-00613",
+      "note": "auth-service pod on node np-3-a1 explicitly logged JWT validation failure due to iat skew starting at 13:40:09 UTC."
+     },
+     {
+      "evidence_id": "metric:auth-service:error_rate_pct",
+      "note": "auth-service error rate spiked sharply from 0.28% to over 30% starting at 13:40:00 UTC."
+     },
+     {
+      "evidence_id": "log-00616",
+      "note": "mobile-bff received 401 responses from auth-service starting at 13:40:18 UTC."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Delayed bug in auth-service session refresh release triggered by standard time validation",
+    "root_cause_service": "auth-service",
+    "category": "bad_deploy",
+    "confidence": 0.05,
+    "supporting": [
+     {
+      "evidence_id": "chg-8214",
+      "note": "auth-service was deployed to version v7.2.0 two days prior to the incident."
+     },
+     {
+      "evidence_id": "metric:auth-service:error_rate_pct",
+      "note": "auth-service error rate increased dramatically during the incident."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "chg-9296",
+      "note": "The incident onset correlates precisely with the time-sync infrastructure change at 13:36:00 UTC rather than the deployment time two days prior."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "auth-service error rate spiked from baseline 0.28% to 32.36% at 2026-10-16T13:40:00+00:00.",
+    "evidence_ids": [
+     "metric:auth-service:error_rate_pct"
+    ]
+   },
+   {
+    "text": "mobile-bff error rate spiked from baseline 0.32% to 5.93% at 2026-10-16T13:40:00+00:00.",
+    "evidence_ids": [
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   },
+   {
+    "text": "auth-service began logging JWT validation errors due to iat skew starting at 2026-10-16T13:40:09+00:00.",
+    "evidence_ids": [
+     "log-00613"
+    ]
+   },
+   {
+    "text": "mobile-bff began logging 401 responses from auth-service for POST /v1/session starting at 2026-10-16T13:40:18+00:00.",
+    "evidence_ids": [
+     "log-00616"
+    ]
+   },
+   {
+    "text": "An infrastructure change on kubernetes node pool np-3 (new node image 2026.10.3, time sync: chrony -> systemd-timesyncd) occurred at 2026-10-16T13:36:00+00:00.",
+    "evidence_ids": [
+     "chg-9296"
+    ]
+   },
+   {
+    "text": "Kubernetes logs began showing clock synchronization warnings on node np-3-a1 starting at 13:39:27, showing a clock offset of +99s.",
+    "evidence_ids": [
+     "log-00607"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The change from chrony to systemd-timesyncd caused an abrupt clock step or drift on node np-3-a1 rather than smooth synchronization."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-14T16:00:00Z",
+    "event": "auth-service was deployed to version v7.2.0",
+    "evidence_id": "chg-8214"
+   },
+   {
+    "ts": "2026-10-16T13:36:00Z",
+    "event": "Infrastructure change on kubernetes node pool np-3 changing time sync from chrony to systemd-timesyncd",
+    "evidence_id": "chg-9296"
+   },
+   {
+    "ts": "2026-10-16T13:39:27Z",
+    "event": "Kubernetes node np-3-a1 logs clock offset +99s exceeding threshold",
+    "evidence_id": "log-00607"
+   },
+   {
+    "ts": "2026-10-16T13:40:00Z",
+    "event": "auth-service and mobile-bff error rates spike",
+    "evidence_id": "metric:auth-service:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-16T13:40:09Z",
+    "event": "auth-service logs JWT validation failure due to iat skew on node np-3-a1",
+    "evidence_id": "log-00613"
+   },
+   {
+    "ts": "2026-10-16T13:40:18Z",
+    "event": "mobile-bff logs 401 response from upstream auth-service",
+    "evidence_id": "log-00616"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Resync or reboot node np-3-a1 to correct the systemd-timesyncd clock drift immediately.",
+    "priority": "immediate",
+    "rationale": "Node np-3-a1 has a +99s clock offset causing active JWT validation failures.",
+    "evidence_ids": [
+     "log-00607",
+     "log-00613"
+    ]
+   },
+   {
+    "action": "Roll back or re-configure time-sync settings on node pool np-3 from systemd-timesyncd back to chrony if desynchronization persists.",
+    "priority": "short_term",
+    "rationale": "The clock drift was introduced directly following the node image update and time-sync configuration change.",
+    "evidence_ids": [
+     "chg-9296",
+     "log-00607"
+    ]
+   },
+   {
+    "action": "Implement strict pre-release validation for node pool images concerning time synchronization accuracy.",
+    "priority": "long_term",
+    "rationale": "Prevents future infrastructure updates from silently altering time-sync mechanisms and causing cluster-wide authentication failures.",
+    "evidence_ids": [
+     "chg-9296"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 2,
+ "tool_calls": 10,
+ "llm_calls": 18,
+ "prompt_tokens": 92036,
+ "completion_tokens": 10971,
+ "latency_s": 52.56,
+ "retrieved_ids": [
+  "chg-1290",
+  "chg-1887",
+  "chg-2074",
+  "chg-2673",
+  "chg-3064",
+  "chg-3526",
+  "chg-3575",
+  "chg-4300",
+  "chg-4369",
+  "chg-5257",
+  "chg-5882",
+  "chg-5929",
+  "chg-5979",
+  "chg-6191",
+  "chg-6508",
+  "chg-7752",
+  "chg-8214",
+  "chg-8615",
+  "chg-9046",
+  "chg-9254",
+  "chg-9289",
+  "chg-9296",
+  "dep:aa-connector->aa-fiu-gateway",
+  "dep:aa-connector->user-db",
+  "dep:auth-service->otp-provider",
+  "dep:auth-service->redis-session",
+  "dep:auth-service->user-db",
+  "dep:kyc-service->kyc-vendor",
+  "dep:kyc-service->user-db",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:orders-service->broker-api",
+  "dep:orders-service->portfolio-db",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:portfolio-service->market-data-service",
+  "dep:portfolio-service->portfolio-db",
+  "log-00021",
+  "log-00036",
+  "log-00045",
+  "log-00207",
+  "log-00269",
+  "log-00282",
+  "log-00359",
+  "log-00449",
+  "log-00607",
+  "log-00613",
+  "log-00616",
+  "log-00834",
+  "log-01136",
+  "log-01167",
+  "log-01208",
+  "log-01230",
+  "log-01339",
+  "log-01358",
+  "log-01374",
+  "log-01395",
+  "log-01497",
+  "log-01519",
+  "log-01534",
+  "log-01545",
+  "log-01550",
+  "log-01552",
+  "log-01557",
+  "log-01560",
+  "log-01561",
+  "log-01563",
+  "log-01566",
+  "log-01569",
+  "log-01570",
+  "log-01571",
+  "log-01572",
+  "log-01574",
+  "log-01577",
+  "log-01578",
+  "log-01580",
+  "log-01581",
+  "log-01582",
+  "log-01583",
+  "log-01584",
+  "log-01585",
+  "log-01586",
+  "log-01587",
+  "log-01588",
+  "log-01589",
+  "metric:auth-service:cpu_pct",
+  "metric:auth-service:error_rate_pct",
+  "metric:auth-service:latency_p99_ms",
+  "metric:auth-service:mem_pct",
+  "metric:auth-service:pod_restarts",
+  "metric:auth-service:rps",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps"
+ ],
+ "cited_ids": [
+  "chg-9296",
+  "log-00607",
+  "log-00613",
+  "metric:auth-service:error_rate_pct",
+  "log-00616",
+  "chg-8214",
+  "metric:mobile-bff:error_rate_pct"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 0,
+ "total_tokens": 103007
+}

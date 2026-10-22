@@ -2,59 +2,50 @@
 
 ## Key decisions
 
-**Own harness, not a framework.** The orchestration is about 400 lines of asyncio: a shared state, a
-dependency-aware scheduler, a budget, a tracer. LangGraph would have provided the graph, but owning the
-loop made the reliability behaviour explicit and testable: retries, time limits, provider fallback,
-reserves, veto. Every step can be traced.
+**Own harness, not a framework.** About 400 lines of asyncio: shared state, a dependency-aware scheduler,
+a budget, a tracer. LangGraph would supply the graph, but owning the loop made retries, time limits,
+provider fallback, the reporter's budget reserve and the Critic veto explicit and testable.
 
 **Typed messages and evidence IDs.** Agents exchange Pydantic objects through the shared state, never
-transcripts. Every tool result item has an ID, and every claim must cite one. Grounding can then be
-*checked by code*: did the cited evidence exist, and did the blamed change precede the onset? It can also
-be *scored without an LLM judge*.
+transcripts. Every tool result item has an ID and every claim cites one. Grounding can then be checked by
+code (does the evidence exist? did the blamed change precede the onset?) and scored without an LLM judge.
 
-**A Critic that is half code.** In development, the LLM Critic accepted hypotheses that had just failed an
-automatic check (a suspect never observed, missing symptomatic telemetry). Blocking checks now veto
-acceptance and turn into evidence requests. If a check is still open at the end, the verdict becomes
-"inconclusive". Prompts alone did not fix this; a rule in code did.
+**A Critic that is half code.** The LLM Critic accepted hypotheses that had just failed an automatic check.
+Blocking checks now veto acceptance and become evidence requests; a check still open at the end makes the
+verdict "inconclusive". Prompts alone did not fix this.
 
-**Tools that summarise.** Logs come back as patterns with counts and first-seen times; metrics as baseline,
-anomaly onset and saturation. This is how real observability tools help humans, and it keeps each
-investigation around 100k tokens.
+**Summarising tools.** Logs return patterns with counts and first-seen times; metrics return baseline, onset
+and saturation. That keeps an investigation near 100k tokens.
 
-**Deterministic adversity.** Incidents are generated from seeded specs. Tool failures are scripted per
-incident plus a random rate, where the random draw is a hash of the call, so parallel runs reproduce exactly.
-Ground truth sits where no tool can read it.
+**Deterministic adversity.** Seeded incident specs; scripted plus hash-seeded random tool failures,
+reproducible under parallelism; ground truth that no tool can read.
 
-**One model for both systems** (Gemini 3.5 Flash-Lite), so the comparison isolates architecture. Tier
-routing exists but was not varied.
+**A fair comparison.** One model for both systems, the same tools, budget and verdict rule. Strict mode
+discards rate-limited runs. A held-out set was written after a code freeze.
 
 ## Trade-offs
 
-<!-- RESULTS-TRADEOFFS -->
+On six held-out incidents both systems scored 4/6 and failed the same two. The multi-agent system cited key
+evidence more completely (100% vs 80%) and, on the dev set, made fewer confident wrong conclusions (1 vs 4).
+It costs about 2× the tokens, 4× the LLM calls and 2.5–3× the latency, plus free-tier rate-limit waits from
+bursty parallel calls. With this model, its value is caution and auditability, not accuracy.
 
-The code veto trades recall for honesty: it can turn a correct but under-verified answer into
-"inconclusive". We accept that, because a confident wrong answer during an incident costs more than "we
-need metrics from X".
+The veto trades recall for honesty: it can turn a correct but under-verified answer into "inconclusive".
 
 ## Limitations
 
-- 12 synthetic incidents, used for both development and evaluation: scores are optimistic. Prompt changes
-  were generic and are logged, but they were made after seeing failures.
-- One model and few repeats. A one-incident difference is within noise.
-- Synthetic telemetry is cleaner than production: no clock skew, sampling or cardinality limits.
-- In-process execution: a crash loses the investigation. There is no durable queue.
-- Latency includes free-tier queueing and retries.
+- Small samples (6 held-out incidents × 1 run, 12 dev × 2), one model, and one author for both the system and
+  the incidents.
+- Neither system recognises genuine ambiguity: given two changes in the same minute, both picked one.
+- Confidence is uncalibrated: wrong answers scored as high as right ones.
+- Synthetic telemetry. In-process execution, so a crash loses the investigation.
 
 ## Improvements
 
-1. **Durable execution** (Temporal or a Redis-backed queue), so long investigations survive restarts and
-   can wait for a human.
-2. **A held-out incident set** written by someone else, more repeats, and confidence intervals.
-3. **Measured model routing:** a cheap model for evidence agents and a strong one for the Critic, compared
-   on cost per correct answer.
-4. **Real backends** (Prometheus, Loki, deploy history from CI/Argo) and trace queries; the tool interfaces
-   already fit them.
-5. **Check the final report too:** run the citation and timing checks on the report, not only on the
-   hypotheses.
-6. **Calibration:** learn a mapping from check results and evidence counts to confidence instead of
-   trusting the model's number.
+1. A competing-trigger check: when two candidate changes in the causal path precede the onset, require
+   evidence that separates them before concluding.
+2. Durable execution (Temporal or a Redis-backed queue) with checkpoints and human approval steps.
+3. Calibrate confidence from check results and evidence counts instead of trusting the model's number.
+4. A larger held-out set written by someone else, more repeats, more models.
+5. Measured tier routing: cheap evidence agents and a strong Critic, scored on cost per correct answer.
+6. Real backends (Prometheus, Loki, CI deploy history); the tool interfaces already fit them.

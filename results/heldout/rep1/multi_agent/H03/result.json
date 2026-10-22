@@ -1,0 +1,391 @@
+{
+ "system": "multi_agent",
+ "incident_id": "H03",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "KYC onboarding failures began at 13:50:15 UTC due to external third-party kyc-vendor returning 504 Gateway Timeouts on POST /v2/pan/verify calls. This caused kyc-service verification threads to block, exhausting its worker pool (64/64 busy) by 13:53, elevating kyc-service latency and error rates, and subsequently increasing error rates in mobile-bff.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Third-party KYC Vendor Outage",
+    "root_cause_service": "kyc-vendor",
+    "category": "third_party_outage",
+    "confidence": 0.85,
+    "supporting": [
+     {
+      "evidence_id": "log-00675",
+      "note": "First warning of kyc-vendor returning 504 Gateway Timeout at 13:50:15, preceding all symptoms."
+     },
+     {
+      "evidence_id": "log-00699",
+      "note": "kyc-service retrying pan/verify calls due to vendor timeouts."
+     },
+     {
+      "evidence_id": "log-00754",
+      "note": "Verification worker pool exhaustion error in kyc-service resulting from blocked synchronous calls."
+     },
+     {
+      "evidence_id": "metric:kyc-service:latency_p99_ms",
+      "note": "kyc-service latency p99 spiked dramatically starting at 13:51."
+     },
+     {
+      "evidence_id": "metric:kyc-service:error_rate_pct",
+      "note": "kyc-service error rate surged at 13:52."
+     },
+     {
+      "evidence_id": "metric:mobile-bff:error_rate_pct",
+      "note": "mobile-bff error rate concurrently rose at 13:52 due to synchronous dependencies on kyc-service."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:kyc-vendor:rps",
+      "note": "kyc-vendor RPS showed no anomaly during the incident window."
+     },
+     {
+      "evidence_id": "metric:kyc-vendor:error_rate_pct",
+      "note": "kyc-vendor error_rate_pct showed no anomaly during the incident window."
+     },
+     {
+      "evidence_id": "metric:kyc-vendor:latency_p99_ms",
+      "note": "kyc-vendor latency_p99_ms showed no anomaly during the incident window."
+     }
+    ]
+   },
+   {
+    "rank": 2,
+    "title": "KYC Service Deployment Regressed Timeout Handling",
+    "root_cause_service": "kyc-service",
+    "category": "bad_deploy",
+    "confidence": 0.15,
+    "supporting": [
+     {
+      "evidence_id": "chg-8017",
+      "note": "kyc-service v5.3.0 deployed a new PAN verification screen flow a day prior to the incident."
+     },
+     {
+      "evidence_id": "log-00754",
+      "note": "Worker pool exhaustion occurred in kyc-service."
+     },
+     {
+      "evidence_id": "log-00699",
+      "note": "kyc-service retrying pan/verify calls repeatedly."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "log-00675",
+      "note": "Directly attributes the 30000ms timeouts to kyc-vendor POST /v2/pan/verify returning 504 Gateway Timeout rather than internal kyc-service logic."
+     },
+     {
+      "evidence_id": "metric:kyc-vendor:rps",
+      "note": "kyc-vendor metrics remain entirely normal, making pure client-side triggering less likely."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "kyc-service latency_p99_ms began rising sharply at 13:51, peaking at over 30 seconds.",
+    "evidence_ids": [
+     "metric:kyc-service:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "kyc-service error_rate_pct anomaly started at 13:52, peaking at 42.72%.",
+    "evidence_ids": [
+     "metric:kyc-service:error_rate_pct"
+    ]
+   },
+   {
+    "text": "mobile-bff error_rate_pct anomaly started at 13:52, rising up to 2.85%.",
+    "evidence_ids": [
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   },
+   {
+    "text": "First warning of kyc-vendor returning 504 Gateway Timeout occurred at 13:50:15.",
+    "evidence_ids": [
+     "log-00675"
+    ]
+   },
+   {
+    "text": "First kyc-service verification worker pool exhaustion error occurred at 13:53:03.",
+    "evidence_ids": [
+     "log-00754"
+    ]
+   },
+   {
+    "text": "kyc-service CPU, memory, and pod restarts showed no anomalies or restarts during the incident window.",
+    "evidence_ids": [
+     "metric:kyc-service:cpu_pct",
+     "metric:kyc-service:mem_pct",
+     "metric:kyc-service:pod_restarts"
+    ]
+   },
+   {
+    "text": "mobile-bff calls kyc-service synchronously.",
+    "evidence_ids": [
+     "dep:mobile-bff->kyc-service"
+    ]
+   },
+   {
+    "text": "kyc-service calls kyc-vendor and user-db synchronously.",
+    "evidence_ids": [
+     "dep:kyc-service->kyc-vendor",
+     "dep:kyc-service->user-db"
+    ]
+   },
+   {
+    "text": "kyc-service was deployed with version v5.3.0 on 2026-10-17T17:30:00+00:00.",
+    "evidence_ids": [
+     "chg-8017"
+    ]
+   },
+   {
+    "text": "kyc-vendor rps shows no anomaly during the incident window with a baseline of 24.61 req/s and stable values.",
+    "evidence_ids": [
+     "metric:kyc-vendor:rps"
+    ]
+   },
+   {
+    "text": "kyc-vendor error_rate_pct shows no anomaly during the incident window, staying at a baseline of 0.34% and maxing out at 0.48%.",
+    "evidence_ids": [
+     "metric:kyc-vendor:error_rate_pct"
+    ]
+   },
+   {
+    "text": "kyc-vendor latency_p99_ms shows no anomaly during the incident window, maintaining a baseline of 716.88 ms.",
+    "evidence_ids": [
+     "metric:kyc-vendor:latency_p99_ms"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The external third-party kyc-vendor experienced localized gateway/proxy failures or upstream database lockups that manifested as 504 Gateway Timeouts at the API integration layer without registering as global metric anomalies."
+  ],
+  "evidence_gaps": [
+   "query_logs(service=kyc-service) returned partial data"
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-17T17:30:00Z",
+    "event": "kyc-service v5.3.0 deployed",
+    "evidence_id": "chg-8017"
+   },
+   {
+    "ts": "2026-10-18T13:50:15Z",
+    "event": "First kyc-vendor POST /v2/pan/verify 504 Gateway Timeout logged by kyc-service",
+    "evidence_id": "log-00675"
+   },
+   {
+    "ts": "2026-10-18T13:51:00Z",
+    "event": "kyc-service latency p99 anomaly starts upward",
+    "evidence_id": "metric:kyc-service:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-18T13:51:00Z",
+    "event": "kyc-service begins retrying pan/verify calls",
+    "evidence_id": "log-00699"
+   },
+   {
+    "ts": "2026-10-18T13:52:00Z",
+    "event": "kyc-service error rate anomaly starts",
+    "evidence_id": "metric:kyc-service:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-18T13:52:00Z",
+    "event": "mobile-bff error rate anomaly starts",
+    "evidence_id": "metric:mobile-bff:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-18T13:53:03Z",
+    "event": "First kyc-service verification worker pool exhaustion error logged",
+    "evidence_id": "log-00754"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Contact third-party KYC vendor support to investigate potential localized proxy gateway timeouts or origin server connectivity issues on POST /v2/pan/verify.",
+    "priority": "immediate",
+    "rationale": "Logs confirm continuous 504 Gateway Timeouts returned from kyc-vendor starting at 13:50:15.",
+    "evidence_ids": [
+     "log-00675",
+     "log-00699"
+    ]
+   },
+   {
+    "action": "Implement circuit breakers and aggressive request timeouts with fallback mechanisms in kyc-service for external vendor calls to prevent worker thread saturation.",
+    "priority": "short_term",
+    "rationale": "Synchronous vendor calls hung for up to 30 seconds, exhausting the 64/64 worker pool and cascading errors to mobile-bff.",
+    "evidence_ids": [
+     "log-00754",
+     "dep:kyc-service->kyc-vendor"
+    ]
+   },
+   {
+    "action": "Establish specialized vendor-specific monitoring and alerting for intermediate proxy or gateway error codes that do not surface in aggregate RPS or latency metrics.",
+    "priority": "long_term",
+    "rationale": "Vendor aggregate metrics showed no anomaly despite persistent 504 Gateway Timeouts impacting user traffic.",
+    "evidence_ids": [
+     "metric:kyc-vendor:rps",
+     "metric:kyc-vendor:error_rate_pct",
+     "metric:kyc-vendor:latency_p99_ms"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 2,
+ "tool_calls": 14,
+ "llm_calls": 24,
+ "prompt_tokens": 135115,
+ "completion_tokens": 14302,
+ "latency_s": 85.12,
+ "retrieved_ids": [
+  "chg-2560",
+  "chg-2743",
+  "chg-3009",
+  "chg-3374",
+  "chg-3551",
+  "chg-3624",
+  "chg-3729",
+  "chg-3805",
+  "chg-3814",
+  "chg-5167",
+  "chg-5264",
+  "chg-6056",
+  "chg-6148",
+  "chg-6509",
+  "chg-6823",
+  "chg-7097",
+  "chg-7437",
+  "chg-7992",
+  "chg-8017",
+  "chg-9094",
+  "chg-9527",
+  "dep:aa-connector->aa-fiu-gateway",
+  "dep:aa-connector->user-db",
+  "dep:auth-service->otp-provider",
+  "dep:auth-service->redis-session",
+  "dep:auth-service->user-db",
+  "dep:kyc-service->kyc-vendor",
+  "dep:kyc-service->user-db",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:orders-service->broker-api",
+  "dep:orders-service->portfolio-db",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:portfolio-service->market-data-service",
+  "dep:portfolio-service->portfolio-db",
+  "hist-2026-0325",
+  "hist-2026-0612",
+  "hist-2026-0618",
+  "log-00417",
+  "log-00483",
+  "log-00574",
+  "log-00671",
+  "log-00675",
+  "log-00688",
+  "log-00699",
+  "log-00752",
+  "log-00754",
+  "log-00995",
+  "log-01304",
+  "log-01305",
+  "log-01307",
+  "log-01308",
+  "log-01309",
+  "log-01311",
+  "log-01312",
+  "log-01313",
+  "log-01315",
+  "log-01316",
+  "log-01317",
+  "log-01319",
+  "log-01320",
+  "log-01321",
+  "log-01322",
+  "log-01323",
+  "log-01325",
+  "log-01326",
+  "log-01327",
+  "log-01329",
+  "log-01330",
+  "log-01332",
+  "log-01333",
+  "log-01334",
+  "log-01336",
+  "log-01337",
+  "log-01338",
+  "log-01339",
+  "log-01341",
+  "log-01343",
+  "log-01981",
+  "log-01984",
+  "log-01987",
+  "log-01990",
+  "log-01993",
+  "log-02006",
+  "log-02012",
+  "log-02018",
+  "log-02021",
+  "log-02024",
+  "log-02030",
+  "log-02033",
+  "metric:kyc-service:cpu_pct",
+  "metric:kyc-service:error_rate_pct",
+  "metric:kyc-service:latency_p99_ms",
+  "metric:kyc-service:mem_pct",
+  "metric:kyc-service:pod_restarts",
+  "metric:kyc-service:rps",
+  "metric:kyc-vendor:error_rate_pct",
+  "metric:kyc-vendor:latency_p99_ms",
+  "metric:kyc-vendor:rps",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps"
+ ],
+ "cited_ids": [
+  "log-00675",
+  "log-00699",
+  "log-00754",
+  "metric:kyc-service:latency_p99_ms",
+  "metric:kyc-service:error_rate_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:kyc-vendor:rps",
+  "metric:kyc-vendor:error_rate_pct",
+  "metric:kyc-vendor:latency_p99_ms",
+  "chg-8017",
+  "metric:kyc-service:cpu_pct",
+  "metric:kyc-service:mem_pct",
+  "metric:kyc-service:pod_restarts",
+  "dep:mobile-bff->kyc-service",
+  "dep:kyc-service->kyc-vendor",
+  "dep:kyc-service->user-db"
+ ],
+ "gaps": [
+  "query_logs(service=kyc-service) returned partial data"
+ ],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 20.0,
+ "total_tokens": 149417
+}

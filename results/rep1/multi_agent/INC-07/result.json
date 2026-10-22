@@ -1,0 +1,342 @@
+{
+ "system": "multi_agent",
+ "incident_id": "INC-07",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "An incident occurred on 2026-10-10 starting at 13:31 UTC where order placements failed with errors like 'Please try again'. The root cause was determined to be a push notification campaign ('diwali_sip_offer') sent to 2.1M users at 13:30 UTC with a direct deep link to create new SIP orders. This generated an instantaneous surge in user traffic across mobile-bff and orders-service, overwhelming the orders-service executor queue (capacity 500) and leading to RejectedExecutionException errors, high CPU utilization, and transaction failures.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Push Notification Campaign Overwhelms Orders Service Queue",
+    "root_cause_service": "orders-service",
+    "category": "traffic_spike",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-9674",
+      "note": "Push campaign 'diwali_sip_offer' sent to 2.1M users at 13:30 UTC with deep link to orders/new-sip directly precedes the traffic surge."
+     },
+     {
+      "evidence_id": "metric:mobile-bff:rps",
+      "note": "mobile-bff traffic spiked abruptly starting at 13:31 UTC, rising from baseline 1097 req/s to 2516+ req/s."
+     },
+     {
+      "evidence_id": "metric:orders-service:rps",
+      "note": "orders-service traffic surged simultaneously at 13:31 UTC, jumping from baseline 115 req/s to 748+ req/s."
+     },
+     {
+      "evidence_id": "metric:orders-service:cpu_pct",
+      "note": "orders-service CPU usage spiked from 27.42% to 89.09% starting at 13:31 UTC."
+     },
+     {
+      "evidence_id": "log-00593",
+      "note": "orders-service logged RejectedExecutionException: order-executor queue full starting at 13:32 UTC."
+     },
+     {
+      "evidence_id": "metric:orders-service:error_rate_pct",
+      "note": "orders-service error rate spiked to 14.12% starting at 13:32 UTC, correlating with the executor queue saturation."
+     },
+     {
+      "evidence_id": "metric:notification-service:rps",
+      "note": "notification-service RPS remained stable without anomalies during the campaign."
+     },
+     {
+      "evidence_id": "metric:notification-service:error_rate_pct",
+      "note": "notification-service error rate remained at 0.31% with no errors."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Routine Deployment of Market Data Service or User DB Triggered Upstream Instability",
+    "root_cause_service": "market-data-service",
+    "category": "bad_deploy",
+    "confidence": 0.05,
+    "supporting": [
+     {
+      "evidence_id": "chg-9148",
+      "note": "market-data-service v2.12.0 deployed at 12:39 UTC."
+     },
+     {
+      "evidence_id": "chg-9417",
+      "note": "user-db v3.23.0 deployed at 12:40 UTC."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "chg-9674",
+      "note": "A 50-minute delay between deployments and the abrupt 13:31 UTC traffic surge without prior anomalies makes a deployment regression far less likely than the direct push campaign trigger."
+     },
+     {
+      "evidence_id": "metric:orders-service:rps",
+      "note": "Traffic metrics show an explicit volume spike starting precisely at 13:31 UTC, matching the push notification timing rather than a gradual deployment degradation."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "orders-service traffic (RPS) and CPU usage showed an anomaly starting at 2026-10-10T13:31:00+00:00.",
+    "evidence_ids": [
+     "metric:orders-service:rps",
+     "metric:orders-service:cpu_pct"
+    ]
+   },
+   {
+    "text": "orders-service error rate and p99 latency anomalies began at 2026-10-10T13:32:00+00:00, with error rates peaking at 15.85%.",
+    "evidence_ids": [
+     "metric:orders-service:error_rate_pct",
+     "metric:orders-service:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "orders-service logs show RejectedExecutionException: order-executor queue full (capacity 500) starting at 2026-10-10T13:32:04+00:00.",
+    "evidence_ids": [
+     "log-00593"
+    ]
+   },
+   {
+    "text": "mobile-bff RPS anomaly started at 2026-10-10T13:31:00+00:00 and error rate anomaly started at 2026-10-10T13:32:00+00:00.",
+    "evidence_ids": [
+     "metric:mobile-bff:rps",
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   },
+   {
+    "text": "A push campaign 'diwali_sip_offer' was sent to 2.1M users via notification-service at 13:30 UTC on 2026-10-10.",
+    "evidence_ids": [
+     "chg-9674"
+    ]
+   },
+   {
+    "text": "notification-service experienced no distress, errors, resource saturation, or latency spikes between 13:30 and 13:35 UTC.",
+    "evidence_ids": [
+     "metric:notification-service:rps",
+     "metric:notification-service:error_rate_pct",
+     "metric:notification-service:latency_p99_ms",
+     "metric:notification-service:cpu_pct",
+     "metric:notification-service:mem_pct",
+     "metric:notification-service:pod_restarts"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The push notification deep link successfully drove a large synchronized influx of users to open order forms simultaneously."
+  ],
+  "evidence_gaps": [
+   "query_logs(service=orders-service) returned partial data",
+   "query_metrics(service=orders-service) failed: timed out after 0.3s after 3 tries",
+   "query_logs(service=orders-service, contains=Please try again) returned partial data"
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-10T12:39:00Z",
+    "event": "market-data-service v2.12.0 deployed",
+    "evidence_id": "chg-9148"
+   },
+   {
+    "ts": "2026-10-10T12:40:00Z",
+    "event": "user-db v3.23.0 deployed",
+    "evidence_id": "chg-9417"
+   },
+   {
+    "ts": "2026-10-10T13:30:00Z",
+    "event": "Push campaign 'diwali_sip_offer' sent to 2.1M users",
+    "evidence_id": "chg-9674"
+   },
+   {
+    "ts": "2026-10-10T13:31:00Z",
+    "event": "mobile-bff and orders-service traffic RPS and CPU anomalies begin",
+    "evidence_id": "metric:orders-service:rps"
+   },
+   {
+    "ts": "2026-10-10T13:32:00Z",
+    "event": "orders-service error rate and p99 latency spike, and RejectedExecutionException occurs",
+    "evidence_id": "log-00593"
+   },
+   {
+    "ts": "2026-10-10T13:50:00Z",
+    "event": "orders-service autoscaler reaches max replicas (6/6)",
+    "evidence_id": "log-00972"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Implement rate limiting or queue shedding mechanisms on orders-service to handle sudden traffic surges gracefully without throwing execution rejections.",
+    "priority": "immediate",
+    "rationale": "Orders-service executor queue became full (capacity 500) during the notification campaign surge, causing transaction failures.",
+    "evidence_ids": [
+     "log-00593",
+     "metric:orders-service:cpu_pct"
+    ]
+   },
+   {
+    "action": "Establish cross-functional coordination and throttling between marketing/notification campaigns and backend service capacity teams.",
+    "priority": "short_term",
+    "rationale": "Uncoordinated broad push notification campaigns with direct deep links caused instantaneous traffic spikes that overwhelmed downstream services.",
+    "evidence_ids": [
+     "chg-9674",
+     "metric:orders-service:rps"
+    ]
+   },
+   {
+    "action": "Review and increase baseline resource provisioning or adjust autoscaling parameters for orders-service during high-impact marketing events.",
+    "priority": "long_term",
+    "rationale": "Autoscaler reached max replicas only later in the incident after queue saturation had already impacted users.",
+    "evidence_ids": [
+     "log-00972",
+     "metric:orders-service:rps"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 2,
+ "tool_calls": 18,
+ "llm_calls": 20,
+ "prompt_tokens": 118776,
+ "completion_tokens": 12536,
+ "latency_s": 131.12,
+ "retrieved_ids": [
+  "chg-1110",
+  "chg-1130",
+  "chg-2178",
+  "chg-2673",
+  "chg-3215",
+  "chg-3518",
+  "chg-3982",
+  "chg-4395",
+  "chg-4448",
+  "chg-4524",
+  "chg-4634",
+  "chg-4861",
+  "chg-5249",
+  "chg-5635",
+  "chg-7005",
+  "chg-8205",
+  "chg-8412",
+  "chg-8912",
+  "chg-9148",
+  "chg-9417",
+  "chg-9674",
+  "dep:aa-connector->aa-fiu-gateway",
+  "dep:aa-connector->user-db",
+  "dep:auth-service->otp-provider",
+  "dep:auth-service->redis-session",
+  "dep:auth-service->user-db",
+  "dep:fraud-service->redis-cache",
+  "dep:kyc-service->kyc-vendor",
+  "dep:kyc-service->user-db",
+  "dep:ledger-service->ledger-db",
+  "dep:market-data-service->market-feed",
+  "dep:market-data-service->redis-cache",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:notification-service->event-bus",
+  "dep:orders-service->broker-api",
+  "dep:orders-service->portfolio-db",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:portfolio-service->market-data-service",
+  "dep:portfolio-service->portfolio-db",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "log-00418",
+  "log-00557",
+  "log-00577",
+  "log-00578",
+  "log-00583",
+  "log-00584",
+  "log-00591",
+  "log-00593",
+  "log-00597",
+  "log-00599",
+  "log-00600",
+  "log-00610",
+  "log-00615",
+  "log-00629",
+  "log-00636",
+  "log-00641",
+  "log-00658",
+  "log-00664",
+  "log-00665",
+  "log-00676",
+  "log-00689",
+  "log-00729",
+  "log-00802",
+  "log-00972",
+  "log-01227",
+  "log-01242",
+  "log-01245",
+  "log-01251",
+  "log-01254",
+  "log-01257",
+  "log-01260",
+  "log-01266",
+  "log-01269",
+  "log-01278",
+  "log-01281",
+  "log-01287",
+  "log-01290",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps",
+  "metric:notification-service:cpu_pct",
+  "metric:notification-service:error_rate_pct",
+  "metric:notification-service:latency_p99_ms",
+  "metric:notification-service:mem_pct",
+  "metric:notification-service:pod_restarts",
+  "metric:notification-service:rps",
+  "metric:orders-service:cpu_pct",
+  "metric:orders-service:error_rate_pct",
+  "metric:orders-service:latency_p99_ms",
+  "metric:orders-service:mem_pct",
+  "metric:orders-service:pod_restarts",
+  "metric:orders-service:rps"
+ ],
+ "cited_ids": [
+  "chg-9674",
+  "metric:mobile-bff:rps",
+  "metric:orders-service:rps",
+  "metric:orders-service:cpu_pct",
+  "log-00593",
+  "metric:orders-service:error_rate_pct",
+  "metric:notification-service:rps",
+  "metric:notification-service:error_rate_pct",
+  "chg-9148",
+  "chg-9417",
+  "metric:orders-service:latency_p99_ms",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:notification-service:latency_p99_ms",
+  "metric:notification-service:cpu_pct",
+  "metric:notification-service:mem_pct",
+  "metric:notification-service:pod_restarts",
+  "log-00972"
+ ],
+ "gaps": [
+  "query_logs(service=orders-service) returned partial data",
+  "query_metrics(service=orders-service) failed: timed out after 0.3s after 3 tries",
+  "query_logs(service=orders-service, contains=Please try again) returned partial data"
+ ],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "total_tokens": 131312,
+ "rate_limit_wait_s": 10.0
+}

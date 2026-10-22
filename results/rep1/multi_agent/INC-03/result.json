@@ -1,0 +1,351 @@
+{
+ "system": "multi_agent",
+ "incident_id": "INC-03",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Checkout timeouts on UPI pay occurred due to an external latency and error rate spike in partner-bank-api starting at 13:41. This caused upi-gateway worker pools to exhaust as requests blocked waiting on partner-bank-api, leading to upi-gateway latency spikes and timeouts that subsequently cascaded into payments-api and mobile-bff error rates.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "External Partner Bank Latency Spike",
+    "root_cause_service": "partner-bank-api",
+    "category": "third_party_outage",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "metric:partner-bank-api:latency_p99_ms",
+      "note": "Shows the earliest anomaly onset at 13:41 preceding all other service latencies."
+     },
+     {
+      "evidence_id": "metric:upi-gateway:latency_p99_ms",
+      "note": "Shows upi-gateway latency rising immediately after partner-bank-api at 13:43."
+     },
+     {
+      "evidence_id": "log-00742",
+      "note": "Shows upi-gateway worker pool exhaustion with workers waiting on partner-bank-api."
+     },
+     {
+      "evidence_id": "metric:payments-api:latency_p99_ms",
+      "note": "Shows payments-api latency jumping at 13:45 mirroring downstream delays."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "UPI Gateway Worker Pool Concurrency Bottleneck",
+    "root_cause_service": "upi-gateway",
+    "category": "resource_exhaustion",
+    "confidence": 0.05,
+    "supporting": [
+     {
+      "evidence_id": "log-00742",
+      "note": "Confirms worker pool exhaustion (200/200 busy) on upi-gateway."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:partner-bank-api:latency_p99_ms",
+      "note": "Partner-bank-api latency started rising at 13:41, whereas upi-gateway metrics only started rising at 13:43, proving the fault originated upstream."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "partner-bank-api latency_p99_ms showed an anomaly starting upward from 13:41, reaching a peak of 9237.07 ms at 14:01.",
+    "evidence_ids": [
+     "metric:partner-bank-api:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "upi-gateway latency_p99_ms showed an anomaly starting upward from 13:43.",
+    "evidence_ids": [
+     "metric:upi-gateway:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "payments-api latency_p99_ms showed an anomaly starting upward from 13:45, reaching a peak of 10772.92 ms at 13:55.",
+    "evidence_ids": [
+     "metric:payments-api:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "partner-bank-api error_rate_pct showed an anomaly starting upward from 13:45, reaching a peak of 4.56% at 13:49.",
+    "evidence_ids": [
+     "metric:partner-bank-api:error_rate_pct"
+    ]
+   },
+   {
+    "text": "payments-api logs showed continuous 10000ms timeouts calling upi-gateway POST /v2/collect beginning at 13:46:00.",
+    "evidence_ids": [
+     "log-00698"
+    ]
+   },
+   {
+    "text": "upi-gateway error_rate_pct showed an anomaly starting upward from 13:46.",
+    "evidence_ids": [
+     "metric:upi-gateway:error_rate_pct"
+    ]
+   },
+   {
+    "text": "payments-api error_rate_pct showed an anomaly starting upward from 13:47.",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct"
+    ]
+   },
+   {
+    "text": "mobile-bff error_rate_pct showed an anomaly starting upward from 13:47.",
+    "evidence_ids": [
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   },
+   {
+    "text": "upi-gateway experienced worker pool exhaustion (200/200 busy), rejecting requests with most workers waiting on partner-bank-api starting at 13:47.",
+    "evidence_ids": [
+     "log-00742"
+    ]
+   },
+   {
+    "text": "orders-service v1.25.0 was deployed at 2026-10-04T12:07:00+00:00.",
+    "evidence_ids": [
+     "chg-9328"
+    ]
+   },
+   {
+    "text": "ledger-service v6.7.0 was deployed at 2026-10-04T12:29:00+00:00.",
+    "evidence_ids": [
+     "chg-9500"
+    ]
+   },
+   {
+    "text": "fraud-service velocity threshold configuration was raised from 5 to 7 transactions/min at 2026-10-04T13:30:00+00:00.",
+    "evidence_ids": [
+     "chg-9502"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The root cause inside partner-bank-api is entirely external and outside internal system logs."
+  ],
+  "evidence_gaps": [
+   "query_logs(service=upi-gateway) returned partial data",
+   "query_metrics(service=partner-bank-api) returned partial data"
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-04T12:07:00Z",
+    "event": "orders-service v1.25.0 routine release deployed",
+    "evidence_id": "chg-9328"
+   },
+   {
+    "ts": "2026-10-04T12:29:00Z",
+    "event": "ledger-service v6.7.0 routine release deployed",
+    "evidence_id": "chg-9500"
+   },
+   {
+    "ts": "2026-10-04T13:30:00Z",
+    "event": "fraud-service velocity threshold configuration raised from 5 to 7 transactions/min",
+    "evidence_id": "chg-9502"
+   },
+   {
+    "ts": "2026-10-04T13:41:00Z",
+    "event": "partner-bank-api latency_p99_ms begins anomaly rise",
+    "evidence_id": "metric:partner-bank-api:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-04T13:43:00Z",
+    "event": "upi-gateway latency_p99_ms begins anomaly rise",
+    "evidence_id": "metric:upi-gateway:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-04T13:45:00Z",
+    "event": "payments-api latency_p99_ms and partner-bank-api error_rate_pct begin anomaly rises",
+    "evidence_id": "metric:payments-api:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-04T13:46:00Z",
+    "event": "payments-api logs timeouts calling upi-gateway; upi-gateway error_rate_pct begins rising",
+    "evidence_id": "log-00698"
+   },
+   {
+    "ts": "2026-10-04T13:47:00Z",
+    "event": "upi-gateway worker pool exhausted; payments-api and mobile-bff error rates begin rising",
+    "evidence_id": "log-00742"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Coordinate with the external partner-bank-api provider to investigate their latency spike and error rates.",
+    "priority": "immediate",
+    "rationale": "partner-bank-api is the upstream origin of the latency and failure chain.",
+    "evidence_ids": [
+     "metric:partner-bank-api:latency_p99_ms",
+     "metric:partner-bank-api:error_rate_pct"
+    ]
+   },
+   {
+    "action": "Implement circuit breakers and aggressive request shedding on upi-gateway for calls to partner-bank-api.",
+    "priority": "short_term",
+    "rationale": "Prevents upi-gateway worker pool exhaustion and cascading failures to payments-api when partner-bank-api degrades.",
+    "evidence_ids": [
+     "log-00742",
+     "metric:upi-gateway:latency_p99_ms"
+    ]
+   },
+   {
+    "action": "Establish secondary redundant payment routes or fallback partner banks for UPI transactions.",
+    "priority": "long_term",
+    "rationale": "Mitigates single-vendor external dependencies causing total feature degradation.",
+    "evidence_ids": [
+     "dep:upi-gateway->partner-bank-api",
+     "metric:partner-bank-api:latency_p99_ms"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 1,
+ "tool_calls": 13,
+ "llm_calls": 13,
+ "prompt_tokens": 93665,
+ "completion_tokens": 7394,
+ "latency_s": 54.21,
+ "retrieved_ids": [
+  "chg-1489",
+  "chg-2190",
+  "chg-2925",
+  "chg-3682",
+  "chg-3820",
+  "chg-3971",
+  "chg-4295",
+  "chg-4320",
+  "chg-5866",
+  "chg-5892",
+  "chg-6178",
+  "chg-6437",
+  "chg-6644",
+  "chg-7285",
+  "chg-7663",
+  "chg-8441",
+  "chg-8974",
+  "chg-9016",
+  "chg-9328",
+  "chg-9500",
+  "chg-9502",
+  "dep:aa-connector->aa-fiu-gateway",
+  "dep:aa-connector->user-db",
+  "dep:auth-service->otp-provider",
+  "dep:auth-service->redis-session",
+  "dep:auth-service->user-db",
+  "dep:fraud-service->redis-cache",
+  "dep:kyc-service->kyc-vendor",
+  "dep:kyc-service->user-db",
+  "dep:ledger-service->ledger-db",
+  "dep:market-data-service->redis-cache",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:notification-service->event-bus",
+  "dep:orders-service->broker-api",
+  "dep:orders-service->portfolio-db",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:portfolio-service->market-data-service",
+  "dep:portfolio-service->portfolio-db",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "log-00054",
+  "log-00099",
+  "log-00117",
+  "log-00141",
+  "log-00181",
+  "log-00436",
+  "log-00512",
+  "log-00599",
+  "log-00657",
+  "log-00698",
+  "log-00742",
+  "log-00975",
+  "log-01545",
+  "log-01569",
+  "log-01578",
+  "log-01581",
+  "log-01584",
+  "log-01590",
+  "log-01603",
+  "log-01615",
+  "log-01621",
+  "log-01636",
+  "log-01646",
+  "log-01648",
+  "log-01650",
+  "log-01652",
+  "log-01654",
+  "log-01655",
+  "log-01657",
+  "log-01660",
+  "log-01661",
+  "log-01662",
+  "log-01663",
+  "log-01665",
+  "log-01666",
+  "log-01668",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps",
+  "metric:partner-bank-api:error_rate_pct",
+  "metric:partner-bank-api:latency_p99_ms",
+  "metric:partner-bank-api:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps",
+  "metric:upi-gateway:cpu_pct",
+  "metric:upi-gateway:error_rate_pct",
+  "metric:upi-gateway:latency_p99_ms",
+  "metric:upi-gateway:mem_pct",
+  "metric:upi-gateway:pod_restarts",
+  "metric:upi-gateway:rps"
+ ],
+ "cited_ids": [
+  "metric:partner-bank-api:latency_p99_ms",
+  "metric:upi-gateway:latency_p99_ms",
+  "log-00742",
+  "metric:payments-api:latency_p99_ms",
+  "metric:partner-bank-api:error_rate_pct",
+  "log-00698",
+  "metric:upi-gateway:error_rate_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "chg-9328",
+  "chg-9500",
+  "chg-9502",
+  "dep:upi-gateway->partner-bank-api"
+ ],
+ "gaps": [
+  "query_logs(service=upi-gateway) returned partial data",
+  "query_metrics(service=partner-bank-api) returned partial data"
+ ],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "total_tokens": 101059,
+ "rate_limit_wait_s": 30.0
+}

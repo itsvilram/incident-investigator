@@ -1,0 +1,251 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-08",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Payments-api latency spiked due to downstream database bottlenecks caused by rolling out the unoptimized ledger.reconciliation_v2 feature flag on ledger-service.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Feature flag rollout of ledger.reconciliation_v2 introduced unoptimized queries saturating ledger-db CPU",
+    "root_cause_service": "ledger-db",
+    "category": "feature_flag",
+    "confidence": 0.9,
+    "supporting": [
+     {
+      "evidence_id": "chg-9802",
+      "note": "Feature flag rollout increased to 100% just before latency and CPU spikes."
+     },
+     {
+      "evidence_id": "log-02040",
+      "note": "ledger-service logged feature flag active at 100%."
+     },
+     {
+      "evidence_id": "metric:ledger-db:cpu_pct",
+      "note": "ledger-db CPU jumped to 94.84% right after the flag rollout."
+     },
+     {
+      "evidence_id": "metric:ledger-db:latency_p99_ms",
+      "note": "ledger-db p99 latency spiked simultaneously with CPU."
+     },
+     {
+      "evidence_id": "metric:payments-api:latency_p99_ms",
+      "note": "payments-api p99 latency increased as a consequence of synchronous dependency on ledger-service/ledger-db."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "log-00001",
+      "note": "TLS deprecation warnings existed before the incident and do not correlate with the sudden onset."
+     }
+    ]
+   },
+   {
+    "rank": 2,
+    "title": "Upstream upi-gateway degradation",
+    "root_cause_service": "upi-gateway",
+    "category": "dependency_failure",
+    "confidence": 0.05,
+    "supporting": [],
+    "contradicting": [
+     {
+      "evidence_id": "metric:upi-gateway:latency_p99_ms",
+      "note": "upi-gateway latency remained completely stable throughout the incident window."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "payments-api p99 latency anomaly started at 2026-10-11T13:20:00+00:00 and peaked at 3521.46ms.",
+    "evidence_ids": [
+     "metric:payments-api:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "Feature flag ledger.reconciliation_v2 was rolled out from 10% to 100% at 2026-10-11T13:18:00+00:00.",
+    "evidence_ids": [
+     "chg-9802",
+     "log-02040"
+    ]
+   },
+   {
+    "text": "ledger-db CPU usage spiked to 94.84% at 2026-10-11T13:34:00+00:00, with latency anomaly starting at 13:19:00+00:00.",
+    "evidence_ids": [
+     "metric:ledger-db:cpu_pct",
+     "metric:ledger-db:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "TLS deprecation warnings in payments-api logs occurred continuously from 12:00:00+00:00 onwards.",
+    "evidence_ids": [
+     "log-00001"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The ledger.reconciliation_v2 feature flag introduced new database queries or logic that lack proper indexing on ledger-db."
+  ],
+  "evidence_gaps": [
+   "Detailed slow query text and execution plans from ledger-db were not directly available."
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-11T12:00:00Z",
+    "event": "Telemetry window opens and TLS deprecation warnings begin logging in payments-api.",
+    "evidence_id": "log-00001"
+   },
+   {
+    "ts": "2026-10-11T13:18:00Z",
+    "event": "Feature flag ledger.reconciliation_v2 rollout increased from 10% to 100%.",
+    "evidence_id": "chg-9802"
+   },
+   {
+    "ts": "2026-10-11T13:18:17Z",
+    "event": "ledger-service logs feature flag active at 100%.",
+    "evidence_id": "log-02040"
+   },
+   {
+    "ts": "2026-10-11T13:19:00Z",
+    "event": "ledger-db latency anomaly begins and CPU starts spiking.",
+    "evidence_id": "metric:ledger-db:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-11T13:20:00Z",
+    "event": "payments-api latency anomaly onset.",
+    "evidence_id": "metric:payments-api:latency_p99_ms"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Roll back feature flag ledger.reconciliation_v2 to 10% or OFF.",
+    "priority": "immediate",
+    "rationale": "Directly mitigates the database CPU saturation caused by the new reconciliation code path.",
+    "evidence_ids": [
+     "chg-9802",
+     "metric:ledger-db:cpu_pct"
+    ]
+   },
+   {
+    "action": "Audit and optimize queries executed by ledger.reconciliation_v2.",
+    "priority": "short_term",
+    "rationale": "Ensures future rollouts do not cause resource exhaustion on ledger-db.",
+    "evidence_ids": [
+     "metric:ledger-db:cpu_pct"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 19,
+ "llm_calls": 7,
+ "prompt_tokens": 111321,
+ "completion_tokens": 3867,
+ "latency_s": 48.19,
+ "retrieved_ids": [
+  "chg-3781",
+  "chg-6164",
+  "chg-9802",
+  "dep:fraud-service->redis-cache",
+  "dep:ledger-service->ledger-db",
+  "dep:market-data-service->redis-cache",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:notification-service->event-bus",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "hist-2026-0410",
+  "hist-2026-0722",
+  "hist-2026-0811",
+  "log-00001",
+  "log-00587",
+  "log-01239",
+  "log-01380",
+  "log-01553",
+  "log-01682",
+  "log-01832",
+  "log-02040",
+  "log-02921",
+  "log-02925",
+  "log-03080",
+  "log-03346",
+  "log-03348",
+  "log-03349",
+  "log-03350",
+  "log-03352",
+  "log-03357",
+  "log-03358",
+  "log-03361",
+  "log-03362",
+  "log-03366",
+  "log-03367",
+  "log-03368",
+  "metric:fraud-service:cpu_pct",
+  "metric:fraud-service:error_rate_pct",
+  "metric:fraud-service:latency_p99_ms",
+  "metric:fraud-service:mem_pct",
+  "metric:fraud-service:pod_restarts",
+  "metric:fraud-service:rps",
+  "metric:ledger-db:connections_active",
+  "metric:ledger-db:cpu_pct",
+  "metric:ledger-db:disk_used_pct",
+  "metric:ledger-db:error_rate_pct",
+  "metric:ledger-db:latency_p99_ms",
+  "metric:ledger-db:mem_pct",
+  "metric:ledger-db:rps",
+  "metric:ledger-service:cpu_pct",
+  "metric:ledger-service:error_rate_pct",
+  "metric:ledger-service:latency_p99_ms",
+  "metric:ledger-service:mem_pct",
+  "metric:ledger-service:pod_restarts",
+  "metric:ledger-service:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps",
+  "metric:redis-cache:cpu_pct",
+  "metric:redis-cache:error_rate_pct",
+  "metric:redis-cache:evictions_per_s",
+  "metric:redis-cache:latency_p99_ms",
+  "metric:redis-cache:memory_used_pct",
+  "metric:redis-cache:rps",
+  "metric:upi-gateway:cpu_pct",
+  "metric:upi-gateway:error_rate_pct",
+  "metric:upi-gateway:latency_p99_ms",
+  "metric:upi-gateway:mem_pct",
+  "metric:upi-gateway:pod_restarts",
+  "metric:upi-gateway:rps"
+ ],
+ "cited_ids": [
+  "chg-9802",
+  "log-02040",
+  "metric:ledger-db:cpu_pct",
+  "metric:ledger-db:latency_p99_ms",
+  "metric:payments-api:latency_p99_ms",
+  "log-00001",
+  "metric:upi-gateway:latency_p99_ms"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 30.0,
+ "total_tokens": 115188
+}

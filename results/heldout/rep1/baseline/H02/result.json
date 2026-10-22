@@ -1,0 +1,323 @@
+{
+ "system": "baseline",
+ "incident_id": "H02",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Payments timed out starting at 2026-10-17T13:06:00Z due to a cascade of statement timeouts in ledger-service caused by database connection pool saturation and write lock contention in ledger-db.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Database connection pool saturation and statement timeouts in ledger-db",
+    "root_cause_service": "ledger-db",
+    "category": "resource_exhaustion",
+    "confidence": 0.9,
+    "supporting": [
+     {
+      "evidence_id": "metric:payments-api:error_rate_pct",
+      "note": "Shows payments-api error rate spiking at 13:06:00Z."
+     },
+     {
+      "evidence_id": "metric:ledger-db:connections_active",
+      "note": "Shows active connections on ledger-db surging from ~45 to ~180 starting at 13:05:00Z."
+     },
+     {
+      "evidence_id": "metric:ledger-db:latency_p99_ms",
+      "note": "Shows ledger-db latency spiking starting at 13:05:00Z."
+     },
+     {
+      "evidence_id": "log-00445",
+      "note": "Shows ledger-service hitting statement timeouts on INSERT INTO ledger_entries starting at 13:06:04Z."
+     },
+     {
+      "evidence_id": "log-00443",
+      "note": "Shows payments-api timing out waiting on ledger-service POST /entries starting at 13:06:02Z."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:ledger-db:cpu_pct",
+      "note": "ledger-db CPU dropped rather than increased during the incident, pointing to connection waiting/blocking rather than heavy query compute."
+     }
+    ]
+   },
+   {
+    "rank": 2,
+    "title": "Config change on payments-api ledger client logging introduced performance degradation",
+    "root_cause_service": "payments-api",
+    "category": "config_change",
+    "confidence": 0.1,
+    "supporting": [
+     {
+      "evidence_id": "chg-9660",
+      "note": "A config change modified ledger client logging from INFO to DEBUG at 13:02:00Z, shortly before the incident onset."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "log-00445",
+      "note": "Errors originate in ledger-db and ledger-service statement timeouts on database inserts, not in client logging routines."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "Payments-api error rate and p99 latency anomalies started at 2026-10-17T13:06:00Z.",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct",
+     "metric:payments-api:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "Ledger-service error rate and latency anomalies started at 2026-10-17T13:05:00Z / 13:06:00Z.",
+    "evidence_ids": [
+     "metric:ledger-service:error_rate_pct",
+     "metric:ledger-service:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "Ledger-db active connections jumped from ~45 to ~180 at 2026-10-17T13:05:00Z.",
+    "evidence_ids": [
+     "metric:ledger-db:connections_active"
+    ]
+   },
+   {
+    "text": "Ledger-service logged statement timeouts on INSERT INTO ledger_entries starting at 2026-10-17T13:06:04Z.",
+    "evidence_ids": [
+     "log-00445"
+    ]
+   },
+   {
+    "text": "Payments-api logged timeouts waiting for ledger-service POST /entries starting at 2026-10-17T13:06:02Z.",
+    "evidence_ids": [
+     "log-00443"
+    ]
+   },
+   {
+    "text": "Config change chg-9660 updated payments-api ledger client log level to DEBUG at 2026-10-17T13:02:00Z.",
+    "evidence_ids": [
+     "chg-9660"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The surge in active database connections reaching ~180 corresponds to maximum connection pool capacity, causing subsequent queries to queue and hit statement timeouts.",
+   "The drop in ledger-db CPU usage is due to threads waiting on locks or connection acquisition."
+  ],
+  "evidence_gaps": [
+   "Exact connection pool maximum limit configuration for ledger-service was not inspected directly.",
+   "Detailed query execution plans and row lock contention telemetry were not available."
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-17T13:02:00Z",
+    "event": "Config change chg-9660 applied to payments-api changing ledger client log level to DEBUG",
+    "evidence_id": "chg-9660"
+   },
+   {
+    "ts": "2026-10-17T13:05:00Z",
+    "event": "ledger-db active connections spike to 180 and p99 latency jumps",
+    "evidence_id": "metric:ledger-db:connections_active"
+   },
+   {
+    "ts": "2026-10-17T13:06:00Z",
+    "event": "Error rate and latency anomalies register on payments-api and ledger-service",
+    "evidence_id": "metric:payments-api:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-17T13:06:02Z",
+    "event": "First payments-api timeout error logged for ledger-service POST /entries",
+    "evidence_id": "log-00443"
+   },
+   {
+    "ts": "2026-10-17T13:06:04Z",
+    "event": "First ledger-service statement timeout logged for INSERT INTO ledger_entries",
+    "evidence_id": "log-00445"
+   },
+   {
+    "ts": "2026-10-17T13:35:00Z",
+    "event": "Incident reported by payments on-call",
+    "evidence_id": null
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Kill or cancel stuck or long-running transactions on ledger-db holding locks.",
+    "priority": "immediate",
+    "rationale": "Active connections are saturated and queries are hitting 10s statement timeouts due to lock contention.",
+    "evidence_ids": [
+     "metric:ledger-db:connections_active",
+     "log-00445"
+    ]
+   },
+   {
+    "action": "Scale up database connection limits or restart connection pools on ledger-service.",
+    "priority": "immediate",
+    "rationale": "Exhausted connection pools prevent new write requests from being processed.",
+    "evidence_ids": [
+     "metric:ledger-db:connections_active"
+    ]
+   },
+   {
+    "action": "Investigate database query execution plans for INSERT INTO ledger_entries to identify locking bottlenecks.",
+    "priority": "short_term",
+    "rationale": "Prevents recurrence of database write deadlocks and connection saturation.",
+    "evidence_ids": [
+     "log-00445"
+    ]
+   },
+   {
+    "action": "Implement circuit breakers and bulkhead isolation between payments-api and ledger-service.",
+    "priority": "short_term",
+    "rationale": "Prevents downstream database saturation from completely blocking payment front-ends.",
+    "evidence_ids": [
+     "log-00443"
+    ]
+   },
+   {
+    "action": "Add automated alerting for database active connection pool saturation exceeding 80% capacity.",
+    "priority": "long_term",
+    "rationale": "Early warning before connection exhaustion leads to user-facing timeouts.",
+    "evidence_ids": [
+     "metric:ledger-db:connections_active"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 12,
+ "llm_calls": 5,
+ "prompt_tokens": 63889,
+ "completion_tokens": 4825,
+ "latency_s": 19.18,
+ "retrieved_ids": [
+  "chg-2059",
+  "chg-3145",
+  "chg-4246",
+  "chg-5827",
+  "chg-6248",
+  "chg-6459",
+  "chg-6793",
+  "chg-6866",
+  "chg-7087",
+  "chg-7289",
+  "chg-7585",
+  "chg-8768",
+  "chg-9660",
+  "dep:fraud-service->redis-cache",
+  "dep:ledger-service->ledger-db",
+  "dep:market-data-service->redis-cache",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:notification-service->event-bus",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "hist-2026-0410",
+  "hist-2026-0722",
+  "hist-2026-0811",
+  "log-00021",
+  "log-00216",
+  "log-00273",
+  "log-00369",
+  "log-00378",
+  "log-00380",
+  "log-00387",
+  "log-00408",
+  "log-00420",
+  "log-00443",
+  "log-00445",
+  "log-00448",
+  "log-00522",
+  "log-00747",
+  "log-00755",
+  "log-00904",
+  "log-01016",
+  "log-01092",
+  "log-01188",
+  "log-01397",
+  "log-01570",
+  "log-01766",
+  "log-02036",
+  "log-02075",
+  "log-02077",
+  "log-02082",
+  "log-02084",
+  "log-02092",
+  "log-02093",
+  "log-02096",
+  "log-02097",
+  "log-02098",
+  "log-02099",
+  "log-02101",
+  "log-02105",
+  "log-02106",
+  "log-02108",
+  "log-02110",
+  "log-02111",
+  "log-02112",
+  "log-02114",
+  "log-02115",
+  "log-02116",
+  "log-02118",
+  "log-02121",
+  "log-02122",
+  "log-02124",
+  "log-02126",
+  "log-02127",
+  "log-02129",
+  "log-02131",
+  "log-02132",
+  "metric:ledger-db:connections_active",
+  "metric:ledger-db:cpu_pct",
+  "metric:ledger-db:disk_used_pct",
+  "metric:ledger-db:error_rate_pct",
+  "metric:ledger-db:latency_p99_ms",
+  "metric:ledger-db:mem_pct",
+  "metric:ledger-db:rps",
+  "metric:ledger-service:cpu_pct",
+  "metric:ledger-service:error_rate_pct",
+  "metric:ledger-service:latency_p99_ms",
+  "metric:ledger-service:mem_pct",
+  "metric:ledger-service:pod_restarts",
+  "metric:ledger-service:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps"
+ ],
+ "cited_ids": [
+  "metric:payments-api:error_rate_pct",
+  "metric:ledger-db:connections_active",
+  "metric:ledger-db:latency_p99_ms",
+  "log-00445",
+  "log-00443",
+  "metric:ledger-db:cpu_pct",
+  "chg-9660",
+  "metric:payments-api:latency_p99_ms",
+  "metric:ledger-service:error_rate_pct",
+  "metric:ledger-service:latency_p99_ms"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 0,
+ "total_tokens": 68714
+}

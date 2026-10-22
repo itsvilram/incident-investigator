@@ -1,0 +1,293 @@
+{
+ "system": "multi_agent",
+ "incident_id": "H05",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Payment confirmations failed due to notification-service encountering deserialization errors starting at 2026-10-20T14:08:00+00:00. This was triggered by the deployment of payments-api v2.16.0 at 14:05, which introduced PaymentCompleted event v3 and renamed the 'amount' field to 'amount_minor'. As notification-service still expected the 'amount' field, it failed to parse the events, causing unhandled exceptions, error rate spikes, and pod restarts.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "payments-api v2.16.0 schema change breaks notification-service event deserialization",
+    "root_cause_service": "payments-api",
+    "category": "bad_deploy",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-9973",
+      "note": "payments-api v2.16.0 deployed at 14:05 introduced PaymentCompleted event v3 renaming amount to amount_minor, exactly preceding the 14:08 onset."
+     },
+     {
+      "evidence_id": "metric:notification-service:error_rate_pct",
+      "note": "notification-service error rate spikes right after the deploy at 14:08."
+     },
+     {
+      "evidence_id": "metric:notification-service:pod_restarts",
+      "note": "notification-service pod restarts begin at 14:08, matching the onset of the deserialization errors."
+     },
+     {
+      "evidence_id": "log-00790",
+      "note": "Explicitly shows DeserializationError stating PaymentCompleted v3 missing required field 'amount' starting at 14:08:02."
+     },
+     {
+      "evidence_id": "metric:payments-api:error_rate_pct",
+      "note": "payments-api error rate shows no anomaly, confirming the service itself is healthy post-deployment."
+     },
+     {
+      "evidence_id": "metric:payments-api:cpu_pct",
+      "note": "payments-api CPU usage remained stable after deployment."
+     },
+     {
+      "evidence_id": "metric:payments-api:mem_pct",
+      "note": "payments-api memory usage remained stable after deployment."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Third-party SMS vendor outage or push provider failure",
+    "root_cause_service": "sms-vendor",
+    "category": "third_party_outage",
+    "confidence": 0.02,
+    "supporting": [],
+    "contradicting": [
+     {
+      "evidence_id": "log-00790",
+      "note": "Logs show errors are exclusively DeserializationError for PaymentCompleted v3, with no error logs related to sms-vendor or push-provider."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "notification-service error rate metric began increasing at 2026-10-20T14:08:00+00:00, reaching a peak of 69.07%.",
+    "evidence_ids": [
+     "metric:notification-service:error_rate_pct"
+    ]
+   },
+   {
+    "text": "notification-service pod restarts metric began increasing at 2026-10-20T14:08:00+00:00.",
+    "evidence_ids": [
+     "metric:notification-service:pod_restarts"
+    ]
+   },
+   {
+    "text": "The first DeserializationError log in notification-service occurred at 2026-10-20T14:08:02+00:00 stating PaymentCompleted v3 missing required field 'amount'.",
+    "evidence_ids": [
+     "log-00790"
+    ]
+   },
+   {
+    "text": "There are no error logs related to sms-vendor or push-provider in notification-service.",
+    "evidence_ids": [
+     "log-00790",
+     "log-01486"
+    ]
+   },
+   {
+    "text": "notification-service depends asynchronously on event-bus, and synchronously on sms-vendor and push-provider.",
+    "evidence_ids": [
+     "dep:notification-service->event-bus",
+     "dep:notification-service->sms-vendor",
+     "dep:notification-service->push-provider"
+    ]
+   },
+   {
+    "text": "payments-api publishes asynchronously to event-bus.",
+    "evidence_ids": [
+     "dep:payments-api->event-bus"
+    ]
+   },
+   {
+    "text": "There were zero code deployments or config changes for notification-service, sms-vendor, push-provider, event-bus, coredns, or kubernetes over the past 7 days.",
+    "evidence_ids": [
+     "chg-9973"
+    ]
+   },
+   {
+    "text": "payments-api deployed version v2.16.0 at 2026-10-20T14:05:00+00:00, introducing PaymentCompleted event v3 which renames amount to amount_minor.",
+    "evidence_ids": [
+     "chg-9973"
+    ]
+   },
+   {
+    "text": "payments-api successfully started v2.16.0 at 14:05:11.",
+    "evidence_ids": [
+     "log-00774"
+    ]
+   },
+   {
+    "text": "payments-api error rate shows no anomaly, remaining stable around baseline.",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct"
+    ]
+   },
+   {
+    "text": "payments-api CPU, memory, request rate, p99 latency, and pod restarts show no anomalies following the deployment.",
+    "evidence_ids": [
+     "metric:payments-api:rps",
+     "metric:payments-api:latency_p99_ms",
+     "metric:payments-api:cpu_pct",
+     "metric:payments-api:mem_pct",
+     "metric:payments-api:pod_restarts"
+    ]
+   }
+  ],
+  "assumptions": [
+   "notification-service has not yet been updated to support PaymentCompleted v3 event schema."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-20T14:05:00Z",
+    "event": "payments-api v2.16.0 deployed introducing PaymentCompleted event v3 (amount renamed to amount_minor)",
+    "evidence_id": "chg-9973"
+   },
+   {
+    "ts": "2026-10-20T14:05:11Z",
+    "event": "payments-api successfully started v2.16.0",
+    "evidence_id": "log-00774"
+   },
+   {
+    "ts": "2026-10-20T14:08:00Z",
+    "event": "notification-service error rate and pod restarts metrics began increasing",
+    "evidence_id": "metric:notification-service:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-20T14:08:02Z",
+    "event": "notification-service logs first DeserializationError for PaymentCompleted v3 due to missing 'amount' field",
+    "evidence_id": "log-00790"
+   },
+   {
+    "ts": "2026-10-20T14:22:00Z",
+    "event": "notification-service error rate reaches peak of 69.07%",
+    "evidence_id": "metric:notification-service:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-20T14:44:00Z",
+    "event": "notification-service pod restarts reaches peak of 2.18 restarts/min",
+    "evidence_id": "metric:notification-service:pod_restarts"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Roll back payments-api to version v2.15.0 or patch notification-service to support PaymentCompleted event v3 schema (handling 'amount_minor').",
+    "priority": "immediate",
+    "rationale": "The schema mismatch between payments-api v2.16.0 and notification-service causes continuous deserialization errors and pod restarts.",
+    "evidence_ids": [
+     "chg-9973",
+     "log-00790"
+    ]
+   },
+   {
+    "action": "Implement contract testing or schema validation pipelines between event producers and consumers to prevent breaking changes.",
+    "priority": "long_term",
+    "rationale": "Renaming fields in asynchronous domain events without updating downstream consumer schema expectations caused total failure of notification delivery.",
+    "evidence_ids": [
+     "chg-9973",
+     "log-00790"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 2,
+ "tool_calls": 15,
+ "llm_calls": 22,
+ "prompt_tokens": 87779,
+ "completion_tokens": 9227,
+ "latency_s": 86.27,
+ "retrieved_ids": [
+  "chg-9973",
+  "dep:notification-service->event-bus",
+  "dep:notification-service->push-provider",
+  "dep:notification-service->sms-vendor",
+  "dep:payments-api->event-bus",
+  "log-00126",
+  "log-00141",
+  "log-00302",
+  "log-00759",
+  "log-00774",
+  "log-00790",
+  "log-00794",
+  "log-00851",
+  "log-00885",
+  "log-00893",
+  "log-00894",
+  "log-00898",
+  "log-00901",
+  "log-00902",
+  "log-00903",
+  "log-00904",
+  "log-00905",
+  "log-00908",
+  "log-00910",
+  "log-00912",
+  "log-00913",
+  "log-00931",
+  "log-00963",
+  "log-01014",
+  "log-01061",
+  "log-01102",
+  "log-01180",
+  "log-01269",
+  "log-01299",
+  "log-01349",
+  "log-01379",
+  "log-01421",
+  "log-01460",
+  "log-01486",
+  "log-01487",
+  "log-01490",
+  "log-01491",
+  "log-01492",
+  "log-01494",
+  "log-01495",
+  "log-01497",
+  "log-01498",
+  "log-01500",
+  "log-01501",
+  "log-01503",
+  "metric:notification-service:cpu_pct",
+  "metric:notification-service:error_rate_pct",
+  "metric:notification-service:latency_p99_ms",
+  "metric:notification-service:mem_pct",
+  "metric:notification-service:pod_restarts",
+  "metric:notification-service:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps"
+ ],
+ "cited_ids": [
+  "chg-9973",
+  "metric:notification-service:error_rate_pct",
+  "metric:notification-service:pod_restarts",
+  "log-00790",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:mem_pct",
+  "log-01486",
+  "dep:notification-service->event-bus",
+  "dep:notification-service->sms-vendor",
+  "dep:notification-service->push-provider",
+  "dep:payments-api->event-bus",
+  "log-00774",
+  "metric:payments-api:rps",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:pod_restarts"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 30.0,
+ "total_tokens": 97006
+}

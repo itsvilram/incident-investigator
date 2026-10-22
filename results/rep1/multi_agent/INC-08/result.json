@@ -1,0 +1,327 @@
+{
+ "system": "multi_agent",
+ "incident_id": "INC-08",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Payments-api p99 latency spiked starting at 2026-10-11T13:20:00+00:00 due to a synchronous dependency on ledger-service, which experienced immediate p99 latency degradation starting at 13:19:00+00:00. This upstream latency spike was directly triggered by the rollout of the ledger.reconciliation_v2 feature flag from 10% to 100% at 13:18:00+00:00.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Ledger Service Feature Flag Rollout Contention",
+    "root_cause_service": "ledger-service",
+    "category": "feature_flag",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-9802",
+      "note": "Feature flag change occurred at 13:18 UTC, precisely 2 minutes before the payments-api latency spike onset."
+     },
+     {
+      "evidence_id": "metric:ledger-service:latency_p99_ms",
+      "note": "ledger-service p99 latency spiked starting at 13:19:00+00:00, immediately following the rollout."
+     },
+     {
+      "evidence_id": "metric:payments-api:latency_p99_ms",
+      "note": "payments-api p99 latency spiked sharply upward starting exactly at 13:20:00+00:00."
+     },
+     {
+      "evidence_id": "dep:payments-api->ledger-service",
+      "note": "Establishes the synchronous dependency path from payments-api to ledger-service."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:payments-api:error_rate_pct",
+      "note": "Error rate increased slightly later at 13:25 UTC rather than simultaneously with the 13:20 latency spike."
+     }
+    ]
+   },
+   {
+    "rank": 2,
+    "title": "UPI Gateway Upstream Degradation",
+    "root_cause_service": "upi-gateway",
+    "category": "third_party_outage",
+    "confidence": 0.05,
+    "supporting": [
+     {
+      "evidence_id": "dep:payments-api->upi-gateway",
+      "note": "Establishes payments-api dependency on upi-gateway."
+     },
+     {
+      "evidence_id": "log-01380",
+      "note": "Shows warnings and retries calling upi-gateway prior to the incident."
+     },
+     {
+      "evidence_id": "log-01553",
+      "note": "Shows slow request intent logs on payments-api shortly before the onset."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "log-01380",
+      "note": "The observed retries and slow requests occurred at 12:53 and 13:00, which are significantly earlier than the 13:20 onset."
+     },
+     {
+      "evidence_id": "metric:payments-api:latency_p99_ms",
+      "note": "The latency anomaly aligns precisely with ledger-service feature rollout rather than any new upi-gateway signal at 13:20."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "payments-api p99 latency spiked starting at 2026-10-11T13:20:00+00:00, jumping from a baseline of ~380ms to 3239.85ms.",
+    "evidence_ids": [
+     "metric:payments-api:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "payments-api error rate increased starting at 2026-10-11T13:25:00+00:00, going from ~0.3% to ~1.2%.",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct"
+    ]
+   },
+   {
+    "text": "TLS deprecation warnings for 'legacy-psp' have been logged continuously since 12:00:00+00:00, predating the latency spike.",
+    "evidence_ids": [
+     "log-00001",
+     "log-03346"
+    ]
+   },
+   {
+    "text": "payments-api directly depends on ledger-service, upi-gateway, fraud-service, redis-cache, and event-bus, and is called by mobile-bff.",
+    "evidence_ids": [
+     "dep:mobile-bff->payments-api",
+     "dep:payments-api->ledger-service",
+     "dep:payments-api->upi-gateway",
+     "dep:payments-api->fraud-service",
+     "dep:payments-api->redis-cache",
+     "dep:payments-api->event-bus"
+    ]
+   },
+   {
+    "text": "A feature flag rollout chg-9802 for ledger.reconciliation_v2 from 10% to 100% occurred on ledger-service at 2026-10-11T13:18:00+00:00.",
+    "evidence_ids": [
+     "chg-9802"
+    ]
+   },
+   {
+    "text": "Ledger-service latency_p99_ms experienced an anomaly starting at 2026-10-11T13:19:00+00:00, peaking at 3364.94 ms at 13:23:00+00:00.",
+    "evidence_ids": [
+     "metric:ledger-service:latency_p99_ms"
+    ]
+   }
+  ],
+  "assumptions": [
+   "ledger-service experienced internal computational or query overhead under 100% reconciliation_v2 traffic that propagated back to payments-api."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-11T12:00:00Z",
+    "event": "TLS deprecation warnings for legacy-psp start logging continuously on payments-api",
+    "evidence_id": "log-00001"
+   },
+   {
+    "ts": "2026-10-11T13:18:00Z",
+    "event": "Feature flag ledger.reconciliation_v2 rolled out from 10% to 100% on ledger-service (chg-9802)",
+    "evidence_id": "chg-9802"
+   },
+   {
+    "ts": "2026-10-11T13:19:00Z",
+    "event": "ledger-service p99 latency anomaly begins",
+    "evidence_id": "metric:ledger-service:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-11T13:20:00Z",
+    "event": "payments-api p99 latency anomaly begins (incident onset)",
+    "evidence_id": "metric:payments-api:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-11T13:25:00Z",
+    "event": "payments-api error rate begins to increase",
+    "evidence_id": "metric:payments-api:error_rate_pct"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Roll back the ledger.reconciliation_v2 feature flag on ledger-service to the previous 10% state.",
+    "priority": "immediate",
+    "rationale": "Directly mitigates the latency introduced by the 100% reconciliation rollout.",
+    "evidence_ids": [
+     "chg-9802",
+     "metric:ledger-service:latency_p99_ms",
+     "metric:payments-api:latency_p99_ms"
+    ]
+   },
+   {
+    "action": "Investigate ledger-service reconciliation query performance and resource usage under full load.",
+    "priority": "short_term",
+    "rationale": "Identifies why the 100% feature flag rollout caused p99 latency to spike on ledger-service.",
+    "evidence_ids": [
+     "chg-9802",
+     "metric:ledger-service:latency_p99_ms"
+    ]
+   },
+   {
+    "action": "Implement circuit breakers or asynchronous handling between payments-api and synchronous dependencies like ledger-service to prevent cascading latency spikes.",
+    "priority": "long_term",
+    "rationale": "Protects payments-api from downstream performance degradation.",
+    "evidence_ids": [
+     "dep:payments-api->ledger-service",
+     "metric:payments-api:latency_p99_ms"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 2,
+ "tool_calls": 13,
+ "llm_calls": 22,
+ "prompt_tokens": 118060,
+ "completion_tokens": 11919,
+ "latency_s": 73.23,
+ "retrieved_ids": [
+  "chg-1621",
+  "chg-2504",
+  "chg-2991",
+  "chg-3770",
+  "chg-3781",
+  "chg-4152",
+  "chg-4591",
+  "chg-5351",
+  "chg-5608",
+  "chg-5822",
+  "chg-6016",
+  "chg-6164",
+  "chg-6419",
+  "chg-6732",
+  "chg-7042",
+  "chg-8883",
+  "chg-9140",
+  "chg-9163",
+  "chg-9768",
+  "chg-9802",
+  "dep:fraud-service->redis-cache",
+  "dep:ledger-service->ledger-db",
+  "dep:market-data-service->redis-cache",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:notification-service->event-bus",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "hist-2026-0410",
+  "hist-2026-0722",
+  "hist-2026-0811",
+  "log-00001",
+  "log-00029",
+  "log-00106",
+  "log-00230",
+  "log-00368",
+  "log-00525",
+  "log-00587",
+  "log-00679",
+  "log-00997",
+  "log-01380",
+  "log-01553",
+  "log-01832",
+  "log-01946",
+  "log-01965",
+  "log-01989",
+  "log-02036",
+  "log-02040",
+  "log-02133",
+  "log-02138",
+  "log-02238",
+  "log-02264",
+  "log-02357",
+  "log-02494",
+  "log-02543",
+  "log-02706",
+  "log-02806",
+  "log-02921",
+  "log-02925",
+  "log-03046",
+  "log-03080",
+  "log-03257",
+  "log-03316",
+  "log-03318",
+  "log-03320",
+  "log-03321",
+  "log-03322",
+  "log-03324",
+  "log-03325",
+  "log-03326",
+  "log-03327",
+  "log-03331",
+  "log-03333",
+  "log-03334",
+  "log-03335",
+  "log-03336",
+  "log-03339",
+  "log-03340",
+  "log-03341",
+  "log-03342",
+  "log-03343",
+  "log-03346",
+  "log-03348",
+  "log-03349",
+  "log-03350",
+  "log-03352",
+  "log-03357",
+  "log-03358",
+  "log-03361",
+  "log-03362",
+  "log-03366",
+  "log-03367",
+  "log-03368",
+  "metric:ledger-service:cpu_pct",
+  "metric:ledger-service:error_rate_pct",
+  "metric:ledger-service:latency_p99_ms",
+  "metric:ledger-service:mem_pct",
+  "metric:ledger-service:pod_restarts",
+  "metric:ledger-service:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps"
+ ],
+ "cited_ids": [
+  "chg-9802",
+  "metric:ledger-service:latency_p99_ms",
+  "metric:payments-api:latency_p99_ms",
+  "dep:payments-api->ledger-service",
+  "metric:payments-api:error_rate_pct",
+  "dep:payments-api->upi-gateway",
+  "log-01380",
+  "log-01553",
+  "log-00001",
+  "log-03346",
+  "dep:mobile-bff->payments-api",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->event-bus"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "total_tokens": 129979,
+ "rate_limit_wait_s": 30.0
+}

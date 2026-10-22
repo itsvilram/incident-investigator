@@ -1,0 +1,253 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-01",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Deployment of payments-api v2.14.0 introduced a NullPointerException regression in PaymentIntentValidator.java:88 when payer_vpa is null, causing approximately 15-20% failure rates across payment attempts starting at 14:03.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "payments-api v2.14.0 deployment introduces a NullPointerException during PaymentIntentValidator validation when payer_vpa is null",
+    "root_cause_service": "payments-api",
+    "category": "bad_deploy",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-9890",
+      "note": "Deployment of payments-api v2.14.0 at 14:02:00 explicitly refactored payment-intent validation."
+     },
+     {
+      "evidence_id": "metric:payments-api:error_rate_pct",
+      "note": "Error rate spiked sharply starting at 14:03:00, reaching over 20%."
+     },
+     {
+      "evidence_id": "metric:mobile-bff:error_rate_pct",
+      "note": "Mobile-bff error rate mirrored the spike starting at 14:03:00."
+     },
+     {
+      "evidence_id": "log-00759",
+      "note": "NullPointerException at PaymentIntentValidator.validate(PaymentIntentValidator.java:88): payer_vpa is null started immediately after deploy at 14:03:05."
+     },
+     {
+      "evidence_id": "log-00758",
+      "note": "mobile-bff logged upstream 500 errors responding to POST /v1/payments/intent starting at 14:03:01."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Upstream NPCI switch or UPI Gateway degradation causing request failures",
+    "root_cause_service": "upi-gateway",
+    "category": "dependency_failure",
+    "confidence": 0.05,
+    "supporting": [],
+    "contradicting": [
+     {
+      "evidence_id": "metric:upi-gateway:error_rate_pct",
+      "note": "upi-gateway error rate remained entirely stable and normal (~0.25%) throughout the incident window."
+     },
+     {
+      "evidence_id": "log-00759",
+      "note": "Errors are internal NullPointerExceptions in payments-api code, not gateway timeouts or external failures."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "payments-api error rate spiked starting at 14:03:00, peaking at 20.29%.",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct"
+    ]
+   },
+   {
+    "text": "mobile-bff error rate spiked starting at 14:03:00, peaking at 6.29%.",
+    "evidence_ids": [
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   },
+   {
+    "text": "payments-api v2.14.0 was deployed at 2026-10-02T14:02:00+00:00 with summary 'payments-api v2.14.0: refactor payment-intent validation, bump json library'.",
+    "evidence_ids": [
+     "chg-9890"
+    ]
+   },
+   {
+    "text": "payments-api began logging NullPointerException at PaymentIntentValidator.validate(PaymentIntentValidator.java:88): payer_vpa is null at 14:03:05.",
+    "evidence_ids": [
+     "log-00759"
+    ]
+   },
+   {
+    "text": "mobile-bff logged upstream payments-api responded 500 errors starting at 14:03:01.",
+    "evidence_ids": [
+     "log-00758"
+    ]
+   },
+   {
+    "text": "upi-gateway error rate remained stable with no anomaly during the incident window.",
+    "evidence_ids": [
+     "metric:upi-gateway:error_rate_pct"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The code refactor in payments-api v2.14.0 altered field handling such that requests lacking or having null payer_vpa are no longer safely defaulted or filtered before reaching validation."
+  ],
+  "evidence_gaps": [
+   "Exact request payloads containing null payer_vpa were not inspected via raw packet or full request log inspection."
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-02T12:22:00Z",
+    "event": "market-data-service v6.7.0 deployed",
+    "evidence_id": "chg-9177"
+   },
+   {
+    "ts": "2026-10-02T12:23:00Z",
+    "event": "market-data-service v1.17.0 deployed",
+    "evidence_id": "chg-9557"
+   },
+   {
+    "ts": "2026-10-02T14:02:00Z",
+    "event": "payments-api v2.14.0 deployed",
+    "evidence_id": "chg-9890"
+   },
+   {
+    "ts": "2026-10-02T14:03:00Z",
+    "event": "Error rate anomaly begins on payments-api and mobile-bff",
+    "evidence_id": "metric:payments-api:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-02T14:03:01Z",
+    "event": "mobile-bff logs first upstream 500 error from payments-api",
+    "evidence_id": "log-00758"
+   },
+   {
+    "ts": "2026-10-02T14:03:05Z",
+    "event": "payments-api logs first NullPointerException in PaymentIntentValidator",
+    "evidence_id": "log-00759"
+   },
+   {
+    "ts": "2026-10-02T14:20:00Z",
+    "event": "Incident INC-01 reported by on-call SRE Priya",
+    "evidence_id": null
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Rollback payments-api to version v2.13.4",
+    "priority": "immediate",
+    "rationale": "Rolls back the bad deployment chg-9890 which introduced the NullPointerException regression.",
+    "evidence_ids": [
+     "chg-9890",
+     "log-00759"
+    ]
+   },
+   {
+    "action": "Fix null safety in PaymentIntentValidator.java",
+    "priority": "short_term",
+    "rationale": "Ensures requests with missing or null payer_vpa are safely validated or rejected with proper client error responses instead of unhandled 500 exceptions.",
+    "evidence_ids": [
+     "log-00759"
+    ]
+   },
+   {
+    "action": "Add integration test coverage for null or missing payment intent fields",
+    "priority": "long_term",
+    "rationale": "Prevents similar validation regressions from passing CI/CD pipelines.",
+    "evidence_ids": [
+     "chg-9890"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 8,
+ "llm_calls": 4,
+ "prompt_tokens": 44515,
+ "completion_tokens": 3961,
+ "latency_s": 14.69,
+ "retrieved_ids": [
+  "chg-9177",
+  "chg-9557",
+  "chg-9890",
+  "dep:fraud-service->redis-cache",
+  "dep:ledger-service->ledger-db",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "log-00717",
+  "log-00758",
+  "log-00759",
+  "log-01660",
+  "log-01664",
+  "log-01667",
+  "log-01669",
+  "log-01673",
+  "log-01679",
+  "log-01681",
+  "log-01682",
+  "log-01683",
+  "log-01684",
+  "log-01685",
+  "log-01686",
+  "log-01687",
+  "log-01688",
+  "log-01689",
+  "log-01690",
+  "log-01691",
+  "log-01692",
+  "log-01694",
+  "log-01695",
+  "log-01697",
+  "log-01698",
+  "log-01699",
+  "log-01700",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps",
+  "metric:upi-gateway:cpu_pct",
+  "metric:upi-gateway:error_rate_pct",
+  "metric:upi-gateway:latency_p99_ms",
+  "metric:upi-gateway:mem_pct",
+  "metric:upi-gateway:pod_restarts",
+  "metric:upi-gateway:rps"
+ ],
+ "cited_ids": [
+  "chg-9890",
+  "metric:payments-api:error_rate_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "log-00759",
+  "log-00758",
+  "metric:upi-gateway:error_rate_pct",
+  "chg-9177",
+  "chg-9557"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 0,
+ "total_tokens": 48476
+}

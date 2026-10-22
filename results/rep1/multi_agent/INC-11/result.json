@@ -1,0 +1,303 @@
+{
+ "system": "multi_agent",
+ "incident_id": "INC-11",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "CoreDNS experienced an internal CPU saturation and latency spike starting at 13:23 UTC on 2026-10-14, which led to UDP query timeouts for external domains. This directly caused downstream getaddrinfo EAI_AGAIN resolution errors in notification-service beginning at 13:25 UTC, resulting in intermittent notification failures.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Cluster CoreDNS service degradation",
+    "root_cause_service": "coredns",
+    "category": "network_dns",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "metric:coredns:error_rate_pct",
+      "note": "Shows coredns error rates started rising at 13:23:00 UTC, directly preceding the notification-service error spike."
+     },
+     {
+      "evidence_id": "metric:coredns:latency_p99_ms",
+      "note": "Shows coredns p99 latency spiked from ~3ms to over 2112ms starting at 13:23:00 UTC."
+     },
+     {
+      "evidence_id": "metric:coredns:cpu_pct",
+      "note": "Shows coredns CPU utilization spiked past 100% starting at 13:23:00 UTC."
+     },
+     {
+      "evidence_id": "log-00525",
+      "note": "Shows coredns logging UDP timeout errors resolving sms-vendor.example.net starting at 13:24:03 UTC."
+     },
+     {
+      "evidence_id": "metric:notification-service:error_rate_pct",
+      "note": "Shows the exact onset of the error rate anomaly at 13:25:00 UTC, immediately following coredns degradation."
+     },
+     {
+      "evidence_id": "log-00531",
+      "note": "Shows persistent getaddrinfo EAI_AGAIN for push-provider starting at 13:25:05 UTC."
+     },
+     {
+      "evidence_id": "log-00533",
+      "note": "Shows persistent getaddrinfo EAI_AGAIN for sms-vendor starting at 13:25:10 UTC."
+     },
+     {
+      "evidence_id": "hist-2026-0228",
+      "note": "Past incident confirms prior occurrences of EAI_AGAIN errors across cluster services due to CoreDNS issues."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:coredns:rps",
+      "note": "CoreDNS overall RPS showed no major spike or anomaly, staying relatively stable around 3500 req/s."
+     }
+    ]
+   },
+   {
+    "rank": 2,
+    "title": "External vendor nameserver timeouts",
+    "root_cause_service": "sms-vendor",
+    "category": "third_party_outage",
+    "confidence": 0.2,
+    "supporting": [
+     {
+      "evidence_id": "log-00525",
+      "note": "Shows CoreDNS timing out specifically when querying UDP for sms-vendor.example.net."
+     },
+     {
+      "evidence_id": "log-00533",
+      "note": "Shows notification-service failing to resolve sms-vendor.example.net with EAI_AGAIN."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:coredns:cpu_pct",
+      "note": "CoreDNS CPU utilization spiked to 105.92%, indicating internal resource contention rather than simple pass-through network packet loss."
+     },
+     {
+      "evidence_id": "metric:coredns:error_rate_pct",
+      "note": "CoreDNS errors started internally at 13:23 UTC before vendor-specific queries failed."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "CoreDNS latency_p99_ms experienced an anomaly starting at 2026-10-14T13:23:00+00:00, peaking at 2112.52 ms.",
+    "evidence_ids": [
+     "metric:coredns:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "CoreDNS error_rate_pct experienced an anomaly starting at 2026-10-14T13:23:00+00:00, peaking at 22.72%.",
+    "evidence_ids": [
+     "metric:coredns:error_rate_pct"
+    ]
+   },
+   {
+    "text": "CoreDNS cpu_pct experienced an anomaly starting at 2026-10-14T13:23:00+00:00, peaking at 105.92%.",
+    "evidence_ids": [
+     "metric:coredns:cpu_pct"
+    ]
+   },
+   {
+    "text": "CoreDNS logged UDP timeout errors trying to resolve sms-vendor.example.net starting at 2026-10-14T13:24:03+00:00.",
+    "evidence_ids": [
+     "log-00525"
+    ]
+   },
+   {
+    "text": "Notification-service error_rate_pct shows an anomaly onset at 2026-10-14T13:25:00+00:00, with error rates jumping from a baseline of ~0.27% to a peak of 26.58%.",
+    "evidence_ids": [
+     "metric:notification-service:error_rate_pct"
+    ]
+   },
+   {
+    "text": "Notification-service logged getaddrinfo EAI_AGAIN errors for fcm.push-provider.example.com starting at 2026-10-14T13:25:05+00:00.",
+    "evidence_ids": [
+     "log-00531"
+    ]
+   },
+   {
+    "text": "Notification-service logged getaddrinfo EAI_AGAIN errors for sms-vendor.example.net starting at 2026-10-14T13:25:10+00:00.",
+    "evidence_ids": [
+     "log-00533"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The CPU spike and query timeouts in CoreDNS were triggered by upstream recursive resolver latency or a burst of specific query patterns that exhausted CoreDNS worker threads."
+  ],
+  "evidence_gaps": [
+   "search_past_incidents(query=coredns) returned partial data"
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-14T13:23:00Z",
+    "event": "CoreDNS metrics (error rate, latency p99, and CPU) begin abnormal upward trend.",
+    "evidence_id": "metric:coredns:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-14T13:24:03Z",
+    "event": "CoreDNS logs UDP timeout errors resolving sms-vendor.example.net.",
+    "evidence_id": "log-00525"
+   },
+   {
+    "ts": "2026-10-14T13:25:00Z",
+    "event": "Notification-service error rate spikes.",
+    "evidence_id": "metric:notification-service:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-14T13:25:05Z",
+    "event": "Notification-service logs getaddrinfo EAI_AGAIN for push-provider.",
+    "evidence_id": "log-00531"
+   },
+   {
+    "ts": "2026-10-14T13:25:10Z",
+    "event": "Notification-service logs getaddrinfo EAI_AGAIN for sms-vendor.",
+    "evidence_id": "log-00533"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Scale up or restart CoreDNS pods to mitigate CPU saturation and resolve active DNS timeout loops.",
+    "priority": "immediate",
+    "rationale": "CoreDNS CPU utilization exceeded 105% and p99 latency spiked past 2100ms, causing cascading name resolution failures across the cluster.",
+    "evidence_ids": [
+     "metric:coredns:cpu_pct",
+     "metric:coredns:latency_p99_ms"
+    ]
+   },
+   {
+    "action": "Implement local caching or negative caching tuning for DNS resolution in notification-service to reduce cluster-wide DNS lookup load.",
+    "priority": "short_term",
+    "rationale": "Past incidents and current logs indicate that DNS resolution dependency issues severely impact outbound service calls.",
+    "evidence_ids": [
+     "hist-2026-0228",
+     "log-00533"
+    ]
+   },
+   {
+    "action": "Review CoreDNS resource limits, horizontal autoscaling configurations, and ndots settings cluster-wide.",
+    "priority": "long_term",
+    "rationale": "Prevent future CPU exhaustion and excessive amplification lookups as seen in past similar incidents.",
+    "evidence_ids": [
+     "hist-2026-0228",
+     "metric:coredns:cpu_pct"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 2,
+ "tool_calls": 15,
+ "llm_calls": 22,
+ "prompt_tokens": 90879,
+ "completion_tokens": 10974,
+ "latency_s": 61.39,
+ "retrieved_ids": [
+  "chg-2154",
+  "chg-5019",
+  "dep:notification-service->event-bus",
+  "dep:notification-service->push-provider",
+  "dep:notification-service->sms-vendor",
+  "dep:payments-api->event-bus",
+  "hist-2026-0228",
+  "hist-2026-0325",
+  "hist-2026-0410",
+  "log-00009",
+  "log-00296",
+  "log-00391",
+  "log-00487",
+  "log-00515",
+  "log-00525",
+  "log-00531",
+  "log-00533",
+  "log-01038",
+  "log-01039",
+  "log-01046",
+  "log-01055",
+  "log-01057",
+  "log-01071",
+  "log-01080",
+  "log-01097",
+  "log-01107",
+  "log-01108",
+  "log-01113",
+  "log-01116",
+  "log-01117",
+  "log-01125",
+  "log-01137",
+  "log-01141",
+  "log-01143",
+  "log-01149",
+  "log-01164",
+  "log-01167",
+  "log-01183",
+  "log-01189",
+  "log-01190",
+  "log-01206",
+  "log-01208",
+  "log-01214",
+  "log-01217",
+  "log-01230",
+  "log-01231",
+  "log-01235",
+  "log-01250",
+  "log-01251",
+  "log-01259",
+  "log-01268",
+  "log-01275",
+  "log-01276",
+  "log-01277",
+  "log-01280",
+  "log-01288",
+  "log-01289",
+  "log-01290",
+  "log-01291",
+  "log-01292",
+  "log-01293",
+  "log-01295",
+  "log-01297",
+  "log-01298",
+  "log-01299",
+  "log-01300",
+  "log-01301",
+  "log-01302",
+  "log-01303",
+  "metric:coredns:cpu_pct",
+  "metric:coredns:error_rate_pct",
+  "metric:coredns:latency_p99_ms",
+  "metric:coredns:mem_pct",
+  "metric:coredns:rps",
+  "metric:notification-service:cpu_pct",
+  "metric:notification-service:error_rate_pct",
+  "metric:notification-service:latency_p99_ms",
+  "metric:notification-service:mem_pct",
+  "metric:notification-service:pod_restarts",
+  "metric:notification-service:rps"
+ ],
+ "cited_ids": [
+  "metric:coredns:error_rate_pct",
+  "metric:coredns:latency_p99_ms",
+  "metric:coredns:cpu_pct",
+  "log-00525",
+  "metric:notification-service:error_rate_pct",
+  "log-00531",
+  "log-00533",
+  "hist-2026-0228",
+  "metric:coredns:rps"
+ ],
+ "gaps": [
+  "search_past_incidents(query=coredns) returned partial data"
+ ],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 20.0,
+ "total_tokens": 101853
+}

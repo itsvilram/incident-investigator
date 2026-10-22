@@ -1,0 +1,224 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-05",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Account linking via Account Aggregator failed due to an expired mTLS client certificate on aa-connector preventing secure connections to aa-fiu-gateway.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Expired mTLS Client Certificate on aa-connector",
+    "root_cause_service": "aa-connector",
+    "category": "certificate_expiry",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "log-00002",
+      "note": "Logged warning that mTLS client certificate expires at 2026-10-08T13:30:00Z."
+     },
+     {
+      "evidence_id": "log-00551",
+      "note": "Logged SSL handshake failure with aa-fiu-gateway due to expired certificate exactly at onset time."
+     },
+     {
+      "evidence_id": "metric:aa-connector:error_rate_pct",
+      "note": "Shows error rate spiking sharply at 13:30."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Third-Party AA FIU Gateway Outage",
+    "root_cause_service": "aa-fiu-gateway",
+    "category": "third_party_outage",
+    "confidence": 0.05,
+    "supporting": [],
+    "contradicting": [
+     {
+      "evidence_id": "log-00551",
+      "note": "Logs explicitly attribute the failure to our own client certificate expiring, not an external gateway failure."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "aa-connector logged an mTLS client certificate expiration warning for 2026-10-08T13:30:00Z at 12:00:14Z.",
+    "evidence_ids": [
+     "log-00002"
+    ]
+   },
+   {
+    "text": "aa-connector error rate spiked to nearly 100% starting at 2026-10-08T13:30:00Z.",
+    "evidence_ids": [
+     "metric:aa-connector:error_rate_pct"
+    ]
+   },
+   {
+    "text": "aa-connector reported SSL handshake failures with aa-fiu-gateway due to certificate expiration starting at 13:30:03Z.",
+    "evidence_ids": [
+     "log-00551"
+    ]
+   },
+   {
+    "text": "mobile-bff experienced an error rate increase starting at 13:30.",
+    "evidence_ids": [
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The certificate was not automatically renewed due to an unconfigured or failing secret rotation operator."
+  ],
+  "evidence_gaps": [
+   "None"
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-08T12:00:14Z",
+    "event": "aa-connector logs that its mTLS client certificate expires in 0 days.",
+    "evidence_id": "log-00002"
+   },
+   {
+    "ts": "2026-10-08T13:30:00Z",
+    "event": "mTLS client certificate expires; aa-connector error rate spikes.",
+    "evidence_id": "metric:aa-connector:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-08T13:30:03Z",
+    "event": "First SSL handshake failure logged by aa-connector.",
+    "evidence_id": "log-00551"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Renew and deploy the expired mTLS client certificate for aa-connector.",
+    "priority": "immediate",
+    "rationale": "Directly resolves the SSL handshake failures and restores account linking functionality.",
+    "evidence_ids": [
+     "log-00551"
+    ]
+   },
+   {
+    "action": "Configure proactive alerts for certificate expiration 14 and 7 days prior.",
+    "priority": "short_term",
+    "rationale": "Prevents future unexpected outages from expired certificates.",
+    "evidence_ids": [
+     "log-00002"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 8,
+ "llm_calls": 4,
+ "prompt_tokens": 38683,
+ "completion_tokens": 2686,
+ "latency_s": 11.05,
+ "retrieved_ids": [
+  "chg-1600",
+  "chg-1826",
+  "chg-2025",
+  "chg-3173",
+  "chg-3824",
+  "chg-4545",
+  "chg-4942",
+  "chg-5433",
+  "chg-5946",
+  "chg-6038",
+  "chg-6346",
+  "chg-6977",
+  "chg-7675",
+  "chg-8044",
+  "chg-8159",
+  "chg-8692",
+  "chg-9048",
+  "chg-9513",
+  "chg-9541",
+  "chg-9816",
+  "dep:aa-connector->aa-fiu-gateway",
+  "dep:aa-connector->user-db",
+  "dep:auth-service->user-db",
+  "dep:kyc-service->user-db",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "hist-2026-0907",
+  "log-00002",
+  "log-00006",
+  "log-00017",
+  "log-00030",
+  "log-00044",
+  "log-00053",
+  "log-00058",
+  "log-00072",
+  "log-00081",
+  "log-00125",
+  "log-00166",
+  "log-00186",
+  "log-00196",
+  "log-00289",
+  "log-00509",
+  "log-00513",
+  "log-00524",
+  "log-00540",
+  "log-00551",
+  "log-00559",
+  "log-00572",
+  "log-00657",
+  "log-00681",
+  "log-00730",
+  "log-00796",
+  "log-00840",
+  "log-00966",
+  "log-01064",
+  "log-01170",
+  "log-01277",
+  "log-01306",
+  "log-01307",
+  "log-01308",
+  "log-01309",
+  "log-01310",
+  "log-01311",
+  "log-01312",
+  "log-01316",
+  "log-01317",
+  "log-01318",
+  "log-01319",
+  "log-01320",
+  "metric:aa-connector:cpu_pct",
+  "metric:aa-connector:error_rate_pct",
+  "metric:aa-connector:latency_p99_ms",
+  "metric:aa-connector:mem_pct",
+  "metric:aa-connector:pod_restarts",
+  "metric:aa-connector:rps",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps"
+ ],
+ "cited_ids": [
+  "log-00002",
+  "log-00551",
+  "metric:aa-connector:error_rate_pct",
+  "metric:mobile-bff:error_rate_pct"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "total_tokens": 41369,
+ "rate_limit_wait_s": 0
+}

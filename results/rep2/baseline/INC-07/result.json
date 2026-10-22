@@ -1,0 +1,267 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-07",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "The diwali_sip_offer push campaign sent at 13:30 triggered a massive traffic surge that overwhelmed orders-service and mobile-bff, causing executor queue exhaustion, high error rates, and hitting max replica limits.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Push Campaign Traffic Overload",
+    "root_cause_service": "orders-service",
+    "category": "traffic_spike",
+    "confidence": 0.9,
+    "supporting": [
+     {
+      "evidence_id": "chg-9674",
+      "note": "Push campaign sent to 2.1M users at 13:30 with deep link orders/new-sip."
+     },
+     {
+      "evidence_id": "metric:orders-service:rps",
+      "note": "RPS anomaly started at 13:31, increasing request rate significantly."
+     },
+     {
+      "evidence_id": "metric:mobile-bff:rps",
+      "note": "RPS anomaly started at 13:31, mirroring the traffic surge."
+     },
+     {
+      "evidence_id": "metric:orders-service:error_rate_pct",
+      "note": "Error rate spiked starting at 13:32 up to 15.85%."
+     },
+     {
+      "evidence_id": "log-00593",
+      "note": "RejectedExecutionException: order-executor queue full starting at 13:32."
+     },
+     {
+      "evidence_id": "log-00972",
+      "note": "Autoscaler reached max replicas (6/6)."
+     },
+     {
+      "evidence_id": "hist-2026-0901",
+      "note": "Past incident with identical symptoms caused by traffic overload and low replica max."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Routine Deployment Regression",
+    "root_cause_service": "market-data-service",
+    "category": "bad_deploy",
+    "confidence": 0.1,
+    "supporting": [
+     {
+      "evidence_id": "chg-9148",
+      "note": "market-data-service v2.12.0 deployed shortly before the incident."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:market-data-service:error_rate_pct",
+      "note": "Market data service error rate remained completely flat and normal."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "Push campaign 'diwali_sip_offer' was sent to 2.1M users at 2026-10-10T13:30:00+00:00.",
+    "evidence_ids": [
+     "chg-9674"
+    ]
+   },
+   {
+    "text": "orders-service and mobile-bff request rates surged starting at 2026-10-10T13:31:00+00:00.",
+    "evidence_ids": [
+     "metric:orders-service:rps",
+     "metric:mobile-bff:rps"
+    ]
+   },
+   {
+    "text": "orders-service and mobile-bff error rates spiked starting at 2026-10-10T13:32:00+00:00.",
+    "evidence_ids": [
+     "metric:orders-service:error_rate_pct",
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   },
+   {
+    "text": "orders-service logged RejectedExecutionException due to full order-executor queue starting at 13:32:04.",
+    "evidence_ids": [
+     "log-00593"
+    ]
+   },
+   {
+    "text": "orders-service autoscaler reached max replicas (6/6).",
+    "evidence_ids": [
+     "log-00972"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The push campaign deep link directed users to initiate SIP orders, heavily concentrating traffic onto orders-service."
+  ],
+  "evidence_gaps": [
+   "metrics query for orders-service initially timed out before succeeding on retry",
+   "orders-service log query shards experienced partial timeouts, leading to incomplete log counts"
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-10T12:39:00Z",
+    "event": "market-data-service v2.12.0 deployed",
+    "evidence_id": "chg-9148"
+   },
+   {
+    "ts": "2026-10-10T12:40:00Z",
+    "event": "user-db v3.23.0 deployed",
+    "evidence_id": "chg-9417"
+   },
+   {
+    "ts": "2026-10-10T13:30:00Z",
+    "event": "Push campaign diwali_sip_offer sent to 2.1M users",
+    "evidence_id": "chg-9674"
+   },
+   {
+    "ts": "2026-10-10T13:31:00Z",
+    "event": "orders-service and mobile-bff request rates surge anomaly starts",
+    "evidence_id": "metric:orders-service:rps"
+   },
+   {
+    "ts": "2026-10-10T13:32:00Z",
+    "event": "orders-service and mobile-bff error rate anomaly starts",
+    "evidence_id": "metric:orders-service:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-10T13:32:04Z",
+    "event": "First RejectedExecutionException logged in orders-service",
+    "evidence_id": "log-00593"
+   },
+   {
+    "ts": "2026-10-10T13:50:19Z",
+    "event": "orders-service autoscaler reaches max replicas",
+    "evidence_id": "log-00972"
+   },
+   {
+    "ts": "2026-10-10T13:55:00Z",
+    "event": "Incident reported by on-call",
+    "evidence_id": null
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Coordinate with growth team to stagger or temporarily pause massive push campaigns",
+    "priority": "immediate",
+    "rationale": "Directly halts the incoming traffic surge causing resource exhaustion.",
+    "evidence_ids": [
+     "chg-9674"
+    ]
+   },
+   {
+    "action": "Increase maximum replica limits for orders-service and mobile-bff beyond 6 pods",
+    "priority": "immediate",
+    "rationale": "Allows services to scale up and absorb higher traffic volumes.",
+    "evidence_ids": [
+     "log-00972",
+     "hist-2026-0901"
+    ]
+   },
+   {
+    "action": "Expand order-executor thread pool capacity and queue size in orders-service",
+    "priority": "short_term",
+    "rationale": "Prevents RejectedExecutionException under high concurrent load.",
+    "evidence_ids": [
+     "log-00593"
+    ]
+   },
+   {
+    "action": "Establish communication workflows between marketing and SRE prior to launching large campaigns",
+    "priority": "long_term",
+    "rationale": "Ensures proactive capacity provisioning for major product campaigns.",
+    "evidence_ids": [
+     "chg-9674",
+     "hist-2026-0901"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 11,
+ "llm_calls": 4,
+ "prompt_tokens": 35138,
+ "completion_tokens": 4023,
+ "latency_s": 25.94,
+ "retrieved_ids": [
+  "chg-8205",
+  "chg-8412",
+  "chg-8912",
+  "chg-9148",
+  "chg-9417",
+  "chg-9674",
+  "dep:orders-service->broker-api",
+  "dep:orders-service->portfolio-db",
+  "hist-2026-0228",
+  "hist-2026-0901",
+  "hist-2026-0907",
+  "log-00033",
+  "log-00200",
+  "log-00593",
+  "log-00972",
+  "log-01242",
+  "log-01245",
+  "log-01251",
+  "log-01254",
+  "log-01257",
+  "log-01260",
+  "log-01266",
+  "log-01269",
+  "log-01278",
+  "log-01281",
+  "log-01287",
+  "log-01290",
+  "metric:market-data-service:cpu_pct",
+  "metric:market-data-service:error_rate_pct",
+  "metric:market-data-service:latency_p99_ms",
+  "metric:market-data-service:mem_pct",
+  "metric:market-data-service:pod_restarts",
+  "metric:market-data-service:rps",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps",
+  "metric:orders-service:cpu_pct",
+  "metric:orders-service:error_rate_pct",
+  "metric:orders-service:latency_p99_ms",
+  "metric:orders-service:mem_pct",
+  "metric:orders-service:pod_restarts",
+  "metric:orders-service:rps"
+ ],
+ "cited_ids": [
+  "chg-9674",
+  "metric:orders-service:rps",
+  "metric:mobile-bff:rps",
+  "metric:orders-service:error_rate_pct",
+  "log-00593",
+  "log-00972",
+  "hist-2026-0901",
+  "chg-9148",
+  "metric:market-data-service:error_rate_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "chg-9417"
+ ],
+ "gaps": [
+  "query_logs(service=orders-service) returned partial data",
+  "query_metrics(service=orders-service) failed: timed out after 0.3s after 3 tries"
+ ],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 10.0,
+ "total_tokens": 39161
+}

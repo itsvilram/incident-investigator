@@ -1,0 +1,225 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-01",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "A code deployment (chg-9890) to payments-api at 14:02 UTC introduced a NullPointerException in PaymentIntentValidator.java, causing payment failures starting at 14:03 UTC.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Code deploy bug in payments-api v2.14.0",
+    "root_cause_service": "payments-api",
+    "category": "bad_deploy",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-9890",
+      "note": "Deployment of payments-api v2.14.0 occurred at 14:02 UTC, just one minute before symptoms started."
+     },
+     {
+      "evidence_id": "metric:payments-api:error_rate_pct",
+      "note": "Error rate spiked sharply at 14:03 UTC reaching 19.1%."
+     },
+     {
+      "evidence_id": "metric:mobile-bff:error_rate_pct",
+      "note": "Error rate spiked at 14:03 UTC reaching 5.31% due to downstream failures."
+     },
+     {
+      "evidence_id": "log-00759",
+      "note": "payments-api logs show NullPointerException at PaymentIntentValidator.validate starting at 14:03:05 UTC."
+     },
+     {
+      "evidence_id": "log-00758",
+      "note": "mobile-bff logs show upstream payments-api 500 errors starting at 14:03:01 UTC."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "External UPI or NPCI gateway outage",
+    "root_cause_service": "npci-switch",
+    "category": "third_party_outage",
+    "confidence": 0.05,
+    "supporting": [],
+    "contradicting": [
+     {
+      "evidence_id": "metric:upi-gateway:error_rate_pct",
+      "note": "upi-gateway error rate remained entirely normal around ~0.2% - 0.34% with no anomaly during the incident window."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "payments-api v2.14.0 was deployed at 2026-10-02T14:02:00+00:00 with changes to payment-intent validation.",
+    "evidence_ids": [
+     "chg-9890"
+    ]
+   },
+   {
+    "text": "Error rates for payments-api and mobile-bff increased sharply starting at 14:03:00+00:00.",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct",
+     "metric:mobile-bff:error_rate_pct"
+    ]
+   },
+   {
+    "text": "payments-api logged NullPointerException at PaymentIntentValidator.java:88 starting at 14:03:05+00:00.",
+    "evidence_ids": [
+     "log-00759"
+    ]
+   },
+   {
+    "text": "mobile-bff logged upstream payments-api 500 responses starting at 14:03:01+00:00.",
+    "evidence_ids": [
+     "log-00758"
+    ]
+   },
+   {
+    "text": "upi-gateway error rates and latency exhibited no anomalies throughout the window.",
+    "evidence_ids": [
+     "metric:upi-gateway:error_rate_pct",
+     "metric:upi-gateway:latency_p99_ms"
+    ]
+   }
+  ],
+  "assumptions": [
+   "Mobile app clients sent payment payloads that triggered the null pointer condition in the newly introduced validation code."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-02T14:02:00Z",
+    "event": "payments-api v2.14.0 deployed",
+    "evidence_id": "chg-9890"
+   },
+   {
+    "ts": "2026-10-02T14:03:00Z",
+    "event": "Error rate anomaly begins on mobile-bff and payments-api",
+    "evidence_id": "metric:payments-api:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-02T14:03:01Z",
+    "event": "mobile-bff logs first upstream 500 error from payments-api",
+    "evidence_id": "log-00758"
+   },
+   {
+    "ts": "2026-10-02T14:03:05Z",
+    "event": "payments-api logs first NullPointerException in PaymentIntentValidator",
+    "evidence_id": "log-00759"
+   },
+   {
+    "ts": "2026-10-02T14:20:00Z",
+    "event": "Incident reported by on-call SRE Priya",
+    "evidence_id": null
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Rollback payments-api from v2.14.0 to v2.13.4",
+    "priority": "immediate",
+    "rationale": "Directly resolves the bad deployment causing widespread payment transaction failures.",
+    "evidence_ids": [
+     "chg-9890",
+     "log-00759"
+    ]
+   },
+   {
+    "action": "Fix null pointer check in PaymentIntentValidator.java",
+    "priority": "short_term",
+    "rationale": "Ensure payer_vpa validation robustly handles null inputs before re-releasing the refactored validation logic.",
+    "evidence_ids": [
+     "log-00759"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 9,
+ "llm_calls": 4,
+ "prompt_tokens": 42904,
+ "completion_tokens": 3184,
+ "latency_s": 30.47,
+ "retrieved_ids": [
+  "chg-8605",
+  "chg-8908",
+  "chg-9177",
+  "chg-9557",
+  "chg-9890",
+  "dep:fraud-service->redis-cache",
+  "dep:ledger-service->ledger-db",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "log-00758",
+  "log-00759",
+  "log-01660",
+  "log-01664",
+  "log-01667",
+  "log-01669",
+  "log-01673",
+  "log-01679",
+  "log-01681",
+  "log-01682",
+  "log-01683",
+  "log-01684",
+  "log-01685",
+  "log-01686",
+  "log-01687",
+  "log-01688",
+  "log-01689",
+  "log-01690",
+  "log-01691",
+  "log-01692",
+  "log-01694",
+  "log-01695",
+  "log-01697",
+  "log-01698",
+  "log-01699",
+  "log-01700",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps",
+  "metric:upi-gateway:cpu_pct",
+  "metric:upi-gateway:error_rate_pct",
+  "metric:upi-gateway:latency_p99_ms",
+  "metric:upi-gateway:mem_pct",
+  "metric:upi-gateway:pod_restarts",
+  "metric:upi-gateway:rps"
+ ],
+ "cited_ids": [
+  "chg-9890",
+  "metric:payments-api:error_rate_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "log-00759",
+  "log-00758",
+  "metric:upi-gateway:error_rate_pct",
+  "metric:upi-gateway:latency_p99_ms"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "total_tokens": 46088,
+ "rate_limit_wait_s": 0
+}

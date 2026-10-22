@@ -1,0 +1,294 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-02",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Ledger Database ran out of disk space, causing file extension errors during INSERT queries in ledger-service, which in turn caused payments-api to fail ledger writes and leave payments stuck in PENDING status.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Ledger Database disk space exhaustion",
+    "root_cause_service": "ledger-db",
+    "category": "resource_exhaustion",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "metric:ledger-db:disk_used_pct",
+      "note": "Shows disk usage reached 100% saturation starting at 13:19"
+     },
+     {
+      "evidence_id": "log-00706",
+      "note": "Ledger-db reported 'could not extend file' errors starting at 13:52"
+     },
+     {
+      "evidence_id": "log-00704",
+      "note": "Ledger-service logged PostgreSQL 'No space left on device' errors on insert statements"
+     },
+     {
+      "evidence_id": "log-00735",
+      "note": "Payments-api failed ledger writes and marked payments as PENDING for retry"
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "KYC service deployment regression",
+    "root_cause_service": "kyc-service",
+    "category": "bad_deploy",
+    "confidence": 0.05,
+    "supporting": [
+     {
+      "evidence_id": "chg-9369",
+      "note": "kyc-service deploy occurred at 14:00"
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:payments-api:error_rate_pct",
+      "note": "Payment-api errors started at 13:53, before the kyc deploy at 14:00"
+     },
+     {
+      "evidence_id": "metric:ledger-service:error_rate_pct",
+      "note": "Ledger-service errors started at 13:52, before the kyc deploy at 14:00"
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "Ledger-db disk usage reached 100% and showed an anomaly starting at 2026-10-03T13:19:00+00:00",
+    "evidence_ids": [
+     "metric:ledger-db:disk_used_pct"
+    ]
+   },
+   {
+    "text": "Ledger-service error rate and latency started increasing at 2026-10-03T13:52:00+00:00",
+    "evidence_ids": [
+     "metric:ledger-service:error_rate_pct",
+     "metric:ledger-service:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "Ledger-db logged 'could not extend file' errors starting at 2026-10-03T13:52:08+00:00",
+    "evidence_ids": [
+     "log-00706"
+    ]
+   },
+   {
+    "text": "Ledger-service logged PostgreSQL 'No space left on device' errors starting at 2026-10-03T13:52:00+00:00",
+    "evidence_ids": [
+     "log-00704"
+    ]
+   },
+   {
+    "text": "Payments-api error rate started increasing at 2026-10-03T13:53:00+00:00",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct"
+    ]
+   },
+   {
+    "text": "Payments-api logged ledger write failures and marked payments as PENDING for retry starting at 2026-10-03T13:53:03+00:00",
+    "evidence_ids": [
+     "log-00735"
+    ]
+   },
+   {
+    "text": "A kyc-service deploy occurred at 2026-10-03T14:00:00+00:00",
+    "evidence_ids": [
+     "chg-9369"
+    ]
+   }
+  ],
+  "assumptions": [
+   "Normal transaction volume and database growth over time naturally filled the storage volume allocated to ledger-db without timely log rotation or scaling."
+  ],
+  "evidence_gaps": [
+   "Past incident search index was partially degraded, returning only top matches."
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-03T13:19:00Z",
+    "event": "Ledger-db disk usage anomaly began rising toward 100%",
+    "evidence_id": "metric:ledger-db:disk_used_pct"
+   },
+   {
+    "ts": "2026-10-03T13:52:00Z",
+    "event": "Ledger-service began experiencing error rate and latency anomalies and logging 'No space left on device' errors",
+    "evidence_id": "log-00704"
+   },
+   {
+    "ts": "2026-10-03T13:52:08Z",
+    "event": "Ledger-db reported file extension failures due to lack of disk space",
+    "evidence_id": "log-00706"
+   },
+   {
+    "ts": "2026-10-03T13:53:00Z",
+    "event": "Payments-api error rate increased and marked payments as PENDING for retry",
+    "evidence_id": "log-00735"
+   },
+   {
+    "ts": "2026-10-03T14:00:00Z",
+    "event": "Routine kyc-service deployment occurred",
+    "evidence_id": "chg-9369"
+   },
+   {
+    "ts": "2026-10-03T14:15:00Z",
+    "event": "Incident INC-02 officially reported by payments on-call",
+    "evidence_id": null
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Provision additional disk space or expand storage volume for ledger-db",
+    "priority": "immediate",
+    "rationale": "Resolves the 'No space left on device' condition allowing database writes to succeed again",
+    "evidence_ids": [
+     "metric:ledger-db:disk_used_pct",
+     "log-00706"
+    ]
+   },
+   {
+    "action": "Implement background worker to retry and complete payments stuck in PENDING status",
+    "priority": "immediate",
+    "rationale": "Ensures customer transactions that debited users are properly processed and recorded",
+    "evidence_ids": [
+     "log-00735"
+    ]
+   },
+   {
+    "action": "Set up critical disk usage alerting on ledger-db",
+    "priority": "short_term",
+    "rationale": "Prevents unexpected disk saturation by warning engineering teams early",
+    "evidence_ids": [
+     "metric:ledger-db:disk_used_pct"
+    ]
+   },
+   {
+    "action": "Review database retention, cleanup, and storage scaling policies for ledger-db",
+    "priority": "long_term",
+    "rationale": "Ensures sustainable long-term capacity planning",
+    "evidence_ids": [
+     "metric:ledger-db:disk_used_pct"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 13,
+ "llm_calls": 6,
+ "prompt_tokens": 87182,
+ "completion_tokens": 3900,
+ "latency_s": 21.84,
+ "retrieved_ids": [
+  "chg-7351",
+  "chg-7687",
+  "chg-7952",
+  "chg-9369",
+  "dep:fraud-service->redis-cache",
+  "dep:ledger-service->ledger-db",
+  "dep:market-data-service->redis-cache",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:notification-service->event-bus",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "log-00699",
+  "log-00704",
+  "log-00706",
+  "log-00728",
+  "log-00735",
+  "log-00839",
+  "log-00950",
+  "log-01109",
+  "log-01340",
+  "log-01704",
+  "log-02088",
+  "log-02089",
+  "log-02096",
+  "log-02097",
+  "log-02098",
+  "log-02099",
+  "log-02100",
+  "log-02101",
+  "log-02102",
+  "log-02103",
+  "log-02104",
+  "log-02105",
+  "log-02106",
+  "log-02107",
+  "log-02108",
+  "log-02109",
+  "log-02110",
+  "log-02111",
+  "log-02112",
+  "log-02113",
+  "log-02114",
+  "log-02115",
+  "log-02116",
+  "log-02117",
+  "log-02118",
+  "log-02119",
+  "log-02120",
+  "log-02121",
+  "log-02122",
+  "log-02123",
+  "log-02124",
+  "log-02125",
+  "log-02126",
+  "log-02127",
+  "log-02128",
+  "metric:kyc-service:cpu_pct",
+  "metric:kyc-service:error_rate_pct",
+  "metric:kyc-service:latency_p99_ms",
+  "metric:kyc-service:mem_pct",
+  "metric:kyc-service:pod_restarts",
+  "metric:kyc-service:rps",
+  "metric:ledger-db:disk_used_pct",
+  "metric:ledger-service:cpu_pct",
+  "metric:ledger-service:error_rate_pct",
+  "metric:ledger-service:latency_p99_ms",
+  "metric:ledger-service:mem_pct",
+  "metric:ledger-service:pod_restarts",
+  "metric:ledger-service:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps"
+ ],
+ "cited_ids": [
+  "metric:ledger-db:disk_used_pct",
+  "log-00706",
+  "log-00704",
+  "log-00735",
+  "chg-9369",
+  "metric:payments-api:error_rate_pct",
+  "metric:ledger-service:error_rate_pct",
+  "metric:ledger-service:latency_p99_ms"
+ ],
+ "gaps": [
+  "search_past_incidents(query=No space left on device) returned partial data"
+ ],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 0,
+ "total_tokens": 91082
+}

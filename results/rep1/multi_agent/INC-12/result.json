@@ -1,0 +1,249 @@
+{
+ "system": "multi_agent",
+ "incident_id": "INC-12",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "Approximately 8% of UPI payments began failing at 14:07 on 2026-10-07 due to an incorrect routing configuration update on upi-gateway. The configuration change (chg-9824) shifted @okbank handles to partner-bank-api /v3/collect, which resulted in HTTP 404 Not Found errors from partner-bank-api and subsequent U30 route failure errors in payments-api.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Routing Configuration Update on upi-gateway Introduced Invalid Endpoint Path for @okbank",
+    "root_cause_service": "upi-gateway",
+    "category": "config_change",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-9824",
+      "note": "Configuration change updating @okbank handles to partner-bank-api /v3/collect occurred at 14:06, immediately preceding the anomaly."
+     },
+     {
+      "evidence_id": "metric:payments-api:error_rate_pct",
+      "note": "payments-api error rate rose sharply starting at 14:07."
+     },
+     {
+      "evidence_id": "metric:upi-gateway:error_rate_pct",
+      "note": "upi-gateway error rate rose sharply starting at 14:07."
+     },
+     {
+      "evidence_id": "log-00788",
+      "note": "upi-gateway logs show partner-bank-api returning 404 Not Found for POST /v3/collect starting at 14:07."
+     },
+     {
+      "evidence_id": "log-00790",
+      "note": "payments-api logs report failures due to upi-gateway error U30 (route failure) starting at 14:07."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Concurrent payments-api Deployment (v2.15.0) Caused Routing Incompatibilities",
+    "root_cause_service": "payments-api",
+    "category": "bad_deploy",
+    "confidence": 0.05,
+    "supporting": [
+     {
+      "evidence_id": "chg-9649",
+      "note": "payments-api v2.15.0 deployed at 14:05, just before the incident onset."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "log-00788",
+      "note": "The root cause of failure is explicitly partner-bank-api returning 404 for /v3/collect, which directly links to the upi-gateway routing table configuration change (chg-9824)."
+     },
+     {
+      "evidence_id": "chg-9824",
+      "note": "The specific targeted failure affecting only @okbank users matches the routing table update precisely."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "The error rate anomaly for payments-api began at 2026-10-07T14:07:00+00:00, jumping from a baseline of ~0.28% to 7.54% and peaking at 8.71%.",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct"
+    ]
+   },
+   {
+    "text": "The error rate anomaly for upi-gateway began at 2026-10-07T14:07:00+00:00, jumping from a baseline of ~0.25% to 8.57% and reaching 10.28%.",
+    "evidence_ids": [
+     "metric:upi-gateway:error_rate_pct"
+    ]
+   },
+   {
+    "text": "payments-api logs report UPI collect failures due to upi-gateway error U30 (route failure).",
+    "evidence_ids": [
+     "log-00790"
+    ]
+   },
+   {
+    "text": "upi-gateway logs report partner-bank-api returning 404 Not Found for collect requests.",
+    "evidence_ids": [
+     "log-00788"
+    ]
+   },
+   {
+    "text": "A deploy for payments-api v2.15.0 occurred on 2026-10-07 at 14:05:00+00:00.",
+    "evidence_ids": [
+     "chg-9649"
+    ]
+   },
+   {
+    "text": "A configuration change for upi-gateway updating routing handles for @okbank to partner-bank-api /v3/collect occurred on 2026-10-07 at 14:06:00+00:00.",
+    "evidence_ids": [
+     "chg-9824"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The partner-bank-api service does not support /v3/collect or expects a different path for collect requests."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-07T14:05:00Z",
+    "event": "A deploy for payments-api v2.15.0 occurred.",
+    "evidence_id": "chg-9649"
+   },
+   {
+    "ts": "2026-10-07T14:06:00Z",
+    "event": "A configuration change for upi-gateway updated routing handles for @okbank to partner-bank-api /v3/collect.",
+    "evidence_id": "chg-9824"
+   },
+   {
+    "ts": "2026-10-07T14:07:00Z",
+    "event": "The error rate anomaly for payments-api and upi-gateway began.",
+    "evidence_id": "metric:payments-api:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-07T14:07:00Z",
+    "event": "upi-gateway logs report partner-bank-api POST /v3/collect returned 404 Not Found for handle 690a8@okbank.",
+    "evidence_id": "log-00788"
+   },
+   {
+    "ts": "2026-10-07T14:07:00Z",
+    "event": "payments-api logs report UPI collect failed due to upi-gateway error U30 (route failure).",
+    "evidence_id": "log-00790"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Rollback the upi-gateway routing table configuration change to revert @okbank handles back to /v2/collect or the correct active endpoint path.",
+    "priority": "immediate",
+    "rationale": "The incident was directly triggered by the configuration change pointing @okbank handles to a non-existent endpoint path (/v3/collect), causing HTTP 404 errors and transaction failures.",
+    "evidence_ids": [
+     "chg-9824",
+     "log-00788",
+     "log-00790"
+    ]
+   },
+   {
+    "action": "Verify partner-bank-api documentation and test endpoint paths before applying future gateway routing updates.",
+    "priority": "short_term",
+    "rationale": "Ensuring pre-deployment validation of upstream/third-party API paths prevents mismatch issues.",
+    "evidence_ids": [
+     "chg-9824",
+     "log-00788"
+    ]
+   },
+   {
+    "action": "Implement automated validation checks in the upi-gateway routing configuration pipeline to catch invalid or unverified downstream endpoints.",
+    "priority": "long_term",
+    "rationale": "Automation reduces human error during manual or programmatic routing updates.",
+    "evidence_ids": [
+     "chg-9824"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 1,
+ "tool_calls": 8,
+ "llm_calls": 11,
+ "prompt_tokens": 50993,
+ "completion_tokens": 7554,
+ "latency_s": 24.52,
+ "retrieved_ids": [
+  "chg-1738",
+  "chg-5323",
+  "chg-9649",
+  "chg-9824",
+  "dep:fraud-service->redis-cache",
+  "dep:ledger-service->ledger-db",
+  "dep:market-data-service->redis-cache",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:notification-service->event-bus",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "log-00748",
+  "log-00788",
+  "log-00790",
+  "log-01371",
+  "log-01374",
+  "log-01375",
+  "log-01377",
+  "log-01379",
+  "log-01381",
+  "log-01382",
+  "log-01383",
+  "log-01385",
+  "log-01386",
+  "log-01388",
+  "log-01391",
+  "log-01392",
+  "log-01393",
+  "log-01394",
+  "log-01395",
+  "log-01397",
+  "log-01398",
+  "log-01399",
+  "log-01400",
+  "log-01403",
+  "log-01404",
+  "log-01406",
+  "log-01407",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps",
+  "metric:upi-gateway:cpu_pct",
+  "metric:upi-gateway:error_rate_pct",
+  "metric:upi-gateway:latency_p99_ms",
+  "metric:upi-gateway:mem_pct",
+  "metric:upi-gateway:pod_restarts",
+  "metric:upi-gateway:rps"
+ ],
+ "cited_ids": [
+  "chg-9824",
+  "metric:payments-api:error_rate_pct",
+  "metric:upi-gateway:error_rate_pct",
+  "log-00788",
+  "log-00790",
+  "chg-9649"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 0,
+ "total_tokens": 58547
+}

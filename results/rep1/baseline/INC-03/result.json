@@ -1,0 +1,267 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-03",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "UPI checkout timeouts and payments-api latency spikes were caused by performance degradation in the external partner-bank-api, which caused upi-gateway worker threads to block and exhaust the worker pool, leading to timeouts across payments-api.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Partner Bank API Latency Degradation",
+    "root_cause_service": "partner-bank-api",
+    "category": "third_party_outage",
+    "confidence": 0.85,
+    "supporting": [
+     {
+      "evidence_id": "log-00657",
+      "note": "upi-gateway logs show slow calls to partner-bank-api starting at 13:42."
+     },
+     {
+      "evidence_id": "log-00742",
+      "note": "upi-gateway worker pool exhausted waiting on partner-bank-api."
+     },
+     {
+      "evidence_id": "log-00698",
+      "note": "payments-api timing out calling upi-gateway."
+     },
+     {
+      "evidence_id": "metric:payments-api:latency_p99_ms",
+      "note": "p99 latency jumped significantly starting at 13:45."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:partner-bank-api:rps",
+      "note": "Metrics backend returned partial data missing latency and error rate metrics."
+     }
+    ]
+   },
+   {
+    "rank": 2,
+    "title": "upi-gateway Worker Pool Exhaustion",
+    "root_cause_service": "upi-gateway",
+    "category": "resource_exhaustion",
+    "confidence": 0.55,
+    "supporting": [
+     {
+      "evidence_id": "log-00742",
+      "note": "Worker pool exhausted (200/200 busy), rejecting requests."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "hist-2026-0530",
+      "note": "Worker pool size of 200 was previously deemed sufficient under normal conditions; exhaustion is secondary to downstream slowness."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "payments-api error rate and p99 latency spiked starting around 13:45-13:47 UTC.",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct",
+     "metric:payments-api:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "upi-gateway logged slow responses from partner-bank-api starting at 13:42:16 UTC.",
+    "evidence_ids": [
+     "log-00657"
+    ]
+   },
+   {
+    "text": "upi-gateway worker pool became exhausted and rejected requests starting at 13:47:40 UTC.",
+    "evidence_ids": [
+     "log-00742"
+    ]
+   },
+   {
+    "text": "No code deployments occurred for payments-api or upi-gateway in the preceding 24 hours.",
+    "evidence_ids": [
+     "get_deployments"
+    ]
+   }
+  ],
+  "assumptions": [
+   "External partner-bank-api experienced database or internal service degradation causing synchronous calls to hang.",
+   "Customer-facing UPI payment timeouts correlate directly with the payments-api and upi-gateway request timeouts."
+  ],
+  "evidence_gaps": [
+   "Metrics backend returned partial data missing error rate and p99 latency for partner-bank-api.",
+   "Log shards timed out resulting in incomplete log match counts for upi-gateway."
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-04T13:30:00Z",
+    "event": "fraud-service velocity threshold configuration change",
+    "evidence_id": "chg-9502"
+   },
+   {
+    "ts": "2026-10-04T13:42:16Z",
+    "event": "First slow call to partner-bank-api logged by upi-gateway",
+    "evidence_id": "log-00657"
+   },
+   {
+    "ts": "2026-10-04T13:43:00Z",
+    "event": "upi-gateway p99 latency anomaly starts",
+    "evidence_id": "metric:upi-gateway:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-04T13:45:00Z",
+    "event": "payments-api p99 latency anomaly starts",
+    "evidence_id": "metric:payments-api:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-04T13:46:00Z",
+    "event": "First payments-api timeout error calling upi-gateway",
+    "evidence_id": "log-00698"
+   },
+   {
+    "ts": "2026-10-04T13:47:00Z",
+    "event": "payments-api and mobile-bff error rate anomalies start",
+    "evidence_id": "metric:payments-api:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-04T13:47:40Z",
+    "event": "upi-gateway worker pool exhaustion and request rejection",
+    "evidence_id": "log-00742"
+   },
+   {
+    "ts": "2026-10-04T14:10:00Z",
+    "event": "Incident reported by on-call SRE",
+    "evidence_id": null
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Coordinate with partner bank ops team to verify partner-bank-api performance.",
+    "priority": "immediate",
+    "rationale": "Partner bank degradation is the root cause of downstream worker pool exhaustion and payment timeouts.",
+    "evidence_ids": [
+     "log-00657",
+     "log-00742"
+    ]
+   },
+   {
+    "action": "Implement or tune circuit breakers on upi-gateway for partner-bank-api calls.",
+    "priority": "immediate",
+    "rationale": "Failing fast prevents thread starvation and worker pool exhaustion during third-party degradation.",
+    "evidence_ids": [
+     "log-00742",
+     "hist-2026-0618"
+    ]
+   },
+   {
+    "action": "Add non-blocking I/O or asynchronous patterns for external dependency calls.",
+    "priority": "long_term",
+    "rationale": "Protects internal gateways from being bottlenecked by synchronous third-party API latency.",
+    "evidence_ids": [
+     "log-00742"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 12,
+ "llm_calls": 5,
+ "prompt_tokens": 65140,
+ "completion_tokens": 3629,
+ "latency_s": 15.91,
+ "retrieved_ids": [
+  "chg-8974",
+  "chg-9502",
+  "dep:fraud-service->redis-cache",
+  "dep:ledger-service->ledger-db",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "hist-2026-0530",
+  "hist-2026-0618",
+  "log-00054",
+  "log-00117",
+  "log-00181",
+  "log-00599",
+  "log-00657",
+  "log-00698",
+  "log-00742",
+  "log-01545",
+  "log-01569",
+  "log-01578",
+  "log-01581",
+  "log-01584",
+  "log-01590",
+  "log-01603",
+  "log-01615",
+  "log-01621",
+  "log-01636",
+  "log-01646",
+  "log-01648",
+  "log-01650",
+  "log-01652",
+  "log-01654",
+  "log-01655",
+  "log-01657",
+  "log-01660",
+  "log-01661",
+  "log-01662",
+  "log-01663",
+  "log-01665",
+  "log-01666",
+  "log-01668",
+  "metric:mobile-bff:cpu_pct",
+  "metric:mobile-bff:error_rate_pct",
+  "metric:mobile-bff:latency_p99_ms",
+  "metric:mobile-bff:mem_pct",
+  "metric:mobile-bff:pod_restarts",
+  "metric:mobile-bff:rps",
+  "metric:npci-switch:error_rate_pct",
+  "metric:npci-switch:latency_p99_ms",
+  "metric:npci-switch:rps",
+  "metric:partner-bank-api:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps",
+  "metric:upi-gateway:cpu_pct",
+  "metric:upi-gateway:error_rate_pct",
+  "metric:upi-gateway:latency_p99_ms",
+  "metric:upi-gateway:mem_pct",
+  "metric:upi-gateway:pod_restarts",
+  "metric:upi-gateway:rps"
+ ],
+ "cited_ids": [
+  "log-00657",
+  "log-00742",
+  "log-00698",
+  "metric:payments-api:latency_p99_ms",
+  "metric:partner-bank-api:rps",
+  "hist-2026-0530",
+  "metric:payments-api:error_rate_pct",
+  "get_deployments",
+  "chg-9502",
+  "metric:upi-gateway:latency_p99_ms",
+  "hist-2026-0618"
+ ],
+ "gaps": [
+  "query_logs(service=upi-gateway) returned partial data",
+  "query_metrics(service=partner-bank-api) returned partial data"
+ ],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "total_tokens": 68769,
+ "rate_limit_wait_s": 0
+}

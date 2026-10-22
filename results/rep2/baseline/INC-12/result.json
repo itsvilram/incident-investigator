@@ -1,0 +1,241 @@
+{
+ "system": "baseline",
+ "incident_id": "INC-12",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "About 8% of UPI payments for okbank users began failing at 14:07 due to an incorrect routing configuration update (chg-9824) at 14:06 that directed okbank handles to an invalid /v3/collect endpoint on partner-bank-api instead of /v2/collect.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Routing Configuration Error",
+    "root_cause_service": "upi-gateway",
+    "category": "config_change",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-9824",
+      "note": "Routing table config update at 14:06 changed @okbank handles to partner-bank-api /v3/collect"
+     },
+     {
+      "evidence_id": "metric:upi-gateway:error_rate_pct",
+      "note": "Error rate spiked starting at 14:07:00, coinciding with the config change"
+     },
+     {
+      "evidence_id": "log-00788",
+      "note": "partner-bank-api returned 404 Not Found for /v3/collect starting at 14:07:03"
+     },
+     {
+      "evidence_id": "log-00790",
+      "note": "payments-api logged upi-gateway error U30 (route failure) starting at 14:07:07"
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Bad Code Deploy in payments-api",
+    "root_cause_service": "payments-api",
+    "category": "bad_deploy",
+    "confidence": 0.05,
+    "supporting": [
+     {
+      "evidence_id": "chg-9649",
+      "note": "payments-api v2.15.0 was deployed at 14:05, just before incident onset"
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "log-00788",
+      "note": "Errors originate from upi-gateway failing to reach partner-bank-api at /v3/collect rather than internal code exceptions"
+     },
+     {
+      "evidence_id": "log-00790",
+      "note": "Error messages explicitly cite upi-gateway error U30 (route failure)"
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "Error rates for payments-api and upi-gateway spiked starting at 2026-10-07T14:07:00Z.",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct",
+     "metric:upi-gateway:error_rate_pct"
+    ]
+   },
+   {
+    "text": "payments-api v2.15.0 was deployed at 2026-10-07T14:05:00Z.",
+    "evidence_ids": [
+     "chg-9649"
+    ]
+   },
+   {
+    "text": "upi-gateway routing configuration was updated at 2026-10-07T14:06:00Z to route @okbank handles to /v3/collect.",
+    "evidence_ids": [
+     "chg-9824"
+    ]
+   },
+   {
+    "text": "partner-bank-api returned 404 Not Found for /v3/collect requests starting at 14:07:03Z.",
+    "evidence_ids": [
+     "log-00788"
+    ]
+   },
+   {
+    "text": "payments-api encountered upi-gateway error U30 route failure starting at 14:07:07Z.",
+    "evidence_ids": [
+     "log-00790"
+    ]
+   }
+  ],
+  "assumptions": [
+   "partner-bank-api does not support the /v3/collect endpoint for okbank handles."
+  ],
+  "evidence_gaps": [
+   "Direct access logs from partner-bank-api to verify endpoint availability."
+  ],
+  "timeline": [
+   {
+    "ts": "2026-10-07T14:05:00Z",
+    "event": "payments-api v2.15.0 deployed",
+    "evidence_id": "chg-9649"
+   },
+   {
+    "ts": "2026-10-07T14:06:00Z",
+    "event": "upi-gateway routing config updated for okbank handles",
+    "evidence_id": "chg-9824"
+   },
+   {
+    "ts": "2026-10-07T14:07:00Z",
+    "event": "Error rate anomaly begins on payments-api and upi-gateway",
+    "evidence_id": "metric:payments-api:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-07T14:07:03Z",
+    "event": "partner-bank-api returns 404 for /v3/collect",
+    "evidence_id": "log-00788"
+   },
+   {
+    "ts": "2026-10-07T14:07:07Z",
+    "event": "payments-api logs upi-gateway error U30 (route failure)",
+    "evidence_id": "log-00790"
+   },
+   {
+    "ts": "2026-10-07T14:30:00Z",
+    "event": "Incident reported by on-call engineer",
+    "evidence_id": null
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Roll back the routing configuration change to restore @okbank handles to /v2/collect.",
+    "priority": "immediate",
+    "rationale": "Will immediately resolve the 404 errors and U30 route failures causing payment drops.",
+    "evidence_ids": [
+     "chg-9824",
+     "log-00788",
+     "log-00790"
+    ]
+   },
+   {
+    "action": "Implement validation checks for partner API endpoints prior to applying gateway routing changes.",
+    "priority": "short_term",
+    "rationale": "Prevents deploying configuration routes to non-existent or unsupported third-party endpoints.",
+    "evidence_ids": [
+     "chg-9824",
+     "log-00788"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "agent finished",
+ "rounds": 1,
+ "tool_calls": 9,
+ "llm_calls": 4,
+ "prompt_tokens": 38439,
+ "completion_tokens": 3457,
+ "latency_s": 12.97,
+ "retrieved_ids": [
+  "chg-9649",
+  "chg-9824",
+  "dep:fraud-service->redis-cache",
+  "dep:ledger-service->ledger-db",
+  "dep:market-data-service->redis-cache",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:notification-service->event-bus",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "hist-2026-0618",
+  "hist-2026-0702",
+  "hist-2026-0722",
+  "log-00748",
+  "log-00788",
+  "log-00790",
+  "log-01400",
+  "log-01635",
+  "log-01637",
+  "log-01638",
+  "log-01639",
+  "log-01640",
+  "log-01641",
+  "log-01642",
+  "log-01644",
+  "log-01646",
+  "log-01647",
+  "log-01648",
+  "log-01649",
+  "log-01650",
+  "log-01651",
+  "log-01652",
+  "log-01653",
+  "log-01654",
+  "log-01655",
+  "log-01657",
+  "log-01658",
+  "log-01659",
+  "log-01660",
+  "log-01662",
+  "log-01667",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps",
+  "metric:upi-gateway:cpu_pct",
+  "metric:upi-gateway:error_rate_pct",
+  "metric:upi-gateway:latency_p99_ms",
+  "metric:upi-gateway:mem_pct",
+  "metric:upi-gateway:pod_restarts",
+  "metric:upi-gateway:rps"
+ ],
+ "cited_ids": [
+  "chg-9824",
+  "metric:upi-gateway:error_rate_pct",
+  "log-00788",
+  "log-00790",
+  "chg-9649",
+  "metric:payments-api:error_rate_pct"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 0,
+ "total_tokens": 41896
+}

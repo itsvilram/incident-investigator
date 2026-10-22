@@ -1,9 +1,10 @@
 # Incident Investigator
 
 A multi-agent AI system that investigates production incidents. It finds probable root causes and
-recommends evidence-backed fixes. It is evaluated against a single-agent baseline on 12 synthetic
+recommends evidence-backed fixes. It is evaluated against a single-agent baseline on 18 synthetic
 fintech incidents built with traps: red-herring deploys, cascading failures, misleading history,
-silent logs, flaky tools, and one incident where the honest answer is "inconclusive".
+silent logs, flaky tools, and incidents where the honest answer is "inconclusive". Six of them were
+written after the code was frozen and are scored separately.
 
 Built for the Orange Invest AI Engineer take-home.
 
@@ -11,11 +12,30 @@ Built for the Orange Invest AI Engineer take-home.
 |---|---|
 | Architecture | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) (diagrams, agent coordination) |
 | Technical note | [docs/TECH_NOTE.md](docs/TECH_NOTE.md) (≤ 500 words) |
-| Evaluation | [docs/EVALUATION.md](docs/EVALUATION.md) · raw: [results/summary.md](results/summary.md) |
-| Dataset | [dataset/scenarios.py](dataset/scenarios.py) (12 incidents and their traps) · generated data in `data/` |
+| Evaluation | [docs/EVALUATION.md](docs/EVALUATION.md) · raw: [held-out](results/heldout/summary.md), [dev](results/summary.md) |
+| Test cases and results | [docs/TEST_RESULTS.md](docs/TEST_RESULTS.md) (all 18 incidents, every run) |
+| Dataset | [dataset/scenarios.py](dataset/scenarios.py) (18 incidents and their traps) · generated data in `data/` |
 | AI assistant transcript | [transcript/](transcript/) |
 
-<!-- RESULTS -->
+## Results
+
+Same model (Gemini 3.5 Flash-Lite), tools, budget and report format for both systems. Cache off; 5% random
+tool failures plus scripted ones.
+
+| | Held-out set: 6 incidents, written after the code freeze | Dev set: 12 incidents × 2 runs |
+|---|---|---|
+| Root-cause accuracy, multi-agent vs single agent | **4/6 vs 4/6** | 23/24 vs 20/24 |
+| Wrong conclusions (all confident) | 2 vs 2 | **1 vs 4** |
+| Key evidence cited | **100% vs 80%** | 80% vs 80% |
+| Invented citations | 0 vs 0 | 0 vs 2 |
+| Tokens per incident | 109k vs 57k | 98k vs 49k |
+| Latency without free-tier rate-limit waits | 50s vs 17s | 38s vs 15s |
+
+**In short:** on unseen incidents the multi-agent system was no more accurate. Both failed the same two
+incidents, one of them a genuinely ambiguous case that neither recognised. It cited the key evidence more
+completely and, on the dev set, made fewer confident wrong conclusions, partly because its code checks force
+"inconclusive" when the affected service's telemetry is missing. It costs about 2× the tokens and 2.5–3× the
+time. Details and caveats: [docs/EVALUATION.md](docs/EVALUATION.md).
 
 ## How it works (30 seconds)
 
@@ -48,13 +68,21 @@ Tests need no key.
 ```bash
 uv sync
 cp .env.example .env          # then paste GEMINI_API_KEY and/or GROQ_API_KEY
-uv run pytest                 # 60 tests, no network (a scripted fake LLM drives the agents)
+uv run pytest                 # 73 tests, no network (a scripted fake LLM drives the agents)
 
-uv run investigate list                          # the 12 incidents
+uv run investigate list                          # the 18 incidents
 uv run investigate run INC-02                    # multi-agent investigation of one incident
 uv run investigate run INC-02 --system baseline  # the single-agent baseline
 uv run investigate eval                          # all incidents, both systems, scored
-uv run investigate eval --no-cache --out results # what produced results/ (latency is real)
+```
+
+What produced `results/` (both model tiers set to `gemini:gemini-3.5-flash-lite` in `.env`; `--strict`
+discards any run that hit a rate limit or fell back to another model, and the eval resumes where it stopped):
+
+```bash
+uv run investigate eval --incidents H01,H02,H03,H04,H05,H06 --repeats 1 --no-cache --strict --out results/heldout
+uv run investigate eval --repeats 2 --no-cache --strict --out results \
+  --incidents INC-01,INC-02,INC-03,INC-04,INC-05,INC-06,INC-07,INC-08,INC-09,INC-10,INC-11,INC-12
 ```
 
 Each run writes `report.md` (human-readable), `result.json`, `trace.jsonl` (every agent step, LLM call
@@ -85,7 +113,7 @@ src/investigator/
   multi_agent.py    the multi-agent investigation loop
   baseline.py       the single-agent baseline
   eval/             scoring, runner, summary
-tests/              60 tests: dataset, tools, scheduler, checks, LLM layer, end to end, scoring
+tests/              73 tests: dataset, tools, scheduler, checks, LLM layer, end to end, scoring
 docs/               architecture, technical note, evaluation
 results/            final evaluation output
 ```
@@ -105,7 +133,7 @@ results/            final evaluation output
 | Recovery from agent/tool failures | provider fallback, task retry, code fallbacks for orchestrator and reporter |
 | Ranked hypotheses, evidence for/against, confidence, actions | `FinalReport` in `models.py`; `report.md` per run |
 | Facts vs assumptions, inconclusive outcome | `facts` / `assumptions` / `evidence_gaps`; verdict rules in `agents/reporting.py` |
-| ≥ 10 test incidents with misleading evidence, conflicts, tool failures | `dataset/scenarios.py` (12) |
+| ≥ 10 test incidents with misleading evidence, conflicts, tool failures | `dataset/scenarios.py`: **18** (12 dev + 6 held-out) |
 | Single-agent baseline with the same tools | `baseline.py` |
 | Accuracy, grounding, tool calls, latency, tokens | `eval/scoring.py`, `results/summary.md` |
 | No hardcoded answers | prompts are generic (`agents/prompts.py`); answers live only in `data/ground_truth/` |
@@ -116,18 +144,20 @@ results/            final evaluation output
   other network access. Everything else (data, tools) is local and synthetic.
 - **Synthetic data.** The incidents are hand-designed and generated, not real telemetry. They test reasoning
   under traps, but they are cleaner than production (consistent clocks, no sampling, a single region).
-- **Small evaluation.** 12 incidents, one model, few repeats. Differences of one or two incidents are within
-  noise. See [docs/EVALUATION.md](docs/EVALUATION.md) for what the numbers do and do not show.
+- **Small evaluation.** 6 held-out incidents (one run each) and 12 dev incidents (two runs), one model.
+  Differences of one or two runs are within noise. See [docs/EVALUATION.md](docs/EVALUATION.md) for what the
+  numbers do and do not show.
 - **One model for every agent** in the evaluation (Gemini 3.5 Flash-Lite), chosen for a fair comparison
   and free-tier quota. Tier routing is implemented but not evaluated as a variable.
 - **Not built:** a UI; a persistent task queue (runs are in-process asyncio, not Temporal or BullMQ);
   real observability backends (the tools read JSON files); streaming progress; human-in-the-loop approval
   of remediation actions (actions are recommendations only).
-- **Prompt tuning risk:** prompts were adjusted only with generic rules during development. Every change is
-  listed in [docs/EVALUATION.md](docs/EVALUATION.md). Still, the same 12 incidents were used for
-  development and for evaluation, so the scores are optimistic for unseen incidents.
+- **Tuning risk:** prompts and Critic rules were adjusted with generic rules while working on the 12 dev
+  incidents (listed in [docs/EVALUATION.md](docs/EVALUATION.md)), so dev scores are optimistic. The held-out
+  set was written after the freeze tag `freeze-before-heldout`; `git diff freeze-before-heldout --
+  src/investigator/agents` shows no change since. The same author wrote both sets.
 
 ## AI coding assistant
 
 Built with Claude Code (as the assignment allows). The full session transcript is in
-[transcript/](transcript/). Personal content unrelated to the assignment is marked as redacted.
+[transcript/](transcript/). Redacted parts are marked where they occur; see [transcript/README.md](transcript/README.md).

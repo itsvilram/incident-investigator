@@ -1,0 +1,276 @@
+{
+ "system": "multi_agent",
+ "incident_id": "INC-04",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "An incident occurred resulting in intermittent database connection errors in payment confirmations due to a configuration change that reduced the maximum database connection pool size on ledger-service from 50 to 5. This triggered connection pool exhaustion, elevated latency, and increased error rates across ledger-service and payments-api starting at 2026-10-06T13:14:00+00:00.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Configuration Change Reducing Database Connection Pool Size Exhausts Ledger Service Connections",
+    "root_cause_service": "ledger-service",
+    "category": "config_change",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "chg-8919",
+      "note": "Config change on ledger-service at 13:12 reduced db.pool.max_size from 50 to 5, immediately preceding the onset."
+     },
+     {
+      "evidence_id": "metric:ledger-service:latency_p99_ms",
+      "note": "Ledger-service latency anomaly began at 13:14, right after the config change."
+     },
+     {
+      "evidence_id": "metric:ledger-service:error_rate_pct",
+      "note": "Ledger-service error rate spiked starting at 13:15."
+     },
+     {
+      "evidence_id": "metric:payments-api:error_rate_pct",
+      "note": "Payments-api error rate spiked starting at 13:15 as calls to ledger-service failed."
+     },
+     {
+      "evidence_id": "log-00466",
+      "note": "Ledger-service logs show HikariPool connection timeouts indicating pool exhaustion (total=5, active=5) starting at 13:15."
+     },
+     {
+      "evidence_id": "log-00465",
+      "note": "Payments-api logs show errors calling ledger-service due to inability to acquire connections starting at 13:15."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Upstream Traffic Surge Overwhelming Ledger Service",
+    "root_cause_service": "payments-api",
+    "category": "traffic_spike",
+    "confidence": 0.05,
+    "supporting": [
+     {
+      "evidence_id": "metric:payments-api:error_rate_pct",
+      "note": "Payments-api error rates spiked during the incident."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "metric:payments-api:rps",
+      "note": "Payments-api RPS shows no abnormal surge or traffic spike during the window."
+     },
+     {
+      "evidence_id": "chg-8919",
+      "note": "The config change at 13:12 provides a direct and sufficient explanation for connection exhaustion without needing a traffic spike."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "Payments-api error rate spiked up starting at 2026-10-06T13:15:00+00:00, reaching a peak of 8.26% at 13:47.",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct"
+    ]
+   },
+   {
+    "text": "Ledger-service error rate spiked starting at 2026-10-06T13:15:00+00:00, reaching a peak of 10.25% at 13:45.",
+    "evidence_ids": [
+     "metric:ledger-service:error_rate_pct"
+    ]
+   },
+   {
+    "text": "Ledger-service p99 latency anomaly began at 2026-10-06T13:14:00+00:00, reaching a peak of 7278.17ms.",
+    "evidence_ids": [
+     "metric:ledger-service:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "Ledger-service logs show HikariPool connection timeouts indicating pool exhaustion (total=5, active=5, idle=0, waiting) starting at 2026-10-06T13:15:05+00:00.",
+    "evidence_ids": [
+     "log-00466"
+    ]
+   },
+   {
+    "text": "Payments-api logs show errors calling ledger-service due to inability to acquire connections starting at 2026-10-06T13:15:02+00:00.",
+    "evidence_ids": [
+     "log-00465"
+    ]
+   },
+   {
+    "text": "Ledger-db active connections and cpu percentage dropped significantly starting at 2026-10-06T13:13:00+00:00.",
+    "evidence_ids": [
+     "metric:ledger-db:connections_active",
+     "metric:ledger-db:cpu_pct"
+    ]
+   },
+   {
+    "text": "Ledger-service underwent a config change on 2026-10-06 at 13:12 normalizing db.pool.max_size from 50 to 5.",
+    "evidence_ids": [
+     "chg-8919"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The configuration change applied successfully across all running instances of ledger-service instantly."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-06T13:12:00Z",
+    "event": "Config-sync normalizes db.pool.max_size from 50 to 5 on ledger-service",
+    "evidence_id": "chg-8919"
+   },
+   {
+    "ts": "2026-10-06T13:13:00Z",
+    "event": "Ledger-db active connections and cpu percentage drop significantly",
+    "evidence_id": "metric:ledger-db:connections_active"
+   },
+   {
+    "ts": "2026-10-06T13:14:00Z",
+    "event": "Ledger-service p99 latency anomaly begins",
+    "evidence_id": "metric:ledger-service:latency_p99_ms"
+   },
+   {
+    "ts": "2026-10-06T13:15:00Z",
+    "event": "Ledger-service and payments-api error rates spike",
+    "evidence_id": "metric:ledger-service:error_rate_pct"
+   },
+   {
+    "ts": "2026-10-06T13:15:02Z",
+    "event": "Payments-api logs errors calling ledger-service due to inability to acquire connections",
+    "evidence_id": "log-00465"
+   },
+   {
+    "ts": "2026-10-06T13:15:05Z",
+    "event": "Ledger-service logs HikariPool connection timeouts indicating pool exhaustion",
+    "evidence_id": "log-00466"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Revert the database connection pool configuration change on ledger-service back to 50",
+    "priority": "immediate",
+    "rationale": "Configuration change chg-8919 reduced max pool size to 5, which directly caused database connection pool exhaustion and subsequent errors across dependent services.",
+    "evidence_ids": [
+     "chg-8919",
+     "log-00466",
+     "metric:ledger-service:error_rate_pct"
+    ]
+   },
+   {
+    "action": "Implement validation checks in the config-sync tool to prevent excessively low database connection pool sizes relative to service concurrency and traffic load",
+    "priority": "short_term",
+    "rationale": "Prevents automated or manual normalization changes from blindly overriding required service resource bounds.",
+    "evidence_ids": [
+     "chg-8919"
+    ]
+   },
+   {
+    "action": "Establish comprehensive automated alerting for sudden drops in database active connections and abnormal database pool wait times",
+    "priority": "long_term",
+    "rationale": "Ensures early detection of connection pool constraints before customer-facing request failures cascade.",
+    "evidence_ids": [
+     "metric:ledger-db:connections_active",
+     "log-00466"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 1,
+ "tool_calls": 15,
+ "llm_calls": 13,
+ "prompt_tokens": 70101,
+ "completion_tokens": 7201,
+ "latency_s": 38.01,
+ "retrieved_ids": [
+  "chg-2112",
+  "chg-3990",
+  "chg-8919",
+  "dep:fraud-service->redis-cache",
+  "dep:ledger-service->ledger-db",
+  "dep:market-data-service->redis-cache",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:notification-service->event-bus",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "log-00034",
+  "log-00098",
+  "log-00465",
+  "log-00466",
+  "log-01042",
+  "log-01274",
+  "log-01279",
+  "log-01281",
+  "log-01282",
+  "log-01283",
+  "log-01284",
+  "log-01285",
+  "log-01286",
+  "log-01289",
+  "log-01291",
+  "log-01292",
+  "log-01296",
+  "log-01297",
+  "log-01298",
+  "log-01299",
+  "log-01302",
+  "log-01303",
+  "log-01304",
+  "log-01305",
+  "log-01306",
+  "log-01307",
+  "log-01308",
+  "log-01310",
+  "log-01311",
+  "metric:ledger-db:connections_active",
+  "metric:ledger-db:cpu_pct",
+  "metric:ledger-db:disk_used_pct",
+  "metric:ledger-db:error_rate_pct",
+  "metric:ledger-db:latency_p99_ms",
+  "metric:ledger-db:mem_pct",
+  "metric:ledger-db:rps",
+  "metric:ledger-service:cpu_pct",
+  "metric:ledger-service:error_rate_pct",
+  "metric:ledger-service:latency_p99_ms",
+  "metric:ledger-service:mem_pct",
+  "metric:ledger-service:pod_restarts",
+  "metric:ledger-service:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps"
+ ],
+ "cited_ids": [
+  "chg-8919",
+  "metric:ledger-service:latency_p99_ms",
+  "metric:ledger-service:error_rate_pct",
+  "metric:payments-api:error_rate_pct",
+  "log-00466",
+  "log-00465",
+  "metric:payments-api:rps",
+  "metric:ledger-db:connections_active",
+  "metric:ledger-db:cpu_pct"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 20.0,
+ "total_tokens": 77302
+}

@@ -1,0 +1,298 @@
+{
+ "system": "multi_agent",
+ "incident_id": "H02",
+ "report": {
+  "verdict": "root_cause_identified",
+  "summary": "An incident affecting payments and ledger services started at 13:06 on 2026-10-17 when database statement timeouts began occurring due to table lock contention. Specifically, the daily reconciliation cron job on ledger-db acquired a share row exclusive lock on the ledger_entries table at 13:04, blocking incoming transactional inserts and causing widespread active connection pile-ups, latency spikes, and 10-second statement timeouts starting at 13:05/13:06.",
+  "ranked_hypotheses": [
+   {
+    "rank": 1,
+    "title": "Daily reconciliation cron job table lock contention on ledger-db",
+    "root_cause_service": "ledger-db",
+    "category": "dependency_failure",
+    "confidence": 0.95,
+    "supporting": [
+     {
+      "evidence_id": "log-00400",
+      "note": "ledger-db cron job executed LOCK TABLE ledger_entries at 13:04:02, directly preceding the anomaly."
+     },
+     {
+      "evidence_id": "log-00414",
+      "note": "Continuous warnings starting at 13:05 for processes waiting for RowExclusiveLock on ledger_entries."
+     },
+     {
+      "evidence_id": "metric:ledger-db:latency_p99_ms",
+      "note": "Ledger-db latency spiked upward starting at 13:05."
+     },
+     {
+      "evidence_id": "metric:ledger-db:connections_active",
+      "note": "Ledger-db active connections surged starting at 13:05."
+     },
+     {
+      "evidence_id": "log-00445",
+      "note": "Ledger-service statements timed out on INSERT INTO ledger_entries starting at 13:06."
+     }
+    ],
+    "contradicting": []
+   },
+   {
+    "rank": 2,
+    "title": "Payments-api logging configuration change causing thread pool or serialization overhead",
+    "root_cause_service": "payments-api",
+    "category": "config_change",
+    "confidence": 0.02,
+    "supporting": [
+     {
+      "evidence_id": "chg-9660",
+      "note": "Config change on payments-api at 13:02 setting ledger client logging to DEBUG."
+     }
+    ],
+    "contradicting": [
+     {
+      "evidence_id": "log-00445",
+      "note": "Actual failures are database statement timeouts inside ledger-db and ledger-service, not client-side formatting delays."
+     },
+     {
+      "evidence_id": "log-00400",
+      "note": "ledger-db explicitly started its blocking table lock at 13:04, establishing an independent database-side cause."
+     }
+    ]
+   }
+  ],
+  "facts": [
+   {
+    "text": "payments-api error_rate_pct and latency_p99_ms started an upward anomaly at 2026-10-17T13:06:00+00:00.",
+    "evidence_ids": [
+     "metric:payments-api:error_rate_pct",
+     "metric:payments-api:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "ledger-service error_rate_pct and latency_p99_ms started an upward anomaly at 2026-10-17T13:06:00+00:00 (and 13:05 for p99 latency).",
+    "evidence_ids": [
+     "metric:ledger-service:error_rate_pct",
+     "metric:ledger-service:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "payments-api logs show persistent errors: ledger-service POST /entries timed out after 10s starting at 13:06:02.",
+    "evidence_ids": [
+     "log-00443",
+     "log-02092"
+    ]
+   },
+   {
+    "text": "ledger-service logs show persistent statement timeouts: INSERT INTO ledger_entries canceled after 10000 ms starting at 13:06:04.",
+    "evidence_ids": [
+     "log-00445",
+     "log-02075"
+    ]
+   },
+   {
+    "text": "At 2026-10-17T13:04:02, ledger-db started a cron job reconcile_daily which executed LOCK TABLE ledger_entries IN SHARE ROW EXCLUSIVE MODE.",
+    "evidence_ids": [
+     "log-00400"
+    ]
+   },
+   {
+    "text": "Ledger-db latency_p99_ms showed an upward anomaly starting at 13:05, jumping from ~15 ms to a peak of 10527.28 ms.",
+    "evidence_ids": [
+     "metric:ledger-db:latency_p99_ms"
+    ]
+   },
+   {
+    "text": "Ledger-db active connections showed an upward anomaly starting at 13:05, surging from ~45 to ~180 active connections.",
+    "evidence_ids": [
+     "metric:ledger-db:connections_active"
+    ]
+   },
+   {
+    "text": "Starting at 13:05, ledger-db logged continuous warnings of processes waiting for RowExclusiveLock on the ledger_entries relation.",
+    "evidence_ids": [
+     "log-00414",
+     "log-02090"
+    ]
+   }
+  ],
+  "assumptions": [
+   "The reconcile_daily cron job holds the table lock for the duration of the reconciliation process, blocking concurrent writes."
+  ],
+  "evidence_gaps": [],
+  "timeline": [
+   {
+    "ts": "2026-10-17T13:02:00Z",
+    "event": "payments-api config change chg-9660 applied (logging.ledger_client set to DEBUG)",
+    "evidence_id": "chg-9660"
+   },
+   {
+    "ts": "2026-10-17T13:04:02Z",
+    "event": "ledger-db cron job reconcile_daily started with LOCK TABLE ledger_entries IN SHARE ROW EXCLUSIVE MODE",
+    "evidence_id": "log-00400"
+   },
+   {
+    "ts": "2026-10-17T13:05:00Z",
+    "event": "ledger-db processes begin waiting for RowExclusiveLock and active connections/latency spike",
+    "evidence_id": "log-00414"
+   },
+   {
+    "ts": "2026-10-17T13:06:00Z",
+    "event": "Upstream error and latency anomalies start on payments-api and ledger-service due to database statement timeouts",
+    "evidence_id": "log-00445"
+   }
+  ],
+  "recommended_actions": [
+   {
+    "action": "Optimize or reschedule the reconcile_daily cron job on ledger-db to avoid blocking concurrent transactional writes on ledger_entries during peak traffic hours.",
+    "priority": "long_term",
+    "rationale": "The daily cron job acquires a broad table lock that causes cascading statement timeouts and connection pool exhaustion.",
+    "evidence_ids": [
+     "log-00400",
+     "log-00414",
+     "metric:ledger-db:connections_active"
+    ]
+   },
+   {
+    "action": "Implement more granular locking strategies or MVCC-compliant queries for reconciliation tasks.",
+    "priority": "short_term",
+    "rationale": "Prevent exclusive table locks from halting regular INSERT and UPDATE statements on ledger tables.",
+    "evidence_ids": [
+     "log-00400",
+     "log-00445"
+    ]
+   }
+  ]
+ },
+ "stop_reason": "critic accepted the top hypothesis",
+ "rounds": 2,
+ "tool_calls": 16,
+ "llm_calls": 19,
+ "prompt_tokens": 121636,
+ "completion_tokens": 10811,
+ "latency_s": 79.41,
+ "retrieved_ids": [
+  "chg-2199",
+  "chg-2309",
+  "chg-4246",
+  "chg-6866",
+  "chg-6913",
+  "chg-8768",
+  "chg-9660",
+  "dep:fraud-service->redis-cache",
+  "dep:ledger-service->ledger-db",
+  "dep:market-data-service->redis-cache",
+  "dep:mobile-bff->aa-connector",
+  "dep:mobile-bff->auth-service",
+  "dep:mobile-bff->kyc-service",
+  "dep:mobile-bff->orders-service",
+  "dep:mobile-bff->payments-api",
+  "dep:mobile-bff->portfolio-service",
+  "dep:notification-service->event-bus",
+  "dep:payments-api->event-bus",
+  "dep:payments-api->fraud-service",
+  "dep:payments-api->ledger-service",
+  "dep:payments-api->redis-cache",
+  "dep:payments-api->upi-gateway",
+  "dep:upi-gateway->npci-switch",
+  "dep:upi-gateway->partner-bank-api",
+  "hist-2026-0410",
+  "hist-2026-0722",
+  "hist-2026-0811",
+  "log-00293",
+  "log-00344",
+  "log-00359",
+  "log-00369",
+  "log-00387",
+  "log-00390",
+  "log-00400",
+  "log-00414",
+  "log-00443",
+  "log-00445",
+  "log-00869",
+  "log-01016",
+  "log-01092",
+  "log-01766",
+  "log-02036",
+  "log-02075",
+  "log-02077",
+  "log-02082",
+  "log-02084",
+  "log-02090",
+  "log-02092",
+  "log-02093",
+  "log-02096",
+  "log-02097",
+  "log-02098",
+  "log-02099",
+  "log-02100",
+  "log-02101",
+  "log-02102",
+  "log-02105",
+  "log-02106",
+  "log-02108",
+  "log-02109",
+  "log-02110",
+  "log-02111",
+  "log-02112",
+  "log-02113",
+  "log-02117",
+  "log-02118",
+  "log-02119",
+  "log-02120",
+  "log-02121",
+  "log-02122",
+  "log-02123",
+  "log-02125",
+  "log-02126",
+  "log-02127",
+  "log-02130",
+  "log-02131",
+  "log-02132",
+  "log-02133",
+  "metric:ledger-db:connections_active",
+  "metric:ledger-db:cpu_pct",
+  "metric:ledger-db:disk_used_pct",
+  "metric:ledger-db:error_rate_pct",
+  "metric:ledger-db:latency_p99_ms",
+  "metric:ledger-db:mem_pct",
+  "metric:ledger-db:rps",
+  "metric:ledger-service:cpu_pct",
+  "metric:ledger-service:error_rate_pct",
+  "metric:ledger-service:latency_p99_ms",
+  "metric:ledger-service:mem_pct",
+  "metric:ledger-service:pod_restarts",
+  "metric:ledger-service:rps",
+  "metric:payments-api:cpu_pct",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:payments-api:mem_pct",
+  "metric:payments-api:pod_restarts",
+  "metric:payments-api:rps"
+ ],
+ "cited_ids": [
+  "log-00400",
+  "log-00414",
+  "metric:ledger-db:latency_p99_ms",
+  "metric:ledger-db:connections_active",
+  "log-00445",
+  "chg-9660",
+  "metric:payments-api:error_rate_pct",
+  "metric:payments-api:latency_p99_ms",
+  "metric:ledger-service:error_rate_pct",
+  "metric:ledger-service:latency_p99_ms",
+  "log-00443",
+  "log-02092",
+  "log-02075",
+  "log-02090"
+ ],
+ "gaps": [],
+ "models": {
+  "fast": [
+   "gemini:gemini-3.5-flash-lite"
+  ],
+  "strong": [
+   "gemini:gemini-3.5-flash-lite"
+  ]
+ },
+ "rate_limit_wait_s": 30.0,
+ "total_tokens": 132447
+}
